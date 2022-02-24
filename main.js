@@ -1,4 +1,22 @@
-var GameState = ""
+var GameState = "ppmppeeeeeeeeeeeeeeePPMPP0101010101-0"
+/* 
+p = blue pawn
+m = blue master
+P = red pawn
+M = red master
+e = empty square
+
+-0 = red's turn
+-1 = blue's turn
+
+first two two-digit numbers = red's move cards
+second two two-digit numbers = blue's move cards
+last one two-digit number = neutral card
+
+moves:
+01 = monkey
+
+*/
 
 
 
@@ -8,106 +26,36 @@ $(document).ready(function(){
 
 
 function main(){
-	GameState = "ppmppeeeeeeeeeeeeeeePPMPP12345"
-	resizeCanvas()
-	drawAll()
+	placePieces(GameState)
+	// placeCards(GameState)
 }
 
-
-// Graphics ***********************************************************************************************
-var Buffers = []
-var DrawingBuffer = 1
-var LastFrameTime = getNow()
-var GameScale = 100
-
-window.addEventListener("resize", resizeCanvas);
-
-function resizeCanvas(){
-	const mainCanvasHolder = $("#mainCanvasHolder")
-	const canvas0 = document.getElementById("mainCanvas0");
-  	const canvas1 = document.getElementById("mainCanvas1");
-  	Buffers.push(canvas0,canvas1)
-	const widthHeightRatio = 1.8
-	var limitingSide = "none"
-	if($(window).width() >= $(window).height()*widthHeightRatio){
-		limitingSide = "height"
-		mainCanvasHolder.height($(window).height())
-		mainCanvasHolder.width($(window).height()*widthHeightRatio)
-		const centerVal = (($(window).width() - mainCanvasHolder.width())/2)+"px"
-		mainCanvasHolder.css({left:centerVal})
-	}else{
-		limitingSide = "width"
-		mainCanvasHolder.width($(window).width())
-		mainCanvasHolder.height(mainCanvasHolder.width()/widthHeightRatio)
-		const centerVal = (($(window).height() - mainCanvasHolder.height())/2)+"px"
-		mainCanvasHolder.css({top:centerVal})
-
+function placePieces(gameState){
+	for(i=0;i<25;i++){
+		var letter = gameState[i]
+		if(letter != "e"){
+			var leftCoordinate = (507+100*(i%5))
+			var topCoordinate = (207+100*Math.floor(i/5))
+			var pieceColor = (letter==letter.toUpperCase() ? "redPiece" : "bluePiece")
+			var pieceType = (letter.toUpperCase() == "M" ? "master" : "pawn")
+			$("#board").append("<div class='piece "+pieceColor+" "+pieceType+"' style='left:"+leftCoordinate+"px; top:"+topCoordinate+"px;'></div>")
+		} 
 	}
-	//resize the canvas, in case someone changed the window size
-	canvas0.width  = mainCanvasHolder.width();
-  	canvas0.height = mainCanvasHolder.height();
-	canvas1.width  = mainCanvasHolder.width();
-  	canvas1.height = mainCanvasHolder.height();
 }
 
-
-window.requestAnimFrame = (function(){ 
- 	return  window.requestAnimationFrame       ||  
-	    window.webkitRequestAnimationFrame ||  
-	    window.mozRequestAnimationFrame    ||  
-	    window.oRequestAnimationFrame      ||  
-	    window.msRequestAnimationFrame     ||  
-	    function( callback ){ 
-	    	window.setTimeout(callback, 1000 / 144); 
-	    }; 
-})();
-
-
-function drawAll(){
-	//This will draw everything that needs to be drawn, properly swapping the canvases for better view. 
-    window.requestAnimFrame(drawAll)
-    Buffers[1-DrawingBuffer].style.visibility='visible';
-    Buffers[DrawingBuffer].style.visibility='hidden';
-    c=Buffers[DrawingBuffer]
-    ctx=c.getContext('2d');;
-    ctx.clearRect(0,0,c.width,c.height)
-
-    ctx.restore();
-    ctx.save()
-
-    drawGame(c,ctx,GameState)
-    DrawingBuffer=1-DrawingBuffer;
-}
-
-function drawGame(c,ctx,gameState){
-	drawEmptyBoard(c,ctx)
-	// drawPieces(gameState)
-	// drawCards(gameState)
-}
-
-function drawEmptyBoard(c,ctx){
-	// hard coded widtha and length of 5
-	for (let y = 0; y < 5; y++) {
-    	for (let x = 0; x < 5; x++) {
-    		drawSquare(c,ctx,y,x) 
-    	}
-  	}
-}
-
-function drawSquare(c,ctx,y,x){
-	ctx.strokeStyle = "black";
-	if (y==0 && x==2){
-		ctx.fillStyle = "red";
-	} else if (y==4 && x==2){
-		ctx.fillStyle = "blue";
-	} else{
-		ctx.fillStyle = "beige";
-	}
-	ctx.lineWidth =3;
-	ctx.fillRect(c.width/3+x*GameScale,c.height/5+y*GameScale,GameScale,GameScale);
-	ctx.strokeRect(c.width/3+x*GameScale,c.height/5+y*GameScale,GameScale,GameScale)
-}
-
+function allowDrop(ev) {
+	ev.preventDefault();
+  }
+  
+  function drag(ev) {
+	ev.dataTransfer.setData("text", ev.target.id);
+  }
+  
+  function drop(ev) {
+	ev.preventDefault();
+	var data = ev.dataTransfer.getData("text");
+	ev.target.appendChild(document.getElementById(data));
+  }
 
 
 // UTILITY ************************************************************
