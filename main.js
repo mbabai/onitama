@@ -39,27 +39,22 @@ function placePiecesStart(gameState){
 			var topCoordinate = (207+100*Math.floor(i/5))
 			var pieceColor = (letter==letter.toUpperCase() ? "redPiece" : "bluePiece")
 			var pieceType = (letter.toUpperCase() == "M" ? "master" : "pawn")
-			$("#board").append("<div id='p"+i+"' draggable='true' ondragstart='drag(event)' class='piece "+pieceColor+" "+pieceType+"' style='left:"+leftCoordinate+"px; top:"+topCoordinate+"px;'></div>")
+			$("#s"+i).append("<div id='p"+i+"' draggable='true' ondragstart='drag(event)' class='piece "+pieceColor+" "+pieceType+"' style='left:0px; top:0px;'></div>")
 		} 
 	}
 }
 
 function allowDrop(ev) {
-	console.log("We are allowing a drop")
 	ev.preventDefault();
 }
 
 function drag(ev) {
-	console.log("We drag")
 	ev.dataTransfer.setData("text", ev.target.id);
 }
 
 function drop(ev) {
-	console.log("We are dropping a piece.")
 	ev.preventDefault();
 	var data = ev.dataTransfer.getData("text");
-	console.log(data)
-
 	ev.target.appendChild(document.getElementById(data));
 }
 

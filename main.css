@@ -14,7 +14,7 @@ body {
 	background-color: darkred;
 }
 .blueTemple {
-	background-color: darkblue4;
+	background-color: darkblue;
 }
 
 .cardSlot {
@@ -58,9 +58,7 @@ body {
 .piece {
 	border-radius: 50%;
 	border:4px solid silver;
-	position:absolute;
-	left:600;
-	top:400;
+	margin: 5px;
 }
 
 .redPiece {
