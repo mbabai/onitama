@@ -21,27 +21,27 @@ body {
 	width: 230;
 	height: 140;
 	background-color:lightgrey;
-	border:2px solid white;
+	border:5px solid white;
 	position:absolute;
 }
 
-#p2c1 {
+#p1c1 {
 	top:25px;
 	left:510px;
 }
 
-#p2c2 {
+#p1c2 {
 	top:25px;
 	left:760px;
 }
 
 
-#p1c1 {
+#p0c1 {
 	top:730px;
 	left:510px;
 }
 
-#p1c2 {
+#p0c2 {
 	top:730px;
 	left:760px;
 }
@@ -61,11 +61,11 @@ body {
 	margin: 5px;
 }
 
-.redPiece {
+.red {
 	background-color: red;
 }
 
-.bluePiece {
+.blue {
 	background-color: blue;
 }
 

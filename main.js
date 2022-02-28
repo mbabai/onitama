@@ -1,4 +1,4 @@
-var GameState = "ppmppeeeeeeeeeeeeeeePPMPP00-01-02-03-04X0"
+var GameState = "ppmppeeeeeeeeeeeeeeePPMPP00-01-02-03-04X1"
 /* 
 p = blue pawn
 m = blue master
@@ -6,8 +6,8 @@ P = red pawn
 M = red master
 e = empty square
 
--0 = red's turn
--1 = blue's turn
+X0 = red's turn
+X1 = blue's turn
 
 first two two-digit numbers = red's move cards
 second two two-digit numbers = blue's move cards
@@ -24,6 +24,8 @@ move_sets_raw = {
 blue020: []
 
 precomputedBoardMoves = {} // this will store actual possible spaces for any move, from any square: index color+cardID+SquareNum
+currentMoveUI = {} //this is a dictionary to build up the current move through the UI
+
 
 $(document).ready(function(){
 	main()
@@ -70,51 +72,84 @@ function precomputeOnBoardMoves(rawMoveSets){
 // VISUAL ********************************************************
 function placePiecesStart(gameState){
 	// Put the piece divs on the board at the start of the game
+	var pieceNum = 0
 	for(i=0;i<25;i++){
 		var letter = gameState[i]
 		if(letter != "e"){
 			var leftCoordinate = (507+100*(i%5))
 			var topCoordinate = (207+100*Math.floor(i/5))
-			var pieceColor = (letter==letter.toUpperCase() ? "redPiece" : "bluePiece")
+			var pieceColor = (letter==letter.toUpperCase() ? "red" : "blue")
 			var pieceType = (letter.toUpperCase() == "M" ? "master" : "pawn")
-			$("#s"+i).append("<div id='p"+i+"' draggable='true' ondragstart='drag(event)' class='piece "+pieceColor+" "+pieceType+"' style='left:0px; top:0px;'></div>")
+			$("#s"+i).append("<div id='p"+(pieceNum++)+"' draggable='false' ondragstart='drag(event)' class='piece "+pieceColor+" "+pieceType+"' style='left:0px; top:0px;'></div>")
 		} 
 	}
 }
 
 function placeCards(gameState){
+	//Shows where the cards are in the game.
 	var turnPlayerID = parseInt(gameState.slice(25).split("X")[1])
 	var cardState = gameState.slice(25).split("X")[0].split("-")
 	cardState.forEach(function (cardID,index){
 		switch (index){
 			case 0:
 				if (turnPlayerID == 0){
-					$("#neutralLeft").text(cardID)
-				} else {
 					$("#neutralRight").text(cardID)
+				} else {
+					$("#neutralLeft").text(cardID)
 				}
 			case 1:
-				$("#p2c1").text(cardID)
-			case 2:
-				$("#p2c2").text(cardID)
-			case 3:
 				$("#p1c1").text(cardID)
-			case 4:
+			case 2:
 				$("#p1c2").text(cardID)
+			case 3:
+				$("#p0c1").text(cardID)
+			case 4:
+				$("#p0c2").text(cardID)
 								}
 	})
 }
 
+function selectCard(slot){
+	var currentTurnPlayer = parseInt(GameState[GameState.length-1])
+	var cardSlotPlayer = parseInt(slot[1])
+	$("[draggable='True']").attr('draggable', 'False'); //set nothing to be draggable. If needed, we'll set somethings to be draggable
+	if(currentTurnPlayer == cardSlotPlayer) { // check that it's the right player's turn.
+		if ("cardID" in currentMoveUI && currentMoveUI["cardID"] == $("#"+slot).text()){ 
+			// If we're clicking on the same card, unselect
+			$(".cardSlot").css("border-color","white")
+			delete currentMoveUI["cardID"]
+		} else {
+			//clicking on a new card, unselect everything else, and select this one. 
+			$(".cardSlot").css("border-color","white")
+			$("#"+slot).css("border-color","gold")
+			currentMoveUI["cardID"] = $("#"+slot).text()
+			if (currentTurnPlayer == 0){ // Red's turn
+				$(".piece.red").attr('draggable', 'True')
+			}else{ // Blue's turn
+				$(".piece.blue").attr('draggable', 'True')
+			}
+		}
+	}
+}
+
 function allowDrop(ev) {
+	// This must always be true. 
 	ev.preventDefault();
 }
 
 function drag(ev) {
-	ev.dataTransfer.setData("text", ev.target.id);
+	// fires when we start to move the piece. Let's see what it's legal moves are. 
+	var data = ev.dataTransfer.setData("text", ev.target.id);
+	var data = ev.dataTransfer.getData("text"); // ID of the piece
+	currentMoveUI["startLocation"] = parseInt($("#"+data).parent().attr('id').split("s")[1])
+	console.log("starting to move from space:"+currentMoveUI["startLocation"])
+
 }
 
 function drop(ev) {
 	ev.preventDefault();
+	console.log("Attempting to move here!")
+	//TODO: Check if this is actually legal
 	var data = ev.dataTransfer.getData("text");
 	ev.target.appendChild(document.getElementById(data));
 }
