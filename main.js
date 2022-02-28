@@ -1,4 +1,4 @@
-var GameState = "ppmppeeeeeeeeeeeeeeePPMPP0001020304-0"
+var GameState = "ppmppeeeeeeeeeeeeeeePPMPP00-01-02-03-04X0"
 /* 
 p = blue pawn
 m = blue master
@@ -12,9 +12,6 @@ e = empty square
 first two two-digit numbers = red's move cards
 second two two-digit numbers = blue's move cards
 last one two-digit number = neutral card
-
-moves:
-01 = monkey
 
 */
 move_sets_raw = {
@@ -36,9 +33,10 @@ $(document).ready(function(){
 function main(){
 	precomputeOnBoardMoves(move_sets_raw)
 	placePiecesStart(GameState)
-	// placeCards(GameState)
+	placeCards(GameState)
 }
 
+// RULES ***************************************************
 function precomputeOnBoardMoves(rawMoveSets){
 	// For each possible move in our raw moveset, for each square on the board, for both colors, we will compute all of the legal moves
 	for(spaceNum=0;spaceNum<25;spaceNum++){ // iterate over every square on the board
@@ -66,10 +64,10 @@ function precomputeOnBoardMoves(rawMoveSets){
 			}
 		})
 	}
-	console.log(Object.keys(precomputedBoardMoves).length)
-	console.log(precomputedBoardMoves)
 }
 
+
+// VISUAL ********************************************************
 function placePiecesStart(gameState){
 	// Put the piece divs on the board at the start of the game
 	for(i=0;i<25;i++){
@@ -82,6 +80,29 @@ function placePiecesStart(gameState){
 			$("#s"+i).append("<div id='p"+i+"' draggable='true' ondragstart='drag(event)' class='piece "+pieceColor+" "+pieceType+"' style='left:0px; top:0px;'></div>")
 		} 
 	}
+}
+
+function placeCards(gameState){
+	var turnPlayerID = parseInt(gameState.slice(25).split("X")[1])
+	var cardState = gameState.slice(25).split("X")[0].split("-")
+	cardState.forEach(function (cardID,index){
+		switch (index){
+			case 0:
+				if (turnPlayerID == 0){
+					$("#neutralLeft").text(cardID)
+				} else {
+					$("#neutralRight").text(cardID)
+				}
+			case 1:
+				$("#p2c1").text(cardID)
+			case 2:
+				$("#p2c2").text(cardID)
+			case 3:
+				$("#p1c1").text(cardID)
+			case 4:
+				$("#p1c2").text(cardID)
+								}
+	})
 }
 
 function allowDrop(ev) {
