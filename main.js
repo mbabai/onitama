@@ -21,9 +21,8 @@ move_sets_raw = {
 	, "03": ["f","rr","ll"]						//Crab
 	, "04": ["l","r","fl","fr"]					//Elephant
 }
-blue020: []
 
-precomputedBoardMoves = {} // this will store actual possible spaces for any move, from any square: index color+cardID+SquareNum
+precomputedBoardMoves = {} // this will store actual possible spaces for any move, from any square. index =  color+cardID+SquareNum
 currentMoveUI = {} //this is a dictionary to build up the current move through the UI
 
 
@@ -34,8 +33,8 @@ $(document).ready(function(){
 
 function main(){
 	precomputeOnBoardMoves(move_sets_raw)
-	placePiecesStart(GameState)
-	placeCards(GameState)
+	placePieces()
+	placeCards()
 }
 
 // RULES ***************************************************
@@ -58,7 +57,7 @@ function precomputeOnBoardMoves(rawMoveSets){
 						}
 					} else if (color == "R"){ // Red moves forward "down in numbers"
 						if(spaceNum - forwardCount*5>=0 && spaceNum + backwardCount*5<25 && spaceNum%5 + rightCount <5 && spaceNum%5 - leftCount >=0){
-							outputMoveList.push(spaceNum+forwardCount*5 - backwardCount*5 - rightCount + leftCount)
+							outputMoveList.push(spaceNum-forwardCount*5 + backwardCount*5 + rightCount - leftCount)
 						}
 					}
 				})
@@ -68,13 +67,25 @@ function precomputeOnBoardMoves(rawMoveSets){
 	}
 }
 
+function doMove(move){
+	//Enact the move, and update the game state.
+	GameState = GameState.replaceAt(move.targetLocation, GameState[move.startLocation]) //The piece will now be in the right place
+	GameState = GameState.replaceAt(move.startLocation,"e") //empty the space it left
+	var oldNeutralCard = GameState.substring(25,27) //Get the Neutral Card
+	var usedCardIndex = GameState.indexOf(move.cardID) //Get the locatin of the used card
+	GameState = GameState.replaceAt(25,move.cardID).replaceAt(usedCardIndex,oldNeutralCard) //swaparoo!!!
+	var flipBit = (1 - parseInt(GameState[GameState.length-1])).toString() // Flip the bit at the end of the string
+	GameState = GameState.replaceAt(GameState.length-1,flipBit) // this changes who's turn is next
+}
+
 
 // VISUAL ********************************************************
-function placePiecesStart(gameState){
-	// Put the piece divs on the board at the start of the game
+function placePieces(){
+	// Put the piece divs on the board to reflect the game state
+	$(".piece").remove() // remove any pieces if there were any.
 	var pieceNum = 0
 	for(i=0;i<25;i++){
-		var letter = gameState[i]
+		var letter = GameState[i]
 		if(letter != "e"){
 			var leftCoordinate = (507+100*(i%5))
 			var topCoordinate = (207+100*Math.floor(i/5))
@@ -85,10 +96,11 @@ function placePiecesStart(gameState){
 	}
 }
 
-function placeCards(gameState){
-	//Shows where the cards are in the game.
-	var turnPlayerID = parseInt(gameState.slice(25).split("X")[1])
-	var cardState = gameState.slice(25).split("X")[0].split("-")
+function placeCards(){
+	//Shows where the cards are in the game, based on the game state
+	$(".cardSlot").text("") // Erase any cards from a prior state
+	var turnPlayerID = parseInt(GameState.slice(25).split("X")[1])
+	var cardState = GameState.slice(25).split("X")[0].split("-")
 	cardState.forEach(function (cardID,index){
 		switch (index){
 			case 0:
@@ -125,8 +137,11 @@ function selectCard(slot){
 			currentMoveUI["cardID"] = $("#"+slot).text()
 			if (currentTurnPlayer == 0){ // Red's turn
 				$(".piece.red").attr('draggable', 'True')
+				currentMoveUI["color"] = "R"
 			}else{ // Blue's turn
 				$(".piece.blue").attr('draggable', 'True')
+				currentMoveUI["color"] = "B"
+
 			}
 		}
 	}
@@ -148,10 +163,39 @@ function drag(ev) {
 
 function drop(ev) {
 	ev.preventDefault();
-	console.log("Attempting to move here!")
-	//TODO: Check if this is actually legal
-	var data = ev.dataTransfer.getData("text");
-	ev.target.appendChild(document.getElementById(data));
+	var targetSquare = ev.target
+	if (targetSquare.id.includes("p")){ //If we're moving onto another piece, we need to know that piece's location (parent ID)
+		targetSquare = targetSquare.parentElement
+	}
+	var targetSpaceNum = parseInt(targetSquare.id.split("s")[1])
+
+	currentMoveUI["targetLocation"] = targetSpaceNum
+	if (isLegal(currentMoveUI)){// check for legal move
+		// PERHAPS UNCOMMENT THIS
+		//var data = ev.dataTransfer.getData("text");
+		//targetSquare.appendChild(document.getElementById(data));
+		doMoveUI(currentMoveUI)
+	} 
+}
+
+function doMoveUI(currentMoveUI){
+	//Actually enact the move - also take care of the UI
+	console.log(GameState)
+	doMove(currentMoveUI)
+	currentMoveUI = {}
+	$("[draggable='True']").attr('draggable', 'False'); //set nothing to be draggable. If needed, we'll set somethings to be draggable
+	$(".cardSlot").css("border-color","white")
+	placePieces()
+	placeCards()
+}
+
+
+
+function isLegal(moveUI){ //Check if a move made in the UI is legal 
+	var lookUpString = moveUI.color + "-" + moveUI.cardID + "-" + moveUI.startLocation
+	var boardLegal = precomputedBoardMoves[lookUpString].includes(moveUI.targetLocation) //is it in the precomputed board moves
+	// Move is legal if it's on the board && to an empty space || to an enemy piece. 
+	return boardLegal && (GameState[moveUI.targetLocation] == "e" || !areSameCase(GameState[moveUI.targetLocation],GameState[moveUI.startLocation]))
 }
 
 
@@ -168,4 +212,20 @@ String.prototype.isEmpty = function() {
 
 function valuesAreEqual(array1,array2){
 	return array1.every(i => array2.includes(i)) && array2.every(i => array1.includes(i));
+}
+
+function isUpperCase(letter){
+	return letter.toUpperCase() === letter
+}
+
+function isLowerCase(letter){
+	return letter.toUpperCase() !== letter
+}
+
+function areSameCase(letterA,letterB){
+	return (isUpperCase(letterA) && isUpperCase(letterB)) || (isLowerCase(letterA) && isLowerCase(letterB))
+}
+
+String.prototype.replaceAt = function(index, replacement) {
+    return this.substring(0, index) + replacement + this.substring(index + replacement.length);
 }
