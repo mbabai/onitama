@@ -103,7 +103,7 @@ function precomputeOnBoardMoves(rawMoveSets){
 					var leftCount = rawMove.split("l").length -1;
 					if (color == "B"){ // Blue moves forward "up in numbers"
 						if(spaceNum + forwardCount*5<25 && spaceNum - backwardCount*5>=0 && spaceNum%5 - rightCount >=0 && spaceNum%5 + leftCount <5){
-							outputMoveList.push(spaceNum+forwardCount*5 - backwardCount*5 + rightCount - leftCount)
+							outputMoveList.push(spaceNum+forwardCount*5 - backwardCount*5 - rightCount + leftCount)
 						}
 					} else if (color == "R"){ // Red moves forward "down in numbers"
 						if(spaceNum - forwardCount*5>=0 && spaceNum + backwardCount*5<25 && spaceNum%5 + rightCount <5 && spaceNum%5 - leftCount >=0){

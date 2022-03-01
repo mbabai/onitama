@@ -30,15 +30,15 @@ body {
 #p1c1 {
 	top:25px;
 	left:510px;
-	transform:scaleX(-1);
-	transform:scaleY(-1);
+	transform:rotate(180deg);
+
 }
 
 #p1c2 {
 	top:25px;
 	left:760px;
-	transform:scaleX(-1);
-	transform:scaleY(-1);
+	transform:rotate(180deg);
+
 }
 
 
@@ -55,8 +55,7 @@ body {
 #neutralLeft {
 	top:380px;
 	left:250px;
-	transform:scaleX(-1);
-	transform:scaleY(-1);
+	transform:rotate(180deg);
 }
 #neutralRight {
 	top:380px;
