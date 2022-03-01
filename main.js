@@ -129,7 +129,6 @@ function doMove(move){
 	var flipBit = (1 - parseInt(GameState[GameState.length-1])).toString() // Flip the bit at the end of the string
 	GameState = GameState.replaceAt(GameState.length-1,flipBit) // this changes who's turn is next
 	GameHistory.moveHistory.push(move_image_names[move.cardID] +"-"+ move.color+"-"+ move.startLocation.toString() +"-"+ move.targetLocation.toString()) 
-	console.log(GameHistory)
 }
 
 
