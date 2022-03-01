@@ -1,4 +1,5 @@
 var GameState = "ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07X0"
+var GameHistory = {"gameStart":"", "moveHistory":[]}
 /* 
 p = blue pawn
 m = blue master
@@ -14,7 +15,7 @@ second two two-digit numbers = blue's move cards
 last one two-digit number = neutral card
 
 */
-move_images = {
+move_image_names = {
 	"00": "monkey"
 	, "01": "tiger"
 	, "02": "dragon"
@@ -62,6 +63,7 @@ $(document).ready(function(){
 
 function main(){
 	GameState = createRandomGameState()
+	GameHistory.gameStart = GameState
 	precomputeOnBoardMoves(move_sets_raw)
 	placePieces()
 	placeCards()
@@ -126,6 +128,8 @@ function doMove(move){
 	GameState = GameState.replaceAt(25,move.cardID).replaceAt(usedCardIndex,oldNeutralCard) //swaparoo!!!
 	var flipBit = (1 - parseInt(GameState[GameState.length-1])).toString() // Flip the bit at the end of the string
 	GameState = GameState.replaceAt(GameState.length-1,flipBit) // this changes who's turn is next
+	GameHistory.moveHistory.push(move_image_names[move.cardID] +"-"+ move.color+"-"+ move.startLocation.toString() +"-"+ move.targetLocation.toString()) 
+	console.log(GameHistory)
 }
 
 
@@ -155,24 +159,24 @@ function placeCards(){
 		switch (index){
 			case 0:
 				if (turnPlayerID == 0){
-					$("#neutralRight").css("background-image", "url('images/" + move_images[cardID] + ".jpeg')");
+					$("#neutralRight").css("background-image", "url('images/" + move_image_names[cardID] + ".jpeg')");
 					$("#neutralRight").text(cardID)
 				} else {
-					$("#neutralLeft").css("background-image", "url('images/" + move_images[cardID] + ".jpeg')");
+					$("#neutralLeft").css("background-image", "url('images/" + move_image_names[cardID] + ".jpeg')");
 					$("#neutralLeft").text(cardID)
 
 				}
 			case 1:
-				$("#p1c1").css("background-image", "url('images/" + move_images[cardID] + ".jpeg')");
+				$("#p1c1").css("background-image", "url('images/" + move_image_names[cardID] + ".jpeg')");
 				$("#p1c1").text(cardID)
 			case 2:
-				$("#p1c2").css("background-image", "url('images/" + move_images[cardID] + ".jpeg')");
+				$("#p1c2").css("background-image", "url('images/" + move_image_names[cardID] + ".jpeg')");
 				$("#p1c2").text(cardID)
 			case 3:
-				$("#p0c1").css("background-image", "url('images/" + move_images[cardID] + ".jpeg')");
+				$("#p0c1").css("background-image", "url('images/" + move_image_names[cardID] + ".jpeg')");
 				$("#p0c1").text(cardID)
 			case 4:
-				$("#p0c2").css("background-image", "url('images/" + move_images[cardID] + ".jpeg')");
+				$("#p0c2").css("background-image", "url('images/" + move_image_names[cardID] + ".jpeg')");
 				$("#p0c2").text(cardID)
 								}
 	})
