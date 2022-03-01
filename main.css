@@ -23,16 +23,22 @@ body {
 	background-color:lightgrey;
 	border:5px solid white;
 	position:absolute;
+	background-size:230px 140px;
+	color:transparent;
 }
 
 #p1c1 {
 	top:25px;
 	left:510px;
+	transform:scaleX(-1);
+	transform:scaleY(-1);
 }
 
 #p1c2 {
 	top:25px;
 	left:760px;
+	transform:scaleX(-1);
+	transform:scaleY(-1);
 }
 
 
@@ -49,6 +55,8 @@ body {
 #neutralLeft {
 	top:380px;
 	left:250px;
+	transform:scaleX(-1);
+	transform:scaleY(-1);
 }
 #neutralRight {
 	top:380px;

@@ -1,4 +1,4 @@
-var GameState = "ppmppeeeeeeeeeeeeeeePPMPP00-01-02-03-04X1"
+var GameState = "ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07X0"
 /* 
 p = blue pawn
 m = blue master
@@ -14,12 +14,41 @@ second two two-digit numbers = blue's move cards
 last one two-digit number = neutral card
 
 */
+move_images = {
+	"00": "monkey"
+	, "01": "tiger"
+	, "02": "dragon"
+	, "03": "crab"
+	, "04": "elephant"
+	, "05": "mantis"
+	, "06": "crane"
+	, "07": "boar"
+	, "08": "horse"
+	, "09": "ox"
+	, "10": "cobra"
+	, "11": "eel"
+	, "12": "rooster"
+	, "13": "goose"
+	, "14": "frog"
+	, "15": "rabbit"
+}
 move_sets_raw = {
 	"00": ["fr","br","fl","bl"] 				//Monkey
 	, "01": ["ff","b"] 							//Tiger
 	, "02": ["frr","fll","br","bl"]				//Dragon
 	, "03": ["f","rr","ll"]						//Crab
 	, "04": ["l","r","fl","fr"]					//Elephant
+	, "05": ["fl","fr","b"]						//Mantis
+	, "06": ["f","br","bl"]						//Crane
+	, "07": ["l","r","f"]						//Boar
+	, "08": ["l","b","f"]						//Horse
+	, "09": ["r","b","f"]						//Ox
+	, "10": ["l","br","fr"]						//Cobra
+	, "11": ["r","bl","fl"]						//Eel
+	, "12": ["l","r","bl","fr"]					//Rooster
+	, "13": ["l","r","fl","br"]					//Goose
+	, "14": ["ll","br","fl"]					//Frog
+	, "15": ["bl","rr","fr"]					//Rabbit
 }
 
 precomputedBoardMoves = {} // this will store actual possible spaces for any move, from any square. index =  color+cardID+SquareNum
@@ -53,7 +82,7 @@ function precomputeOnBoardMoves(rawMoveSets){
 					var leftCount = rawMove.split("l").length -1;
 					if (color == "B"){ // Blue moves forward "up in numbers"
 						if(spaceNum + forwardCount*5<25 && spaceNum - backwardCount*5>=0 && spaceNum%5 - rightCount >=0 && spaceNum%5 + leftCount <5){
-							outputMoveList.push(spaceNum+forwardCount*5 - backwardCount*5 - rightCount + leftCount)
+							outputMoveList.push(spaceNum+forwardCount*5 - backwardCount*5 + rightCount - leftCount)
 						}
 					} else if (color == "R"){ // Red moves forward "down in numbers"
 						if(spaceNum - forwardCount*5>=0 && spaceNum + backwardCount*5<25 && spaceNum%5 + rightCount <5 && spaceNum%5 - leftCount >=0){
@@ -98,24 +127,31 @@ function placePieces(){
 
 function placeCards(){
 	//Shows where the cards are in the game, based on the game state
-	$(".cardSlot").text("") // Erase any cards from a prior state
+	$(".cardSlot").css("background-image", "none"); // Erase any cards from a prior state
 	var turnPlayerID = parseInt(GameState.slice(25).split("X")[1])
 	var cardState = GameState.slice(25).split("X")[0].split("-")
 	cardState.forEach(function (cardID,index){
 		switch (index){
 			case 0:
 				if (turnPlayerID == 0){
+					$("#neutralRight").css("background-image", "url('images/" + move_images[cardID] + ".jpeg')");
 					$("#neutralRight").text(cardID)
 				} else {
+					$("#neutralLeft").css("background-image", "url('images/" + move_images[cardID] + ".jpeg')");
 					$("#neutralLeft").text(cardID)
+
 				}
 			case 1:
+				$("#p1c1").css("background-image", "url('images/" + move_images[cardID] + ".jpeg')");
 				$("#p1c1").text(cardID)
 			case 2:
+				$("#p1c2").css("background-image", "url('images/" + move_images[cardID] + ".jpeg')");
 				$("#p1c2").text(cardID)
 			case 3:
+				$("#p0c1").css("background-image", "url('images/" + move_images[cardID] + ".jpeg')");
 				$("#p0c1").text(cardID)
 			case 4:
+				$("#p0c2").css("background-image", "url('images/" + move_images[cardID] + ".jpeg')");
 				$("#p0c2").text(cardID)
 								}
 	})
