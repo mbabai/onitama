@@ -61,9 +61,30 @@ $(document).ready(function(){
 
 
 function main(){
+	GameState = createRandomGameState()
 	precomputeOnBoardMoves(move_sets_raw)
 	placePieces()
 	placeCards()
+}
+
+//SETUP
+function createRandomGameState(isStart = true){
+	var thisGameState = "ppmppeeeeeeeeeeeeeeePPMPP";
+	var deck = ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15"]
+	if (!isStart) {
+		thisGameState = thisGameState.shuffle()
+	}
+	for(var i=0;i<5;i++){
+		const randomCardID = deck[Math.floor(Math.random() * deck.length)];
+		for( var j = 0; j < deck.length; j++){ 
+			if ( deck[j] === randomCardID) { 
+				deck.splice(j, 1); 
+			}
+		}
+		thisGameState += randomCardID + (i<4 ? "-" : "X")
+	}
+	thisGameState += Math.random() > 0.5 ? "1" : "0";
+	return thisGameState
 }
 
 // RULES ***************************************************
@@ -193,7 +214,6 @@ function drag(ev) {
 	var data = ev.dataTransfer.setData("text", ev.target.id);
 	var data = ev.dataTransfer.getData("text"); // ID of the piece
 	currentMoveUI["startLocation"] = parseInt($("#"+data).parent().attr('id').split("s")[1])
-	console.log("starting to move from space:"+currentMoveUI["startLocation"])
 
 }
 
@@ -216,7 +236,6 @@ function drop(ev) {
 
 function doMoveUI(currentMoveUI){
 	//Actually enact the move - also take care of the UI
-	console.log(GameState)
 	doMove(currentMoveUI)
 	currentMoveUI = {}
 	$("[draggable='True']").attr('draggable', 'False'); //set nothing to be draggable. If needed, we'll set somethings to be draggable
@@ -264,4 +283,17 @@ function areSameCase(letterA,letterB){
 
 String.prototype.replaceAt = function(index, replacement) {
     return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+}
+
+String.prototype.shuffle = function () {
+    var a = this.split(""),
+        n = a.length;
+
+    for(var i = n - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
+    }
+    return a.join("");
 }
