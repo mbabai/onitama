@@ -10,9 +10,9 @@ e = empty square
 X0 = red's turn
 X1 = blue's turn
 
-first two two-digit numbers = red's move cards
-second two two-digit numbers = blue's move cards
-last one two-digit number = neutral card
+first pair two-digit numbers = red's move cards
+second pair two-digit numbers = blue's move cards
+last single two-digit number = neutral card
 
 */
 move_image_names = {
@@ -60,14 +60,21 @@ $(document).ready(function(){
 	main()
 })
 
-
+// Logic flow ********************************************
 function main(){
+	startNewGame()
+}
+
+function startNewGame(){
 	GameState = createRandomGameState()
 	GameHistory.gameStart = GameState
-	precomputeOnBoardMoves(move_sets_raw)
+	var thisGameMoveSets = getThisGameCardsMoveSet(move_sets_raw, GameState) // Filter down all possible moves to just the cards in this game
+	precomputeOnBoardMoves(thisGameMoveSets)
 	placePieces()
 	placeCards()
 }
+
+
 // AI ****************************************************
 
 function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue is "negative"
@@ -77,13 +84,16 @@ function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue
 		return -Infinity //Blue wins
 	}
 	else {
-		// Count the differences in pieces, as a share of the total number of pieces that there are. The fewer pieces there are the more the difference matters. 
-		var evaluation = (gameState.countLetters("P") - gameState.countLetters("p"))
-		// Check the relative distances of the masters to their winning temples.
-		var redMasterPos = gameState.indexOf("M")
-		var blueMasterPos = gameState.indexOf("m")
-		//Higher score for red master being closer to blue temple, and lower score for the blue master being closer to the red temple (manhattan distance)
-		evaluation += ((4 - Math.floor(redMasterPos/5)) - (Math.abs(redMasterPos%5 - 2))) - (Math.floor(blueMasterPos/5) - (Math.abs(blueMasterPos%5 - 2)))
+		var bluePawnsCount = gameState.countLetters("p")
+		var redPawnsCount =  gameState.countLetters("P")
+		var piecesEval = (bluePawnsCount - redPawnsCount)
+		var evaluation = 5*(piecesEval) // The difference between number of pawns 
+		var redMasterPos = gameState.indexOf("M") 
+		var blueMasterPos = gameState.indexOf("m") 
+		var redMasterLocationEval = (4 - Math.floor(redMasterPos/5)) - (Math.abs(redMasterPos%5 - 2)) // How close is Red master to blue temple (manhattan Distance)
+		var blueMasterLocationEval = (Math.floor(blueMasterPos/5)) - (Math.abs(blueMasterPos%5 - 2))  // How close is Blue master to red temple (manhattan Distance)
+		var endGamePercent = 10*(8 - (bluePawnsCount + redPawnsCount))/8 // How deep are we into the end game (as measure by total pawns)
+		evaluation += endGamePercent * (redMasterLocationEval - blueMasterLocationEval) // As endgame approaches, master distance to enemy temple matters more.
 		return evaluation
 	}
 }
@@ -136,6 +146,25 @@ function precomputeOnBoardMoves(rawMoveSets){
 			}
 		})
 	}
+}
+
+function getThisGameCardsMoveSet(move_sets_raw, gameState) {
+	// Filter down all possible moves to just the cards in this game
+	var thisGameMoves = {}
+	//Extract the moves from the game state
+	var move0Index = getRedMoveCardIDs(gameState)[0]
+	var move1Index = getRedMoveCardIDs(gameState)[1]
+	var move2Index = getBlueMoveCardIDs(gameState)[0]
+	var move3Index = getBlueMoveCardIDs(gameState)[1]
+	var move4Index = getNeutralMoveCardID(gameState) 
+	//Add the moves into this game's specific moves
+	thisGameMoves[move0Index] = move_sets_raw[move0Index]
+	thisGameMoves[move1Index] = move_sets_raw[move1Index]
+	thisGameMoves[move2Index] = move_sets_raw[move2Index]
+	thisGameMoves[move3Index] = move_sets_raw[move3Index]
+	thisGameMoves[move4Index] = move_sets_raw[move4Index]
+	return thisGameMoves
+
 }
 
 function doMove(move){
@@ -278,6 +307,22 @@ function isLegal(moveUI){ //Check if a move made in the UI is legal
 
 
 // UTILITY ************************************************************
+
+function getRedMoveCardIDs(gameState){
+	var move0Index = gameState.substring(25,27) 
+	var move1Index = gameState.substring(28,30)
+	return [move0Index,move1Index]
+}
+
+function getBlueMoveCardIDs(gameState){
+	var move2Index = gameState.substring(31,33)
+	var move3Index = gameState.substring(34,36)
+	return [move2Index,move3Index]
+}
+
+function getNeutralMoveCardID(gameState){
+	return gameState.substring(37,39)
+}
 
 function getNow(){
 	const d = new Date();
