@@ -68,8 +68,27 @@ function main(){
 	placePieces()
 	placeCards()
 }
+// AI ****************************************************
 
-//SETUP
+function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue is "negative"
+	if(!gameState.includes("m") || gameState[2] == "M"){ // Either there is no blue master, or the red master is in the blue temple
+		return Infinity //Red wins
+	} else if (!gameState.includes("M") || gameState[22] == "m"){ // Either there is no red master, or the blue master is in the red temple
+		return -Infinity //Blue wins
+	}
+	else {
+		// Count the differences in pieces, as a share of the total number of pieces that there are. The fewer pieces there are the more the difference matters. 
+		var evaluation = (gameState.countLetters("P") - gameState.countLetters("p"))
+		// Check the relative distances of the masters to their winning temples.
+		var redMasterPos = gameState.indexOf("M")
+		var blueMasterPos = gameState.indexOf("m")
+		//Higher score for red master being closer to blue temple, and lower score for the blue master being closer to the red temple (manhattan distance)
+		evaluation += ((4 - Math.floor(redMasterPos/5)) - (Math.abs(redMasterPos%5 - 2))) - (Math.floor(blueMasterPos/5) - (Math.abs(blueMasterPos%5 - 2)))
+		return evaluation
+	}
+}
+
+//SETUP ***************************************************
 function createRandomGameState(isStart = true){
 	var thisGameState = "ppmppeeeeeeeeeeeeeeePPMPP";
 	var deck = ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15"]
@@ -99,10 +118,10 @@ function precomputeOnBoardMoves(rawMoveSets){
 				var thisRawMoveList = rawMoveSets[cardID] //grab the actual list of possible moves from the card
 				var outputMoveList = [] //This output list will have actual square numbers
 				thisRawMoveList.forEach( function(rawMove,index){ //at the individual move square level now. We need to count the letters.
-					var forwardCount = rawMove.split("f").length -1;
-					var backwardCount = rawMove.split("b").length -1;
-					var rightCount = rawMove.split("r").length -1;
-					var leftCount = rawMove.split("l").length -1;
+					var forwardCount = rawMove.countLetters("f");
+					var backwardCount = rawMove.countLetters("b");
+					var rightCount = rawMove.countLetters("r");
+					var leftCount = rawMove.countLetters("l");
 					if (color == "B"){ // Blue moves forward "up in numbers"
 						if(spaceNum + forwardCount*5<25 && spaceNum - backwardCount*5>=0 && spaceNum%5 - rightCount >=0 && spaceNum%5 + leftCount <5){
 							outputMoveList.push(spaceNum+forwardCount*5 - backwardCount*5 - rightCount + leftCount)
@@ -129,6 +148,7 @@ function doMove(move){
 	var flipBit = (1 - parseInt(GameState[GameState.length-1])).toString() // Flip the bit at the end of the string
 	GameState = GameState.replaceAt(GameState.length-1,flipBit) // this changes who's turn is next
 	GameHistory.moveHistory.push(move_image_names[move.cardID] +"-"+ move.color+"-"+ move.startLocation.toString() +"-"+ move.targetLocation.toString()) 
+	console.log("game predicted score: "+staticEvaluation(GameState))
 }
 
 
@@ -299,4 +319,8 @@ String.prototype.shuffle = function () {
         a[j] = tmp;
     }
     return a.join("");
+}
+
+String.prototype.countLetters = function(inputLetter) {
+    return this.split(inputLetter).length -1;
 }
