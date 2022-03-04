@@ -87,13 +87,13 @@ function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue
 	else {
 		var bluePawnsCount = gameState.countLetters("p")
 		var redPawnsCount =  gameState.countLetters("P")
-		var piecesEval = (bluePawnsCount - redPawnsCount)
-		var evaluation = 5*(piecesEval) // The difference between number of pawns 
 		var redMasterPos = gameState.indexOf("M") 
 		var blueMasterPos = gameState.indexOf("m") 
 		var redMasterLocationEval = (4 - Math.floor(redMasterPos/5)) - (Math.abs(redMasterPos%5 - 2)) // How close is Red master to blue temple (manhattan Distance)
 		var blueMasterLocationEval = (Math.floor(blueMasterPos/5)) - (Math.abs(blueMasterPos%5 - 2))  // How close is Blue master to red temple (manhattan Distance)
 		var endGamePercent = 10*(8 - (bluePawnsCount + redPawnsCount))/8 // How deep are we into the end game (as measure by total pawns)
+		
+		var evaluation = 5*(redPawnsCount - bluePawnsCount) // The difference between number of pawns 
 		evaluation += endGamePercent * (redMasterLocationEval - blueMasterLocationEval) // As endgame approaches, master distance to enemy temple matters more.
 		return evaluation
 	}
@@ -103,14 +103,18 @@ function countPossiblePlies(gameState){
 	//Count the number of board legal plies (moves for one side) of the current player.
 	var turn = whosTurn(gameState)
 	var countPlies = 0
-	for (var spaceNum = 0; spaceNum <25; spaceNum++) {
-		if (gameState[spaceNum] != "e" && (turn == "R" ? isUpperCase(gameState[spaceNum]) : isLowerCase(gameState[spaceNum]) ) ) {// Select the right color
-			getRedMoveCardIDs(gameState).forEach(function(cardID){
-				var startKey = turn+"-"+cardID+"-"+spaceNum //defines the starting move, which is the key to our precomputed moves.
-				console.log(startKey +" to " + precomputedBoardMoves[startKey])
-				countPlies += precomputedBoardMoves[startKey].length
-			})
-		}
+	var piecesForPlayersTurn = getColorPieceLocations(gameState, turn)
+	for (var i = 0; i < piecesForPlayersTurn.length; i++) {
+		var pieceSpace = piecesForPlayersTurn[i]
+		getCurrentTurnPlayersCardIDs(gameState).forEach(function(cardID){
+			var startKey = turn+"-"+cardID+"-"+pieceSpace //defines the starting move, which is the key to our precomputed moves.
+			for (var i = precomputedBoardMoves[startKey].length - 1; i >= 0; i--) {
+				var targetLocationPiece = gameState[precomputedBoardMoves[startKey][i]]
+				if( !( (targetLocationPiece == (turn == "R" ? "M": "m")) || (targetLocationPiece == (turn == "R" ? "P": "p")) ) ) {//If the target doesn't have a same color piece
+					countPlies += 1 //Count this as a valid move.
+				}
+			}
+		})
 	}
 	return countPlies
 }
@@ -190,7 +194,6 @@ function doMove(move,gameState){
 	gameState = changeTurns(gameState) 
 	recordHistory(move)
 	console.log( "Game predicted score: "+staticEvaluation(gameState))
-	console.log(countPossiblePlies(gameState))
 	return gameState
 }
 
@@ -339,6 +342,18 @@ function isLegal(moveUI){ //Check if a move made in the UI is legal
 
 
 // UTILITY ************************************************************
+function getColorPieceLocations(gameState, color){
+	// get a list of pawn locations. The first entry is always the master (if there is one)
+	var locations =[]
+	locations.push(gameState.indexOf(color =="R" ? "M":"m"))//Get the master of the appropriate color
+	for(i=0;i<25;i++){
+		if (gameState[i] == (color =="R" ? "P":"p")){ //get the index of the pawns of the appropriate color
+			locations.push(i)
+		}
+	}
+	return locations
+}
+
 function whosTurn(gameState){
 	//returns "R" or "B" depending on who's turn it is
 	return gameState.charAt(gameState.length - 1)
@@ -349,6 +364,13 @@ function getRedMoveCardIDs(gameState){
 	var move0Index = gameState.substring(25,27) 
 	var move1Index = gameState.substring(28,30)
 	return [move0Index,move1Index]
+}
+
+function getCurrentTurnPlayersCardIDs(gameState){
+	if (whosTurn(gameState) == "R"){
+		return  getRedMoveCardIDs(gameState)
+	}
+	return getBlueMoveCardIDs(gameState)
 }
 
 function getBlueMoveCardIDs(gameState){
