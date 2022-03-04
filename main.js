@@ -72,7 +72,6 @@ function startNewGame(){
 	precomputeOnBoardMoves(thisGameMoveSets)
 	placePieces(GameState)
 	placeCards(GameState)
-	console.log(countPossiblePlies(GameState))
 }
 
 
@@ -266,7 +265,6 @@ function placeCards(gameState){
 function selectCard(slot){
 	var currentTurnPlayer = whosTurn(GameState)
 	var cardSlotPlayer = slot[1]
-	console.log(cardSlotPlayer)
 	$("[draggable='True']").attr('draggable', 'False'); //set nothing to be draggable. If needed, we'll set somethings to be draggable
 	if(currentTurnPlayer == cardSlotPlayer) { // check that it's the right player's turn.
 		if ("cardID" in currentMoveUI && currentMoveUI["cardID"] == $("#"+slot).text()){ 
@@ -318,6 +316,11 @@ function drop(ev) {
 		//targetSquare.appendChild(document.getElementById(data));
 		GameState = doMoveUI(currentMoveUI,GameState)
 	} 
+	if(staticEvaluation(GameState) == Infinity){
+		alert("Red wins!!!")
+	}else if(staticEvaluation(GameState) == -Infinity){
+		alert("Blue wins!!!")
+	}
 }
 
 function doMoveUI(currentMoveUI,gameState){
