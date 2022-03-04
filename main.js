@@ -98,24 +98,44 @@ function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue
 	}
 }
 
-function countPossiblePlies(gameState){
+function enumerateMoves(gameState, depth, maximizingPlayer){
 	//Count the number of board legal plies (moves for one side) of the current player.
 	var turn = whosTurn(gameState)
-	var countPlies = 0
 	var piecesForPlayersTurn = getColorPieceLocations(gameState, turn)
 	for (var i = 0; i < piecesForPlayersTurn.length; i++) {
 		var pieceSpace = piecesForPlayersTurn[i]
 		getCurrentTurnPlayersCardIDs(gameState).forEach(function(cardID){
 			var startKey = turn+"-"+cardID+"-"+pieceSpace //defines the starting move, which is the key to our precomputed moves.
 			for (var i = precomputedBoardMoves[startKey].length - 1; i >= 0; i--) {
-				var targetLocationPiece = gameState[precomputedBoardMoves[startKey][i]]
+				var targetLocation = precomputedBoardMoves[startKey][i]
+				var targetLocationPiece = gameState[targetLocation]
 				if( !( (targetLocationPiece == (turn == "R" ? "M": "m")) || (targetLocationPiece == (turn == "R" ? "P": "p")) ) ) {//If the target doesn't have a same color piece
-					countPlies += 1 //Count this as a valid move.
+					//This is a legal move, let's enact it, and run the game state
+					var thisMove = cardID+"-" turn+"-"+ pieceSpace.toString() +"-"+targetLocation.toString()
+					var newGameState = doMove(thisMove,gameState)
+					minimax(newGameState,depth -1, maximizingPlayer)
 				}
 			}
 		})
 	}
-	return countPlies
+}
+
+function minimax(gameState,depth, maximizingPlayer){
+	//take a gamestate, search a specific deapth, and get the min-max score for this games state, based on the depth.
+	var staticEval = staticEvaluation(gamesState)
+	if(depth == 0 or Math.abs(staticEval) == Infinity ){ //Either we won't be searching further, or we've reached an end node of the game
+		return staticEval
+	}
+	if (maximizingPlayer == "R"){
+		maxEval = -infinity
+		var eval = enumerateMoves(gameState, depth, "B")
+		return max(maxEval,eval)
+	} else {
+		minEval = infinity
+		var eval = enumerateMoves(gameState, depth, "R")
+		return max(minEval,eval)
+	}
+		
 }
 
 //SETUP ***************************************************
