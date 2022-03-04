@@ -1,4 +1,4 @@
-var GameState = "ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07X0"
+var GameState = "ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07XR"
 var GameHistory = {"gameStart":"", "moveHistory":[]}
 /* 
 p = blue pawn
@@ -7,8 +7,8 @@ P = red pawn
 M = red master
 e = empty square
 
-X0 = red's turn
-X1 = blue's turn
+XR = red's turn
+XB = blue's turn
 
 first pair two-digit numbers = red's move cards
 second pair two-digit numbers = blue's move cards
@@ -70,8 +70,9 @@ function startNewGame(){
 	GameHistory.gameStart = GameState
 	var thisGameMoveSets = getThisGameCardsMoveSet(move_sets_raw, GameState) // Filter down all possible moves to just the cards in this game
 	precomputeOnBoardMoves(thisGameMoveSets)
-	placePieces()
-	placeCards()
+	placePieces(GameState)
+	placeCards(GameState)
+	console.log(countPossiblePlies(GameState))
 }
 
 
@@ -98,6 +99,22 @@ function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue
 	}
 }
 
+function countPossiblePlies(gameState){
+	//Count the number of board legal plies (moves for one side) of the current player.
+	var turn = whosTurn(gameState)
+	var countPlies = 0
+	for (var spaceNum = 0; spaceNum <25; spaceNum++) {
+		if (gameState[spaceNum] != "e" && (turn == "R" ? isUpperCase(gameState[spaceNum]) : isLowerCase(gameState[spaceNum]) ) ) {// Select the right color
+			getRedMoveCardIDs(gameState).forEach(function(cardID){
+				var startKey = turn+"-"+cardID+"-"+spaceNum //defines the starting move, which is the key to our precomputed moves.
+				console.log(startKey +" to " + precomputedBoardMoves[startKey])
+				countPlies += precomputedBoardMoves[startKey].length
+			})
+		}
+	}
+	return countPlies
+}
+
 //SETUP ***************************************************
 function createRandomGameState(isStart = true){
 	var thisGameState = "ppmppeeeeeeeeeeeeeeePPMPP";
@@ -114,7 +131,7 @@ function createRandomGameState(isStart = true){
 		}
 		thisGameState += randomCardID + (i<4 ? "-" : "X")
 	}
-	thisGameState += Math.random() > 0.5 ? "1" : "0";
+	thisGameState += Math.random() > 0.5 ? "R" : "B";
 	return thisGameState
 }
 
@@ -167,27 +184,51 @@ function getThisGameCardsMoveSet(move_sets_raw, gameState) {
 
 }
 
-function doMove(move){
-	//Enact the move, and update the game state.
-	GameState = GameState.replaceAt(move.targetLocation, GameState[move.startLocation]) //The piece will now be in the right place
-	GameState = GameState.replaceAt(move.startLocation,"e") //empty the space it left
-	var oldNeutralCard = GameState.substring(25,27) //Get the Neutral Card
-	var usedCardIndex = GameState.indexOf(move.cardID) //Get the locatin of the used card
-	GameState = GameState.replaceAt(25,move.cardID).replaceAt(usedCardIndex,oldNeutralCard) //swaparoo!!!
-	var flipBit = (1 - parseInt(GameState[GameState.length-1])).toString() // Flip the bit at the end of the string
-	GameState = GameState.replaceAt(GameState.length-1,flipBit) // this changes who's turn is next
+function doMove(move,gameState){
+	gameState = movePiece(gameState,move)
+	gameState = rotateCards(gameState, move)
+	gameState = changeTurns(gameState) 
+	recordHistory(move)
+	console.log( "Game predicted score: "+staticEvaluation(gameState))
+	console.log(countPossiblePlies(gameState))
+	return gameState
+}
+
+function recordHistory(move){
+	//Keep a record of what has gone on in the game.
 	GameHistory.moveHistory.push(move_image_names[move.cardID] +"-"+ move.color+"-"+ move.startLocation.toString() +"-"+ move.targetLocation.toString()) 
-	console.log("game predicted score: "+staticEvaluation(GameState))
+}
+
+function movePiece(gameState,move){
+	//Enact the move, and update the game state.
+	gameState = gameState.replaceAt(move.targetLocation, gameState[move.startLocation]) //The piece will now be in the right place
+	gameState = gameState.replaceAt(move.startLocation,"e") //empty the space it left
+	return gameState
+}
+
+function rotateCards(gameState, move){
+	// Find the old card, and the neurtral card, and swap them. 
+	var oldNeutralCard = getNeutralMoveCardID(gameState) //Get the Neutral Card
+	var usedCardIndex = gameState.indexOf(move.cardID) //Get the locatin of the used card
+	gameState = gameState.replaceAt(37,move.cardID).replaceAt(usedCardIndex,oldNeutralCard) //swaparoo!!!
+	return gameState
+}
+
+function changeTurns(gameState){
+	// this changes who's turn is next, by flipping the last letter in gameState form B to R or vice versa.
+	var currentTurn = gameState[gameState.length-1]
+	var newTurn = (currentTurn == "R" ? "B" : "R")
+	return gameState.replaceAt(gameState.length-1,newTurn)
 }
 
 
 // VISUAL ********************************************************
-function placePieces(){
+function placePieces(gameState){
 	// Put the piece divs on the board to reflect the game state
 	$(".piece").remove() // remove any pieces if there were any.
 	var pieceNum = 0
 	for(i=0;i<25;i++){
-		var letter = GameState[i]
+		var letter = gameState[i]
 		if(letter != "e"){
 			var leftCoordinate = (507+100*(i%5))
 			var topCoordinate = (207+100*Math.floor(i/5))
@@ -198,41 +239,31 @@ function placePieces(){
 	}
 }
 
-function placeCards(){
+function placeCards(gameState){
 	//Shows where the cards are in the game, based on the game state
 	$(".cardSlot").css("background-image", "none"); // Erase any cards from a prior state
-	var turnPlayerID = parseInt(GameState.slice(25).split("X")[1])
-	var cardState = GameState.slice(25).split("X")[0].split("-")
-	cardState.forEach(function (cardID,index){
-		switch (index){
-			case 0:
-				if (turnPlayerID == 0){
-					$("#neutralRight").css("background-image", "url('images/" + move_image_names[cardID] + ".jpeg')");
-					$("#neutralRight").text(cardID)
-				} else {
-					$("#neutralLeft").css("background-image", "url('images/" + move_image_names[cardID] + ".jpeg')");
-					$("#neutralLeft").text(cardID)
-
-				}
-			case 1:
-				$("#p1c1").css("background-image", "url('images/" + move_image_names[cardID] + ".jpeg')");
-				$("#p1c1").text(cardID)
-			case 2:
-				$("#p1c2").css("background-image", "url('images/" + move_image_names[cardID] + ".jpeg')");
-				$("#p1c2").text(cardID)
-			case 3:
-				$("#p0c1").css("background-image", "url('images/" + move_image_names[cardID] + ".jpeg')");
-				$("#p0c1").text(cardID)
-			case 4:
-				$("#p0c2").css("background-image", "url('images/" + move_image_names[cardID] + ".jpeg')");
-				$("#p0c2").text(cardID)
-								}
-	})
+	var turnPlayer = whosTurn(gameState)
+	if (turnPlayer == "R"){
+		$("#neutralRed").css("background-image", "url('images/" + move_image_names[getNeutralMoveCardID(gameState)] + ".jpeg')");
+		$("#neutralRed").text(getNeutralMoveCardID(gameState))
+	} else {
+		$("#neutralBlue").css("background-image", "url('images/" + move_image_names[getNeutralMoveCardID(gameState)] + ".jpeg')");
+		$("#neutralBlue").text(getNeutralMoveCardID(gameState))
+	}
+	$("#pBc1").css("background-image", "url('images/" + move_image_names[getBlueMoveCardIDs(gameState)[0]] + ".jpeg')");
+	$("#pBc1").text(getBlueMoveCardIDs(gameState)[0])
+	$("#pBc2").css("background-image", "url('images/" + move_image_names[getBlueMoveCardIDs(gameState)[1]] + ".jpeg')");
+	$("#pBc2").text(getBlueMoveCardIDs(gameState)[1])
+	$("#pRc1").css("background-image", "url('images/" + move_image_names[getRedMoveCardIDs(gameState)[0]] + ".jpeg')");
+	$("#pRc1").text(getRedMoveCardIDs(gameState)[0])
+	$("#pRc2").css("background-image", "url('images/" + move_image_names[getRedMoveCardIDs(gameState)[1]] + ".jpeg')");
+	$("#pRc2").text(getRedMoveCardIDs(gameState)[1])
 }
 
 function selectCard(slot){
-	var currentTurnPlayer = parseInt(GameState[GameState.length-1])
-	var cardSlotPlayer = parseInt(slot[1])
+	var currentTurnPlayer = whosTurn(GameState)
+	var cardSlotPlayer = slot[1]
+	console.log(cardSlotPlayer)
 	$("[draggable='True']").attr('draggable', 'False'); //set nothing to be draggable. If needed, we'll set somethings to be draggable
 	if(currentTurnPlayer == cardSlotPlayer) { // check that it's the right player's turn.
 		if ("cardID" in currentMoveUI && currentMoveUI["cardID"] == $("#"+slot).text()){ 
@@ -244,7 +275,7 @@ function selectCard(slot){
 			$(".cardSlot").css("border-color","white")
 			$("#"+slot).css("border-color","gold")
 			currentMoveUI["cardID"] = $("#"+slot).text()
-			if (currentTurnPlayer == 0){ // Red's turn
+			if (currentTurnPlayer == "R"){ // Red's turn
 				$(".piece.red").attr('draggable', 'True')
 				currentMoveUI["color"] = "R"
 			}else{ // Blue's turn
@@ -282,18 +313,19 @@ function drop(ev) {
 		// PERHAPS UNCOMMENT THIS
 		//var data = ev.dataTransfer.getData("text");
 		//targetSquare.appendChild(document.getElementById(data));
-		doMoveUI(currentMoveUI)
+		GameState = doMoveUI(currentMoveUI,GameState)
 	} 
 }
 
-function doMoveUI(currentMoveUI){
+function doMoveUI(currentMoveUI,gameState){
 	//Actually enact the move - also take care of the UI
-	doMove(currentMoveUI)
+	gameState = doMove(currentMoveUI,gameState)
 	currentMoveUI = {}
 	$("[draggable='True']").attr('draggable', 'False'); //set nothing to be draggable. If needed, we'll set somethings to be draggable
 	$(".cardSlot").css("border-color","white")
-	placePieces()
-	placeCards()
+	placePieces(gameState)
+	placeCards(gameState)
+	return gameState
 }
 
 
@@ -307,6 +339,11 @@ function isLegal(moveUI){ //Check if a move made in the UI is legal
 
 
 // UTILITY ************************************************************
+function whosTurn(gameState){
+	//returns "R" or "B" depending on who's turn it is
+	return gameState.charAt(gameState.length - 1)
+}
+
 
 function getRedMoveCardIDs(gameState){
 	var move0Index = gameState.substring(25,27) 

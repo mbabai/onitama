@@ -27,14 +27,14 @@ body {
 	color:transparent;
 }
 
-#p1c1 {
+#pBc1 {
 	top:25px;
 	left:510px;
 	transform:rotate(180deg);
 
 }
 
-#p1c2 {
+#pBc2 {
 	top:25px;
 	left:760px;
 	transform:rotate(180deg);
@@ -42,22 +42,22 @@ body {
 }
 
 
-#p0c1 {
+#pRc1 {
 	top:730px;
 	left:510px;
 }
 
-#p0c2 {
+#pRc2 {
 	top:730px;
 	left:760px;
 }
 
-#neutralLeft {
+#neutralBlue {
 	top:380px;
 	left:250px;
 	transform:rotate(180deg);
 }
-#neutralRight {
+#neutralRed {
 	top:380px;
 	left:1020px;
 }
