@@ -81,10 +81,7 @@ function doAIMove(gameState,color){
 	console.log("Thinking about move...")
 	var thinkingStartTime = getNow()
 	AImovesEvaluated = 0
-	var evalMove = minimaxMoveFind(gameState,3, color)
-	console.log(evalMove)
-	// evalMove = {"eval":300, "move":{"cardID":getBlueMoveCardIDs(gameState)[0], "color":"B", "startLocation":2, "targetLocation": 7}} // Fake move for testing
-	// console.log(evalMove)
+	var evalMove = minimaxMoveFind(gameState,6, color)
 	var newGameState = doMove(gameState,evalMove.move)
 	// The move sort of occurs...
 	var thinkingEndTime = getNow()
@@ -142,7 +139,7 @@ function minimaxMoveFind(gameState,depth,maximizingPlayer){ //return {"eval":num
 	var topMove = {}
 	//Given a game state, and a depth, recursively get the best move until bottom depth or game over node
 	var staticEval = staticEvaluation(gameState)
-	if(depth == 0 || Math.abs(staticEval) == Infinity ){ //Either we won't be searching further, or we've reached an end node of the game
+	if(depth == 0 || Math.abs(staticEval) == Infinity ) { //Either we won't be searching further, or we've reached an end node of the game
 		return {"eval":staticEval, "move":topMove}
 	}
 
@@ -158,20 +155,18 @@ function minimaxMoveFind(gameState,depth,maximizingPlayer){ //return {"eval":num
 			for (var i = 0; i < PrecomputedBoardMoves[startKey].length; i++) { // Loop through the precomputed legal moves makeable with those cards for the given piece
 				var targetLocation = PrecomputedBoardMoves[startKey][i]
 				var targetLocationPiece = gameState[targetLocation]
-				var thisMove = {"cardID":cardID,"color":turn,"startLocation":pieceSpace,"tartgetLocation":targetLocation}
-				if(isLegal(gameState,thisMove)) { //If the target doesn't have a same color piece					
+				var thisMove = {"cardID":cardID,"color":turn,"startLocation":pieceSpace,"targetLocation":targetLocation}
+				if(isLegal(gameState,thisMove)) { //If the target doesn't have a same color piece	
 					//This is a legal move, let's enact it, and run the game state
-					console.log(depth)
-					console.log(thisMove)
 					var newGameState = doMove(gameState,thisMove)
 					var moveEval = minimaxMoveFind(newGameState,depth - 1, maximizingPlayer == "R" ? "B": "R")
 					if(maximizingPlayer == "R"){
-						if (moveEval.eval>=topEval){
+						if (moveEval.eval >= topEval){
 							topMove = thisMove //keep track of the best move
 							topEval = moveEval.eval
 						} 
-					}else {
-						if (moveEval.eval<=topEval){
+					} else {
+						if (moveEval.eval <= topEval){
 							topMove = thisMove //keep track of the best move
 							topEval = moveEval.eval
 
@@ -182,7 +177,7 @@ function minimaxMoveFind(gameState,depth,maximizingPlayer){ //return {"eval":num
 			}
 		})
 	}
-	if (topMove == {}){
+	if (isEmpty(topMove)){
 		console.log("SOMETHING WENT VERY WRONG")
 	} 
 	return {"eval":topEval,"move":topMove} 
@@ -378,9 +373,6 @@ function drop(ev) {
 
 	currentMoveUI["targetLocation"] = targetSpaceNum
 	if (isLegal(GameState,currentMoveUI)){// check for legal move
-		// PERHAPS UNCOMMENT THIS
-		//var data = ev.dataTransfer.getData("text");
-		//targetSquare.appendChild(document.getElementById(data));
 		GameState = doMoveUI(GameState,currentMoveUI)
 	} 
 	if(staticEvaluation(GameState) == Infinity){
@@ -415,6 +407,7 @@ function isLegal(gameState,move){ //Check if a move made in the UI is legal
 	if (!boardLegal) return false
 	// Move is legal if it's to an empty space || to an enemy piece. 
 	return (gameState[move.targetLocation] == "e" || !areSameCase(gameState[move.targetLocation],gameState[move.startLocation]))
+	 
 }
 
 
@@ -514,4 +507,8 @@ String.prototype.shuffle = function () {
 
 String.prototype.countLetters = function(inputLetter) {
     return this.split(inputLetter).length -1;
+}
+
+function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
 }
