@@ -17,7 +17,6 @@ XB = blue's turn
 first pair two-digit numbers = red's move cards
 second pair two-digit numbers = blue's move cards
 last single two-digit number = neutral card
-
 */
 
 /*
@@ -73,30 +72,28 @@ function main(){
 	startNewGame()
 }
 
-function doAIMove(gameState,color){
+function getAIMove(gameState,color){
 	//The AI will make moves on it's turn according to minimax. 
-	if(whosTurn(gameState) != color){ return gameState} // don't modify the game state (or do anything) if it's not the AI's turn
+	// if(whosTurn(gameState) != color){ return {};} // don't modify the game state (or do anything) if it's not the AI's turn
 	//Start the thinking process. 
 	PlayerCanMove = false
 	console.log("Thinking about move...")
 	var thinkingStartTime = getNow()
 	AImovesEvaluated = 0
-	var evalMove = minimaxMoveFind(gameState,6, color)
+	var evalMove = minimaxMoveFind(gameState,5, color)
 	var newGameState = doMove(gameState,evalMove.move)
 	// The move sort of occurs...
 	var thinkingEndTime = getNow()
 	var thinkingTime = (thinkingEndTime - thinkingStartTime)/1000
 	PlayerCanMove = true 
 	console.log("Moved, after evaluating "+AImovesEvaluated+" plies in "+thinkingTime+" seconds.")
-	return newGameState
+	return evalMove
 }
 
 
-function doAiMoveUI(gameState,color){
-		var newGameState = doAIMove(gameState,color)
-		placePieces(newGameState)
-		placeCards(newGameState)
-		return newGameState
+function doAIMove(gameState,color){
+	var thisMove = getAIMove(gameState,color).move
+	doRealMove(GameState,thisMove)
 }
 
 function startNewGame(){
@@ -108,7 +105,7 @@ function startNewGame(){
 	placeCards(GameState)
 	if(whosTurn(GameState) == AIcolor && Math.abs(staticEvaluation(GameState)) != Infinity){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
 		console.log("Starting game with AI...")
- 		GameState = doAiMoveUI(GameState,AIcolor)
+		doAIMove(GameState,AIcolor)
 	}
 }
 
@@ -252,6 +249,20 @@ function getThisGameCardsMoveSet(move_sets_raw, gameState) {
 
 }
 
+function doRealMove(gameState,move){
+	//Actually Play out a real move in the game, and record the history
+	GameState = doMove(gameState,move)
+	updateUI(GameState,move)
+	recordHistory(move)
+	if(staticEvaluation(GameState) == Infinity){
+		alert("Red wins!!!")
+	} else if(staticEvaluation(GameState) == -Infinity){
+		alert("Blue wins!!!")
+	} else if(whosTurn(GameState) == AIcolor){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
+		doAIMove(GameState,AIcolor)
+	}
+}
+
 function doMove(gameState,move){
 	gameState = movePiece(gameState,move)
 	gameState = rotateCards(gameState, move)
@@ -373,29 +384,24 @@ function drop(ev) {
 
 	currentMoveUI["targetLocation"] = targetSpaceNum
 	if (isLegal(GameState,currentMoveUI)){// check for legal move
-		GameState = doMoveUI(GameState,currentMoveUI)
+		doRealMove(GameState,currentMoveUI)
+		doMoveUI(GameState,currentMoveUI)
 	} 
-	if(staticEvaluation(GameState) == Infinity){
-		alert("Red wins!!!")
-	}else if(staticEvaluation(GameState) == -Infinity){
-		alert("Blue wins!!!")
-	}else if(whosTurn(GameState) == AIcolor){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
- 		GameState = doAiMoveUI(GameState,AIcolor)
-	}
 }
 
 function doMoveUI(gameState,currentMoveUI){
 	//Actually enact the move - also take care of the UI
 	if(!PlayerCanMove) return gameState
-	gameState = doMove(gameState,currentMoveUI)
-	currentMoveUI = {}
 	$("[draggable='True']").attr('draggable', 'False'); //set nothing to be draggable. If needed, we'll set somethings to be draggable
 	$(".cardSlot").css("border-color","white")
+}
+
+function updateUI(gameState,move){
 	placePieces(gameState)
 	placeCards(gameState)
-	console.log("Game predicted score: "+staticEvaluation(gameState))
-	//console.log("Last move: "+ stringifyMove(GameHistory.moveHistory[GameHistory.moveHistory.length - 1]))
-	return gameState
+	recordHistory(move)
+	console.log("Last move: "+ stringifyMove(GameHistory.moveHistory[GameHistory.moveHistory.length - 1]))
+	currentMoveUI = {}
 }
 
 
