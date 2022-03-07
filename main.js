@@ -1,5 +1,9 @@
 var GameState = "ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07XR"
 var GameHistory = {"gameStart":"", "moveHistory":[]}
+var PlayerCanMove = true
+var AIcolor = "B" //This is B or R if there is an AI playing. it is empty if there is no AI.
+var AImovesEvaluated = 0
+
 /* 
 p = blue pawn
 m = blue master
@@ -14,6 +18,10 @@ first pair two-digit numbers = red's move cards
 second pair two-digit numbers = blue's move cards
 last single two-digit number = neutral card
 
+*/
+
+/*
+move = {cardID: '01', color: 'B', startLocation: 2, tartgetLocation: 12} 
 */
 move_image_names = {
 	"00": "monkey"
@@ -41,8 +49,8 @@ move_sets_raw = {
 	, "04": ["l","r","fl","fr"]					//Elephant
 	, "05": ["fl","fr","b"]						//Mantis
 	, "06": ["f","br","bl"]						//Crane
-	, "07": ["l","r","f"]						//Boar
-	, "08": ["l","b","f"]						//Horse
+	, "07": ["l","r","f"]						//Boars
+	, "08": ["l","f","b"]						//Horse
 	, "09": ["r","b","f"]						//Ox
 	, "10": ["l","br","fr"]						//Cobra
 	, "11": ["r","bl","fl"]						//Eel
@@ -52,7 +60,7 @@ move_sets_raw = {
 	, "15": ["bl","rr","fr"]					//Rabbit
 }
 
-precomputedBoardMoves = {} // this will store actual possible spaces for any move, from any square. index =  color+cardID+SquareNum
+PrecomputedBoardMoves = {} // this will store actual possible spaces for any move, from any square. index =  color+cardID+SquareNum
 currentMoveUI = {} //this is a dictionary to build up the current move through the UI
 
 
@@ -65,6 +73,35 @@ function main(){
 	startNewGame()
 }
 
+function doAIMove(gameState,color){
+	//The AI will make moves on it's turn according to minimax. 
+	if(whosTurn(gameState) != color){ return gameState} // don't modify the game state (or do anything) if it's not the AI's turn
+	//Start the thinking process. 
+	PlayerCanMove = false
+	console.log("Thinking about move...")
+	var thinkingStartTime = getNow()
+	AImovesEvaluated = 0
+	var evalMove = minimaxMoveFind(gameState,3, color)
+	console.log(evalMove)
+	// evalMove = {"eval":300, "move":{"cardID":getBlueMoveCardIDs(gameState)[0], "color":"B", "startLocation":2, "targetLocation": 7}} // Fake move for testing
+	// console.log(evalMove)
+	var newGameState = doMove(gameState,evalMove.move)
+	// The move sort of occurs...
+	var thinkingEndTime = getNow()
+	var thinkingTime = (thinkingEndTime - thinkingStartTime)/1000
+	PlayerCanMove = true 
+	console.log("Moved, after evaluating "+AImovesEvaluated+" plies in "+thinkingTime+" seconds.")
+	return newGameState
+}
+
+
+function doAiMoveUI(gameState,color){
+		var newGameState = doAIMove(gameState,color)
+		placePieces(newGameState)
+		placeCards(newGameState)
+		return newGameState
+}
+
 function startNewGame(){
 	GameState = createRandomGameState()
 	GameHistory.gameStart = GameState
@@ -72,6 +109,10 @@ function startNewGame(){
 	precomputeOnBoardMoves(thisGameMoveSets)
 	placePieces(GameState)
 	placeCards(GameState)
+	if(whosTurn(GameState) == AIcolor && Math.abs(staticEvaluation(GameState)) != Infinity){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
+		console.log("Starting game with AI...")
+ 		GameState = doAiMoveUI(GameState,AIcolor)
+	}
 }
 
 
@@ -82,8 +123,7 @@ function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue
 		return Infinity //Red wins
 	} else if (!gameState.includes("M") || gameState[22] == "m"){ // Either there is no red master, or the blue master is in the red temple
 		return -Infinity //Blue wins
-	}
-	else {
+	} else {
 		var bluePawnsCount = gameState.countLetters("p")
 		var redPawnsCount =  gameState.countLetters("P")
 		var redMasterPos = gameState.indexOf("M") 
@@ -98,44 +138,54 @@ function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue
 	}
 }
 
-function enumerateMoves(gameState, depth, maximizingPlayer){
-	//Count the number of board legal plies (moves for one side) of the current player.
+function minimaxMoveFind(gameState,depth,maximizingPlayer){ //return {"eval":number,"move":moveString}
+	var topMove = {}
+	//Given a game state, and a depth, recursively get the best move until bottom depth or game over node
+	var staticEval = staticEvaluation(gameState)
+	if(depth == 0 || Math.abs(staticEval) == Infinity ){ //Either we won't be searching further, or we've reached an end node of the game
+		return {"eval":staticEval, "move":topMove}
+	}
+
+	var topEval = (maximizingPlayer == "R" ? -Infinity : Infinity) // Depending on the player trying to optimize, the "top" is either infinity of negative infinity (Red is trying to go up, blue down)
 	var turn = whosTurn(gameState)
-	var piecesForPlayersTurn = getColorPieceLocations(gameState, turn)
-	for (var i = 0; i < piecesForPlayersTurn.length; i++) {
-		var pieceSpace = piecesForPlayersTurn[i]
-		getCurrentTurnPlayersCardIDs(gameState).forEach(function(cardID){
+	var piecesForPlayersTurn = getColorPieceLocations(gameState, turn) // get a list of pieces for the current player's turn
+
+	//Begin iterating through moves
+	for (var i = 0; i < piecesForPlayersTurn.length; i++) { // Loop through all the pieces the current player has on the board
+		var pieceSpace = piecesForPlayersTurn[i] //get the square number for that piece
+		getCurrentTurnPlayersCardIDs(gameState).forEach(function(cardID){ //Loop through the 2 cards of the player
 			var startKey = turn+"-"+cardID+"-"+pieceSpace //defines the starting move, which is the key to our precomputed moves.
-			for (var i = precomputedBoardMoves[startKey].length - 1; i >= 0; i--) {
-				var targetLocation = precomputedBoardMoves[startKey][i]
+			for (var i = 0; i < PrecomputedBoardMoves[startKey].length; i++) { // Loop through the precomputed legal moves makeable with those cards for the given piece
+				var targetLocation = PrecomputedBoardMoves[startKey][i]
 				var targetLocationPiece = gameState[targetLocation]
-				if( !( (targetLocationPiece == (turn == "R" ? "M": "m")) || (targetLocationPiece == (turn == "R" ? "P": "p")) ) ) {//If the target doesn't have a same color piece
+				var thisMove = {"cardID":cardID,"color":turn,"startLocation":pieceSpace,"tartgetLocation":targetLocation}
+				if(isLegal(gameState,thisMove)) { //If the target doesn't have a same color piece					
 					//This is a legal move, let's enact it, and run the game state
-					var thisMove = cardID+"-" turn+"-"+ pieceSpace.toString() +"-"+targetLocation.toString()
-					var newGameState = doMove(thisMove,gameState)
-					minimax(newGameState,depth -1, maximizingPlayer)
+					console.log(depth)
+					console.log(thisMove)
+					var newGameState = doMove(gameState,thisMove)
+					var moveEval = minimaxMoveFind(newGameState,depth - 1, maximizingPlayer == "R" ? "B": "R")
+					if(maximizingPlayer == "R"){
+						if (moveEval.eval>=topEval){
+							topMove = thisMove //keep track of the best move
+							topEval = moveEval.eval
+						} 
+					}else {
+						if (moveEval.eval<=topEval){
+							topMove = thisMove //keep track of the best move
+							topEval = moveEval.eval
+
+						}
+					}
+					AImovesEvaluated +=1
 				}
 			}
 		})
 	}
-}
-
-function minimax(gameState,depth, maximizingPlayer){
-	//take a gamestate, search a specific deapth, and get the min-max score for this games state, based on the depth.
-	var staticEval = staticEvaluation(gamesState)
-	if(depth == 0 or Math.abs(staticEval) == Infinity ){ //Either we won't be searching further, or we've reached an end node of the game
-		return staticEval
-	}
-	if (maximizingPlayer == "R"){
-		maxEval = -infinity
-		var eval = enumerateMoves(gameState, depth, "B")
-		return max(maxEval,eval)
-	} else {
-		minEval = infinity
-		var eval = enumerateMoves(gameState, depth, "R")
-		return max(minEval,eval)
-	}
-		
+	if (topMove == {}){
+		console.log("SOMETHING WENT VERY WRONG")
+	} 
+	return {"eval":topEval,"move":topMove} 
 }
 
 //SETUP ***************************************************
@@ -182,7 +232,7 @@ function precomputeOnBoardMoves(rawMoveSets){
 						}
 					}
 				})
-				precomputedBoardMoves[color+"-"+cardID.toString()+"-"+spaceNum.toString()] = outputMoveList
+				PrecomputedBoardMoves[color+"-"+cardID+"-"+spaceNum.toString()] = outputMoveList
 			}
 		})
 	}
@@ -207,40 +257,37 @@ function getThisGameCardsMoveSet(move_sets_raw, gameState) {
 
 }
 
-function doMove(move,gameState){
+function doMove(gameState,move){
 	gameState = movePiece(gameState,move)
 	gameState = rotateCards(gameState, move)
 	gameState = changeTurns(gameState) 
-	recordHistory(move)
-	console.log( "Game predicted score: "+staticEvaluation(gameState))
 	return gameState
 }
 
 function recordHistory(move){
 	//Keep a record of what has gone on in the game.
-	GameHistory.moveHistory.push(move_image_names[move.cardID] +"-"+ move.color+"-"+ move.startLocation.toString() +"-"+ move.targetLocation.toString()) 
+	GameHistory.moveHistory.push(move) 
 }
 
 function movePiece(gameState,move){
 	//Enact the move, and update the game state.
-	gameState = gameState.replaceAt(move.targetLocation, gameState[move.startLocation]) //The piece will now be in the right place
-	gameState = gameState.replaceAt(move.startLocation,"e") //empty the space it left
-	return gameState
+	var newGameState = gameState.replaceAt(move.targetLocation, gameState[move.startLocation]) //The piece will now be in the right place
+	var newestGameState = newGameState.replaceAt(move.startLocation,"e") //empty the space it left
+	return newestGameState
 }
 
 function rotateCards(gameState, move){
 	// Find the old card, and the neurtral card, and swap them. 
 	var oldNeutralCard = getNeutralMoveCardID(gameState) //Get the Neutral Card
 	var usedCardIndex = gameState.indexOf(move.cardID) //Get the locatin of the used card
-	gameState = gameState.replaceAt(37,move.cardID).replaceAt(usedCardIndex,oldNeutralCard) //swaparoo!!!
-	return gameState
+	var newGameState = gameState.replaceAt(37,move.cardID).replaceAt(usedCardIndex,oldNeutralCard) //swaparoo!!!
+	return newGameState
 }
 
 function changeTurns(gameState){
 	// this changes who's turn is next, by flipping the last letter in gameState form B to R or vice versa.
-	var currentTurn = gameState[gameState.length-1]
-	var newTurn = (currentTurn == "R" ? "B" : "R")
-	return gameState.replaceAt(gameState.length-1,newTurn)
+	var newGameState = gameState.replaceAt(gameState.length-1, (whosTurn(gameState) == "R" ? "B" : "R"))
+	return newGameState
 }
 
 
@@ -330,41 +377,58 @@ function drop(ev) {
 	var targetSpaceNum = parseInt(targetSquare.id.split("s")[1])
 
 	currentMoveUI["targetLocation"] = targetSpaceNum
-	if (isLegal(currentMoveUI)){// check for legal move
+	if (isLegal(GameState,currentMoveUI)){// check for legal move
 		// PERHAPS UNCOMMENT THIS
 		//var data = ev.dataTransfer.getData("text");
 		//targetSquare.appendChild(document.getElementById(data));
-		GameState = doMoveUI(currentMoveUI,GameState)
+		GameState = doMoveUI(GameState,currentMoveUI)
 	} 
 	if(staticEvaluation(GameState) == Infinity){
 		alert("Red wins!!!")
 	}else if(staticEvaluation(GameState) == -Infinity){
 		alert("Blue wins!!!")
+	}else if(whosTurn(GameState) == AIcolor){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
+ 		GameState = doAiMoveUI(GameState,AIcolor)
 	}
 }
 
-function doMoveUI(currentMoveUI,gameState){
+function doMoveUI(gameState,currentMoveUI){
 	//Actually enact the move - also take care of the UI
-	gameState = doMove(currentMoveUI,gameState)
+	if(!PlayerCanMove) return gameState
+	gameState = doMove(gameState,currentMoveUI)
 	currentMoveUI = {}
 	$("[draggable='True']").attr('draggable', 'False'); //set nothing to be draggable. If needed, we'll set somethings to be draggable
 	$(".cardSlot").css("border-color","white")
 	placePieces(gameState)
 	placeCards(gameState)
+	console.log("Game predicted score: "+staticEvaluation(gameState))
+	//console.log("Last move: "+ stringifyMove(GameHistory.moveHistory[GameHistory.moveHistory.length - 1]))
 	return gameState
 }
 
 
 
-function isLegal(moveUI){ //Check if a move made in the UI is legal 
-	var lookUpString = moveUI.color + "-" + moveUI.cardID + "-" + moveUI.startLocation
-	var boardLegal = precomputedBoardMoves[lookUpString].includes(moveUI.targetLocation) //is it in the precomputed board moves
-	// Move is legal if it's on the board && to an empty space || to an enemy piece. 
-	return boardLegal && (GameState[moveUI.targetLocation] == "e" || !areSameCase(GameState[moveUI.targetLocation],GameState[moveUI.startLocation]))
+function isLegal(gameState,move){ //Check if a move made in the UI is legal
+	if (move.color != whosTurn(gameState)) return false // can't move on the wrong turn
+	var lookUpString = move.color + "-" + move.cardID + "-" + move.startLocation
+	var boardLegal = PrecomputedBoardMoves[lookUpString].includes(move.targetLocation) //is it in the precomputed board moves
+	if (!boardLegal) return false
+	// Move is legal if it's to an empty space || to an enemy piece. 
+	return (gameState[move.targetLocation] == "e" || !areSameCase(gameState[move.targetLocation],gameState[move.startLocation]))
 }
 
 
 // UTILITY ************************************************************
+function stringifyMove(move){
+	if (Object.keys(move).length === 0) return "Empty Move"
+	return move.color +"-"+move_image_names[move.cardID] +":"+  coordinatifySquareNumber(move.startLocation) +"-"+ coordinatifySquareNumber(move.targetLocation)
+}
+
+function coordinatifySquareNumber(n){
+	var letters = "abcde"
+	return letters[n%5] + (Math.floor(n/5)+1)
+}
+
 function getColorPieceLocations(gameState, color){
 	// get a list of pawn locations. The first entry is always the master (if there is one)
 	var locations =[]
