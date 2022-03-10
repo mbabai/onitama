@@ -80,13 +80,15 @@ function getAIMove(gameState,color){
 	console.log("Thinking about move...")
 	var thinkingStartTime = getNow()
 	AImovesEvaluated = 0
-	var evalMove = minimaxMoveFind(gameState,5, color)
+	AImovesPruned = 0
+	var evalMove = minimaxMoveFind(gameState,5,-Infinity,Infinity, color)
 	var newGameState = doMove(gameState,evalMove.move)
 	// The move sort of occurs...
 	var thinkingEndTime = getNow()
 	var thinkingTime = (thinkingEndTime - thinkingStartTime)/1000
 	PlayerCanMove = true 
-	console.log("Moved, after evaluating "+AImovesEvaluated+" plies in "+thinkingTime+" seconds.")
+	var winningPlayer = evalMove.eval > 0 ? "Red by "+evalMove.eval : (evalMove.eval < 0 ? "Blue by "+evalMove.eval : "neither side")
+	console.log("Moved, after evaluating "+AImovesEvaluated+" plies in "+thinkingTime+" seconds, with an edge given to "+winningPlayer+".")
 	return evalMove
 }
 
@@ -132,47 +134,56 @@ function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue
 	}
 }
 
-function minimaxMoveFind(gameState,depth,maximizingPlayer){ //return {"eval":number,"move":moveString}
+function minimaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer){ //return {"eval":number,"move":moveString}
 	var topMove = {}
 	//Given a game state, and a depth, recursively get the best move until bottom depth or game over node
-	var staticEval = staticEvaluation(gameState)
+	const staticEval = staticEvaluation(gameState)
 	if(depth == 0 || Math.abs(staticEval) == Infinity ) { //Either we won't be searching further, or we've reached an end node of the game
 		return {"eval":staticEval, "move":topMove}
 	}
 
 	var topEval = (maximizingPlayer == "R" ? -Infinity : Infinity) // Depending on the player trying to optimize, the "top" is either infinity of negative infinity (Red is trying to go up, blue down)
-	var turn = whosTurn(gameState)
-	var piecesForPlayersTurn = getColorPieceLocations(gameState, turn) // get a list of pieces for the current player's turn
+	const turn = whosTurn(gameState)
+	const piecesForPlayersTurn = getColorPieceLocations(gameState, turn) // get a list of pieces for the current player's turn
+	const cardIDs = getCurrentTurnPlayersCardIDs(gameState)
 
 	//Begin iterating through moves
-	for (var i = 0; i < piecesForPlayersTurn.length; i++) { // Loop through all the pieces the current player has on the board
-		var pieceSpace = piecesForPlayersTurn[i] //get the square number for that piece
-		getCurrentTurnPlayersCardIDs(gameState).forEach(function(cardID){ //Loop through the 2 cards of the player
-			var startKey = turn+"-"+cardID+"-"+pieceSpace //defines the starting move, which is the key to our precomputed moves.
-			for (var i = 0; i < PrecomputedBoardMoves[startKey].length; i++) { // Loop through the precomputed legal moves makeable with those cards for the given piece
-				var targetLocation = PrecomputedBoardMoves[startKey][i]
-				var targetLocationPiece = gameState[targetLocation]
-				var thisMove = {"cardID":cardID,"color":turn,"startLocation":pieceSpace,"targetLocation":targetLocation}
+	for (let pieceSpace of piecesForPlayersTurn){ //(var i = 0; i < piecesForPlayersTurn.length; i++) { // Loop through all the pieces the current player has on the board
+		//const pieceSpace = piecesForPlayersTurn[i] //get the square number for that piece
+		for (let cardID of cardIDs){ // (let j=0; j < cardIDs.length; j++) { //cardIDs.forEach(function(cardID) {//
+			//const cardID = cardIDs[i]
+			const startKey = turn+"-"+cardID+"-"+pieceSpace //defines the starting move, which is the key to our precomputed moves.
+			const targetLocations = PrecomputedBoardMoves[startKey]
+			if(!targetLocations){ continue;} // If we don't have any moves with this card, then we move on.
+			for (let targetLocation of targetLocations){//(let i = 0; i < targetLocations.length; i++) { // Loop through the precomputed legal moves makeable with those cards for the given piece
+				//const targetLocation = targetLocations[i]
+				const targetLocationPiece = gameState[targetLocation]
+				const thisMove = {"cardID":cardID,"color":turn,"startLocation":pieceSpace,"targetLocation":targetLocation}
 				if(isLegal(gameState,thisMove)) { //If the target doesn't have a same color piece	
 					//This is a legal move, let's enact it, and run the game state
-					var newGameState = doMove(gameState,thisMove)
-					var moveEval = minimaxMoveFind(newGameState,depth - 1, maximizingPlayer == "R" ? "B": "R")
+					const newGameState = doMove(gameState,thisMove) 
+					AImovesEvaluated +=1
+					const moveEval = minimaxMoveFind(newGameState,depth - 1,rBest,bBest, maximizingPlayer == "R" ? "B": "R")
 					if(maximizingPlayer == "R"){
 						if (moveEval.eval >= topEval){
 							topMove = thisMove //keep track of the best move
 							topEval = moveEval.eval
+							rBest = Math.max(rBest,topEval)
 						} 
 					} else {
 						if (moveEval.eval <= topEval){
 							topMove = thisMove //keep track of the best move
 							topEval = moveEval.eval
+							bBest = Math.min(bBest,topEval)
 
 						}
 					}
-					AImovesEvaluated +=1
+					// if(bBest <= rBest){//Prune the tree
+					// 	return {"eval":topEval,"move":topMove}
+					// }
 				}
 			}
-		})
+		}
 	}
 	if (isEmpty(topMove)){
 		console.log("SOMETHING WENT VERY WRONG")
