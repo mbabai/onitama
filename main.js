@@ -100,8 +100,11 @@ function getAIMove(gameState,color){
 
 
 function doAIMove(gameState,color){
-	var thisMove = getAIMove(gameState,color).move
+	setTimeout(() => {
+			var thisMove = getAIMove(gameState,color).move
 	doRealMove(GameState,thisMove)
+},1)
+
 }
 
 function startNewGame(){
