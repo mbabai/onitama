@@ -82,7 +82,7 @@ function getAIMove(gameState,color){
 	var thinkingStartTime = getNow()
 	AImovesEvaluated = 0
 	// QAD: show if the AI has dominated
-	var evalMove = minimaxMoveFind(gameState,MaxSearchDepth,-Infinity,Infinity, color)
+	var evalMove = minimaxMoveFind(gameState,MaxSearchDepth,-Infinity,Infinity, color == "R")
 	if ((evalMove.eval == Infinity && color == "B") || (evalMove.eval == -Infinity && color == "R")){
 		alert("AI resigns")
 	} else if ((evalMove.eval == Infinity && color == "R") || (evalMove.eval == -Infinity && color == "B")){
@@ -147,6 +147,7 @@ function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue
 }
 
 function minimaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer){ //return {"eval":number,"move":moveString}
+	// Maximizing Player True if Red, false if Blue
 	var topMove = {}
 	//Given a game state, and a depth, recursively get the best move until bottom depth or game over node
 	const staticEval = staticEvaluation(gameState)
@@ -154,7 +155,7 @@ function minimaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer){ //return
 		return {"eval":staticEval, "move":topMove}
 	}
 
-	var topEval = (maximizingPlayer == "R" ? -Infinity : Infinity) // Depending on the player trying to optimize, the "top" is either infinity of negative infinity (Red is trying to go up, blue down)
+	var topEval = (maximizingPlayer ? -Infinity : Infinity) // Depending on the player trying to optimize, the "top" is either infinity of negative infinity (Red is trying to go up, blue down)
 	const turn = whosTurn(gameState)
 	const piecesForPlayersTurn = getColorPieceLocations(gameState, turn) // get a list of pieces for the current player's turn
 	const cardIDs = getCurrentTurnPlayersCardIDs(gameState)
@@ -175,8 +176,8 @@ function minimaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer){ //return
 					//This is a legal move, let's enact it, and run the game state
 					const newGameState = doMove(gameState,thisMove) 
 					AImovesEvaluated +=1
-					const moveEval = minimaxMoveFind(newGameState,depth - 1,rBest,bBest, maximizingPlayer == "R" ? "B": "R")
-					if(maximizingPlayer == "R"){
+					const moveEval = minimaxMoveFind(newGameState,depth - 1,rBest,bBest, !maximizingPlayer )
+					if(maximizingPlayer){
 						if (moveEval.eval >= topEval){
 							topMove = thisMove //keep track of the best move
 							topEval = moveEval.eval
@@ -190,9 +191,9 @@ function minimaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer){ //return
 
 						}
 					}
-					// if(bBest <= rBest){//Prune the tree
-					// 	return {"eval":topEval,"move":topMove}
-					// }
+					if(bBest <= rBest){//Prune the tree
+						// return {"eval":topEval,"move":topMove}
+					}
 				}
 			}
 		}
