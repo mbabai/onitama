@@ -1,8 +1,9 @@
 var GameState = "ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07XR"
 var GameHistory = {"gameStart":"", "moveHistory":[]}
 var PlayerCanMove = true
-var AIcolor = "B" //This is B or R if there is an AI playing. it is empty if there is no AI.
+var AIcolor = ["B"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
 var AImovesEvaluated = 0
+const MaxSearchDepth = 5
 
 /* 
 p = blue pawn
@@ -80,8 +81,13 @@ function getAIMove(gameState,color){
 	console.log("Thinking about move...")
 	var thinkingStartTime = getNow()
 	AImovesEvaluated = 0
-	AImovesPruned = 0
-	var evalMove = minimaxMoveFind(gameState,5,-Infinity,Infinity, color)
+	// QAD: show if the AI has dominated
+	var evalMove = minimaxMoveFind(gameState,MaxSearchDepth,-Infinity,Infinity, color)
+	if ((evalMove.eval == Infinity && color == "B") || (evalMove.eval == -Infinity && color == "R")){
+		alert("AI resigns")
+	} else if ((evalMove.eval == Infinity && color == "R") || (evalMove.eval == -Infinity && color == "B")){
+		alert("Checkmate")
+	}
 	var newGameState = doMove(gameState,evalMove.move)
 	// The move sort of occurs...
 	var thinkingEndTime = getNow()
@@ -105,9 +111,9 @@ function startNewGame(){
 	precomputeOnBoardMoves(thisGameMoveSets)
 	placePieces(GameState)
 	placeCards(GameState)
-	if(whosTurn(GameState) == AIcolor && Math.abs(staticEvaluation(GameState)) != Infinity){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
+	if(AIcolor.includes(whosTurn(GameState)) && Math.abs(staticEvaluation(GameState)) != Infinity){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
 		console.log("Starting game with AI...")
-		doAIMove(GameState,AIcolor)
+		doAIMove(GameState,whosTurn(GameState))
 	}
 }
 
@@ -120,16 +126,22 @@ function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue
 	} else if (!gameState.includes("M") || gameState[22] == "m"){ // Either there is no red master, or the blue master is in the red temple
 		return -Infinity //Blue wins
 	} else {
-		var bluePawnsCount = gameState.countLetters("p")
-		var redPawnsCount =  gameState.countLetters("P")
-		var redMasterPos = gameState.indexOf("M") 
-		var blueMasterPos = gameState.indexOf("m") 
-		var redMasterLocationEval = (4 - Math.floor(redMasterPos/5)) - (Math.abs(redMasterPos%5 - 2)) // How close is Red master to blue temple (manhattan Distance)
-		var blueMasterLocationEval = (Math.floor(blueMasterPos/5)) - (Math.abs(blueMasterPos%5 - 2))  // How close is Blue master to red temple (manhattan Distance)
-		var endGamePercent = 10*(8 - (bluePawnsCount + redPawnsCount))/8 // How deep are we into the end game (as measure by total pawns)
-		
+		//Eval Variables
+		const bluePawnsCount = gameState.countLetters("p")
+		const redPawnsCount =  gameState.countLetters("P")
+		const redMasterPos = gameState.indexOf("M") 
+		const blueMasterPos = gameState.indexOf("m") 
+		const redMasterLocationEval = (4 - Math.floor(redMasterPos/5)) - (Math.abs(redMasterPos%5 - 2)) // How close is Red master to blue temple (manhattan Distance)
+		const blueMasterLocationEval = (Math.floor(blueMasterPos/5)) - (Math.abs(blueMasterPos%5 - 2))  // How close is Blue master to red temple (manhattan Distance)
+		const endGamePercent = 10*(8 - (bluePawnsCount + redPawnsCount))/8 // How deep are we into the end game (as measure by total pawns)
+		const centerSpaces = gameState[6]+gameState[7]+gameState[8]+gameState[11]+gameState[12]+gameState[13]+gameState[16]+gameState[17]+gameState[18]
+		const redCenterControl = centerSpaces.countLetters("P")
+		const blueCenterControl = centerSpaces.countLetters("p")
+
+		// Put in the evals
 		var evaluation = 5*(redPawnsCount - bluePawnsCount) // The difference between number of pawns 
 		evaluation += endGamePercent * (redMasterLocationEval - blueMasterLocationEval) // As endgame approaches, master distance to enemy temple matters more.
+		evaluation += redCenterControl - blueCenterControl // See who has more center control. 
 		return evaluation
 	}
 }
@@ -266,11 +278,13 @@ function doRealMove(gameState,move){
 	updateUI(GameState,move)
 	recordHistory(move)
 	if(staticEvaluation(GameState) == Infinity){
-		alert("Red wins!!!")
+		console.log(GameHistory)
+		alert("Red wins!!! "+GameHistory.moveHistory.length+" plies")
 	} else if(staticEvaluation(GameState) == -Infinity){
-		alert("Blue wins!!!")
-	} else if(whosTurn(GameState) == AIcolor){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
-		doAIMove(GameState,AIcolor)
+		alert("Blue wins!!! "+GameHistory.moveHistory.length+" plies")
+		console.log(GameHistory)
+	} else if(AIcolor.includes(whosTurn(GameState))){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
+		doAIMove(GameState,whosTurn(GameState))
 	}
 }
 
@@ -410,8 +424,7 @@ function doMoveUI(gameState,currentMoveUI){
 function updateUI(gameState,move){
 	placePieces(gameState)
 	placeCards(gameState)
-	recordHistory(move)
-	console.log("Last move: "+ stringifyMove(GameHistory.moveHistory[GameHistory.moveHistory.length - 1]))
+	console.log("Last move: "+ stringifyMove(move))
 	currentMoveUI = {}
 }
 
