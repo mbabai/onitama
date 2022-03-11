@@ -3,7 +3,7 @@ var GameHistory = {"gameStart":"", "moveHistory":[]}
 var PlayerCanMove = true
 var AIcolor = ["B"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
 var AImovesEvaluated = 0
-const MaxSearchDepth = 5
+const MaxSearchDepth = 6
 
 /* 
 p = blue pawn
@@ -93,7 +93,7 @@ function getAIMove(gameState,color){
 	var thinkingEndTime = getNow()
 	var thinkingTime = (thinkingEndTime - thinkingStartTime)/1000
 	PlayerCanMove = true 
-	var winningPlayer = evalMove.eval > 0 ? "Red by "+evalMove.eval : (evalMove.eval < 0 ? "Blue by "+evalMove.eval : "neither side")
+	var winningPlayer = evalMove.eval > 0 ? "Red by "+evalMove.eval : (evalMove.eval < 0 ? "Blue by "+(-1*evalMove.eval) : "neither side")
 	console.log("Moved, after evaluating "+AImovesEvaluated+" plies in "+thinkingTime+" seconds, with an edge given to "+winningPlayer+".")
 	return evalMove
 }
@@ -142,12 +142,13 @@ function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue
 		var evaluation = 5*(redPawnsCount - bluePawnsCount) // The difference between number of pawns 
 		evaluation += endGamePercent * (redMasterLocationEval - blueMasterLocationEval) // As endgame approaches, master distance to enemy temple matters more.
 		evaluation += redCenterControl - blueCenterControl // See who has more center control. 
+		// evaluation += Math.random()/10
 		return evaluation
 	}
 }
 
 function minimaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer){ //return {"eval":number,"move":moveString}
-	// Maximizing Player True if Red, false if Blue
+	// maximizingPlayer true if Red, false if Blue
 	var topMove = {}
 	//Given a game state, and a depth, recursively get the best move until bottom depth or game over node
 	const staticEval = staticEvaluation(gameState)
@@ -166,17 +167,16 @@ function minimaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer){ //return
 		for (let cardID of cardIDs){ // (let j=0; j < cardIDs.length; j++) { //cardIDs.forEach(function(cardID) {//
 			//const cardID = cardIDs[i]
 			const startKey = turn+"-"+cardID+"-"+pieceSpace //defines the starting move, which is the key to our precomputed moves.
-			const targetLocations = PrecomputedBoardMoves[startKey]
+			const targetLocations = PrecomputedBoardMoves[startKey] //List of places this pieces can move from here using this card
 			if(!targetLocations){ continue;} // If we don't have any moves with this card, then we move on.
 			for (let targetLocation of targetLocations){//(let i = 0; i < targetLocations.length; i++) { // Loop through the precomputed legal moves makeable with those cards for the given piece
-				//const targetLocation = targetLocations[i]
-				const targetLocationPiece = gameState[targetLocation]
+				const targetLocationPiece = gameState[targetLocation] // what, if anything, is one this space
 				const thisMove = {"cardID":cardID,"color":turn,"startLocation":pieceSpace,"targetLocation":targetLocation}
 				if(isLegal(gameState,thisMove)) { //If the target doesn't have a same color piece	
 					//This is a legal move, let's enact it, and run the game state
 					const newGameState = doMove(gameState,thisMove) 
 					AImovesEvaluated +=1
-					const moveEval = minimaxMoveFind(newGameState,depth - 1,rBest,bBest, !maximizingPlayer )
+					const moveEval = minimaxMoveFind(newGameState,depth - 1,rBest,bBest, !maximizingPlayer)
 					if(maximizingPlayer){
 						if (moveEval.eval >= topEval){
 							topMove = thisMove //keep track of the best move
@@ -188,11 +188,11 @@ function minimaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer){ //return
 							topMove = thisMove //keep track of the best move
 							topEval = moveEval.eval
 							bBest = Math.min(bBest,topEval)
-
 						}
 					}
-					if(bBest <= rBest){//Prune the tree
-						// return {"eval":topEval,"move":topMove}
+					if(bBest < rBest){//Prune the tree
+						//console.log(topEval + " prune")
+						return {"eval":topEval,"move":topMove}
 					}
 				}
 			}
@@ -201,6 +201,7 @@ function minimaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer){ //return
 	if (isEmpty(topMove)){
 		console.log("SOMETHING WENT VERY WRONG")
 	} 
+	//console.log(topEval + " straight")
 	return {"eval":topEval,"move":topMove} 
 }
 
