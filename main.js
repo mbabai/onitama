@@ -63,11 +63,6 @@ move_sets_raw = {
 PrecomputedBoardMoves = {} // this will store actual possible spaces for any move, from any square. index =  color+cardID+SquareNum
 currentMoveUI = {} //this is a dictionary to build up the current move through the UI
 
-
-$(document).ready(function(){
-	main()
-})
-
 // Logic flow ********************************************
 function main(){
 	startNewGame()
@@ -330,7 +325,7 @@ function changeTurns(gameState){
 // VISUAL ********************************************************
 function placePieces(gameState){
 	// Put the piece divs on the board to reflect the game state
-	$(".piece").remove() // remove any pieces if there were any.
+	removeElementsByClass("piece") // remove any pieces if there were any.
 	var pieceNum = 0
 	for(i=0;i<25;i++){
 		var letter = gameState[i]
@@ -339,51 +334,55 @@ function placePieces(gameState){
 			var topCoordinate = (207+100*Math.floor(i/5))
 			var pieceColor = (letter==letter.toUpperCase() ? "red" : "blue")
 			var pieceType = (letter.toUpperCase() == "M" ? "master" : "pawn")
-			$("#s"+i).append("<div id='p"+(pieceNum++)+"' draggable='false' ondragstart='drag(event)' class='piece "+pieceColor+" "+pieceType+"' style='left:0px; top:0px;'></div>")
+			appendHtml("s"+i, "<div id='p"+(pieceNum++)+"' draggable='false' ondragstart='drag(event)' class='piece "+pieceColor+" "+pieceType+"' style='left:0px; top:0px;'></div>")
 		} 
 	}
 }
 
 function placeCards(gameState){
 	//Shows where the cards are in the game, based on the game state
-	$(".cardSlot").css("background-image", "none"); // Erase any cards from a prior state
+	setClassStyleValue("cardSlot","background-image","none")// Erase any cards from a prior state
 	var turnPlayer = whosTurn(gameState)
 	if (turnPlayer == "R"){
-		$("#neutralRed").css("background-image", "url('images/" + move_image_names[getNeutralMoveCardID(gameState)] + ".jpeg')");
-		$("#neutralRed").text(getNeutralMoveCardID(gameState))
+		document.getElementById("neutralRed").style.backgroundImage = "url('images/" + move_image_names[getNeutralMoveCardID(gameState)] + ".jpeg')"
+		document.getElementById("neutralRed").innerText = getNeutralMoveCardID(gameState)
+
 	} else {
-		$("#neutralBlue").css("background-image", "url('images/" + move_image_names[getNeutralMoveCardID(gameState)] + ".jpeg')");
-		$("#neutralBlue").text(getNeutralMoveCardID(gameState))
+		document.getElementById("neutralBlue").style.backgroundImage = "url('images/" + move_image_names[getNeutralMoveCardID(gameState)] + ".jpeg')"
+		document.getElementById("neutralBlue").innerText = getNeutralMoveCardID(gameState)
+
 	}
-	$("#pBc1").css("background-image", "url('images/" + move_image_names[getBlueMoveCardIDs(gameState)[0]] + ".jpeg')");
-	$("#pBc1").text(getBlueMoveCardIDs(gameState)[0])
-	$("#pBc2").css("background-image", "url('images/" + move_image_names[getBlueMoveCardIDs(gameState)[1]] + ".jpeg')");
-	$("#pBc2").text(getBlueMoveCardIDs(gameState)[1])
-	$("#pRc1").css("background-image", "url('images/" + move_image_names[getRedMoveCardIDs(gameState)[0]] + ".jpeg')");
-	$("#pRc1").text(getRedMoveCardIDs(gameState)[0])
-	$("#pRc2").css("background-image", "url('images/" + move_image_names[getRedMoveCardIDs(gameState)[1]] + ".jpeg')");
-	$("#pRc2").text(getRedMoveCardIDs(gameState)[1])
+	document.getElementById("pBc1").style.backgroundImage = "url('images/" + move_image_names[getBlueMoveCardIDs(gameState)[0]] + ".jpeg')"
+	document.getElementById("pBc1").innerText = getBlueMoveCardIDs(gameState)[0]
+	document.getElementById("pBc2").style.backgroundImage = "url('images/" + move_image_names[getBlueMoveCardIDs(gameState)[1]] + ".jpeg')"
+	document.getElementById("pBc2").innerText = getBlueMoveCardIDs(gameState)[1]
+	document.getElementById("pRc1").style.backgroundImage = "url('images/" + move_image_names[getRedMoveCardIDs(gameState)[0]] + ".jpeg')"
+	document.getElementById("pRc1").innerText = getRedMoveCardIDs(gameState)[0]
+	document.getElementById("pRc2").style.backgroundImage = "url('images/" + move_image_names[getRedMoveCardIDs(gameState)[1]] + ".jpeg')"
+	document.getElementById("pRc2").innerText = getRedMoveCardIDs(gameState)[1]
+
+
 }
 
 function selectCard(slot){
 	var currentTurnPlayer = whosTurn(GameState)
 	var cardSlotPlayer = slot[1]
-	$("[draggable='True']").attr('draggable', 'False'); //set nothing to be draggable. If needed, we'll set somethings to be draggable
+	setClassAttributeToValue("piece","draggable","False") //set nothing to be draggable. If needed, we'll set somethings to be draggable
 	if(currentTurnPlayer == cardSlotPlayer) { // check that it's the right player's turn.
-		if ("cardID" in currentMoveUI && currentMoveUI["cardID"] == $("#"+slot).text()){ 
+		if ("cardID" in currentMoveUI && currentMoveUI["cardID"] == document.getElementById(slot).innerText ){ 
 			// If we're clicking on the same card, unselect
-			$(".cardSlot").css("border-color","white")
+			document.getElementById(slot).style["border-color"] = "white"
 			delete currentMoveUI["cardID"]
 		} else {
 			//clicking on a new card, unselect everything else, and select this one. 
-			$(".cardSlot").css("border-color","white")
-			$("#"+slot).css("border-color","gold")
-			currentMoveUI["cardID"] = $("#"+slot).text()
+			setClassStyleValue("cardSlot","border-color","white")
+			document.getElementById(slot).style["border-color"] = "gold"
+			currentMoveUI["cardID"] = document.getElementById(slot).innerText
 			if (currentTurnPlayer == "R"){ // Red's turn
-				$(".piece.red").attr('draggable', 'True')
+				setClassAttributeToValue("piece red","draggable","True")
 				currentMoveUI["color"] = "R"
 			}else{ // Blue's turn
-				$(".piece.blue").attr('draggable', 'True')
+				setClassAttributeToValue("piece blue","draggable","True")
 				currentMoveUI["color"] = "B"
 
 			}
@@ -400,7 +399,7 @@ function drag(ev) {
 	// fires when we start to move the piece. Let's see what it's legal moves are. 
 	var data = ev.dataTransfer.setData("text", ev.target.id);
 	var data = ev.dataTransfer.getData("text"); // ID of the piece
-	currentMoveUI["startLocation"] = parseInt($("#"+data).parent().attr('id').split("s")[1])
+	currentMoveUI["startLocation"] = parseInt(document.getElementById(data).parentElement.id.split("s")[1]) //
 
 }
 
@@ -422,8 +421,8 @@ function drop(ev) {
 function doMoveUI(gameState,currentMoveUI){
 	//Actually enact the move - also take care of the UI
 	if(!PlayerCanMove) return gameState
-	$("[draggable='True']").attr('draggable', 'False'); //set nothing to be draggable. If needed, we'll set somethings to be draggable
-	$(".cardSlot").css("border-color","white")
+	setClassAttributeToValue("piece","draggable","False")//set nothing to be draggable. If needed, we'll set somethings to be draggable
+	setClassStyleValue("cardSlot","border-color","white")
 }
 
 function updateUI(gameState,move){
@@ -546,4 +545,35 @@ String.prototype.countLetters = function(inputLetter) {
 
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
+}
+
+//JQUERY REPLACEMENTS ***********************************
+function removeElementsByClass(className){
+    var elements = document.getElementsByClassName(className);
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+}
+
+function appendHtml(parentID, str) {
+	var el = document.getElementById(parentID)
+  	var div = document.createElement('div');
+  	div.innerHTML = str;
+  	while (div.children.length > 0) {
+    	el.appendChild(div.children[0]);
+  	}
+}
+
+function setClassStyleValue(classID,style,value){
+	var elements = document.getElementsByClassName(classID)
+	for (let element of elements){
+		element.style[style] = value
+	}
+}
+
+function setClassAttributeToValue(classID,attribute,value){
+	var elements = document.getElementsByClassName(classID)
+	for (let element of elements){
+		element.setAttribute(attribute,value)
+	}
 }
