@@ -1,9 +1,11 @@
 var GameState = "ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07XR"
 var GameHistory = {"gameStart":"", "moveHistory":[]}
 var PlayerCanMove = true
-var AIcolor = ["B"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
+var AIcolor = ["B", "R"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
 var AImovesEvaluated = 0
 const MaxSearchDepth = 6
+var ForcedMateShown = false
+var ResignShown = false
 
 /* 
 p = blue pawn
@@ -79,9 +81,15 @@ function getAIMove(gameState,color){
 	// QAD: show if the AI has dominated
 	var evalMove = minimaxMoveFind(gameState,MaxSearchDepth,-Infinity,Infinity, color == "R")
 	if ((evalMove.eval == Infinity && color == "B") || (evalMove.eval == -Infinity && color == "R")){
-		alert("AI resigns")
+		if(!ResignShown){
+			alert("AI resigns")
+			ResignShown = true
+		}
 	} else if ((evalMove.eval == Infinity && color == "R") || (evalMove.eval == -Infinity && color == "B")){
-		alert("Checkmate")
+		if(!ForcedMateShown){
+			alert("Checkmate")
+			ForcedMateShown = true
+		}
 	}
 	var newGameState = doMove(gameState,evalMove.move)
 	// The move sort of occurs...
