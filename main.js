@@ -1,7 +1,7 @@
 var GameState = "ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07XR"
 var GameHistory = {"gameStart":"", "moveHistory":[]}
 var PlayerCanMove = true
-var AIcolor = ["B", "R"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
+var AIcolor = ["B"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
 var AImovesEvaluated = 0
 const MaxSearchDepth = 6
 var ForcedMateShown = false
@@ -106,17 +106,17 @@ function doAIMove(gameState,color){
 	setTimeout(() => {
 			var thisMove = getAIMove(gameState,color).move
 	doRealMove(GameState,thisMove)
-},1)
+},100)
 
 }
 
 function startNewGame(){
 	GameState = createRandomGameState()
+	placePieces(GameState)
+	placeCards(GameState)
 	GameHistory.gameStart = GameState
 	var thisGameMoveSets = getThisGameCardsMoveSet(move_sets_raw, GameState) // Filter down all possible moves to just the cards in this game
 	precomputeOnBoardMoves(thisGameMoveSets)
-	placePieces(GameState)
-	placeCards(GameState)
 	if(AIcolor.includes(whosTurn(GameState)) && Math.abs(staticEvaluation(GameState)) != Infinity){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
 		console.log("Starting game with AI...")
 		doAIMove(GameState,whosTurn(GameState))
@@ -285,6 +285,7 @@ function doRealMove(gameState,move){
 	GameState = doMove(gameState,move)
 	updateUI(GameState,move)
 	recordHistory(move)
+	colorlastSquare(GameHistory)
 	if(staticEvaluation(GameState) == Infinity){
 		console.log(GameHistory)
 		alert("Red wins!!! "+GameHistory.moveHistory.length+" plies")
@@ -370,6 +371,12 @@ function placeCards(gameState){
 	document.getElementById("pRc2").innerText = getRedMoveCardIDs(gameState)[1]
 
 
+}
+
+function colorlastSquare(gameHistory){
+	setClassStyleValue("boardSquare","background-color","beige")
+	var moves = gameHistory.moveHistory
+	document.getElementById("s"+moves[moves.length -1].targetLocation).style["background-color"] = "tan"
 }
 
 function selectCard(slot){
