@@ -46,6 +46,22 @@ move_image_names = {
 	, "13": "goose"
 	, "14": "frog"
 	, "15": "rabbit"
+	, "16": "fox"
+	, "17": "dog"
+	, "18": "giraffe"
+	, "19": "panda"
+	, "20": "bear"
+	, "21": "kirin"
+	, "22": "sea snake"
+	, "23": "viper"
+	, "24": "phoenix"
+	, "25": "mouse"
+	, "26": "rat"
+	, "27": "turtle"
+	, "28": "tanuki"
+	, "29": "iguana"
+	, "30": "frsableog"
+	, "31": "otter"
 }
 move_sets_raw = {
 	"00": ["fr","br","fl","bl"] 				//Monkey
@@ -64,6 +80,22 @@ move_sets_raw = {
 	, "13": ["l","r","fl","br"]					//Goose
 	, "14": ["ll","br","fl"]					//Frog
 	, "15": ["bl","rr","fr"]					//Rabbit
+	, "16": ["fr","r","br"] 					//Fox
+	, "17": ["fl","l","bl"] 					//Dog
+	, "18": ["frr","fll","b"]					//Giraffe
+	, "19": ["f","fr","bl"]						//Panda
+	, "20": ["fl","f","br"]						//Bear
+	, "21": ["ffl","ffr","bb"]					//Kirin
+	, "22": ["f","rr","bl"]						//Sea Snake
+	, "23": ["f","ll","br"]						//Viper
+	, "24": ["ll","rr","fr","fl"]				//Phoenix
+	, "25": ["r","f","bl"]						//Mouse
+	, "26": ["l","f","br"]						//Rat
+	, "27": ["rr","ll","bl","br"]				//Turtle
+	, "28": ["f","frr","bl"]					//Tanuki
+	, "29": ["f","fll","br"]					//Iguana
+	, "30": ["ll","bl","fr"]					//Sable
+	, "31": ["rr","br","fl"]					//Otter
 }
 
 PrecomputedBoardMoves = {} // this will store actual possible spaces for any move, from any square. index =  color+cardID+SquareNum
