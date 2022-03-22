@@ -207,16 +207,17 @@ function minmaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer,thinkingSta
 	Profiler.statics.occurrences += 1
 
 	profilerStartTime = getNow()
-	if(depth == 0 || Math.abs(staticEval) == Infinity || getNow() - thinkingStartTime > MaxThinkingTime) { //Either we won't be searching further, or we've reached an end node of the game, or we've run out of thiniking time.
-		if (depth == 0){ Profiler.endNode.zeroDepth += 1}
-		else if (Math.abs(staticEval) == Infinity) { Profiler.endNode.checkmate += 1}
-		else if (getNow() - thinkingStartTime > MaxThinkingTime){ Profiler.endNode.timeOut += 1}
+	if(depth == 0  || getNow() - thinkingStartTime > MaxThinkingTime || Math.abs(staticEval) == Infinity) { 
+		//Either we won't be searching further, or we've reached an end node of the game, or we've run out of thiniking time.
 		
 		const finalMove = {"eval":staticEval
 			, "move":topMove
-			,"depthForward":Math.abs(staticEval) == Infinity ? Infinity : 0
-			,"isCompleteSearch":(getNow() - thinkingStartTime < MaxThinkingTime)
+			, "depthForward":Math.abs(staticEval) == Infinity ? Infinity : 0
+			, "isCompleteSearch":(getNow() - thinkingStartTime < MaxThinkingTime)
 		}
+		if (depth == 0){ Profiler.endNode.zeroDepth += 1}
+		else if (Math.abs(staticEval) == Infinity) { Profiler.endNode.checkmate += 1}
+		else if (getNow() - thinkingStartTime > MaxThinkingTime){ Profiler.endNode.timeOut += 1}
 		EvaluatedStates[gameState] = finalMove
 		Profiler.finalNode.time += (getNow() - profilerStartTime)
 		Profiler.finalNode.occurrences += 1
