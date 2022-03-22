@@ -1,7 +1,7 @@
 var GameState = ""  //"ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07XR"
 var GameHistory = {"gameStart":"", "moveHistory":[]}
 var PlayerCanMove = true
-var AIcolor = ["B"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
+var AIcolor = ["B","R"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
 var EvaluatedStates = {} // this will be the running memory of evaluated states
 var AImovesEvaluated = 0
 var AImovesRevisited = 0
@@ -395,16 +395,21 @@ function getThisGameCardsMoveSet(move_sets_raw, gameState) {
 
 function doRealMove(gameState,move){
 	//Actually Play out a real move in the game, and record the history
+	console.log(move)
 	GameState = doMove(gameState,move)
 	recordHistory(move)
 	updateUI(GameState,move)
 	GameIsOver = Math.abs(staticEvaluation(GameState)) == Infinity
 	if (GameIsOver){
+		var endstring = ""
 		if(staticEvaluation(GameState) == Infinity){
-			alert("Red wins!!! "+GameHistory.moveHistory.length+" plies")
+			endstring = "Red wins!!! "+GameHistory.moveHistory.length+" plies"
+
 		} else if(staticEvaluation(GameState) == -Infinity){
-			alert("Blue wins!!! "+GameHistory.moveHistory.length+" plies")
+			endstring = "Blue wins!!! "+GameHistory.moveHistory.length+" plies"
 		}
+		alert(endstring)
+		console.log(endstring)
 		return 
 	}
 	if(AIcolor.includes(whosTurn(GameState))){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
