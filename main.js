@@ -395,7 +395,7 @@ function getThisGameCardsMoveSet(move_sets_raw, gameState) {
 
 function doRealMove(gameState,move){
 	//Actually Play out a real move in the game, and record the history
-	console.log(move)
+	if(move === undefined) debugger;
 	GameState = doMove(gameState,move)
 	recordHistory(move)
 	updateUI(GameState,move)
