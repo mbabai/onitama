@@ -4,7 +4,6 @@ var PlayerCanMove = true
 var AIcolor = ["B"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
 var EvaluatedStates = {} // this will be the running memory of evaluated states
 var AImovesEvaluated = 0
-var AImovesRevisited = 0
 const MaxSearchDepth = 6
 const MaxThinkingTime = 5000 // how many miliseconds we're giving the AI to think. 
 var ForcedMateShown = false
@@ -113,7 +112,6 @@ function getAIMove(gameState,color){
 	GameIsOver = true
 	console.log("Thinking about move...")
 	AImovesEvaluated = 0
-	AImovesRevisited = 0
 
 	var evalMove = timeBasedMinMax(gameState, thinkingStartTime, color) //minmaxMoveFind(gameState,MaxSearchDepth,-Infinity,Infinity, color == "R",thinkingStartTime)
 	if ((evalMove.eval == Infinity && color == "B") || (evalMove.eval == -Infinity && color == "R")){
@@ -132,9 +130,8 @@ function getAIMove(gameState,color){
 	var thinkingTime = (thinkingEndTime - thinkingStartTime)/1000
 	PlayerCanMove = true 
 	var winningPlayer = evalMove.eval > 0 ? "Red by "+evalMove.eval : (evalMove.eval < 0 ? "Blue by "+(-1*evalMove.eval) : "neither side")
-	console.log("Moved!")
+	console.log("Moved! ------------------------------")
 	console.log("Positions Evaluated: "+AImovesEvaluated)
-	console.log("Moves Revisited: "+AImovesRevisited)
 	console.log("Thinking time: "+thinkingTime)
 	console.log("Edge: "+winningPlayer)
 	console.log(Profiler)
@@ -159,7 +156,7 @@ function startNewGame(){
 	GameHistory.gameStart = GameState
 	var thisGameMoveSets = getThisGameCardsMoveSet(move_sets_raw, GameState) // Filter down all possible moves to just the cards in this game
 	precomputeOnBoardMoves(thisGameMoveSets)
-	if(AIcolor.includes(whosTurn(GameState)) && Math.abs(staticEvaluation(GameState)) != Infinity){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
+	if(AIcolor.includes(whosTurn(GameState))){ // If its the AI's turn (and there is an AI) the AI makes a move.
 		console.log("Starting game with AI...")
 		doAIMove(GameState,whosTurn(GameState))
 	}
@@ -197,7 +194,6 @@ function minmaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer,thinkingSta
 
 	if (priorEval && priorEval.depthForward >= depth){ 
 		// If we've already seen this state, with an equal or better depth of search, let's just use it.
-		AImovesRevisited+=1
 		return priorEval
 	}
 
@@ -209,7 +205,6 @@ function minmaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer,thinkingSta
 	profilerStartTime = getNow()
 	if(depth == 0  || getNow() - thinkingStartTime > MaxThinkingTime || Math.abs(staticEval) == Infinity) { 
 		//Either we won't be searching further, or we've reached an end node of the game, or we've run out of thiniking time.
-		
 		const finalMove = {"eval":staticEval
 			, "move":topMove
 			, "depthForward":Math.abs(staticEval) == Infinity ? Infinity : 0
