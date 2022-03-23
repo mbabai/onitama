@@ -1,11 +1,13 @@
 var GameState = ""  //"ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07XR"
 var GameHistory = {"gameStart":"", "moveHistory":[]}
 var PlayerCanMove = true
-var AIcolor = ["B"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
+var AIcolor = ["B","R"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
 var EvaluatedStates = {} // this will be the running memory of evaluated states
 var StatesMovesLists = {} // This takes in a state, and outputs a move list, ordered best to worst
 var AImovesEvaluated = 0
-const MaxThinkingTime = 3000 // how many miliseconds we're giving the AI to think. 
+var AImovesPrunedNormal = 0
+var AImovesPrunedSorted = 0
+const MaxThinkingTime = 10000 // how many miliseconds we're giving the AI to think. 
 var ForcedMateShown = false
 var ResignShown = false
 var GameIsOver = true
@@ -132,6 +134,8 @@ function getAIMove(gameState,color){
 	var winningPlayer = evalMove.eval > 0 ? "Red by "+evalMove.eval : (evalMove.eval < 0 ? "Blue by "+(-1*evalMove.eval) : "neither side")
 	console.log("Done Thinking! ------------------------------")
 	console.log("Positions Evaluated: "+AImovesEvaluated)
+	console.log("AI moves Pruned Normal: "+AImovesPrunedNormal)
+	console.log("AI moves Pruned Sorted: "+AImovesPrunedSorted)
 	console.log("Thinking time: "+thinkingTime)
 	console.log("Edge: "+winningPlayer)
 	// console.log(Profiler)
@@ -144,6 +148,8 @@ function doAIMove(gameState,color){
 	setTimeout(() => {//Wait for the UI to update, then move. TODO: make it so you don't need to wait. 
 		EvaluatedStates = {}
 		StatesMovesLists = {}
+		AImovesPrunedNormal = 0
+		AIMovesPrunedSorted = 0
 		const evalMove = getAIMove(gameState,color)
 		doRealMove(GameState, evalMove.move)
 		// console.log("Used Heap Size: "+window.performance.memory.usedJSHeapSize)
@@ -171,8 +177,9 @@ function startNewGame(){
 // AI ****************************************************
 
 function timeBasedMinMax(gameState, thinkingStartTime, color){
-	//This function will progressively go deeper in depth of search, and stop when it's run out of time. 
+	//This function will progressively go deeper in depth of search, and stop when it's r un out of time. 
 	var evalMove = {}
+	var depthsBestMove = {}
 	var depth = 0
 	while(getNow() - thinkingStartTime < MaxThinkingTime){
 		depth++
@@ -180,9 +187,19 @@ function timeBasedMinMax(gameState, thinkingStartTime, color){
 		if(getNow() - thinkingStartTime < MaxThinkingTime){//We completed the search in time, so it should be fine.
 			evalMove = thisEvalMove
 		}
-		if(Math.abs(evalMove.eval) == Infinity){
-			alert("Checkmate in "+(depth-1)+" moves.")
+		depthsBestMove[depth] = evalMove
+		if((evalMove.eval == Infinity && color =="R") || (evalMove.eval == -Infinity && color =="B")){
+			//The current color is winning
+			console.log(("Checkmate in "+(depth-1)+" moves."))
 			return evalMove;
+		} else if ((evalMove.eval == -Infinity && color =="R") || (evalMove.eval == Infinity && color =="B")){
+			//The current color is losing
+			if(depth > 1){ 
+				console.log("Greatest Depth: "+(depth-1))
+				console.log("Resigning due to mate in "+depth+" moves.")
+				//In order to not play a random move, let's see what the best we could come up with is.
+				return depthsBestMove[depth-1] 
+			}
 		}
 	}
 	console.log("Greatest Depth: "+(depth-1))
@@ -277,6 +294,7 @@ function minmaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer,thinkingSta
 			rBest = moveEval.rBest
 			bBest = moveEval.bBest
 			if (moveEval.shouldPrune){ // Prune by alpha-beta pruning
+				AImovesPrunedSorted += 1
 				return moveEval
 			}
 		}
@@ -321,6 +339,7 @@ function minmaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer,thinkingSta
 			}
 		}
 	}
+	if (canPrune) {AImovesPrunedNormal += 1}
 	var profilerStartTimeFinalizeMove = getNow()
 	const finalMoveEval = {"eval":topEval,"move":topMove, "depthForward":depth,"isCompleteSearch":true}
 	EvaluatedStates[gameState] = finalMoveEval
