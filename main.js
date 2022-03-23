@@ -1,9 +1,9 @@
 var GameState = ""  //"ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07XR"
 var GameHistory = {"gameStart":"", "moveHistory":[]}
 var PlayerCanMove = true
-var AIcolor = ["B","R"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
+var AIcolor = ["B"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
 var EvaluatedStates = {} // this will be the running memory of evaluated states
-var StatesMovesLists = [] // This takes in a state, and outputs a move list, ordered best to worst
+var StatesMovesLists = {} // This takes in a state, and outputs a move list, ordered best to worst
 var AImovesEvaluated = 0
 const MaxThinkingTime = 3000 // how many miliseconds we're giving the AI to think. 
 var ForcedMateShown = false
@@ -177,15 +177,12 @@ function timeBasedMinMax(gameState, thinkingStartTime, color){
 	while(getNow() - thinkingStartTime < MaxThinkingTime){
 		depth++
 		const thisEvalMove = minmaxMoveFind(gameState,depth,-Infinity,Infinity, (color == "R"),thinkingStartTime)
-		if (isEmpty(thisEvalMove)){
-			console.log("***** First proof of problem********")
-		}
 		if(getNow() - thinkingStartTime < MaxThinkingTime){//We completed the search in time, so it should be fine.
 			evalMove = thisEvalMove
 		}
 		if(Math.abs(evalMove.eval) == Infinity){
-			console.log("Certain checkmate found")
-			break
+			alert("Checkmate in "+(depth-1)+" moves.")
+			return evalMove;
 		}
 	}
 	console.log("Greatest Depth: "+(depth-1))
@@ -194,12 +191,11 @@ function timeBasedMinMax(gameState, thinkingStartTime, color){
 }
 
 function evaluateMoveViaMinMax(gameState,depth,rBest,bBest,maximizingPlayer,thinkingStartTime 		
-		,topMove,topEval,thisMove,isSorted=false){
+		,topMove,topEval,thisMove){
 	// Run the evaluation on a move that is known to be legal from a given game state.
 	const newGameState = doMove(gameState,thisMove) 
 	AImovesEvaluated +=1
 	const moveEval = minmaxMoveFind(newGameState,depth - 1,rBest,bBest, !maximizingPlayer,thinkingStartTime)
-	if(!isSorted) { StatesMovesLists[gameState].push({"move":thisMove,"eval":moveEval}); } //keep track of all moves we've evaluated. 
 	var profilerStartTimeMoveSwapping = getNow()
 	if(maximizingPlayer){
 		if (moveEval.eval >= topEval){
@@ -270,34 +266,56 @@ function minmaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer,thinkingSta
 	Profiler.variableSetup.time += (getNow() - profilerStartTimeVariableSetup)
 	Profiler.variableSetup.occurrences += 1
 
-	StatesMovesLists[gameState] = []
-	//Begin iterating through moves
-	for (let pieceSpace of piecesForPlayersTurn){ // Loop through all the pieces the current player has on the board
-		//get the square number for that piece
-		for (let cardID of cardIDs){ 
-			const startKey = turn+"-"+cardID+"-"+pieceSpace //defines the starting move, which is the key to our precomputed moves.
-			var profilerStartTimePrecomputeLookup = getNow()
-			const targetLocations = PrecomputedBoardMoves[startKey] //List of places this pieces can move from here using this card
-			Profiler.precomputeLookup.time += (getNow() - profilerStartTimePrecomputeLookup)
-			Profiler.precomputeLookup.occurrences += 1
-			if(!targetLocations){ continue;} // If we don't have any moves with this card, then we move on.
-			for (let targetLocation of targetLocations){ // Loop through the precomputed legal moves makeable with those cards for the given piece
-				const targetLocationPiece = gameState[targetLocation] // what, if anything, is one this space
-				const thisMove = {"cardID":cardID,"color":turn,"startLocation":pieceSpace,"targetLocation":targetLocation}
-				var profilerStartTimeMoveLegalityCheck = getNow()
-				const moveIsLegal = isLegal(gameState,thisMove)
-				Profiler.moveLegalityCheck.time += (getNow() - profilerStartTimeMoveLegalityCheck)
-				Profiler.moveLegalityCheck.occurrences += 1
-				if(moveIsLegal) { //If the target doesn't have a same color piece	
-					//This is a legal move, let's enact it, and run the game state
-					const moveEval = evaluateMoveViaMinMax(gameState,depth,rBest,bBest,maximizingPlayer,thinkingStartTime 		
-						,topMove,topEval,thisMove)
-					topMove = moveEval.move
-					topEval = moveEval.eval
-					rBest = moveEval.rBest
-					bBest = moveEval.bBest
-					if (moveEval.shouldPrune){ // Prune by alpha-beta pruning
-						return moveEval
+	if(StatesMovesLists[gameState]){ //we already have a list of moves, with associated evals.
+		const sortedMovesList = StatesMovesLists[gameState].sort((a, b) => (a.eval < b.eval) ? 1 : -1)
+		for (let thisMoveEval of sortedMovesList){//sort the evals, this will optimize for alpha-beta pruning.
+			const thisMove = thisMoveEval.move
+			const moveEval = evaluateMoveViaMinMax(gameState,depth,rBest,bBest,maximizingPlayer,thinkingStartTime 		
+				,topMove,topEval,thisMove,true)
+			topMove = moveEval.move
+			topEval = moveEval.eval
+			rBest = moveEval.rBest
+			bBest = moveEval.bBest
+			if (moveEval.shouldPrune){ // Prune by alpha-beta pruning
+				return moveEval
+			}
+		}
+	} else {
+		StatesMovesLists[gameState] = []
+		var canPrune = false
+		//Begin iterating through moves
+		for (let pieceSpace of piecesForPlayersTurn){ // Loop through all the pieces the current player has on the board
+			//get the square number for that piece
+			for (let cardID of cardIDs){ 
+				const startKey = turn+"-"+cardID+"-"+pieceSpace //defines the starting move, which is the key to our precomputed moves.
+				var profilerStartTimePrecomputeLookup = getNow()
+				const targetLocations = PrecomputedBoardMoves[startKey] //List of places this pieces can move from here using this card
+				Profiler.precomputeLookup.time += (getNow() - profilerStartTimePrecomputeLookup)
+				Profiler.precomputeLookup.occurrences += 1
+				if(!targetLocations){ continue;} // If we don't have any moves with this card, then we move on.
+				for (let targetLocation of targetLocations){ // Loop through the precomputed legal moves makeable with those cards for the given piece
+					const targetLocationPiece = gameState[targetLocation] // what, if anything, is one this space
+					const thisMove = {"cardID":cardID,"color":turn,"startLocation":pieceSpace,"targetLocation":targetLocation}
+					var profilerStartTimeMoveLegalityCheck = getNow()
+					const moveIsLegal = isLegal(gameState,thisMove)
+					Profiler.moveLegalityCheck.time += (getNow() - profilerStartTimeMoveLegalityCheck)
+					Profiler.moveLegalityCheck.occurrences += 1
+					if(moveIsLegal) { //If the target doesn't have a same color piece	
+						//This is a legal move, let's enact it, and run the game state
+						var moveEval = {}
+						if(!canPrune){ //Evaluate the next move, unless we can prune. 
+							moveEval = evaluateMoveViaMinMax(gameState,depth,rBest,bBest,maximizingPlayer,thinkingStartTime 		
+								,topMove,topEval,thisMove)
+							topMove = moveEval.move
+							topEval = moveEval.eval
+							rBest = moveEval.rBest
+							bBest = moveEval.bBest
+						} else { // Even if we prune, we still want to keep all the remaining moves in a list, but assume they are bad. 
+							topEval = (maximizingPlayer ? Infinity : -Infinity)
+						}
+						
+						StatesMovesLists[gameState].push({"move":thisMove,"eval":topEval}) //keep track of all moves we've evaluated. 
+						canPrune = moveEval.shouldPrune // We don't want to look at any more moves, but still want to write out the possible moves.
 					}
 				}
 			}
