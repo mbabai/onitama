@@ -1,17 +1,16 @@
 var GameState = ""  //"ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07XR"
 var GameHistory = {"gameStart":"", "moveHistory":[]}
 var PlayerCanMove = true
-var AIcolor = ["B","R"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
+var AIcolor = ["B"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
 var EvaluatedStates = {} // this will be the running memory of evaluated states
 var StatesMovesLists = {} // This takes in a state, and outputs a move list, ordered best to worst
 var AImovesEvaluated = 0
 var AImovesPrunedNormal = 0
 var AImovesPrunedSorted = 0
-const MaxThinkingTime = 10000 // how many miliseconds we're giving the AI to think. 
+const MaxThinkingTime = 5000 // how many miliseconds we're giving the AI to think. 
 var ForcedMateShown = false
 var ResignShown = false
 var GameIsOver = true
-var Profiler = {} 
 
 /* 
 p = blue pawn
@@ -138,13 +137,11 @@ function getAIMove(gameState,color){
 	console.log("AI moves Pruned Sorted: "+AImovesPrunedSorted)
 	console.log("Thinking time: "+thinkingTime)
 	console.log("Edge: "+winningPlayer)
-	// console.log(Profiler)
 	return evalMove
 }
 
 
 function doAIMove(gameState,color){
-	resetProfiler()
 	setTimeout(() => {//Wait for the UI to update, then move. TODO: make it so you don't need to wait. 
 		EvaluatedStates = {}
 		StatesMovesLists = {}
@@ -213,7 +210,6 @@ function evaluateMoveViaMinMax(gameState,depth,rBest,bBest,maximizingPlayer,thin
 	const newGameState = doMove(gameState,thisMove) 
 	AImovesEvaluated +=1
 	const moveEval = minmaxMoveFind(newGameState,depth - 1,rBest,bBest, !maximizingPlayer,thinkingStartTime)
-	var profilerStartTimeMoveSwapping = getNow()
 	if(maximizingPlayer){
 		if (moveEval.eval >= topEval){
 			topMove = thisMove //keep track of the best move
@@ -239,49 +235,33 @@ function evaluateMoveViaMinMax(gameState,depth,rBest,bBest,maximizingPlayer,thin
 function minmaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer,thinkingStartTime){ //return {"eval":number,"move":moveString,"depthForward":depth}
 	// Given a game state, and a depth, recursively get the best move until bottom depth or game over node
 	// maximizingPlayer true if Red, false if Blue
-	var profilerStartTimePrioEval = getNow()
 	const priorEval = EvaluatedStates[gameState] // Grab an existing eval for this game state, so we only have to look up once.
-	Profiler.priorEval.time += (getNow() - profilerStartTimePrioEval)
-	Profiler.priorEval.occurrences += 1
-
 	if (priorEval && priorEval.depthForward >= depth){ 
 		// If we've already seen this state, with an equal or better depth of search, let's just use it.
 		priorEval["isSavedMove"] = true
 		return priorEval
 	}
 
-	var profilerStartTimeStaticEval = getNow()
 	const staticEval = staticEvaluation(gameState)
-	Profiler.statics.time += (getNow() - profilerStartTimeStaticEval)
-	Profiler.statics.occurrences += 1
 
 	if(depth == 0  || getNow() - thinkingStartTime > MaxThinkingTime || Math.abs(staticEval) == Infinity) { 
-		var profilerStartTimeFinalNode = getNow()
 		//Either we won't be searching further, or we've reached an end node of the game, or we've run out of thiniking time.
 		const finalMove = {"eval":staticEval
 			, "move":"No Move"
 			, "depthForward":Math.abs(staticEval) == Infinity ? Infinity : 0
 			, "isCompleteSearch":(getNow() - thinkingStartTime < MaxThinkingTime)
 		}
-		if (depth == 0){ Profiler.endNode.zeroDepth += 1}
-		else if (Math.abs(staticEval) == Infinity) { Profiler.endNode.checkmate += 1}
-		else if (getNow() - thinkingStartTime > MaxThinkingTime){ Profiler.endNode.timeOut += 1}
 		if (finalMove.isCompleteSearch){
 			EvaluatedStates[gameState] = finalMove
 		}
-		Profiler.finalNode.time += (getNow() - profilerStartTimeFinalNode)
-		Profiler.finalNode.occurrences += 1
 		return finalMove
 	}
 
-	var profilerStartTimeVariableSetup = getNow()
 	var topMove = {}
 	var topEval = (maximizingPlayer ? -Infinity : Infinity) // Depending on the player trying to optimize, the "top" is either infinity of negative infinity (Red is trying to go up, blue down)
 	const turn = whosTurn(gameState)
 	const piecesForPlayersTurn = getColorPieceLocations(gameState, turn) // get a list of pieces for the current player's turn
 	const cardIDs = getCurrentTurnPlayersCardIDs(gameState)
-	Profiler.variableSetup.time += (getNow() - profilerStartTimeVariableSetup)
-	Profiler.variableSetup.occurrences += 1
 
 	if(StatesMovesLists[gameState]){ //we already have a list of moves, with associated evals.
 		const sortedMovesList = StatesMovesLists[gameState].sort((a, b) => (a.eval < b.eval) ? 1 : -1)
@@ -306,18 +286,12 @@ function minmaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer,thinkingSta
 			//get the square number for that piece
 			for (let cardID of cardIDs){ 
 				const startKey = turn+"-"+cardID+"-"+pieceSpace //defines the starting move, which is the key to our precomputed moves.
-				var profilerStartTimePrecomputeLookup = getNow()
 				const targetLocations = PrecomputedBoardMoves[startKey] //List of places this pieces can move from here using this card
-				Profiler.precomputeLookup.time += (getNow() - profilerStartTimePrecomputeLookup)
-				Profiler.precomputeLookup.occurrences += 1
 				if(!targetLocations){ continue;} // If we don't have any moves with this card, then we move on.
 				for (let targetLocation of targetLocations){ // Loop through the precomputed legal moves makeable with those cards for the given piece
 					const targetLocationPiece = gameState[targetLocation] // what, if anything, is one this space
 					const thisMove = {"cardID":cardID,"color":turn,"startLocation":pieceSpace,"targetLocation":targetLocation}
-					var profilerStartTimeMoveLegalityCheck = getNow()
 					const moveIsLegal = isLegal(gameState,thisMove)
-					Profiler.moveLegalityCheck.time += (getNow() - profilerStartTimeMoveLegalityCheck)
-					Profiler.moveLegalityCheck.occurrences += 1
 					if(moveIsLegal) { //If the target doesn't have a same color piece	
 						//This is a legal move, let's enact it, and run the game state
 						var moveEval = {}
@@ -340,11 +314,8 @@ function minmaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer,thinkingSta
 		}
 	}
 	if (canPrune) {AImovesPrunedNormal += 1}
-	var profilerStartTimeFinalizeMove = getNow()
 	const finalMoveEval = {"eval":topEval,"move":topMove, "depthForward":depth,"isCompleteSearch":true}
 	EvaluatedStates[gameState] = finalMoveEval
-	Profiler.finalizeMove.time += (getNow() - profilerStartTimeFinalizeMove)
-	Profiler.finalizeMove.occurrences += 1
 	return finalMoveEval
 }
 
@@ -632,25 +603,6 @@ function isLegal(gameState,move){ //Check if a move made in the UI is legal
 
 
 // UTILITY ************************************************************
-
-function resetProfiler(){
-	Profiler = {"priorEval": {"time":0,"occurrences":0}
-		, "statics":  {"time":0,"occurrences":0}
-		, "finalNode": {"time":0,"occurrences":0}
-		, "variableSetup": {"time":0,"occurrences":0}
-		, "precomputeLookup": {"time":0,"occurrences":0}
-		, "moveLegalityCheck": {"time":0,"occurrences":0}
-		, "doMove": {"time":0,"occurrences":0}
-		, "moveSwapping": {"time":0,"occurrences":0}
-		, "pruning": {"time":0,"occurrences":0}
-		, "finalizeMove": {"time":0,"occurrences":0}
-		, "endNode": {"zeroDepth":0
-			, "checkmate":0
-			, "timeOut":0}
-	}
-}
-
-
 function stringifyMove(move){
 	if (Object.keys(move).length === 0) return "Empty Move"
 	return move.color +"-"+move_image_names[move.cardID] +":"+  coordinatifySquareNumber(move.startLocation) +"-"+ coordinatifySquareNumber(move.targetLocation)
