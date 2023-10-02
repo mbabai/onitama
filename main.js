@@ -1,17 +1,4 @@
 var GameState = ""  //"ppmppeeeeeeeeeeeeeeePPMPP05-09-12-13-07XR"
-var GameHistory = {"gameStart":"", "moveHistory":[]}
-var PlayerCanMove = true
-var AIcolor = ["B"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
-var EvaluatedStates = {} // this will be the running memory of evaluated states
-var StatesMovesLists = {} // This takes in a state, and outputs a move list, ordered best to worst
-var AImovesEvaluated = 0
-var AImovesPrunedNormal = 0
-var AImovesPrunedSorted = 0
-const MaxThinkingTime = 5000 // how many miliseconds we're giving the AI to think. 
-var ForcedMateShown = false
-var ResignShown = false
-var GameIsOver = true
-
 /* 
 p = blue pawn
 m = blue master
@@ -27,79 +14,80 @@ second pair two-digit numbers = blue's move cards
 last single two-digit number = neutral card
 */
 
+var GameHistory = {"gameStart":"", "moveHistory":[]}
 /*
 sampleMove = {cardID: '01', color: 'B', startLocation: 2, tartgetLocation: 12}  
 */
-move_image_names = {
-	"00": "monkey"
-	, "01": "tiger"
-	, "02": "dragon"
-	, "03": "crab"
-	, "04": "elephant"
-	, "05": "mantis"
-	, "06": "crane"
-	, "07": "boar"
-	, "08": "horse"
-	, "09": "ox"
-	, "10": "cobra"
-	, "11": "eel"
-	, "12": "rooster"
-	, "13": "goose"
-	, "14": "frog"
-	, "15": "rabbit"
-	, "16": "fox"
-	, "17": "dog"
-	, "18": "giraffe"
-	, "19": "panda"
-	, "20": "bear"
-	, "21": "kirin"
-	, "22": "sea snake"
-	, "23": "viper"
-	, "24": "phoenix"
-	, "25": "mouse"
-	, "26": "rat"
-	, "27": "turtle"
-	, "28": "tanuki"
-	, "29": "iguana"
-	, "30": "sable"
-	, "31": "otter"
-}
-move_sets_raw = {
-	"00": ["fr","br","fl","bl"] 				//Monkey
-	, "01": ["ff","b"] 							//Tiger
-	, "02": ["frr","fll","br","bl"]				//Dragon
-	, "03": ["f","rr","ll"]						//Crab
-	, "04": ["l","r","fl","fr"]					//Elephant
-	, "05": ["fl","fr","b"]						//Mantis
-	, "06": ["f","br","bl"]						//Crane
-	, "07": ["l","r","f"]						//Boars
-	, "08": ["l","f","b"]						//Horse
-	, "09": ["r","b","f"]						//Ox
-	, "10": ["l","br","fr"]						//Cobra
-	, "11": ["r","bl","fl"]						//Eel
-	, "12": ["l","r","bl","fr"]					//Rooster
-	, "13": ["l","r","fl","br"]					//Goose
-	, "14": ["ll","br","fl"]					//Frog
-	, "15": ["bl","rr","fr"]					//Rabbit
-	, "16": ["fr","r","br"] 					//Fox
-	, "17": ["fl","l","bl"] 					//Dog
-	, "18": ["frr","fll","b"]					//Giraffe
-	, "19": ["f","fr","bl"]						//Panda
-	, "20": ["fl","f","br"]						//Bear
-	, "21": ["ffl","ffr","bb"]					//Kirin
-	, "22": ["f","rr","bl"]						//Sea Snake
-	, "23": ["f","ll","br"]						//Viper
-	, "24": ["ll","rr","fr","fl"]				//Phoenix
-	, "25": ["r","f","bl"]						//Mouse
-	, "26": ["l","f","br"]						//Rat
-	, "27": ["rr","ll","bl","br"]				//Turtle
-	, "28": ["f","frr","bl"]					//Tanuki
-	, "29": ["f","fll","br"]					//Iguana
-	, "30": ["ll","bl","fr"]					//Sable
-	, "31": ["rr","br","fl"]					//Otter
+var PlayerCanMove = true
+var AIcolor = ["B"] //This contains B or R if there is an AI playing. it is empty if there is no AI.
+var EvaluatedStates = {} // this will be the running memory of evaluated states
+/*
+	key -- gameState
+	value -- {
+		"e": evaluationScore // How good this position is
+		"m": move // The best move to do based on this position (if there is one, based on further searching)
+		"d": depthForward // This is effectively the confidence in this move, based on how far forward from here we looked
+		"t": turn // This is the turn this state would occur on. use this to prune this dictionary for unlikely future states
+		"r": Red's Best (for alpha-beta pruning)
+		"b": Blue's Best (for alpha-beta pruning)
+		"p": p // Boolean stating if this should be pruned.
+	}
+
+*/
+var StatesMovesLists = {} // This takes in a state, and outputs a move list, ordered best to worst
+/*
+	key -- gameState
+	value -- [{
+		"m": Move //A move doable from this state
+		,"e": Eval //Evaluation associated with this move
+	}]
+*/
+var AImovesEvaluated = 0
+const MaxThinkingTime = 5000 // how many miliseconds we're giving the AI to think. 
+var ForcedMateShown = false
+var ResignShown = false
+var GameIsOver = true
+var GreatestDepthSearched = 0
+
+
+
+
+move_dictionary = {
+	  "00": {"moves": ["fr","br","fl","bl"]			,"name":"monkey" }
+	, "01": {"moves": ["ff","b"] 					,"name":"tiger" }
+	, "02": {"moves": ["frr","fll","br","bl"]		,"name":"dragon" }
+	, "03": {"moves": ["f","rr","ll"]				,"name":"crab" }
+	, "04": {"moves": ["l","r","fl","fr"]			,"name":"elephant" }
+	, "05": {"moves": ["fl","fr","b"]				,"name":"mantis" }
+	, "06": {"moves": ["f","br","bl"]				,"name":"crane" }
+	, "07": {"moves": ["l","r","f"]					,"name":"boar" }
+	, "08": {"moves": ["l","f","b"]					,"name":"horse" }
+	, "09": {"moves": ["r","b","f"]					,"name":"ox" }
+	, "10": {"moves": ["l","br","fr"]				,"name":"cobra" }
+	, "11": {"moves": ["r","bl","fl"]				,"name":"eel" }
+	, "12": {"moves": ["l","r","bl","fr"]			,"name":"rooster" }
+	, "13": {"moves": ["l","r","fl","br"]			,"name":"goose" }
+	, "14": {"moves": ["ll","br","fl"]				,"name":"frog" }
+	, "15": {"moves": ["bl","rr","fr"]				,"name":"rabbit" }
+	, "16": {"moves": ["fr","r","br"]				,"name":"fox" }
+	, "17": {"moves": ["fl","l","bl"]				,"name":"dog" }
+	, "18": {"moves": ["frr","fll","b"]				,"name":"giraffe" }
+	, "19": {"moves": ["f","fr","bl"]				,"name":"panda" }
+	, "20": {"moves": ["fl","f","br"]				,"name":"bear" }
+	, "21": {"moves": ["ffl","ffr","bb"]			,"name":"kirin" }
+	, "22": {"moves": ["f","rr","bl"]				,"name":"sea snake" }
+	, "23": {"moves": ["f","ll","br"]				,"name":"viper" }
+	, "24": {"moves": ["ll","rr","fr","fl"]			,"name":"phoenix" }
+	, "25": {"moves": ["r","f","bl"]				,"name":"mouse" }
+	, "26": {"moves": ["l","f","br"]				,"name":"rat" }
+	, "27": {"moves": ["rr","ll","bl","br"]			,"name":"turtle" }
+	, "28": {"moves": ["f","frr","bl"]				,"name":"tanuki" }
+	, "29": {"moves": ["f","fll","br"]				,"name":"iguana" }
+	, "30": {"moves": ["ll","bl","fr"]				,"name":"sable" }
+	, "31": {"moves":  ["rr","br","fl"]				,"name":"otter" }
 }
 
-PrecomputedBoardMoves = {} // this will store actual possible spaces for any move, from any square. index =  color+cardID+SquareNum
+PrecomputedBoardMoves = {} // this will store actual possible spaces for any move, from any square. index = color+cardID+SquareNum
 currentMoveUI = {} //this is a dictionary to build up the current move through the UI
 
 // Logic flow ********************************************
@@ -115,12 +103,12 @@ function getAIMove(gameState,color){
 	AImovesEvaluated = 0
 
 	var evalMove = timeBasedMinMax(gameState, thinkingStartTime, color)
-	if ((evalMove.eval == Infinity && color == "B") || (evalMove.eval == -Infinity && color == "R")){
+	if ((evalMove.e == Infinity && color == "B") || (evalMove.e == -Infinity && color == "R")){
 		if(!ResignShown){
 			console.log("AI resigns")
 			ResignShown = true
 		}
-	} else if ((evalMove.eval == Infinity && color == "R") || (evalMove.eval == -Infinity && color == "B")){
+	} else if ((evalMove.e == Infinity && color == "R") || (evalMove.e == -Infinity && color == "B")){
 		if(!ForcedMateShown){
 			console.log("Mate found")
 			ForcedMateShown = true
@@ -130,11 +118,9 @@ function getAIMove(gameState,color){
 	var thinkingEndTime = getNow()
 	var thinkingTime = (thinkingEndTime - thinkingStartTime)/1000
 	PlayerCanMove = true 
-	var winningPlayer = evalMove.eval > 0 ? "Red by "+evalMove.eval : (evalMove.eval < 0 ? "Blue by "+(-1*evalMove.eval) : "neither side")
+	var winningPlayer = evalMove.e > 0 ? "Red by "+evalMove.e : (evalMove.e < 0 ? "Blue by "+(-1*evalMove.e) : "neither side")
 	console.log("Done Thinking! ------------------------------")
-	console.log("Positions Evaluated: "+AImovesEvaluated)
-	console.log("AI moves Pruned Normal: "+AImovesPrunedNormal)
-	console.log("AI moves Pruned Sorted: "+AImovesPrunedSorted)
+	console.log("Positions Evaluated: "+AImovesEvaluated)  
 	console.log("Thinking time: "+thinkingTime)
 	console.log("Edge: "+winningPlayer)
 	return evalMove
@@ -143,15 +129,8 @@ function getAIMove(gameState,color){
 
 function doAIMove(gameState,color){
 	setTimeout(() => {//Wait for the UI to update, then move. TODO: make it so you don't need to wait. 
-		EvaluatedStates = {}
-		StatesMovesLists = {}
-		AImovesPrunedNormal = 0
-		AIMovesPrunedSorted = 0
 		const evalMove = getAIMove(gameState,color)
-		doRealMove(GameState, evalMove.move)
-		// console.log("Used Heap Size: "+window.performance.memory.usedJSHeapSize)
-		// console.log("JS Heap Size: "+window.performance.memory.jsHeapSizeLimit) 
-		// console.log("Heap Size Limit: "+window.performance.memory.jsHeapSizeLimit)
+		doRealMove(GameState, evalMove.m)
 	},100)
 
 }
@@ -162,7 +141,7 @@ function startNewGame(){
 	placePieces(GameState)
 	placeCards(GameState)
 	GameHistory.gameStart = GameState
-	var thisGameMoveSets = getThisGameCardsMoveSet(move_sets_raw, GameState) // Filter down all possible moves to just the cards in this game
+	var thisGameMoveSets = getThisGameCardsMoveSet(move_dictionary, GameState) // Filter down all possible moves to just the cards in this game
 	precomputeOnBoardMoves(thisGameMoveSets)
 	if(AIcolor.includes(whosTurn(GameState))){ // If its the AI's turn (and there is an AI) the AI makes a move.
 		console.log("Starting game with AI...")
@@ -175,85 +154,82 @@ function startNewGame(){
 
 function timeBasedMinMax(gameState, thinkingStartTime, color){
 	//This function will progressively go deeper in depth of search, and stop when it's r un out of time. 
+	disposeUnneededStates(EvaluatedStates) // pear down the evaluated states by removing old turns
+	StatesMovesLists = {}
+	GreatestDepthSearched = 0
 	var evalMove = {}
 	var depthsBestMove = {}
-	var depth = 0
+	var depthRemaining = 0
+	//Start the thinking loop
 	while(getNow() - thinkingStartTime < MaxThinkingTime){
-		depth++
-		const thisEvalMove = minmaxMoveFind(gameState,depth,-Infinity,Infinity, (color == "R"),thinkingStartTime)
+		depthRemaining++
+		const thisEvalMove = minmaxMoveFind(gameState,depthRemaining,0,-Infinity,Infinity, (color == "R"),thinkingStartTime)
 		if(getNow() - thinkingStartTime < MaxThinkingTime){//We completed the search in time, so it should be fine.
 			evalMove = thisEvalMove
 		}
-		depthsBestMove[depth] = evalMove
-		if((evalMove.eval == Infinity && color =="R") || (evalMove.eval == -Infinity && color =="B")){
+		depthsBestMove[depthRemaining] = evalMove
+		if((evalMove.e == Infinity && color == "R") || (evalMove.e == -Infinity && color =="B")){
 			//The current color is winning
-			console.log(("Checkmate in "+(depth-1)+" moves."))
-			return evalMove;
-		} else if ((evalMove.eval == -Infinity && color =="R") || (evalMove.eval == Infinity && color =="B")){
+			console.log(("Checkmate in "+(evalMove.d)+" moves."))
+			break;
+		} else if ((evalMove.e == -Infinity && color =="R") || (evalMove.e == Infinity && color == "B")){
 			//The current color is losing
-			if(depth > 1){ 
-				console.log("Greatest Depth: "+(depth-1))
-				console.log("Resigning due to mate in "+depth+" moves.")
+			if(depthRemaining > 1){ 
+				console.log("Resigning due to mate in "+(evalMove.d)+" moves.")
 				//In order to not play a random move, let's see what the best we could come up with is.
-				return depthsBestMove[depth-1] 
+				evalMove = depthsBestMove[depthRemaining-1] 
+				break;
 			}
 		}
 	}
-	console.log("Greatest Depth: "+(depth-1))
-
+	console.log("Greatest Depth Searched: "+(GreatestDepthSearched))
 	return evalMove
 }
 
-function evaluateMoveViaMinMax(gameState,depth,rBest,bBest,maximizingPlayer,thinkingStartTime 		
+function evaluateMoveViaMinMax(gameState,depthRemaining,depth,rBest,bBest,maximizingPlayer,thinkingStartTime 		
 		,topMove,topEval,thisMove){
 	// Run the evaluation on a move that is known to be legal from a given game state.
 	const newGameState = doMove(gameState,thisMove) 
 	AImovesEvaluated +=1
-	const moveEval = minmaxMoveFind(newGameState,depth - 1,rBest,bBest, !maximizingPlayer,thinkingStartTime)
+	const moveEval = minmaxMoveFind(newGameState,depthRemaining - 1,depth+1,rBest,bBest, !maximizingPlayer,thinkingStartTime)
 	if(maximizingPlayer){
-		if (moveEval.eval >= topEval){
+		if (moveEval.e >= topEval){
 			topMove = thisMove //keep track of the best move
-			topEval = moveEval.eval
+			topEval = moveEval.e
 			rBest = Math.max(rBest,topEval)
 		} 
 	} else {
-		if (moveEval.eval <= topEval){
+		if (moveEval.e <= topEval){
 			topMove = thisMove //keep track of the best move
-			topEval = moveEval.eval
+			topEval = moveEval.e
 			bBest = Math.min(bBest,topEval)
 		}
 	}
 
-	var finalMoveEval = {"eval":topEval,"move":topMove,"depthForward":depth,"shouldPrune":false,"bBest":bBest,"rBest":rBest}
-	if(bBest < rBest){//Prepare to prune the tree via alpha-beta pruning
-		finalMoveEval.shouldPrune = true
-		EvaluatedStates[gameState] = finalMoveEval
-	}
+	var finalMoveEval = getEvalMove(topEval,topMove,depthRemaining,depth)
+	//Alpha-beta pruning:
+	finalMoveEval.b = bBest
+	finalMoveEval.r = rBest
+	finalMoveEval.p = (bBest < rBest)
+	if(finalMoveEval.p){EvaluatedStates[gameState] = finalMoveEval;} //Prepare to prune 
 	return finalMoveEval
 }
 
-function minmaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer,thinkingStartTime){ //return {"eval":number,"move":moveString,"depthForward":depth}
+
+
+function minmaxMoveFind(gameState,depthRemaining,depth,rBest,bBest,maximizingPlayer,thinkingStartTime){ //return {"e":number,"m":moveString,"d":depthRemaining}
 	// Given a game state, and a depth, recursively get the best move until bottom depth or game over node
 	// maximizingPlayer true if Red, false if Blue
+	if (getNow() - thinkingStartTime > MaxThinkingTime){ return {};}// Ran out of time, we won't be using this search anyway.
+	GreatestDepthSearched = Math.max(GreatestDepthSearched,depth) // For tracking purposes only
 	const priorEval = EvaluatedStates[gameState] // Grab an existing eval for this game state, so we only have to look up once.
-	if (priorEval && priorEval.depthForward >= depth){ 
-		// If we've already seen this state, with an equal or better depth of search, let's just use it.
-		priorEval["isSavedMove"] = true
-		return priorEval
-	}
+	if (priorEval && priorEval.d >= depthRemaining){ return priorEval;} //If it's deeper than we have now, use it.
 
 	const staticEval = staticEvaluation(gameState)
-
-	if(depth == 0  || getNow() - thinkingStartTime > MaxThinkingTime || Math.abs(staticEval) == Infinity) { 
+	if(depthRemaining == 0 || Math.abs(staticEval) == Infinity) { 
 		//Either we won't be searching further, or we've reached an end node of the game, or we've run out of thiniking time.
-		const finalMove = {"eval":staticEval
-			, "move":"No Move"
-			, "depthForward":Math.abs(staticEval) == Infinity ? Infinity : 0
-			, "isCompleteSearch":(getNow() - thinkingStartTime < MaxThinkingTime)
-		}
-		if (finalMove.isCompleteSearch){
-			EvaluatedStates[gameState] = finalMove
-		}
+		const finalMove = getEvalMove(staticEval,"",Math.abs(staticEval) == Infinity ? Infinity : 0,depth)
+		EvaluatedStates[gameState] = finalMove
 		return finalMove
 	}
 
@@ -264,21 +240,18 @@ function minmaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer,thinkingSta
 	const cardIDs = getCurrentTurnPlayersCardIDs(gameState)
 
 	if(StatesMovesLists[gameState]){ //we already have a list of moves, with associated evals.
-		const sortedMovesList = StatesMovesLists[gameState].sort((a, b) => (a.eval < b.eval) ? 1 : -1)
+		const sortedMovesList = StatesMovesLists[gameState].sort((a, b) => (a.e < b.e) ? 1 : -1)
 		for (let thisMoveEval of sortedMovesList){//sort the evals, this will optimize for alpha-beta pruning.
-			const thisMove = thisMoveEval.move
-			const moveEval = evaluateMoveViaMinMax(gameState,depth,rBest,bBest,maximizingPlayer,thinkingStartTime 		
+			const thisMove = thisMoveEval.m
+			const moveEval = evaluateMoveViaMinMax(gameState,depthRemaining,depth,rBest,bBest,maximizingPlayer,thinkingStartTime 		
 				,topMove,topEval,thisMove,true)
-			topMove = moveEval.move
-			topEval = moveEval.eval
-			rBest = moveEval.rBest
-			bBest = moveEval.bBest
-			if (moveEval.shouldPrune){ // Prune by alpha-beta pruning
-				AImovesPrunedSorted += 1
-				return moveEval
-			}
+			topMove = moveEval.m
+			topEval = moveEval.e
+			rBest = moveEval.r
+			bBest = moveEval.b
+			if (moveEval.p){ return moveEval;}// Prune by alpha-beta pruning
 		}
-	} else {
+	} else {//We've never seen this set of moves before.
 		StatesMovesLists[gameState] = []
 		var canPrune = false
 		//Begin iterating through moves
@@ -296,25 +269,24 @@ function minmaxMoveFind(gameState,depth,rBest,bBest,maximizingPlayer,thinkingSta
 						//This is a legal move, let's enact it, and run the game state
 						var moveEval = {}
 						if(!canPrune){ //Evaluate the next move, unless we can prune. 
-							moveEval = evaluateMoveViaMinMax(gameState,depth,rBest,bBest,maximizingPlayer,thinkingStartTime 		
+							moveEval = evaluateMoveViaMinMax(gameState,depthRemaining,depth,rBest,bBest,maximizingPlayer,thinkingStartTime 		
 								,topMove,topEval,thisMove)
-							topMove = moveEval.move
-							topEval = moveEval.eval
-							rBest = moveEval.rBest
-							bBest = moveEval.bBest
+							topMove = moveEval.m
+							topEval = moveEval.e
+							rBest = moveEval.r
+							bBest = moveEval.b
 						} else { // Even if we prune, we still want to keep all the remaining moves in a list, but assume they are bad. 
-							topEval = (maximizingPlayer ? Infinity : -Infinity)
+							topEval = (maximizingPlayer ? -Infinity : Infinity)
 						}
 						
-						StatesMovesLists[gameState].push({"move":thisMove,"eval":topEval}) //keep track of all moves we've evaluated. 
-						canPrune = moveEval.shouldPrune // We don't want to look at any more moves, but still want to write out the possible moves.
+						StatesMovesLists[gameState].push({"m":thisMove,"e":topEval}) //keep track of all moves we've evaluated. 
+						canPrune = moveEval.p // We don't want to look at any more moves, but still want to write out the possible moves.
 					}
 				}
 			}
 		}
 	}
-	if (canPrune) {AImovesPrunedNormal += 1}
-	const finalMoveEval = {"eval":topEval,"move":topMove, "depthForward":depth,"isCompleteSearch":true}
+	const finalMoveEval = getEvalMove(topEval,topMove,depthRemaining,depth)
 	EvaluatedStates[gameState] = finalMoveEval
 	return finalMoveEval
 }
@@ -345,9 +317,27 @@ function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue
 	}
 }
 
+function getEvalMove(thisEval,thisMove,depthRemaining,depth,r=null,b=null,p=null){
+	 var evalMove = {"e": thisEval
+			, "m": thisMove
+			, "d": depthRemaining
+			, "t": (GameHistory.moveHistory.length+depth)
+		}
+	return evalMove
+}
+
+function disposeUnneededStates(evaluatedStates){
+	const gameStates = Object.keys(evaluatedStates)
+	gameStates.forEach(key => {
+		if(evaluatedStates[key].t <= GameHistory.moveHistory.length -1){
+			delete evaluatedStates[key]
+		}
+	})
+}
+
 //SETUP ***************************************************
 function createRandomGameState(isStart = true){
-	var thisGameState = "ppmppeeeeeeeeeeeeeeePPMPP";
+	var thisGameState = "eemeeeeeeeeeeeeeeeeeeeMee";
 	var deck = ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"]
 	if (!isStart) {
 		thisGameState = thisGameState.shuffle()
@@ -395,7 +385,7 @@ function precomputeOnBoardMoves(rawMoveSets){
 	}
 }
 
-function getThisGameCardsMoveSet(move_sets_raw, gameState) {
+function getThisGameCardsMoveSet(move_dictionary, gameState) {
 	// Filter down all possible moves to just the cards in this game
 	var thisGameMoves = {}
 	//Extract the moves from the game state
@@ -405,11 +395,11 @@ function getThisGameCardsMoveSet(move_sets_raw, gameState) {
 	var move3Index = getBlueMoveCardIDs(gameState)[1]
 	var move4Index = getNeutralMoveCardID(gameState) 
 	//Add the moves into this game's specific moves
-	thisGameMoves[move0Index] = move_sets_raw[move0Index]
-	thisGameMoves[move1Index] = move_sets_raw[move1Index]
-	thisGameMoves[move2Index] = move_sets_raw[move2Index]
-	thisGameMoves[move3Index] = move_sets_raw[move3Index]
-	thisGameMoves[move4Index] = move_sets_raw[move4Index]
+	thisGameMoves[move0Index] = move_dictionary[move0Index].moves
+	thisGameMoves[move1Index] = move_dictionary[move1Index].moves
+	thisGameMoves[move2Index] = move_dictionary[move2Index].moves
+	thisGameMoves[move3Index] = move_dictionary[move3Index].moves
+	thisGameMoves[move4Index] = move_dictionary[move4Index].moves
 	return thisGameMoves
 
 }
@@ -493,21 +483,21 @@ function placeCards(gameState){
 	setClassStyleValue("cardSlot","background-image","none")// Erase any cards from a prior state
 	var turnPlayer = whosTurn(gameState)
 	if (turnPlayer == "R"){
-		document.getElementById("neutralRed").style.backgroundImage = "url('images/" + move_image_names[getNeutralMoveCardID(gameState)] + ".jpeg')"
+		document.getElementById("neutralRed").style.backgroundImage = "url('images/" + move_dictionary[getNeutralMoveCardID(gameState)].name + ".jpeg')"
 		document.getElementById("neutralRed").innerText = getNeutralMoveCardID(gameState)
 
 	} else {
-		document.getElementById("neutralBlue").style.backgroundImage = "url('images/" + move_image_names[getNeutralMoveCardID(gameState)] + ".jpeg')"
+		document.getElementById("neutralBlue").style.backgroundImage = "url('images/" + move_dictionary[getNeutralMoveCardID(gameState)].name + ".jpeg')"
 		document.getElementById("neutralBlue").innerText = getNeutralMoveCardID(gameState)
 
 	}
-	document.getElementById("pBc1").style.backgroundImage = "url('images/" + move_image_names[getBlueMoveCardIDs(gameState)[0]] + ".jpeg')"
+	document.getElementById("pBc1").style.backgroundImage = "url('images/" + move_dictionary[getBlueMoveCardIDs(gameState)[0]].name + ".jpeg')"
 	document.getElementById("pBc1").innerText = getBlueMoveCardIDs(gameState)[0]
-	document.getElementById("pBc2").style.backgroundImage = "url('images/" + move_image_names[getBlueMoveCardIDs(gameState)[1]] + ".jpeg')"
+	document.getElementById("pBc2").style.backgroundImage = "url('images/" + move_dictionary[getBlueMoveCardIDs(gameState)[1]].name + ".jpeg')"
 	document.getElementById("pBc2").innerText = getBlueMoveCardIDs(gameState)[1]
-	document.getElementById("pRc1").style.backgroundImage = "url('images/" + move_image_names[getRedMoveCardIDs(gameState)[0]] + ".jpeg')"
+	document.getElementById("pRc1").style.backgroundImage = "url('images/" + move_dictionary[getRedMoveCardIDs(gameState)[0]].name + ".jpeg')"
 	document.getElementById("pRc1").innerText = getRedMoveCardIDs(gameState)[0]
-	document.getElementById("pRc2").style.backgroundImage = "url('images/" + move_image_names[getRedMoveCardIDs(gameState)[1]] + ".jpeg')"
+	document.getElementById("pRc2").style.backgroundImage = "url('images/" + move_dictionary[getRedMoveCardIDs(gameState)[1]].name + ".jpeg')"
 	document.getElementById("pRc2").innerText = getRedMoveCardIDs(gameState)[1]
 
 
@@ -605,7 +595,7 @@ function isLegal(gameState,move){ //Check if a move made in the UI is legal
 // UTILITY ************************************************************
 function stringifyMove(move){
 	if (Object.keys(move).length === 0) return "Empty Move"
-	return move.color +"-"+move_image_names[move.cardID] +":"+  coordinatifySquareNumber(move.startLocation) +"-"+ coordinatifySquareNumber(move.targetLocation)
+	return move.color +"-"+move_dictionary[move.cardID].name +":"+  coordinatifySquareNumber(move.startLocation) +"-"+ coordinatifySquareNumber(move.targetLocation)
 }
 
 function coordinatifySquareNumber(n){
