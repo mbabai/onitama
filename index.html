@@ -1,47 +1,64 @@
-<header>
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-	<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script> -->
-	<script type="text/javascript" src="main.js"></script>
-	<link href="main.css" rel="stylesheet" type="text/css">
-</header>
-<title>Onitama</title>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Onitama</title>
+	<link href="./main.css" rel="stylesheet" type="text/css">
+</head>
 <body>
-	<div class="cardSlot" id="pRc1" onclick="selectCard('pRc1')"></div>
-	<div class="cardSlot" id="pRc2" onclick="selectCard('pRc2')"></div>
-	<div class="cardSlot" id="pBc1" onclick="selectCard('pBc1')"></div>
-	<div class="cardSlot" id="pBc2" onclick="selectCard('pBc2')"></div>
-	<div class="cardSlot" id="neutralBlue"></div>
-	<div class="cardSlot" id="neutralRed"></div>
-	<div id="board">
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s0" style="left:500px; top:200px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s1" style="left:600px; top:200px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare blueTemple" id="s2" style="left:700px; top:200px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s3" style="left:800px; top:200px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s4" style="left:900px; top:200px;"></div>
-
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s5" style="left:500px; top:300px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s6" style="left:600px; top:300px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s7" style="left:700px; top:300px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s8" style="left:800px; top:300px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s9" style="left:900px; top:300px;"></div>
-
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s10" style="left:500px; top:400px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s11" style="left:600px; top:400px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s12" style="left:700px; top:400px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s13" style="left:800px; top:400px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s14" style="left:900px; top:400px;"></div>
-
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s15" style="left:500px; top:500px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s16" style="left:600px; top:500px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s17" style="left:700px; top:500px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s18" style="left:800px; top:500px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s19" style="left:900px; top:500px;"></div>
-
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s20" style="left:500px; top:600px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s21" style="left:600px; top:600px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare redTemple" id="s22" style="left:700px; top:600px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s23" style="left:800px; top:600px;"></div>
-		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s24" style="left:900px; top:600px;"></div>
+	<div id="startMenu" class="menuPanel">
+		<label for="playerColor">Color</label>
+		<select id="playerColor">
+			<option value="random" selected>Random</option>
+			<option value="R">Red</option>
+			<option value="B">Blue</option>
+		</select>
+		<div class="cardPickerHeader">Cards</div>
+		<div id="cardPicker" class="cardPicker" aria-label="Cards included in random deals"></div>
+		<button type="button" onclick="playFromMenu()">Play</button>
 	</div>
+	<div id="gameArea">
+		<button id="homeButton" type="button" onclick="goHome()" title="Abandon game and return home">Home</button>
+		<div class="cardSlot" id="pRc1" onclick="selectCard('pRc1')"></div>
+		<div class="cardSlot" id="pRc2" onclick="selectCard('pRc2')"></div>
+		<div class="cardSlot" id="pBc1" onclick="selectCard('pBc1')"></div>
+		<div class="cardSlot" id="pBc2" onclick="selectCard('pBc2')"></div>
+		<div class="cardSlot" id="neutralBlue"></div>
+		<div class="cardSlot" id="neutralRed"></div>
+		<div id="board">
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s0" style="left:500px; top:200px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s1" style="left:600px; top:200px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare blueTemple" id="s2" style="left:700px; top:200px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s3" style="left:800px; top:200px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s4" style="left:900px; top:200px;"></div>
+
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s5" style="left:500px; top:300px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s6" style="left:600px; top:300px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s7" style="left:700px; top:300px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s8" style="left:800px; top:300px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s9" style="left:900px; top:300px;"></div>
+
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s10" style="left:500px; top:400px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s11" style="left:600px; top:400px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s12" style="left:700px; top:400px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s13" style="left:800px; top:400px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s14" style="left:900px; top:400px;"></div>
+
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s15" style="left:500px; top:500px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s16" style="left:600px; top:500px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s17" style="left:700px; top:500px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s18" style="left:800px; top:500px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s19" style="left:900px; top:500px;"></div>
+
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s20" style="left:500px; top:600px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s21" style="left:600px; top:600px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare redTemple" id="s22" style="left:700px; top:600px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s23" style="left:800px; top:600px;"></div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s24" style="left:900px; top:600px;"></div>
+		</div>
+	</div>
+	<script type="text/javascript" src="./main.js?v=20260519"></script>
+	<script type="text/javascript">main()</script>
 </body>
-<script type="text/javascript">main()</script>
+</html>

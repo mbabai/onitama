@@ -2,12 +2,150 @@ body {
 	background-color: tan;
 }
 
+.menuPanel {
+	background-color: beige;
+	border: 2px solid white;
+	left: 50%;
+	max-width: 960px;
+	padding: 20px;
+	position: absolute;
+	top: 24px;
+	transform: translateX(-50%);
+	width: calc(100% - 64px);
+}
+
+.menuPanel > label,
+.menuPanel select,
+.menuPanel button {
+	font: 18px Arial, sans-serif;
+	margin-right: 10px;
+}
+
+.menuPanel button {
+	cursor: pointer;
+	margin-top: 16px;
+}
+
+.cardPickerHeader {
+	color: #4b4638;
+	font: bold 18px Arial, sans-serif;
+	margin-top: 16px;
+}
+
+.cardPicker {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	margin-top: 8px;
+}
+
+.cardToggle {
+	align-items: flex-start;
+	aspect-ratio: 23 / 14;
+	background-color: lightgrey;
+	background-position: center;
+	background-size: cover;
+	border: 3px solid white;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: flex;
+	gap: 8px;
+	min-height: 82px;
+	overflow: hidden;
+	padding: 8px;
+	position: relative;
+}
+
+.cardToggle input {
+	height: 18px;
+	margin: 0;
+	position: relative;
+	width: 18px;
+	z-index: 2;
+}
+
+.cardToggleCheckmark {
+	background: linear-gradient(90deg, rgba(0,0,0,0.7), rgba(0,0,0,0));
+	inset: 0;
+	position: absolute;
+	z-index: 1;
+}
+
+.cardToggleName {
+	color: white;
+	font: bold 14px Arial, sans-serif;
+	position: relative;
+	text-shadow: 0 1px 3px black;
+	z-index: 2;
+}
+
+.cardToggle:has(input:not(:checked)) {
+	filter: grayscale(0.9);
+	opacity: 0.45;
+}
+
+.cardToggle.shake {
+	animation: shakeCard 220ms ease-in-out;
+	border-color: gold;
+}
+
+.cardToggle.locked:active {
+	animation: shakeCard 220ms ease-in-out;
+	border-color: gold;
+}
+
+@keyframes shakeCard {
+	0%, 100% { transform: translateX(0); }
+	20% { transform: translateX(-7px); }
+	40% { transform: translateX(7px); }
+	60% { transform: translateX(-5px); }
+	80% { transform: translateX(5px); }
+}
+
+#homeButton {
+	background-color: beige;
+	border: 2px solid white;
+	cursor: pointer;
+	font: 18px Arial, sans-serif;
+	left: 20px;
+	padding: 8px 14px;
+	position: absolute;
+	top: 20px;
+	z-index: 200;
+}
+
 .boardSquare {
 	background-color: beige;
 	border: 2px solid white;
 	position:absolute;
 	width: 100px;
 	height:100px;
+}
+
+.lastMoveFromSquare {
+	background-color: #e6d8ff;
+}
+
+.lastMoveToSquare {
+	background-color: #d8f5d0;
+}
+
+.coordinateLabel {
+	color: #4b4638;
+	font: bold 14px Arial, sans-serif;
+	pointer-events: none;
+	position: absolute;
+	z-index: 1;
+}
+
+.fileLabel {
+	bottom: 4px;
+	right: 6px;
+}
+
+.rankLabel {
+	left: 6px;
+	top: 4px;
 }
 
 .redTemple {
@@ -25,8 +163,8 @@ body {
 }
 
 .cardSlot {
-	width: 230;
-	height: 140;
+	width: 230px;
+	height: 140px;
 	background-color:lightgrey;
 	border:5px solid white;
 	position:absolute;
@@ -73,6 +211,8 @@ body {
 	border-radius: 50%;
 	border:4px solid silver;
 	margin: 5px;
+	position: relative;
+	z-index: 2;
 }
 
 .red {
