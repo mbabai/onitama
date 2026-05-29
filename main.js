@@ -62,14 +62,14 @@ const STARTING_BOARD_STATE = "ppmpp" + "e".repeat(15) + "PPMPP";
 const BOARD_LEFT = 500
 const BOARD_TOP = 200
 const SQUARE_SIZE = 100
-const EVAL_BAR_GAP = 18
+const BOARD_BORDER_SIZE = 4
 const EVAL_BAR_WIDTH = 28
 const EVAL_BAR_SECTIONS = 20
 const CARD_TOP = 25
 const CARD_BOTTOM = 730
 const CARD_LEFT_1 = 510
 const CARD_LEFT_2 = 760
-const NEUTRAL_LEFT = 250
+const NEUTRAL_LEFT = 220
 const NEUTRAL_RIGHT = 1020
 const NEUTRAL_TOP = 380
 const MIN_SELECTED_CARDS = 5
@@ -352,6 +352,7 @@ function getAIMove(gameState,color){
 	var evalMove = timeBasedMinMax(gameState, thinkingStartTime, color)
 	var thinkingEndTime = getNow()
 	logAIMoveResult(evalMove, color, AImovesEvaluated, GreatestDepthSearched, (thinkingEndTime - thinkingStartTime)/1000)
+	setLatestAIEvaluation(evalMove)
 	return evalMove
 }
 
@@ -687,7 +688,9 @@ function timeBasedMinMax(gameState, thinkingStartTime, color){
 		} else if (evalMove.exact && isLosingScoreForColor(evalMove.e, color)){
 			if(depthRemaining > 1){
 				console.log("Forced loss in "+(evalMove.d)+" plies.")
+				const forcedLossEvalMove = evalMove
 				evalMove = depthsBestMove[depthRemaining-1]
+				evalMove.latestEvaluation = forcedLossEvalMove
 				break
 			}
 		}
@@ -1154,6 +1157,13 @@ function getEvalMove(thisEval,thisMove,depthRemaining,depth,r=null,b=null,p=null
 	return evalMove
 }
 
+function getStaticEvaluationMove(gameState){
+	const evalMove = getEvalMove(staticEvaluation(gameState), {}, 0, 0)
+	evalMove.exact = Math.abs(evalMove.e) == Infinity
+	evalMove.bound = "static"
+	return evalMove
+}
+
 function disposeUnneededStates(evaluatedStates){
 	const gameStates = Object.keys(evaluatedStates)
 	gameStates.forEach(key => {
@@ -1242,9 +1252,13 @@ function doRealMove(gameState,move){
 	//Actually Play out a real move in the game, and record the history
 	if (!GameHasStarted) return
 	if (!move || !("cardID" in move) || !("startLocation" in move) || !("targetLocation" in move)) return
+	const movedByAI = AIcolor.includes(move.color)
 	GameState = doMove(gameState,move)
 	recordHistory(move, GameState)
 	updateUI(GameState,move)
+	if (!movedByAI){
+		setLatestAIEvaluation(getStaticEvaluationMove(GameState))
+	}
 	GameIsOver = Math.abs(staticEvaluation(GameState)) == Infinity
 	if (GameIsOver){
 		var endstring = ""
@@ -1357,9 +1371,9 @@ function setCardSlotPosition(slotID, top, left, transform){
 function positionEvaluationBar(){
 	const bar = getEvaluationBar()
 	if (!bar) return
-	bar.style.left = (BOARD_LEFT + SQUARE_SIZE*5 + EVAL_BAR_GAP) + "px"
+	bar.style.left = (BOARD_LEFT - EVAL_BAR_WIDTH) + "px"
 	bar.style.top = BOARD_TOP + "px"
-	bar.style.height = (SQUARE_SIZE*5) + "px"
+	bar.style.height = (SQUARE_SIZE*5 + BOARD_BORDER_SIZE) + "px"
 	bar.style.width = EVAL_BAR_WIDTH + "px"
 }
 
@@ -1374,6 +1388,88 @@ function getEvaluationBar(){
 	bar.setAttribute("aria-label", "Latest bot evaluation")
 	board.appendChild(bar)
 	return bar
+}
+
+function setLatestAIEvaluation(evalMove){
+	LatestAIEvalMove = getDisplayAIEvaluation(evalMove)
+	updateEvaluationBar()
+}
+
+function clearLatestAIEvaluation(){
+	LatestAIEvalMove = null
+	updateEvaluationBar()
+}
+
+function updateEvaluationBar(){
+	const bar = getEvaluationBar()
+	if (!bar) return
+	const sections = getEvaluationBarSections(LatestAIEvalMove)
+	bar.innerHTML = ""
+	for (let color of sections){
+		var segment = document.createElement("div")
+		segment.className = "evalBarSegment " + (color == "R" ? "evalBarRed" : "evalBarBlue")
+		bar.appendChild(segment)
+	}
+	const label = getEvaluationBarLabel(LatestAIEvalMove)
+	bar.title = label
+	bar.setAttribute("aria-label", label)
+}
+
+function getDisplayAIEvaluation(evalMove){
+	if (evalMove && evalMove.latestEvaluation) return evalMove.latestEvaluation
+	return evalMove
+}
+
+function getEvaluationBarSections(evalMove){
+	const counts = getEvaluationBarColorCounts(evalMove)
+	const topColor = PlayerColor == "B" ? "R" : "B"
+	const bottomColor = oppositeColor(topColor)
+	var sections = []
+	for (let i=0;i<counts[topColor];i++){
+		sections.push(topColor)
+	}
+	for (let i=0;i<counts[bottomColor];i++){
+		sections.push(bottomColor)
+	}
+	return sections
+}
+
+function getEvaluationBarColorCounts(evalMove){
+	if (evalMove && evalMove.exact && evalMove.e == Infinity){
+		return {"R": EVAL_BAR_SECTIONS, "B": 0}
+	}
+	if (evalMove && evalMove.exact && evalMove.e == -Infinity){
+		return {"R": 0, "B": EVAL_BAR_SECTIONS}
+	}
+	const evaluation = evalMove && Number.isFinite(evalMove.e) ? evalMove.e : 0
+	const redSections = EVAL_BAR_SECTIONS/2 + getFiniteEvaluationSectionSwing(evaluation)
+	return {"R": redSections, "B": EVAL_BAR_SECTIONS - redSections}
+}
+
+function getFiniteEvaluationSectionSwing(evaluation){
+	const maxFiniteSwing = EVAL_BAR_SECTIONS/2 - 1
+	const direction = evaluation > 0 ? 1 : (evaluation < 0 ? -1 : 0)
+	const swing = Math.round(Math.log2(Math.abs(evaluation) + 1))
+	return direction * clamp(swing, 0, maxFiniteSwing)
+}
+
+function getEvaluationBarLabel(evalMove){
+	if (!evalMove){
+		return "AI evaluation 0"
+	}
+	if (evalMove.exact && evalMove.e == Infinity){
+		return "AI evaluation Red: Mate in " + evalMove.d
+	}
+	if (evalMove.exact && evalMove.e == -Infinity){
+		return "AI evaluation Blue: Mate in " + evalMove.d
+	}
+	if (evalMove.e > 0){
+		return "AI evaluation +" + evalMove.e + " red"
+	}
+	if (evalMove.e < 0){
+		return "AI evaluation +" + (-1*evalMove.e) + " blue"
+	}
+	return "AI evaluation 0"
 }
 
 function updateTempleBorders(){
@@ -1766,6 +1862,10 @@ function getNeutralMoveCardID(gameState){
 function getNow(){
 	const d = new Date();
 	return d.getTime();
+}
+
+function clamp(value, min, max){
+	return Math.max(min, Math.min(max, value))
 }
 
 String.prototype.isEmpty = function() {

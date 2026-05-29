@@ -171,11 +171,6 @@ body {
 
 .evalBarSegment {
 	box-sizing: border-box;
-	border-bottom: 1px solid rgba(255,255,255,0.55);
-}
-
-.evalBarSegment:last-child {
-	border-bottom: 0;
 }
 
 .evalBarRed {
