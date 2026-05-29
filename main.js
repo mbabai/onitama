@@ -14,7 +14,7 @@ second pair two-digit numbers = blue's move cards
 last single two-digit number = neutral card
 */
 
-var GameHistory = {"gameStart":"", "moveHistory":[]}
+var GameHistory = createEmptyGameHistory()
 /*
 sampleMove = {cardID: '01', color: 'B', startLocation: 2, tartgetLocation: 12}  
 */
@@ -47,6 +47,7 @@ const MaxThinkingTime = 5000 // how many miliseconds we're giving the AI to thin
 var ForcedMateShown = false
 var ResignShown = false
 var GameIsOver = true
+var GameHasStarted = false
 var GreatestDepthSearched = 0
 var PlayerColor = "R"
 var AIIsThinking = false
@@ -55,11 +56,15 @@ var AIWorkerUrl = null
 var AIWorkerRequests = {}
 var AIWorkerMessageId = 0
 var ActiveAIRequestId = 0
+var LatestAIEvalMove = null
 
 const STARTING_BOARD_STATE = "ppmpp" + "e".repeat(15) + "PPMPP";
 const BOARD_LEFT = 500
 const BOARD_TOP = 200
 const SQUARE_SIZE = 100
+const EVAL_BAR_GAP = 18
+const EVAL_BAR_WIDTH = 28
+const EVAL_BAR_SECTIONS = 20
 const CARD_TOP = 25
 const CARD_BOTTOM = 730
 const CARD_LEFT_1 = 510
@@ -132,8 +137,10 @@ function goHome(){
 	AIIsThinking = false
 	PlayerCanMove = false
 	GameIsOver = true
+	GameHasStarted = false
 	currentMoveUI = {}
-	GameHistory = {"gameStart":"", "moveHistory":[]}
+	GameHistory = createEmptyGameHistory()
+	clearLatestAIEvaluation()
 	clearTransientGameUI()
 	showStartMenu()
 }
@@ -354,23 +361,28 @@ function doAIMove(gameState,color){
 	resetAIWorker("AI search cancelled.")
 	PlayerCanMove = false
 	AIIsThinking = true
+	updateAIThinkingIndicator(color)
 	console.log("Thinking about move...")
 	setTimeout(() => {
 		getAIMoveInWorker(gameState,color).then((result) => {
 			if(requestId != ActiveAIRequestId || gameState != GameState || whosTurn(GameState) != color) return
 			AIIsThinking = false
+			updateAIThinkingIndicator(color)
 			PlayerCanMove = true
 			AImovesEvaluated = result.nodes
 			GreatestDepthSearched = result.depth
 			logAIMoveResult(result.evalMove, color, result.nodes, result.depth, result.thinkingTime)
 			doRealMove(GameState, result.evalMove.m)
+			setLatestAIEvaluation(result.evalMove)
 		}).catch((error) => {
 			if(requestId != ActiveAIRequestId || gameState != GameState || whosTurn(GameState) != color) return
 			console.warn("AI worker failed; using quick fallback move.", error)
 			AIIsThinking = false
+			updateAIThinkingIndicator(color)
 			PlayerCanMove = true
 			const fallbackMove = getFallbackMove(GameState)
 			doRealMove(GameState, fallbackMove.m)
+			setLatestAIEvaluation(fallbackMove)
 		})
 	},100)
 
@@ -548,11 +560,13 @@ function startGameFromState(initialGameState){
 	ActiveAIRequestId += 1
 	resetAIWorker("AI search cancelled.")
 	AIIsThinking = false
-	PlayerCanMove = true
+	PlayerCanMove = false
 	GameState = initialGameState
 	GameIsOver = false
+	GameHasStarted = false
 	currentMoveUI = {}
-	GameHistory = {"gameStart":"", "moveHistory":[]}
+	GameHistory = createEmptyGameHistory()
+	clearLatestAIEvaluation()
 	ForcedMateShown = false
 	ResignShown = false
 	clearTransientGameUI()
@@ -560,13 +574,76 @@ function startGameFromState(initialGameState){
 	placePieces(GameState)
 	placeCards(GameState)
 	bindBoardSquareClicks()
+	showBoardStartButton()
 	GameHistory.gameStart = GameState
+	GameHistory.stateHistory = [GameState]
+	updateTakeBackButton()
 	var thisGameMoveSets = getThisGameCardsMoveSet(move_dictionary, GameState) // Filter down all possible moves to just the cards in this game
 	precomputeOnBoardMoves(thisGameMoveSets)
+}
+
+function startBoardGame(){
+	if (GameIsOver || GameHasStarted) return
+	GameHasStarted = true
+	PlayerCanMove = true
+	hideBoardStartButton()
+	updateTakeBackButton()
 	if(AIcolor.includes(whosTurn(GameState))){ // If its the AI's turn (and there is an AI) the AI makes a move.
 		console.log("Starting game with AI...")
 		doAIMove(GameState,whosTurn(GameState))
 	}
+}
+
+function takeBack(){
+	const targetHistoryIndex = getTakeBackHistoryIndex()
+	if (targetHistoryIndex === null) return
+
+	ActiveAIRequestId += 1
+	resetAIWorker("AI search cancelled.")
+	AIIsThinking = false
+	PlayerCanMove = true
+	GameIsOver = false
+	ForcedMateShown = false
+	ResignShown = false
+	currentMoveUI = {}
+	clearLatestAIEvaluation()
+
+	GameState = getGameStateAtHistoryIndex(targetHistoryIndex)
+	GameHistory.moveHistory = GameHistory.moveHistory.slice(0, targetHistoryIndex)
+	GameHistory.stateHistory = getStateHistoryThroughIndex(targetHistoryIndex)
+
+	updateUI(GameState)
+	console.log("Took back to "+GameHistory.moveHistory.length+" plies.")
+}
+
+function getTakeBackHistoryIndex(){
+	if (!GameHasStarted || !GameHistory.moveHistory.length) return null
+	const currentHistoryIndex = GameHistory.moveHistory.length
+	for (let historyIndex = currentHistoryIndex - 1; historyIndex >= 0; historyIndex--){
+		if (whosTurn(getGameStateAtHistoryIndex(historyIndex)) == PlayerColor){
+			return historyIndex
+		}
+	}
+	return null
+}
+
+function getGameStateAtHistoryIndex(historyIndex){
+	if (GameHistory.stateHistory && GameHistory.stateHistory[historyIndex]){
+		return GameHistory.stateHistory[historyIndex]
+	}
+	var gameState = GameHistory.gameStart
+	for (let moveIndex = 0; moveIndex < historyIndex; moveIndex++){
+		gameState = doMove(gameState, GameHistory.moveHistory[moveIndex])
+	}
+	return gameState
+}
+
+function getStateHistoryThroughIndex(historyIndex){
+	var stateHistory = []
+	for (let stateIndex = 0; stateIndex <= historyIndex; stateIndex++){
+		stateHistory.push(getGameStateAtHistoryIndex(stateIndex))
+	}
+	return stateHistory
 }
 
 
@@ -1157,11 +1234,16 @@ function getThisGameCardsMoveSet(move_dictionary, gameState) {
 
 }
 
+function createEmptyGameHistory(){
+	return {"gameStart":"", "moveHistory":[], "stateHistory":[]}
+}
+
 function doRealMove(gameState,move){
 	//Actually Play out a real move in the game, and record the history
+	if (!GameHasStarted) return
 	if (!move || !("cardID" in move) || !("startLocation" in move) || !("targetLocation" in move)) return
 	GameState = doMove(gameState,move)
-	recordHistory(move)
+	recordHistory(move, GameState)
 	updateUI(GameState,move)
 	GameIsOver = Math.abs(staticEvaluation(GameState)) == Infinity
 	if (GameIsOver){
@@ -1176,7 +1258,7 @@ function doRealMove(gameState,move){
 		console.log(endstring)
 		return 
 	}
-	if(AIcolor.includes(whosTurn(GameState))){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
+	if(GameHasStarted && AIcolor.includes(whosTurn(GameState))){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
 		doAIMove(GameState,whosTurn(GameState))
 	}
 }
@@ -1188,9 +1270,13 @@ function doMove(gameState,move){
 	return gameState
 }
 
-function recordHistory(move){
+function recordHistory(move, gameState){
 	//Keep a record of what has gone on in the game.
-	GameHistory.moveHistory.push(move) 
+	if (!GameHistory.stateHistory){
+		GameHistory.stateHistory = [GameHistory.gameStart]
+	}
+	GameHistory.moveHistory.push(move)
+	GameHistory.stateHistory.push(gameState)
 }
 
 function movePiece(gameState,move){
@@ -1218,9 +1304,11 @@ function changeTurns(gameState){
 // VISUAL ********************************************************
 function applyPlayerPerspective(){
 	positionBoardSquares()
+	positionEvaluationBar()
 	positionCardSlots()
 	updateTempleBorders()
 	labelBoardCoordinates()
+	updateEvaluationBar()
 }
 
 function positionBoardSquares(){
@@ -1264,6 +1352,28 @@ function setCardSlotPosition(slotID, top, left, transform){
 	slot.style.top = top + "px"
 	slot.style.left = left + "px"
 	slot.style.transform = transform
+}
+
+function positionEvaluationBar(){
+	const bar = getEvaluationBar()
+	if (!bar) return
+	bar.style.left = (BOARD_LEFT + SQUARE_SIZE*5 + EVAL_BAR_GAP) + "px"
+	bar.style.top = BOARD_TOP + "px"
+	bar.style.height = (SQUARE_SIZE*5) + "px"
+	bar.style.width = EVAL_BAR_WIDTH + "px"
+}
+
+function getEvaluationBar(){
+	var bar = document.getElementById("aiEvalBar")
+	if (bar) return bar
+	var board = document.getElementById("board")
+	if (!board) return null
+	bar = document.createElement("div")
+	bar.id = "aiEvalBar"
+	bar.className = "evalBar"
+	bar.setAttribute("aria-label", "Latest bot evaluation")
+	board.appendChild(bar)
+	return bar
 }
 
 function updateTempleBorders(){
@@ -1316,6 +1426,24 @@ function placePieces(gameState){
 			appendHtml("s"+i, "<div id='p"+(pieceNum++)+"' draggable='false' onclick='selectPiece(event)' ondragstart='drag(event)' class='piece "+pieceColor+" "+pieceType+"' style='left:0px; top:0px;'></div>")
 		} 
 	}
+	if (AIIsThinking){
+		updateAIThinkingIndicator(whosTurn(gameState))
+	}
+}
+
+function updateAIThinkingIndicator(color){
+	removeElementsByClass("aiThinkingIndicator")
+	if (!AIIsThinking || !AIcolor.includes(color)) return
+	var masterLocation = GameState.indexOf(color == "R" ? "M" : "m")
+	if (masterLocation < 0) return
+	var masterSquare = document.getElementById("s"+masterLocation)
+	var masterPiece = masterSquare ? masterSquare.querySelector(".master") : null
+	if (!masterPiece) return
+	var loadingImage = document.createElement("img")
+	loadingImage.className = "aiThinkingIndicator"
+	loadingImage.src = "images/loading.gif"
+	loadingImage.alt = "AI thinking"
+	masterPiece.appendChild(loadingImage)
 }
 
 function placeCards(gameState){
@@ -1372,10 +1500,39 @@ function colorlastSquare(gameHistory){
 function clearTransientGameUI(){
 	clearBoardHighlights()
 	removeElementsByClass("piece")
+	hideBoardStartButton()
+	updateTakeBackButton()
 	setClassStyleValue("cardSlot","background-image","none")
 	setClassStyleValue("cardSlot","border-color","white")
 	setClassStyleValue("cardSlot","opacity","")
 	setClassInnerText("cardSlot","")
+}
+
+function updateTakeBackButton(){
+	var takeBackButton = document.getElementById("takeBackButton")
+	if (!takeBackButton) return
+	takeBackButton.disabled = getTakeBackHistoryIndex() === null
+}
+
+function showBoardStartButton(){
+	var board = document.getElementById("board")
+	var startButton = document.getElementById("boardStartButton")
+	if (!startButton){
+		startButton = document.createElement("button")
+		startButton.id = "boardStartButton"
+		startButton.type = "button"
+		startButton.innerText = "Start"
+		startButton.onclick = startBoardGame
+		board.appendChild(startButton)
+	}
+	startButton.style.display = "block"
+}
+
+function hideBoardStartButton(){
+	var startButton = document.getElementById("boardStartButton")
+	if (startButton){
+		startButton.style.display = "none"
+	}
 }
 
 function clearBoardHighlights(){
@@ -1387,7 +1544,7 @@ function clearBoardHighlights(){
 }
 
 function selectCard(slot){
-	if (GameIsOver || !PlayerCanMove || AIIsThinking) return;
+	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking) return;
 	var currentTurnPlayer = whosTurn(GameState)
 	var cardSlotPlayer = slot[1]
 	setClassAttributeToValue("piece","draggable","false") //set nothing to be draggable. If needed, we'll set somethings to be draggable
@@ -1458,7 +1615,7 @@ function highlightLegalTargets(){
 }
 
 function selectPiece(ev){
-	if (GameIsOver || !PlayerCanMove || AIIsThinking || !("cardID" in currentMoveUI)) return
+	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking || !("cardID" in currentMoveUI)) return
 	var squareNum = getSquareNumFromElement(ev.target.parentElement)
 	if (squareNum === null) return
 	var piece = GameState[squareNum]
@@ -1478,7 +1635,7 @@ function selectPiece(ev){
 }
 
 function selectTargetSquare(ev){
-	if (GameIsOver || !PlayerCanMove || AIIsThinking || !("startLocation" in currentMoveUI)) return
+	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking || !("startLocation" in currentMoveUI)) return
 	var targetSquare = getSquareElementFromTarget(ev.target)
 	if (!targetSquare) return
 	tryMoveToTarget(getSquareNumFromElement(targetSquare))
@@ -1491,7 +1648,7 @@ function allowDrop(ev) {
 
 function drag(ev) {
 	// fires when we start to move the piece. Let's see what it's legal moves are. 
-	if (GameIsOver || !PlayerCanMove || AIIsThinking || !("cardID" in currentMoveUI)) {
+	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking || !("cardID" in currentMoveUI)) {
 		ev.preventDefault()
 		return
 	}
@@ -1503,7 +1660,7 @@ function drag(ev) {
 
 function drop(ev) {
 	ev.preventDefault();
-	if (GameIsOver || !PlayerCanMove || AIIsThinking) return
+	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking) return
 	var targetSquare = getSquareElementFromTarget(ev.target)
 	if (!targetSquare) return
 	tryMoveToTarget(getSquareNumFromElement(targetSquare))
@@ -1534,6 +1691,7 @@ function updateUI(gameState,move){
 	placeCards(gameState)
 	colorlastSquare(GameHistory)
 	currentMoveUI = {}
+	updateTakeBackButton()
 }
 
 

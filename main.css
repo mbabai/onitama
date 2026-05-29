@@ -102,16 +102,51 @@ body {
 	80% { transform: translateX(5px); }
 }
 
-#homeButton {
+#homeButton,
+#takeBackButton {
 	background-color: beige;
 	border: 2px solid white;
 	cursor: pointer;
 	font: 18px Arial, sans-serif;
-	left: 20px;
 	padding: 8px 14px;
 	position: absolute;
 	top: 20px;
 	z-index: 200;
+}
+
+#homeButton {
+	left: 20px;
+}
+
+#takeBackButton {
+	left: 102px;
+}
+
+#takeBackButton:disabled {
+	cursor: default;
+	opacity: 0.45;
+}
+
+#boardStartButton {
+	background-color: #1f1f1f;
+	border: 3px solid white;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+	color: white;
+	cursor: pointer;
+	font: bold 22px Arial, sans-serif;
+	height: 72px;
+	left: 664px;
+	position: absolute;
+	text-transform: uppercase;
+	top: 414px;
+	width: 172px;
+	z-index: 250;
+}
+
+#boardStartButton:hover,
+#boardStartButton:focus {
+	background-color: #333333;
+	outline: 3px solid gold;
 }
 
 .boardSquare {
@@ -120,6 +155,35 @@ body {
 	position:absolute;
 	width: 100px;
 	height:100px;
+}
+
+.evalBar {
+	background-color: #f1ead4;
+	border: 2px solid white;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+	box-sizing: border-box;
+	display: grid;
+	grid-template-rows: repeat(20, 1fr);
+	position: absolute;
+	width: 28px;
+	z-index: 150;
+}
+
+.evalBarSegment {
+	box-sizing: border-box;
+	border-bottom: 1px solid rgba(255,255,255,0.55);
+}
+
+.evalBarSegment:last-child {
+	border-bottom: 0;
+}
+
+.evalBarRed {
+	background-color: red;
+}
+
+.evalBarBlue {
+	background-color: blue;
 }
 
 .lastMoveFromSquare {
@@ -226,6 +290,17 @@ body {
 .pawn {
 	width:80px;
 	height:80px;
+}
+
+.aiThinkingIndicator {
+	height: 58px;
+	left: 50%;
+	pointer-events: none;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 58px;
+	z-index: 3;
 }
 
 .master {

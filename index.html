@@ -20,6 +20,7 @@
 	</div>
 	<div id="gameArea">
 		<button id="homeButton" type="button" onclick="goHome()" title="Abandon game and return home">Home</button>
+		<button id="takeBackButton" type="button" onclick="takeBack()" title="Return to your previous turn">Take Back</button>
 		<div class="cardSlot" id="pRc1" onclick="selectCard('pRc1')"></div>
 		<div class="cardSlot" id="pRc2" onclick="selectCard('pRc2')"></div>
 		<div class="cardSlot" id="pBc1" onclick="selectCard('pBc1')"></div>
@@ -56,9 +57,10 @@
 			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare redTemple" id="s22" style="left:700px; top:600px;"></div>
 			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s23" style="left:800px; top:600px;"></div>
 			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s24" style="left:900px; top:600px;"></div>
+			<div id="aiEvalBar" class="evalBar" aria-label="Latest bot evaluation"></div>
 		</div>
 	</div>
-	<script type="text/javascript" src="./main.js?v=20260519"></script>
+	<script type="text/javascript" src="./main.js?v=20260529"></script>
 	<script type="text/javascript">main()</script>
 </body>
 </html>
