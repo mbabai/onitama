@@ -5,8 +5,11 @@ body {
 .menuPanel {
 	background-color: beige;
 	border: 2px solid white;
+	box-sizing: border-box;
+	display: flex;
+	gap: 24px;
 	left: 50%;
-	max-width: 960px;
+	max-width: 1040px;
 	padding: 20px;
 	position: absolute;
 	top: 24px;
@@ -14,29 +17,67 @@ body {
 	width: calc(100% - 64px);
 }
 
-.menuPanel > label,
+.menuControls {
+	flex: 1;
+	min-width: 0;
+}
+
+.menuControls h1 {
+	color: #2f2b22;
+	font: bold 32px Arial, sans-serif;
+	margin: 0 0 24px;
+}
+
+.menuField {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.menuField label,
 .menuPanel select,
 .menuPanel button {
 	font: 18px Arial, sans-serif;
-	margin-right: 10px;
 }
 
 .menuPanel button {
 	cursor: pointer;
-	margin-top: 16px;
+}
+
+.menuActions {
+	display: flex;
+	gap: 10px;
+	margin-top: 18px;
+}
+
+.menuMateActions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 12px;
+}
+
+.menuCardPanel {
+	display: flex;
+	flex: 0 0 260px;
+	flex-direction: column;
+	min-height: 0;
 }
 
 .cardPickerHeader {
 	color: #4b4638;
 	font: bold 18px Arial, sans-serif;
-	margin-top: 16px;
 }
 
 .cardPicker {
-	display: grid;
+	display: flex;
+	flex-direction: column;
 	gap: 10px;
-	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	max-height: min(680px, calc(100vh - 126px));
 	margin-top: 8px;
+	overflow-y: auto;
+	padding-right: 6px;
 }
 
 .cardToggle {
@@ -49,6 +90,7 @@ body {
 	box-sizing: border-box;
 	cursor: pointer;
 	display: flex;
+	flex: 0 0 auto;
 	gap: 8px;
 	min-height: 82px;
 	overflow: hidden;
@@ -123,6 +165,21 @@ body {
 }
 
 #takeBackButton:disabled {
+	cursor: default;
+	opacity: 0.45;
+}
+
+#customBeginButton {
+	background-color: beige;
+	border: 2px solid white;
+	cursor: pointer;
+	font: bold 18px Arial, sans-serif;
+	padding: 8px 16px;
+	position: absolute;
+	z-index: 220;
+}
+
+#customBeginButton:disabled {
 	cursor: default;
 	opacity: 0.45;
 }
@@ -231,6 +288,98 @@ body {
 	color:transparent;
 }
 
+.customSetupMode #takeBackButton {
+	display: none;
+}
+
+.customSetupMode .boardSquare,
+.customSetupMode .cardSlot,
+.customSetupMode .piece,
+.customCardChoice {
+	cursor: pointer;
+}
+
+.customCardPanel {
+	background-color: beige;
+	border: 2px solid white;
+	box-sizing: border-box;
+	display: none;
+	height: 504px;
+	left: 780px;
+	padding: 10px;
+	position: absolute;
+	top: 200px;
+	width: 230px;
+	z-index: 180;
+}
+
+.customCardPanelHeader {
+	color: #4b4638;
+	font: bold 18px Arial, sans-serif;
+	margin-bottom: 8px;
+}
+
+.customCardPicker {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	height: calc(100% - 30px);
+	overflow-y: auto;
+	padding-right: 4px;
+}
+
+.customCardChoice {
+	aspect-ratio: 23 / 14;
+	background-color: lightgrey;
+	background-position: center;
+	background-size: cover;
+	border: 3px solid white;
+	box-sizing: border-box;
+	color: white;
+	flex: 0 0 auto;
+	font: bold 14px Arial, sans-serif;
+	overflow: hidden;
+	padding: 8px;
+	position: relative;
+	text-align: left;
+	text-shadow: 0 1px 3px black;
+}
+
+.customCardChoice::before {
+	background: linear-gradient(90deg, rgba(0,0,0,0.7), rgba(0,0,0,0));
+	content: "";
+	inset: 0;
+	position: absolute;
+}
+
+.customCardChoice span {
+	position: relative;
+	z-index: 1;
+}
+
+.customCardChoice.selected {
+	border-color: gold;
+}
+
+.customCardChoice.used:not(.selected) {
+	filter: grayscale(0.5);
+	opacity: 0.6;
+}
+
+.cardSlot.customEmptySlot {
+	background-image: none;
+	border-style: dashed;
+	opacity: 0.35;
+}
+
+.cardSlot.customFilledSlot {
+	opacity: 1;
+}
+
+.piece.customSelectedPiece {
+	outline: 4px solid gold;
+}
+
 #pBc1 {
 	top:25px;
 	left:510px;
@@ -303,4 +452,18 @@ body {
 	border: 4px solid gold;
 	width:80px;
 	height:80px;
+}
+
+@media (max-width: 760px) {
+	.menuPanel {
+		flex-direction: column;
+	}
+
+	.menuCardPanel {
+		flex-basis: auto;
+	}
+
+	.cardPicker {
+		max-height: 420px;
+	}
 }

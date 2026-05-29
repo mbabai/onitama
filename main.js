@@ -75,6 +75,17 @@ const NEUTRAL_TOP = 380
 const MIN_SELECTED_CARDS = 5
 const SELECTED_CARDS_COOKIE = "onitamaSelectedCards"
 const PLAYER_COLOR_COOKIE = "onitamaPlayerColor"
+const CUSTOM_BOARD_LEFT = 260
+const CUSTOM_CARD_LEFT_1 = 270
+const CUSTOM_CARD_LEFT_2 = 520
+const CUSTOM_NEUTRAL_LEFT = 20
+const CUSTOM_NEUTRAL_TOP_1 = 300
+const CUSTOM_NEUTRAL_TOP_2 = 470
+const CUSTOM_CARD_PANEL_LEFT = 780
+const CUSTOM_CARD_PANEL_TOP = 200
+const CUSTOM_CARD_SLOT_IDS = ["pRc1","pRc2","pBc1","pBc2","neutralBlue","neutralRed"]
+const CUSTOM_REQUIRED_CARD_SLOT_IDS = ["pRc1","pRc2","pBc1","pBc2"]
+const CUSTOM_NEUTRAL_SLOT_IDS = ["neutralBlue","neutralRed"]
 
 
 
@@ -116,6 +127,11 @@ move_dictionary = {
 
 PrecomputedBoardMoves = {} // this will store actual possible spaces for any move, from any square. index = color+cardID+SquareNum
 currentMoveUI = {} //this is a dictionary to build up the current move through the UI
+var CustomSetupActive = false
+var CustomSetupBoardState = ""
+var CustomSetupCards = {}
+var CustomSelectedCardID = null
+var CustomSelectedPieceSquare = null
 
 // Logic flow ********************************************
 function main(){
@@ -125,8 +141,9 @@ function main(){
 }
 
 function showStartMenu(){
+	setCustomSetupMode(false)
 	document.getElementById("gameArea").style.display = "none"
-	document.getElementById("startMenu").style.display = "block"
+	document.getElementById("startMenu").style.display = "flex"
 }
 
 function goHome(){
@@ -153,6 +170,312 @@ function playFromMenu(){
 	document.getElementById("startMenu").style.display = "none"
 	document.getElementById("gameArea").style.display = "block"
 	startNewGame()
+}
+
+function playRandomMateIn(mateMoves){
+	var matePlies = mateMovesToPlies(mateMoves)
+	var mateStates = getMateStartingStatesForPlies(matePlies)
+	if(!mateStates.length){
+		alert("No mate-in-" + mateMoves + " starting positions are loaded.")
+		return
+	}
+	var selectedMate = mateStates[Math.floor(Math.random() * mateStates.length)]
+	var startingPlayer = whosTurn(selectedMate.game_state)
+	PlayerColor = oppositeColor(startingPlayer)
+	AIcolor = [startingPlayer]
+	document.getElementById("startMenu").style.display = "none"
+	document.getElementById("gameArea").style.display = "block"
+	startGameFromState(selectedMate.game_state)
+}
+
+function mateMovesToPlies(mateMoves){
+	return (2 * mateMoves) - 1
+}
+
+function getMateStartingStatesForPlies(matePlies){
+	if(!Array.isArray(window.MATE_STARTING_STATES)) return []
+	return window.MATE_STARTING_STATES.filter(function(mateState){
+		return mateState
+			&& mateState.mate_plies == matePlies
+			&& isValidLaunchGameState(mateState.game_state)
+	})
+}
+
+function startCustomSetup(){
+	var selectedColor = document.getElementById("playerColor").value
+	saveMenuPreferences()
+	PlayerColor = selectedColor == "random" ? (Math.random() > 0.5 ? "R" : "B") : selectedColor
+	AIcolor = [PlayerColor == "R" ? "B" : "R"]
+	ActiveAIRequestId += 1
+	resetAIWorker("AI search cancelled.")
+	AIIsThinking = false
+	PlayerCanMove = false
+	GameIsOver = false
+	GameHasStarted = false
+	currentMoveUI = {}
+	GameHistory = createEmptyGameHistory()
+	clearLatestAIEvaluation()
+	ForcedMateShown = false
+	ResignShown = false
+	CustomSetupBoardState = STARTING_BOARD_STATE
+	CustomSetupCards = createEmptyCustomCardSlots()
+	CustomSelectedCardID = null
+	CustomSelectedPieceSquare = null
+	GameState = CustomSetupBoardState + "00-01-02-03-04XR"
+
+	document.getElementById("startMenu").style.display = "none"
+	document.getElementById("gameArea").style.display = "block"
+	clearTransientGameUI()
+	setCustomSetupMode(true)
+	applyPlayerPerspective()
+	positionCustomSetupLayout()
+	bindBoardSquareClicks()
+	placePieces(CustomSetupBoardState)
+	renderCustomCardPicker()
+	renderCustomCardSlots()
+	showCustomBeginButton()
+	updateTakeBackButton()
+}
+
+function setCustomSetupMode(isActive){
+	CustomSetupActive = isActive
+	var gameArea = document.getElementById("gameArea")
+	if (gameArea){
+		gameArea.classList.toggle("customSetupMode", isActive)
+	}
+	var customCardPanel = document.getElementById("customCardPanel")
+	if (customCardPanel){
+		customCardPanel.style.display = isActive ? "block" : "none"
+	}
+	if (!isActive){
+		CustomSelectedCardID = null
+		CustomSelectedPieceSquare = null
+		hideCustomBeginButton()
+	}
+}
+
+function positionCustomSetupLayout(){
+	positionCustomBoardSquares()
+	positionCustomEvaluationBar()
+	positionCustomCardSlots()
+	positionCustomCardPanel()
+}
+
+function positionCustomBoardSquares(){
+	for(let squareNum=0;squareNum<25;squareNum++){
+		const visualPosition = getVisualBoardPosition(squareNum)
+		const square = document.getElementById("s"+squareNum)
+		square.style.left = (CUSTOM_BOARD_LEFT + visualPosition.col*SQUARE_SIZE) + "px"
+		square.style.top = (BOARD_TOP + visualPosition.row*SQUARE_SIZE) + "px"
+	}
+}
+
+function positionCustomEvaluationBar(){
+	const bar = getEvaluationBar()
+	if (!bar) return
+	bar.style.left = (CUSTOM_BOARD_LEFT - EVAL_BAR_WIDTH) + "px"
+	bar.style.top = BOARD_TOP + "px"
+	bar.style.height = (SQUARE_SIZE*5 + BOARD_BORDER_SIZE) + "px"
+	bar.style.width = EVAL_BAR_WIDTH + "px"
+}
+
+function positionCustomCardSlots(){
+	if (PlayerColor == "B"){
+		setCardSlotPosition("pBc1", CARD_BOTTOM, CUSTOM_CARD_LEFT_1, "rotate(0deg)")
+		setCardSlotPosition("pBc2", CARD_BOTTOM, CUSTOM_CARD_LEFT_2, "rotate(0deg)")
+		setCardSlotPosition("pRc1", CARD_TOP, CUSTOM_CARD_LEFT_1, "rotate(180deg)")
+		setCardSlotPosition("pRc2", CARD_TOP, CUSTOM_CARD_LEFT_2, "rotate(180deg)")
+		setCardSlotPosition("neutralBlue", CUSTOM_NEUTRAL_TOP_1, CUSTOM_NEUTRAL_LEFT, "rotate(0deg)")
+		setCardSlotPosition("neutralRed", CUSTOM_NEUTRAL_TOP_2, CUSTOM_NEUTRAL_LEFT, "rotate(180deg)")
+	} else {
+		setCardSlotPosition("pBc1", CARD_TOP, CUSTOM_CARD_LEFT_1, "rotate(180deg)")
+		setCardSlotPosition("pBc2", CARD_TOP, CUSTOM_CARD_LEFT_2, "rotate(180deg)")
+		setCardSlotPosition("pRc1", CARD_BOTTOM, CUSTOM_CARD_LEFT_1, "rotate(0deg)")
+		setCardSlotPosition("pRc2", CARD_BOTTOM, CUSTOM_CARD_LEFT_2, "rotate(0deg)")
+		setCardSlotPosition("neutralBlue", CUSTOM_NEUTRAL_TOP_1, CUSTOM_NEUTRAL_LEFT, "rotate(180deg)")
+		setCardSlotPosition("neutralRed", CUSTOM_NEUTRAL_TOP_2, CUSTOM_NEUTRAL_LEFT, "rotate(0deg)")
+	}
+}
+
+function positionCustomCardPanel(){
+	var panel = document.getElementById("customCardPanel")
+	if (!panel) return
+	panel.style.left = CUSTOM_CARD_PANEL_LEFT + "px"
+	panel.style.top = CUSTOM_CARD_PANEL_TOP + "px"
+}
+
+function createEmptyCustomCardSlots(){
+	var slots = {}
+	for (let slotID of CUSTOM_CARD_SLOT_IDS){
+		slots[slotID] = null
+	}
+	return slots
+}
+
+function renderCustomCardPicker(){
+	var cardPicker = document.getElementById("customCardPicker")
+	if (!cardPicker) return
+	cardPicker.innerHTML = ""
+	for (let cardID of getAllCardIDs()){
+		var cardButton = document.createElement("button")
+		cardButton.type = "button"
+		cardButton.className = "customCardChoice"
+		cardButton.setAttribute("data-card-id", cardID)
+		cardButton.style.backgroundImage = "url('images/" + move_dictionary[cardID].name + ".jpeg')"
+		cardButton.onclick = function(){
+			selectCustomCard(cardID)
+		}
+
+		var name = document.createElement("span")
+		name.innerText = titleCase(move_dictionary[cardID].name)
+		cardButton.appendChild(name)
+		cardPicker.appendChild(cardButton)
+	}
+	updateCustomCardPickerStyles()
+}
+
+function selectCustomCard(cardID){
+	if (!CustomSetupActive) return
+	CustomSelectedCardID = CustomSelectedCardID == cardID ? null : cardID
+	updateCustomCardPickerStyles()
+}
+
+function updateCustomCardPickerStyles(){
+	var usedCards = new Set(getCustomSelectedGameCards())
+	var cardButtons = document.querySelectorAll("#customCardPicker .customCardChoice")
+	for (let cardButton of cardButtons){
+		var cardID = cardButton.getAttribute("data-card-id")
+		cardButton.classList.toggle("selected", cardID == CustomSelectedCardID)
+		cardButton.classList.toggle("used", usedCards.has(cardID))
+	}
+}
+
+function renderCustomCardSlots(){
+	for (let slotID of CUSTOM_CARD_SLOT_IDS){
+		var slot = document.getElementById(slotID)
+		if (!slot) continue
+		var cardID = CustomSetupCards[slotID]
+		slot.style.backgroundImage = cardID ? "url('images/" + move_dictionary[cardID].name + ".jpeg')" : "none"
+		slot.innerText = cardID || ""
+		slot.style.borderColor = getCustomCardSlotBorderColor(slotID)
+		slot.classList.toggle("customEmptySlot", !cardID)
+		slot.classList.toggle("customFilledSlot", !!cardID)
+	}
+	updateCustomCardPickerStyles()
+	updateCustomBeginButton()
+}
+
+function getCustomCardSlotBorderColor(slotID){
+	if (slotID == "pRc1" || slotID == "pRc2") return "red"
+	if (slotID == "pBc1" || slotID == "pBc2") return "blue"
+	return "white"
+}
+
+function placeCustomCardInSlot(slotID){
+	if (!CustomSetupActive) return
+	if (!CustomSelectedCardID){
+		if (CustomSetupCards[slotID]){
+			CustomSelectedCardID = CustomSetupCards[slotID]
+			CustomSetupCards[slotID] = null
+			renderCustomCardSlots()
+		}
+		return
+	}
+
+	for (let existingSlotID of CUSTOM_CARD_SLOT_IDS){
+		if (CustomSetupCards[existingSlotID] == CustomSelectedCardID){
+			CustomSetupCards[existingSlotID] = null
+		}
+	}
+	if (isCustomNeutralSlot(slotID)){
+		for (let neutralSlotID of CUSTOM_NEUTRAL_SLOT_IDS){
+			CustomSetupCards[neutralSlotID] = null
+		}
+	}
+	CustomSetupCards[slotID] = CustomSelectedCardID
+	CustomSelectedCardID = null
+	renderCustomCardSlots()
+}
+
+function isCustomNeutralSlot(slotID){
+	return CUSTOM_NEUTRAL_SLOT_IDS.includes(slotID)
+}
+
+function getCustomNeutralSlot(){
+	for (let slotID of CUSTOM_NEUTRAL_SLOT_IDS){
+		if (CustomSetupCards[slotID]) return slotID
+	}
+	return null
+}
+
+function getCustomSelectedGameCards(){
+	var selectedCards = []
+	for (let slotID of CUSTOM_REQUIRED_CARD_SLOT_IDS){
+		if (CustomSetupCards[slotID]){
+			selectedCards.push(CustomSetupCards[slotID])
+		}
+	}
+	var neutralSlot = getCustomNeutralSlot()
+	if (neutralSlot){
+		selectedCards.push(CustomSetupCards[neutralSlot])
+	}
+	return selectedCards
+}
+
+function isCustomSetupReady(){
+	for (let slotID of CUSTOM_REQUIRED_CARD_SLOT_IDS){
+		if (!CustomSetupCards[slotID]) return false
+	}
+	var selectedCards = getCustomSelectedGameCards()
+	return getCustomNeutralSlot() !== null && new Set(selectedCards).size == selectedCards.length
+}
+
+function showCustomBeginButton(){
+	var board = document.getElementById("board")
+	var beginButton = document.getElementById("customBeginButton")
+	if (!beginButton){
+		beginButton = document.createElement("button")
+		beginButton.id = "customBeginButton"
+		beginButton.type = "button"
+		beginButton.innerText = "Begin"
+		beginButton.onclick = beginCustomGame
+		board.appendChild(beginButton)
+	}
+	beginButton.style.left = (CustomSetupActive ? Math.max(20, CUSTOM_BOARD_LEFT - 112) : BOARD_LEFT) + "px"
+	beginButton.style.top = (BOARD_TOP - 56) + "px"
+	beginButton.style.display = "block"
+	updateCustomBeginButton()
+}
+
+function hideCustomBeginButton(){
+	var beginButton = document.getElementById("customBeginButton")
+	if (beginButton){
+		beginButton.style.display = "none"
+	}
+}
+
+function updateCustomBeginButton(){
+	var beginButton = document.getElementById("customBeginButton")
+	if (!beginButton) return
+	beginButton.disabled = !isCustomSetupReady()
+	beginButton.title = beginButton.disabled ? "Choose two red cards, two blue cards, and one neutral card." : "Use this setup."
+}
+
+function beginCustomGame(){
+	if (!isCustomSetupReady()) return
+	startGameFromState(buildCustomGameState())
+}
+
+function buildCustomGameState(){
+	var neutralSlot = getCustomNeutralSlot()
+	var firstTurn = neutralSlot == "neutralRed" ? "R" : "B"
+	return CustomSetupBoardState
+		+ CustomSetupCards["pRc1"] + "-"
+		+ CustomSetupCards["pRc2"] + "-"
+		+ CustomSetupCards["pBc1"] + "-"
+		+ CustomSetupCards["pBc2"] + "-"
+		+ CustomSetupCards[neutralSlot] + "X"
+		+ firstTurn
 }
 
 function startGameFromLaunchParams(){
@@ -480,15 +803,24 @@ function buildAIWorkerScript(){
 		isLosingScoreForColor,
 		timeBasedMinMax,
 		createFastSearch,
+		createFastTranspositionTable,
 		ensureFastSearchTables,
 		createFastZobrist,
 		fastAlphaBeta,
+		fastTTIndex,
+		fastTTProbe,
+		fastTTStore,
 		fastFallbackSearch,
 		fastGenerateLegalMoves,
 		fastOrderMoves,
 		fastMoveHeuristic,
+		fastRecordCutoff,
 		fastMakeMove,
 		fastUnmakeMove,
+		fastBitIndex,
+		fastPieceAt,
+		fastAddPieceStats,
+		fastRemovePieceStats,
 		fastStaticEvaluation,
 		fastResultToEval,
 		fastEncodeMove,
@@ -522,8 +854,17 @@ function buildAIWorkerScript(){
 		const TT_EXACT = ${TT_EXACT};
 		const TT_LOWER = ${TT_LOWER};
 		const TT_UPPER = ${TT_UPPER};
+		const FAST_BOARD_MASK = ${FAST_BOARD_MASK};
+		const FAST_TT_BITS = ${FAST_TT_BITS};
+		const FAST_TT_SIZE = ${FAST_TT_SIZE};
+		const FAST_TT_MASK = ${FAST_TT_MASK};
+		const FAST_HISTORY_SIZE = ${FAST_HISTORY_SIZE};
+		const FAST_HISTORY_MAX = ${FAST_HISTORY_MAX};
+		const FAST_KILLER_SCORE = ${FAST_KILLER_SCORE};
 		var FastMoveTable = null;
+		var FastMoveMask = null;
 		var FastZobrist = null;
+		var FastCenterTable = null;
 		var move_dictionary = ${JSON.stringify(move_dictionary)};
 		String.prototype.countLetters = function(inputLetter) {
 			return this.split(inputLetter).length -1;
@@ -561,6 +902,7 @@ function startGameFromState(initialGameState){
 	ActiveAIRequestId += 1
 	resetAIWorker("AI search cancelled.")
 	AIIsThinking = false
+	setCustomSetupMode(false)
 	PlayerCanMove = false
 	GameState = initialGameState
 	GameIsOver = false
@@ -662,8 +1004,17 @@ const FAST_MATE_THRESHOLD = 900000
 const TT_EXACT = 0
 const TT_LOWER = 1
 const TT_UPPER = 2
+const FAST_BOARD_MASK = (1 << 25) - 1
+const FAST_TT_BITS = 20
+const FAST_TT_SIZE = 1 << FAST_TT_BITS
+const FAST_TT_MASK = FAST_TT_SIZE - 1
+const FAST_HISTORY_SIZE = 1 << 13
+const FAST_HISTORY_MAX = 7000
+const FAST_KILLER_SCORE = 8000
 var FastMoveTable = null
+var FastMoveMask = null
 var FastZobrist = null
+var FastCenterTable = null
 
 function timeBasedMinMax(gameState, thinkingStartTime, color){
 	// Iterative deepening over a compact, mutable search state.
@@ -713,11 +1064,34 @@ function createFastSearch(gameState, thinkingStartTime){
 		turn: whosTurn(gameState) == "R" ? FAST_RED : FAST_BLUE,
 		hashA: 0,
 		hashB: 0,
-		tt: new Map(),
+		occupiedMask: 0,
+		redMask: 0,
+		masterMask: 0,
+		tt: createFastTranspositionTable(),
+		moveBuffers: [],
+		moveScoreBuffers: [],
+		killerOne: [],
+		killerTwo: [],
+		history: new Int32Array(FAST_HISTORY_SIZE * 2),
+		undoMove: [],
+		undoMovingPiece: [],
+		undoCapturedPiece: [],
+		undoOldSlotCard: [],
+		undoOldNeutralCard: [],
+		undoOldTurn: [],
+		undoHashA: [],
+		undoHashB: [],
+		redPawnsCount: 0,
+		bluePawnsCount: 0,
+		redMasterPos: -1,
+		blueMasterPos: -1,
+		redCenterControl: 0,
+		blueCenterControl: 0,
 		thinkingStartTime: thinkingStartTime
 	}
 	for(let i=0;i<25;i++){
 		search.board[i] = fastPieceFromChar(gameState[i])
+		fastAddPieceStats(search, i, search.board[i])
 		fastXorPiece(search, i, search.board[i])
 	}
 	search.cards[0] = parseInt(gameState.substring(25,27))
@@ -732,16 +1106,40 @@ function createFastSearch(gameState, thinkingStartTime){
 	return search
 }
 
+function createFastTranspositionTable(){
+	return {
+		hashA: new Uint32Array(FAST_TT_SIZE),
+		hashB: new Uint32Array(FAST_TT_SIZE),
+		depth: new Int16Array(FAST_TT_SIZE),
+		score: new Float64Array(FAST_TT_SIZE),
+		flag: new Int8Array(FAST_TT_SIZE),
+		move: new Uint16Array(FAST_TT_SIZE)
+	}
+}
+
 function ensureFastSearchTables(){
-	if(FastMoveTable && FastZobrist) return
+	if(FastMoveTable && FastMoveMask && FastZobrist && FastCenterTable) return
+	FastCenterTable = new Int8Array(25)
+	FastCenterTable[6] = 1
+	FastCenterTable[7] = 1
+	FastCenterTable[8] = 1
+	FastCenterTable[11] = 1
+	FastCenterTable[12] = 1
+	FastCenterTable[13] = 1
+	FastCenterTable[16] = 1
+	FastCenterTable[17] = 1
+	FastCenterTable[18] = 1
 	FastMoveTable = [[],[]]
+	FastMoveMask = [[],[]]
 	for(let colorIndex=0;colorIndex<2;colorIndex++){
 		const color = colorIndex == 0 ? "R" : "B"
 		for(let cardID=0;cardID<32;cardID++){
 			FastMoveTable[colorIndex][cardID] = []
+			FastMoveMask[colorIndex][cardID] = new Uint32Array(25)
 			const rawMoves = move_dictionary[twoDigit(cardID)].moves
 			for(let spaceNum=0;spaceNum<25;spaceNum++){
 				const outputMoveList = []
+				var outputMoveMask = 0
 				for(let rawMove of rawMoves){
 					const forwardCount = rawMove.countLetters("f")
 					const backwardCount = rawMove.countLetters("b")
@@ -749,15 +1147,20 @@ function ensureFastSearchTables(){
 					const leftCount = rawMove.countLetters("l")
 					if (color == "B"){
 						if(spaceNum + forwardCount*5<25 && spaceNum - backwardCount*5>=0 && spaceNum%5 - rightCount >=0 && spaceNum%5 + leftCount <5){
-							outputMoveList.push(spaceNum+forwardCount*5 - backwardCount*5 - rightCount + leftCount)
+							const target = spaceNum+forwardCount*5 - backwardCount*5 - rightCount + leftCount
+							outputMoveList.push(target)
+							outputMoveMask |= 1 << target
 						}
 					} else if (color == "R"){
 						if(spaceNum - forwardCount*5>=0 && spaceNum + backwardCount*5<25 && spaceNum%5 + rightCount <5 && spaceNum%5 - leftCount >=0){
-							outputMoveList.push(spaceNum-forwardCount*5 + backwardCount*5 + rightCount - leftCount)
+							const target = spaceNum-forwardCount*5 + backwardCount*5 + rightCount - leftCount
+							outputMoveList.push(target)
+							outputMoveMask |= 1 << target
 						}
 					}
 				}
 				FastMoveTable[colorIndex][cardID][spaceNum] = outputMoveList
+				FastMoveMask[colorIndex][cardID][spaceNum] = outputMoveMask
 			}
 		}
 	}
@@ -815,37 +1218,40 @@ function fastAlphaBeta(search, depthRemaining, alpha, beta, ply){
 
 	const alphaOrig = alpha
 	const betaOrig = beta
-	const key = fastHashKey(search)
-	const ttEntry = search.tt.get(key)
+	const ttIndex = fastTTProbe(search)
 	var ttMove = 0
-	if(ttEntry){
-		ttMove = ttEntry.move
-		if(ttEntry.depth >= depthRemaining){
-			if(ttEntry.flag == TT_EXACT){
-				return {"score": ttEntry.score, "move": ttEntry.move, "exact": true, "bound": "exact"}
+	if(ttIndex >= 0){
+		const tt = search.tt
+		ttMove = tt.move[ttIndex]
+		if(tt.depth[ttIndex] >= depthRemaining){
+			const ttFlag = tt.flag[ttIndex]
+			const ttScore = tt.score[ttIndex]
+			if(ttFlag == TT_EXACT){
+				return {"score": ttScore, "move": ttMove, "exact": true, "bound": "exact"}
 			}
-			if(ttEntry.flag == TT_LOWER) alpha = Math.max(alpha, ttEntry.score)
-			if(ttEntry.flag == TT_UPPER) beta = Math.min(beta, ttEntry.score)
+			if(ttFlag == TT_LOWER) alpha = Math.max(alpha, ttScore)
+			if(ttFlag == TT_UPPER) beta = Math.min(beta, ttScore)
 			if(alpha >= beta){
-				return {"score": ttEntry.score, "move": ttEntry.move, "exact": false, "bound": ttEntry.flag == TT_LOWER ? "lower" : "upper"}
+				return {"score": ttScore, "move": ttMove, "exact": false, "bound": ttFlag == TT_LOWER ? "lower" : "upper"}
 			}
 		}
 	}
 
-	const legalMoves = fastGenerateLegalMoves(search)
+	const legalMoves = fastGenerateLegalMoves(search, ply)
 	if(legalMoves.length == 0){
 		return {"score": staticEval, "move": 0, "exact": true, "bound": "exact"}
 	}
-	fastOrderMoves(search, legalMoves, ttMove)
+	fastOrderMoves(search, legalMoves, ttMove, ply)
 
 	const maximizingPlayer = search.turn == FAST_RED
 	var bestMove = legalMoves[0]
 	var bestScore = maximizingPlayer ? -FAST_MATE_SCORE - 1 : FAST_MATE_SCORE + 1
-	for(let move of legalMoves){
-		const undo = fastMakeMove(search, move)
+	for(let moveIndex=0;moveIndex<legalMoves.length;moveIndex++){
+		const move = legalMoves[moveIndex]
+		fastMakeMove(search, move, ply)
 		AImovesEvaluated += 1
 		const childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, beta, ply + 1)
-		fastUnmakeMove(search, undo)
+		fastUnmakeMove(search, ply)
 		if(childEval.timedOut) return childEval
 
 		if((maximizingPlayer && childEval.score > bestScore) || (!maximizingPlayer && childEval.score < bestScore)){
@@ -857,13 +1263,16 @@ function fastAlphaBeta(search, depthRemaining, alpha, beta, ply){
 		} else {
 			beta = Math.min(beta, bestScore)
 		}
-		if(alpha >= beta) break
+		if(alpha >= beta){
+			fastRecordCutoff(search, move, ply, depthRemaining)
+			break
+		}
 	}
 
 	var flag = TT_EXACT
 	if(bestScore <= alphaOrig) flag = TT_UPPER
 	else if(bestScore >= betaOrig) flag = TT_LOWER
-	search.tt.set(key, {"depth": depthRemaining, "score": bestScore, "flag": flag, "move": bestMove})
+	fastTTStore(search, depthRemaining, bestScore, flag, bestMove)
 	return {
 		"score": bestScore,
 		"move": bestMove,
@@ -872,20 +1281,44 @@ function fastAlphaBeta(search, depthRemaining, alpha, beta, ply){
 	}
 }
 
+function fastTTIndex(search){
+	return (search.hashA ^ Math.imul(search.hashB, 0x9e3779b1)) & FAST_TT_MASK
+}
+
+function fastTTProbe(search){
+	const tt = search.tt
+	const index = fastTTIndex(search)
+	if(tt.depth[index] > 0 && tt.hashA[index] == search.hashA && tt.hashB[index] == search.hashB) return index
+	return -1
+}
+
+function fastTTStore(search, depthRemaining, score, flag, move){
+	const tt = search.tt
+	const index = fastTTIndex(search)
+	if(tt.depth[index] > depthRemaining && (tt.hashA[index] != search.hashA || tt.hashB[index] != search.hashB)) return
+	tt.hashA[index] = search.hashA
+	tt.hashB[index] = search.hashB
+	tt.depth[index] = depthRemaining
+	tt.score[index] = score
+	tt.flag[index] = flag
+	tt.move[index] = move
+}
+
 function fastFallbackSearch(search){
-	const legalMoves = fastGenerateLegalMoves(search)
+	const legalMoves = fastGenerateLegalMoves(search, 0)
 	if(legalMoves.length == 0){
 		return {"score": fastStaticEvaluation(search, 0), "move": 0, "exact": true, "bound": "exact"}
 	}
 	const maximizingPlayer = search.turn == FAST_RED
 	var bestMove = legalMoves[0]
-	var undo = fastMakeMove(search, bestMove)
+	fastMakeMove(search, bestMove, 0)
 	var bestScore = fastStaticEvaluation(search, 1)
-	fastUnmakeMove(search, undo)
-	for(let move of legalMoves){
-		undo = fastMakeMove(search, move)
+	fastUnmakeMove(search, 0)
+	for(let moveIndex=0;moveIndex<legalMoves.length;moveIndex++){
+		const move = legalMoves[moveIndex]
+		fastMakeMove(search, move, 0)
 		const score = fastStaticEvaluation(search, 1)
-		fastUnmakeMove(search, undo)
+		fastUnmakeMove(search, 0)
 		if((maximizingPlayer && score > bestScore) || (!maximizingPlayer && score < bestScore)){
 			bestMove = move
 			bestScore = score
@@ -894,64 +1327,106 @@ function fastFallbackSearch(search){
 	return {"score": bestScore, "move": bestMove, "exact": false, "bound": "fallback"}
 }
 
-function fastGenerateLegalMoves(search){
+function fastGenerateLegalMoves(search, ply){
 	const colorIndex = search.turn == FAST_RED ? 0 : 1
 	const firstCardSlot = search.turn == FAST_RED ? 0 : 2
-	const legalMoves = []
-	for(let start=0;start<25;start++){
-		const piece = search.board[start]
-		if(piece == FAST_EMPTY || (search.turn == FAST_RED && piece < 0) || (search.turn == FAST_BLUE && piece > 0)) continue
+	const legalMoves = search.moveBuffers[ply] || (search.moveBuffers[ply] = [])
+	legalMoves.length = 0
+	const ownMask = search.turn == FAST_RED ? (search.occupiedMask & search.redMask) : (search.occupiedMask & ~search.redMask)
+	var pieces = ownMask
+	while(pieces){
+		const startBit = pieces & -pieces
+		const start = fastBitIndex(startBit)
 		for(let slot=firstCardSlot;slot<firstCardSlot+2;slot++){
 			const cardID = search.cards[slot]
-			const targetLocations = FastMoveTable[colorIndex][cardID][start]
-			for(let target of targetLocations){
-				const targetPiece = search.board[target]
-				if(targetPiece == FAST_EMPTY || (targetPiece > 0) != (piece > 0)){
-					legalMoves.push(fastEncodeMove(slot, start, target))
-				}
+			var targetMask = FastMoveMask[colorIndex][cardID][start] & ~ownMask
+			while(targetMask){
+				const targetBit = targetMask & -targetMask
+				legalMoves.push(fastEncodeMove(slot, start, fastBitIndex(targetBit)))
+				targetMask ^= targetBit
 			}
 		}
+		pieces ^= startBit
 	}
 	return legalMoves
 }
 
-function fastOrderMoves(search, moves, ttMove){
-	moves.sort((a,b) => fastMoveHeuristic(search, b, ttMove) - fastMoveHeuristic(search, a, ttMove))
+function fastOrderMoves(search, moves, ttMove, ply){
+	const scores = search.moveScoreBuffers[ply] || (search.moveScoreBuffers[ply] = [])
+	for(let i=0;i<moves.length;i++){
+		const move = moves[i]
+		const score = fastMoveHeuristic(search, move, ttMove, ply)
+		let j = i - 1
+		while(j >= 0 && scores[j] < score){
+			moves[j + 1] = moves[j]
+			scores[j + 1] = scores[j]
+			j--
+		}
+		moves[j + 1] = move
+		scores[j + 1] = score
+	}
 }
 
-function fastMoveHeuristic(search, move, ttMove){
+function fastMoveHeuristic(search, move, ttMove, ply){
 	if(move == ttMove) return 1000000
+	const start = fastMoveStart(move)
 	const target = fastMoveTarget(move)
-	const targetPiece = search.board[target]
+	const startBit = 1 << start
+	const targetBit = 1 << target
 	var score = 0
-	if(targetPiece != FAST_EMPTY) score += Math.abs(targetPiece) == 2 ? 50000 : 10000
-	if((search.turn == FAST_RED && target == 2) || (search.turn == FAST_BLUE && target == 22)) score += 90000
+	if(search.occupiedMask & targetBit) score += (search.masterMask & targetBit) ? 50000 : 10000
+	if(search.masterMask & startBit){
+		if((search.redMask & startBit) && target == 2) score += 90000
+		else if((search.redMask & startBit) == 0 && target == 22) score += 90000
+	}
+	if(search.killerOne[ply] == move) score += FAST_KILLER_SCORE
+	else if(search.killerTwo[ply] == move) score += FAST_KILLER_SCORE - 1000
+	const colorIndex = search.turn == FAST_RED ? 0 : 1
+	score += search.history[colorIndex * FAST_HISTORY_SIZE + move]
 	return score
 }
 
-function fastMakeMove(search, move){
+function fastRecordCutoff(search, move, ply, depthRemaining){
+	if(search.occupiedMask & (1 << fastMoveTarget(move))) return
+	if(search.killerOne[ply] != move){
+		search.killerTwo[ply] = search.killerOne[ply] || 0
+		search.killerOne[ply] = move
+	}
+	const colorIndex = search.turn == FAST_RED ? 0 : 1
+	const historyIndex = colorIndex * FAST_HISTORY_SIZE + move
+	const historyScore = search.history[historyIndex] + depthRemaining * depthRemaining
+	search.history[historyIndex] = historyScore > FAST_HISTORY_MAX ? FAST_HISTORY_MAX : historyScore
+}
+
+function fastMakeMove(search, move, ply){
 	const slot = fastMoveSlot(move)
 	const start = fastMoveStart(move)
 	const target = fastMoveTarget(move)
-	const movingPiece = search.board[start]
-	const capturedPiece = search.board[target]
+	const startBit = 1 << start
+	const targetBit = 1 << target
+	const movingIsRed = (search.redMask & startBit) != 0
+	const movingIsMaster = (search.masterMask & startBit) != 0
+	const targetOccupied = (search.occupiedMask & targetBit) != 0
+	const targetIsRed = (search.redMask & targetBit) != 0
+	const targetIsMaster = (search.masterMask & targetBit) != 0
+	const movingPiece = movingIsRed ? (movingIsMaster ? FAST_RED_MASTER : FAST_RED_PAWN) : (movingIsMaster ? FAST_BLUE_MASTER : FAST_BLUE_PAWN)
+	const capturedPiece = targetOccupied ? (targetIsRed ? (targetIsMaster ? FAST_RED_MASTER : FAST_RED_PAWN) : (targetIsMaster ? FAST_BLUE_MASTER : FAST_BLUE_PAWN)) : FAST_EMPTY
 	const oldSlotCard = search.cards[slot]
 	const oldNeutralCard = search.cards[4]
-	const undo = {
-		"move": move,
-		"movingPiece": movingPiece,
-		"capturedPiece": capturedPiece,
-		"oldSlotCard": oldSlotCard,
-		"oldNeutralCard": oldNeutralCard,
-		"oldTurn": search.turn,
-		"hashA": search.hashA,
-		"hashB": search.hashB
-	}
+	search.undoMove[ply] = move
+	search.undoMovingPiece[ply] = movingPiece
+	search.undoCapturedPiece[ply] = capturedPiece
+	search.undoOldSlotCard[ply] = oldSlotCard
+	search.undoOldNeutralCard[ply] = oldNeutralCard
+	search.undoOldTurn[ply] = search.turn
+	search.undoHashA[ply] = search.hashA
+	search.undoHashB[ply] = search.hashB
 
 	fastXorPiece(search, start, movingPiece)
 	if(capturedPiece != FAST_EMPTY) fastXorPiece(search, target, capturedPiece)
-	search.board[start] = FAST_EMPTY
-	search.board[target] = movingPiece
+	fastRemovePieceStats(search, start, movingPiece)
+	if(capturedPiece != FAST_EMPTY) fastRemovePieceStats(search, target, capturedPiece)
+	fastAddPieceStats(search, target, movingPiece)
 	fastXorPiece(search, target, movingPiece)
 
 	fastXorCard(search, slot, oldSlotCard)
@@ -964,47 +1439,93 @@ function fastMakeMove(search, move){
 	fastXorTurn(search, search.turn)
 	search.turn = -search.turn
 	fastXorTurn(search, search.turn)
-	return undo
 }
 
-function fastUnmakeMove(search, undo){
-	const move = undo.move
-	search.board[fastMoveStart(move)] = undo.movingPiece
-	search.board[fastMoveTarget(move)] = undo.capturedPiece
-	search.cards[fastMoveSlot(move)] = undo.oldSlotCard
-	search.cards[4] = undo.oldNeutralCard
-	search.turn = undo.oldTurn
-	search.hashA = undo.hashA
-	search.hashB = undo.hashB
+function fastUnmakeMove(search, ply){
+	const move = search.undoMove[ply]
+	const start = fastMoveStart(move)
+	const target = fastMoveTarget(move)
+	const movingPiece = search.undoMovingPiece[ply]
+	const capturedPiece = search.undoCapturedPiece[ply]
+	fastRemovePieceStats(search, target, movingPiece)
+	if(capturedPiece != FAST_EMPTY) fastAddPieceStats(search, target, capturedPiece)
+	fastAddPieceStats(search, start, movingPiece)
+	search.cards[fastMoveSlot(move)] = search.undoOldSlotCard[ply]
+	search.cards[4] = search.undoOldNeutralCard[ply]
+	search.turn = search.undoOldTurn[ply]
+	search.hashA = search.undoHashA[ply]
+	search.hashB = search.undoHashB[ply]
+}
+
+function fastBitIndex(bit){
+	return 31 - Math.clz32(bit)
+}
+
+function fastPieceAt(search, square){
+	const bit = 1 << square
+	if((search.occupiedMask & bit) == 0) return FAST_EMPTY
+	if(search.redMask & bit){
+		return (search.masterMask & bit) ? FAST_RED_MASTER : FAST_RED_PAWN
+	}
+	return (search.masterMask & bit) ? FAST_BLUE_MASTER : FAST_BLUE_PAWN
+}
+
+function fastAddPieceStats(search, square, piece){
+	if(piece == FAST_EMPTY) return
+	const bit = 1 << square
+	search.occupiedMask |= bit
+	if(piece > 0) search.redMask |= bit
+	else search.redMask &= ~bit
+	if(piece == FAST_RED_MASTER || piece == FAST_BLUE_MASTER) search.masterMask |= bit
+	else search.masterMask &= ~bit
+	const centerValue = FastCenterTable[square]
+	if(piece == FAST_RED_PAWN){
+		search.redPawnsCount += 1
+		search.redCenterControl += centerValue
+	} else if(piece == FAST_BLUE_PAWN){
+		search.bluePawnsCount += 1
+		search.blueCenterControl += centerValue
+	} else if(piece == FAST_RED_MASTER){
+		search.redMasterPos = square
+		search.redCenterControl += centerValue
+	} else if(piece == FAST_BLUE_MASTER){
+		search.blueMasterPos = square
+		search.blueCenterControl += centerValue
+	}
+}
+
+function fastRemovePieceStats(search, square, piece){
+	if(piece == FAST_EMPTY) return
+	const bit = 1 << square
+	search.occupiedMask &= ~bit
+	search.redMask &= ~bit
+	search.masterMask &= ~bit
+	const centerValue = FastCenterTable[square]
+	if(piece == FAST_RED_PAWN){
+		search.redPawnsCount -= 1
+		search.redCenterControl -= centerValue
+	} else if(piece == FAST_BLUE_PAWN){
+		search.bluePawnsCount -= 1
+		search.blueCenterControl -= centerValue
+	} else if(piece == FAST_RED_MASTER){
+		search.redMasterPos = -1
+		search.redCenterControl -= centerValue
+	} else if(piece == FAST_BLUE_MASTER){
+		search.blueMasterPos = -1
+		search.blueCenterControl -= centerValue
+	}
 }
 
 function fastStaticEvaluation(search, ply){
-	var bluePawnsCount = 0
-	var redPawnsCount = 0
-	var redMasterPos = -1
-	var blueMasterPos = -1
-	var redCenterControl = 0
-	var blueCenterControl = 0
-	for(let i=0;i<25;i++){
-		const piece = search.board[i]
-		if(piece == FAST_RED_MASTER) redMasterPos = i
-		else if(piece == FAST_BLUE_MASTER) blueMasterPos = i
-		else if(piece == FAST_RED_PAWN) redPawnsCount += 1
-		else if(piece == FAST_BLUE_PAWN) bluePawnsCount += 1
-		if(i == 6 || i == 7 || i == 8 || i == 11 || i == 12 || i == 13 || i == 16 || i == 17 || i == 18){
-			if(piece > 0) redCenterControl += 1
-			else if(piece < 0) blueCenterControl += 1
-		}
-	}
-	if(blueMasterPos == -1 || search.board[2] == FAST_RED_MASTER) return FAST_MATE_SCORE - ply
-	if(redMasterPos == -1 || search.board[22] == FAST_BLUE_MASTER) return -FAST_MATE_SCORE + ply
+	if(search.blueMasterPos == -1 || search.redMasterPos == 2) return FAST_MATE_SCORE - ply
+	if(search.redMasterPos == -1 || search.blueMasterPos == 22) return -FAST_MATE_SCORE + ply
 
-	const redMasterLocationEval = (4 - Math.floor(redMasterPos/5)) - (Math.abs(redMasterPos%5 - 2))
-	const blueMasterLocationEval = (Math.floor(blueMasterPos/5)) - (Math.abs(blueMasterPos%5 - 2))
-	const endGamePercent = 10*(8 - (bluePawnsCount + redPawnsCount))/8
-	var evaluation = 5*(redPawnsCount - bluePawnsCount)
+	const redMasterLocationEval = (4 - Math.floor(search.redMasterPos/5)) - (Math.abs(search.redMasterPos%5 - 2))
+	const blueMasterLocationEval = (Math.floor(search.blueMasterPos/5)) - (Math.abs(search.blueMasterPos%5 - 2))
+	const endGamePercent = 10*(8 - (search.bluePawnsCount + search.redPawnsCount))/8
+	var evaluation = 5*(search.redPawnsCount - search.bluePawnsCount)
 	evaluation += endGamePercent * (redMasterLocationEval - blueMasterLocationEval)
-	evaluation += redCenterControl - blueCenterControl
+	evaluation += search.redCenterControl - search.blueCenterControl
 	return evaluation
 }
 
@@ -1458,10 +1979,10 @@ function getEvaluationBarLabel(evalMove){
 		return "AI evaluation 0"
 	}
 	if (evalMove.exact && evalMove.e == Infinity){
-		return "AI evaluation Red: Mate in " + evalMove.d
+		return "AI evaluation Red: Mate in " + matePliesToMoves(evalMove.d)
 	}
 	if (evalMove.exact && evalMove.e == -Infinity){
-		return "AI evaluation Blue: Mate in " + evalMove.d
+		return "AI evaluation Blue: Mate in " + matePliesToMoves(evalMove.d)
 	}
 	if (evalMove.e > 0){
 		return "AI evaluation +" + evalMove.e + " red"
@@ -1470,6 +1991,10 @@ function getEvaluationBarLabel(evalMove){
 		return "AI evaluation +" + (-1*evalMove.e) + " blue"
 	}
 	return "AI evaluation 0"
+}
+
+function matePliesToMoves(plies){
+	return Math.ceil(plies / 2)
 }
 
 function updateTempleBorders(){
@@ -1519,7 +2044,8 @@ function placePieces(gameState){
 		if(letter != "e"){
 			var pieceColor = (letter==letter.toUpperCase() ? "red" : "blue")
 			var pieceType = (letter.toUpperCase() == "M" ? "master" : "pawn")
-			appendHtml("s"+i, "<div id='p"+(pieceNum++)+"' draggable='false' onclick='selectPiece(event)' ondragstart='drag(event)' class='piece "+pieceColor+" "+pieceType+"' style='left:0px; top:0px;'></div>")
+			var draggable = CustomSetupActive ? "true" : "false"
+			appendHtml("s"+i, "<div id='p"+(pieceNum++)+"' draggable='"+draggable+"' onclick='selectPiece(event)' ondragstart='drag(event)' class='piece "+pieceColor+" "+pieceType+"' style='left:0px; top:0px;'></div>")
 		} 
 	}
 	if (AIIsThinking){
@@ -1596,6 +2122,9 @@ function colorlastSquare(gameHistory){
 function clearTransientGameUI(){
 	clearBoardHighlights()
 	removeElementsByClass("piece")
+	removeClassFromElements("cardSlot","customEmptySlot")
+	removeClassFromElements("cardSlot","customFilledSlot")
+	removeClassFromElements("piece","customSelectedPiece")
 	hideBoardStartButton()
 	updateTakeBackButton()
 	setClassStyleValue("cardSlot","background-image","none")
@@ -1640,6 +2169,10 @@ function clearBoardHighlights(){
 }
 
 function selectCard(slot){
+	if (CustomSetupActive){
+		placeCustomCardInSlot(slot)
+		return
+	}
 	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking) return;
 	var currentTurnPlayer = whosTurn(GameState)
 	var cardSlotPlayer = slot[1]
@@ -1710,7 +2243,59 @@ function highlightLegalTargets(){
 	}
 }
 
+function selectCustomSetupPiece(ev){
+	var squareNum = getSquareNumFromElement(ev.target.parentElement)
+	if (squareNum === null || CustomSetupBoardState[squareNum] == "e") return
+	ev.stopPropagation()
+	if (CustomSelectedPieceSquare !== null && CustomSelectedPieceSquare !== squareNum){
+		moveCustomPieceToSquare(squareNum)
+		return
+	}
+	CustomSelectedPieceSquare = CustomSelectedPieceSquare === squareNum ? null : squareNum
+	updateCustomPieceSelection()
+}
+
+function selectCustomSetupTarget(squareNum){
+	if (CustomSelectedPieceSquare === null || squareNum === null) return
+	moveCustomPieceToSquare(squareNum)
+}
+
+function moveCustomPieceToSquare(targetSquare){
+	if (CustomSelectedPieceSquare === null || targetSquare === null) return
+	var startSquare = CustomSelectedPieceSquare
+	if (startSquare == targetSquare){
+		CustomSelectedPieceSquare = null
+		updateCustomPieceSelection()
+		return
+	}
+	var movingPiece = CustomSetupBoardState[startSquare]
+	if (movingPiece == "e"){
+		CustomSelectedPieceSquare = null
+		updateCustomPieceSelection()
+		return
+	}
+	var targetPiece = CustomSetupBoardState[targetSquare]
+	CustomSetupBoardState = CustomSetupBoardState.replaceAt(targetSquare, movingPiece).replaceAt(startSquare, targetPiece)
+	GameState = CustomSetupBoardState + GameState.substring(25)
+	CustomSelectedPieceSquare = null
+	placePieces(CustomSetupBoardState)
+}
+
+function updateCustomPieceSelection(){
+	removeClassFromElements("piece","customSelectedPiece")
+	if (CustomSelectedPieceSquare === null) return
+	var square = document.getElementById("s"+CustomSelectedPieceSquare)
+	var piece = square ? square.querySelector(".piece") : null
+	if (piece){
+		piece.classList.add("customSelectedPiece")
+	}
+}
+
 function selectPiece(ev){
+	if (CustomSetupActive){
+		selectCustomSetupPiece(ev)
+		return
+	}
 	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking || !("cardID" in currentMoveUI)) return
 	var squareNum = getSquareNumFromElement(ev.target.parentElement)
 	if (squareNum === null) return
@@ -1731,6 +2316,10 @@ function selectPiece(ev){
 }
 
 function selectTargetSquare(ev){
+	if (CustomSetupActive){
+		selectCustomSetupTarget(getSquareNumFromElement(getSquareElementFromTarget(ev.target)))
+		return
+	}
 	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking || !("startLocation" in currentMoveUI)) return
 	var targetSquare = getSquareElementFromTarget(ev.target)
 	if (!targetSquare) return
@@ -1744,6 +2333,12 @@ function allowDrop(ev) {
 
 function drag(ev) {
 	// fires when we start to move the piece. Let's see what it's legal moves are. 
+	if (CustomSetupActive){
+		ev.dataTransfer.setData("text", ev.target.id)
+		CustomSelectedPieceSquare = getSquareNumFromElement(ev.target.parentElement)
+		updateCustomPieceSelection()
+		return
+	}
 	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking || !("cardID" in currentMoveUI)) {
 		ev.preventDefault()
 		return
@@ -1756,6 +2351,12 @@ function drag(ev) {
 
 function drop(ev) {
 	ev.preventDefault();
+	if (CustomSetupActive){
+		var customTargetSquare = getSquareElementFromTarget(ev.target)
+		if (!customTargetSquare) return
+		moveCustomPieceToSquare(getSquareNumFromElement(customTargetSquare))
+		return
+	}
 	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking) return
 	var targetSquare = getSquareElementFromTarget(ev.target)
 	if (!targetSquare) return

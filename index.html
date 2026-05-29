@@ -8,25 +8,44 @@
 </head>
 <body>
 	<div id="startMenu" class="menuPanel">
-		<label for="playerColor">Color</label>
-		<select id="playerColor">
-			<option value="random" selected>Random</option>
-			<option value="R">Red</option>
-			<option value="B">Blue</option>
-		</select>
-		<div class="cardPickerHeader">Cards</div>
-		<div id="cardPicker" class="cardPicker" aria-label="Cards included in random deals"></div>
-		<button type="button" onclick="playFromMenu()">Play</button>
+		<div class="menuControls">
+			<h1>Play Onitama against AI</h1>
+			<div class="menuField">
+				<label for="playerColor">Player Color</label>
+				<select id="playerColor">
+					<option value="random" selected>Random</option>
+					<option value="R">Red</option>
+					<option value="B">Blue</option>
+				</select>
+			</div>
+			<div class="menuActions">
+				<button type="button" onclick="playFromMenu()">Play</button>
+				<button type="button" onclick="startCustomSetup()">Custom</button>
+			</div>
+			<div class="menuMateActions" aria-label="Mate puzzles">
+				<button type="button" onclick="playRandomMateIn(3)">Random Mate in 3</button>
+				<button type="button" onclick="playRandomMateIn(4)">Random Mate in 4</button>
+				<button type="button" onclick="playRandomMateIn(5)">Random Mate in 5</button>
+			</div>
+		</div>
+		<div class="menuCardPanel">
+			<div class="cardPickerHeader">Cards</div>
+			<div id="cardPicker" class="cardPicker" aria-label="Cards included in random deals"></div>
+		</div>
 	</div>
 	<div id="gameArea">
 		<button id="homeButton" type="button" onclick="goHome()" title="Abandon game and return home">Home</button>
 		<button id="takeBackButton" type="button" onclick="takeBack()" title="Return to your previous turn">Take Back</button>
+		<div id="customCardPanel" class="customCardPanel" aria-label="Custom setup cards">
+			<div class="customCardPanelHeader">Cards</div>
+			<div id="customCardPicker" class="customCardPicker"></div>
+		</div>
 		<div class="cardSlot" id="pRc1" onclick="selectCard('pRc1')"></div>
 		<div class="cardSlot" id="pRc2" onclick="selectCard('pRc2')"></div>
 		<div class="cardSlot" id="pBc1" onclick="selectCard('pBc1')"></div>
 		<div class="cardSlot" id="pBc2" onclick="selectCard('pBc2')"></div>
-		<div class="cardSlot" id="neutralBlue"></div>
-		<div class="cardSlot" id="neutralRed"></div>
+		<div class="cardSlot" id="neutralBlue" onclick="selectCard('neutralBlue')"></div>
+		<div class="cardSlot" id="neutralRed" onclick="selectCard('neutralRed')"></div>
 		<div id="board">
 			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s0" style="left:500px; top:200px;"></div>
 			<div ondrop="drop(event)" ondragover="allowDrop(event)" class="boardSquare" id="s1" style="left:600px; top:200px;"></div>
@@ -60,7 +79,8 @@
 			<div id="aiEvalBar" class="evalBar" aria-label="Latest bot evaluation"></div>
 		</div>
 	</div>
-	<script type="text/javascript" src="./main.js?v=20260529"></script>
+	<script type="text/javascript" src="./mate_search/mate_starting_states.js?v=20260529"></script>
+	<script type="text/javascript" src="./main.js?v=20260529-bitboard"></script>
 	<script type="text/javascript">main()</script>
 </body>
 </html>
