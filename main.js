@@ -539,7 +539,36 @@ function setupStartMenu(){
 		playerColorSelect.value = savedColor
 	}
 	playerColorSelect.addEventListener("change", saveMenuPreferences)
+	renderMatePuzzleButtons()
 	renderCardPicker(loadSelectedCardIDs())
+}
+
+function renderMatePuzzleButtons(){
+	var mateActions = document.getElementById("menuMateActions")
+	if(!mateActions) return
+	mateActions.innerHTML = ""
+	var mateMoves = getAvailableMateMoveCounts()
+	for(let mateMoveCount of mateMoves){
+		var button = document.createElement("button")
+		button.type = "button"
+		button.innerText = "Random Mate in " + mateMoveCount
+		button.addEventListener("click", function(){
+			playRandomMateIn(mateMoveCount)
+		})
+		mateActions.appendChild(button)
+	}
+}
+
+function getAvailableMateMoveCounts(){
+	if(!Array.isArray(window.MATE_STARTING_STATES)) return []
+	var available = new Set()
+	for(let mateState of window.MATE_STARTING_STATES){
+		if(!mateState || !isValidLaunchGameState(mateState.game_state)) continue
+		var matePlies = Number(mateState.mate_plies)
+		if(!Number.isFinite(matePlies) || matePlies <= 0) continue
+		available.add(matePliesToMoves(matePlies))
+	}
+	return Array.from(available).sort((a,b) => a - b)
 }
 
 function renderCardPicker(selectedCardIDs){
@@ -900,8 +929,8 @@ function resetAIWorker(reason=null){
 	}
 }
 
-function buildAIWorkerScript(){
-	const workerFunctions = [
+function getFastSearchWorkerFunctions(){
+	return [
 		getNow,
 		whosTurn,
 		twoDigit,
@@ -915,12 +944,16 @@ function buildAIWorkerScript(){
 		getSharedFastSearchSession,
 		createFastSearchSession,
 		createFastSearchMemory,
+		createFastSearchState,
+		createFastStartingSearchFromCards,
 		createFastSearch,
 		createFastTranspositionTable,
 		createFastTTStats,
 		fastCloneTTStats,
 		ensureFastSearchTables,
+		createFastPieceTables,
 		createFastZobrist,
+		createFastCardSwapHashes,
 		fastAlphaBeta,
 		fastTTIndex,
 		fastTTProbe,
@@ -935,27 +968,40 @@ function buildAIWorkerScript(){
 		fastMoveListContains,
 		fastMoveHeuristic,
 		fastRecordCutoff,
+		fastTerminalMoveScore,
 		fastMakeMove,
 		fastUnmakeMove,
 		fastBitIndex,
 		fastPieceAt,
+		fastAddPieceStatsByIndex,
+		fastRemovePieceStatsByIndex,
 		fastAddPieceStats,
 		fastRemovePieceStats,
+		fastTerminalScore,
 		fastStaticEvaluation,
 		fastResultToEval,
+		fastDisplayScore,
 		fastEncodeMove,
+		fastMoveTableKey,
 		fastMoveSlot,
 		fastMoveStart,
 		fastMoveTarget,
 		fastDecodeMove,
+		fastGetCard,
 		fastHashKey,
+		fastXorPieceIndex,
 		fastXorPiece,
 		fastXorCard,
 		fastXorTurn,
+		fastCardSwapKey,
 		fastPieceIndex,
 		fastPieceFromChar,
 		isFastMateScore
-	].map((fn) => fn.toString()).join("\n\n")
+	]
+}
+
+function buildFastSearchWorkerPrelude(){
+	const workerFunctions = getFastSearchWorkerFunctions().map((fn) => fn.toString()).join("\n\n")
 	return `
 		var EvaluatedStates = {};
 		var StatesMovesLists = {};
@@ -975,6 +1021,7 @@ function buildAIWorkerScript(){
 		const TT_LOWER = ${TT_LOWER};
 		const TT_UPPER = ${TT_UPPER};
 		const FAST_BOARD_MASK = ${FAST_BOARD_MASK};
+		const FAST_EVAL_SCALE = ${FAST_EVAL_SCALE};
 		const FAST_ASPIRATION_WINDOW = ${FAST_ASPIRATION_WINDOW};
 		const FAST_PVS_WINDOW = ${FAST_PVS_WINDOW};
 		const FAST_TT_BITS = ${FAST_TT_BITS};
@@ -985,8 +1032,27 @@ function buildAIWorkerScript(){
 		const FAST_HISTORY_MAX = ${FAST_HISTORY_MAX};
 		const FAST_KILLER_SCORE = ${FAST_KILLER_SCORE};
 		const FAST_MAX_MOVES = ${FAST_MAX_MOVES};
-		var FastMoveTable = null;
-		var FastMoveMask = null;
+		const FAST_MAX_PLY = ${FAST_MAX_PLY};
+		const FAST_MOVE_META_SIZE = ${FAST_MOVE_META_SIZE};
+		const FAST_MOVE_TABLE_SIZE = ${FAST_MOVE_TABLE_SIZE};
+		const FAST_CARD_MASK = ${FAST_CARD_MASK};
+		const FAST_TIME_CHECK_MASK = ${FAST_TIME_CHECK_MASK};
+		var FastEncodedMoveList = null;
+		var FastMoveOffsetTable = null;
+		var FastMoveCountTable = null;
+		var FastMoveSlotTable = null;
+		var FastMoveStartTable = null;
+		var FastMoveTargetTable = null;
+		var FastMoveStartBitTable = null;
+		var FastMoveTargetBitTable = null;
+		var FastCardSwapHashA = null;
+		var FastCardSwapHashB = null;
+		var FastPieceIsRed = null;
+		var FastPieceIsMaster = null;
+		var FastPieceRedPawnDelta = null;
+		var FastPieceBluePawnDelta = null;
+		var FastPieceRedCenterDelta = null;
+		var FastPieceBlueCenterDelta = null;
 		var FastZobrist = null;
 		var FastCenterTable = null;
 		var FastSharedTT = null;
@@ -998,6 +1064,13 @@ function buildAIWorkerScript(){
 			return this.split(inputLetter).length -1;
 		};
 		${workerFunctions}
+		ensureFastSearchTables();
+	`
+}
+
+function buildAIWorkerScript(){
+	return `
+		${buildFastSearchWorkerPrelude()}
 		self.onmessage = function(event){
 			try {
 				MaxThinkingTime = event.data.maxThinkingTime;
@@ -1074,7 +1147,7 @@ function startGameFromState(initialGameState){
 function startBoardGame(){
 	if (GameIsOver || GameHasStarted) return
 	GameHasStarted = true
-	PlayerCanMove = true
+	PlayerCanMove = !AIcolor.includes(whosTurn(GameState))
 	hideBoardStartButton()
 	updateTakeBackButton()
 	updateSwitchSidesButton()
@@ -1177,8 +1250,9 @@ const TT_EXACT = 0
 const TT_LOWER = 1
 const TT_UPPER = 2
 const FAST_BOARD_MASK = (1 << 25) - 1
-const FAST_ASPIRATION_WINDOW = 8
-const FAST_PVS_WINDOW = 0.01
+const FAST_EVAL_SCALE = 8
+const FAST_ASPIRATION_WINDOW = 8 * FAST_EVAL_SCALE
+const FAST_PVS_WINDOW = 1
 const FAST_TT_BITS = 20
 const FAST_TT_SIZE = 1 << FAST_TT_BITS
 const FAST_TT_BUCKET_SIZE = 2
@@ -1187,8 +1261,27 @@ const FAST_HISTORY_SIZE = 1 << 13
 const FAST_HISTORY_MAX = 7000
 const FAST_KILLER_SCORE = 8000
 const FAST_MAX_MOVES = 128
-var FastMoveTable = null
-var FastMoveMask = null
+const FAST_MAX_PLY = 128
+const FAST_MOVE_META_SIZE = 8192
+const FAST_MOVE_TABLE_SIZE = 5 * 2 * 32 * 25
+const FAST_CARD_MASK = 31
+const FAST_TIME_CHECK_MASK = 4095
+var FastEncodedMoveList = null
+var FastMoveOffsetTable = null
+var FastMoveCountTable = null
+var FastMoveSlotTable = null
+var FastMoveStartTable = null
+var FastMoveTargetTable = null
+var FastMoveStartBitTable = null
+var FastMoveTargetBitTable = null
+var FastCardSwapHashA = null
+var FastCardSwapHashB = null
+var FastPieceIsRed = null
+var FastPieceIsMaster = null
+var FastPieceRedPawnDelta = null
+var FastPieceBluePawnDelta = null
+var FastPieceRedCenterDelta = null
+var FastPieceBlueCenterDelta = null
 var FastZobrist = null
 var FastCenterTable = null
 var FastSharedTT = null
@@ -1220,6 +1313,7 @@ function continueTimeBasedMinMax(gameState, thinkingStartTime, color, session, p
 			session.search.rootMove = rootResult.move
 			fastStorePrincipalVariation(session.search, rootResult.depth)
 			session.previousPv = session.search.previousPv
+			session.previousPvLength = session.search.previousPvLength
 			session.bestEvalMove = fastResultToEval(session.search, rootResult)
 			session.bestEvalMove.searchDepth = rootResult.depth
 			session.depthsBestMove[rootResult.depth] = session.bestEvalMove
@@ -1242,6 +1336,7 @@ function continueTimeBasedMinMax(gameState, thinkingStartTime, color, session, p
 		session.rootMove = thisResult.move
 		fastStorePrincipalVariation(search, depthRemaining)
 		session.previousPv = search.previousPv
+		session.previousPvLength = search.previousPvLength
 		evalMove = fastResultToEval(search, thisResult)
 		evalMove.searchDepth = depthRemaining
 		session.completedDepth = depthRemaining
@@ -1309,7 +1404,8 @@ function createFastSearchSession(key, gameState, transpositionTable, searchMemor
 		bestResult: null,
 		bestEvalMove: null,
 		rootMove: 0,
-		previousPv: [],
+		previousPv: memory.previousPv,
+		previousPvLength: 0,
 		depthsBestMove: {},
 		killerOne: memory.killerOne,
 		killerTwo: memory.killerTwo,
@@ -1319,9 +1415,27 @@ function createFastSearchSession(key, gameState, transpositionTable, searchMemor
 
 function createFastSearchMemory(){
 	return {
-		killerOne: [],
-		killerTwo: [],
-		history: new Int32Array(FAST_HISTORY_SIZE * 2)
+		killerOne: new Uint16Array(FAST_MAX_PLY),
+		killerTwo: new Uint16Array(FAST_MAX_PLY),
+		history: new Int32Array(FAST_HISTORY_SIZE * 2),
+		previousPv: new Uint16Array(FAST_MAX_PLY),
+		moveBuffers: [],
+		moveScoreBuffers: [],
+		moveCounts: [],
+		quietMoveBuffers: [],
+		undoCardBits: new Uint32Array(FAST_MAX_PLY),
+		undoOldTurn: new Int8Array(FAST_MAX_PLY),
+		undoHashA: new Uint32Array(FAST_MAX_PLY),
+		undoHashB: new Uint32Array(FAST_MAX_PLY),
+		undoOccupiedMask: new Uint32Array(FAST_MAX_PLY),
+		undoRedMask: new Uint32Array(FAST_MAX_PLY),
+		undoMasterMask: new Uint32Array(FAST_MAX_PLY),
+		undoRedPawnsCount: new Int8Array(FAST_MAX_PLY),
+		undoBluePawnsCount: new Int8Array(FAST_MAX_PLY),
+		undoRedMasterPos: new Int8Array(FAST_MAX_PLY),
+		undoBlueMasterPos: new Int8Array(FAST_MAX_PLY),
+		undoRedCenterControl: new Int8Array(FAST_MAX_PLY),
+		undoBlueCenterControl: new Int8Array(FAST_MAX_PLY)
 	}
 }
 
@@ -1334,7 +1448,7 @@ function minmaxMoveFind(gameState,depthRemaining,depth,rBest,bBest,thinkingStart
 function fastSearchRoot(search, depthRemaining, previousScore){
 	const fullAlpha = -FAST_MATE_SCORE - 1
 	const fullBeta = FAST_MATE_SCORE + 1
-	if(previousScore !== null && !isFastMateScore(previousScore)){
+	if(!search.mateOnly && previousScore !== null && !isFastMateScore(previousScore)){
 		const alpha = Math.max(fullAlpha, previousScore - FAST_ASPIRATION_WINDOW)
 		const beta = Math.min(fullBeta, previousScore + FAST_ASPIRATION_WINDOW)
 		const aspirationResult = fastAlphaBeta(search, depthRemaining, alpha, beta, 0)
@@ -1346,55 +1460,97 @@ function fastSearchRoot(search, depthRemaining, previousScore){
 	return fastAlphaBeta(search, depthRemaining, fullAlpha, fullBeta, 0)
 }
 
-function createFastSearch(gameState, thinkingStartTime, transpositionTable=null, searchMemory=null){
+function createFastSearchState(turn, thinkingStartTime, transpositionTable=null, searchMemory=null){
 	ensureFastSearchTables()
 	const memory = searchMemory || {}
-	const search = {
-		board: new Int8Array(25),
-		cards: new Int8Array(5),
-		turn: whosTurn(gameState) == "R" ? FAST_RED : FAST_BLUE,
+	return {
+		cardBits: 0,
+		turn: turn,
 		hashA: 0,
 		hashB: 0,
 		occupiedMask: 0,
 		redMask: 0,
 		masterMask: 0,
 		tt: transpositionTable || createFastTranspositionTable(),
-		moveBuffers: [],
-		moveScoreBuffers: [],
-		moveCounts: [],
+		moveBuffers: memory.moveBuffers || [],
+		moveScoreBuffers: memory.moveScoreBuffers || [],
+		moveCounts: memory.moveCounts || [],
+		quietMoveBuffers: memory.quietMoveBuffers || [],
 		rootMove: memory.rootMove || 0,
-		previousPv: memory.previousPv || [],
-		killerOne: memory.killerOne || [],
-		killerTwo: memory.killerTwo || [],
+		previousPv: memory.previousPv || new Uint16Array(FAST_MAX_PLY),
+		previousPvLength: memory.previousPvLength || 0,
+		killerOne: memory.killerOne || new Uint16Array(FAST_MAX_PLY),
+		killerTwo: memory.killerTwo || new Uint16Array(FAST_MAX_PLY),
 		history: memory.history || new Int32Array(FAST_HISTORY_SIZE * 2),
-		undoMove: [],
-		undoMovingPiece: [],
-		undoCapturedPiece: [],
-		undoOldSlotCard: [],
-		undoOldNeutralCard: [],
-		undoOldTurn: [],
-		undoHashA: [],
-		undoHashB: [],
+		undoCardBits: memory.undoCardBits || new Uint32Array(FAST_MAX_PLY),
+		undoOldTurn: memory.undoOldTurn || new Int8Array(FAST_MAX_PLY),
+		undoHashA: memory.undoHashA || new Uint32Array(FAST_MAX_PLY),
+		undoHashB: memory.undoHashB || new Uint32Array(FAST_MAX_PLY),
+		undoOccupiedMask: memory.undoOccupiedMask || new Uint32Array(FAST_MAX_PLY),
+		undoRedMask: memory.undoRedMask || new Uint32Array(FAST_MAX_PLY),
+		undoMasterMask: memory.undoMasterMask || new Uint32Array(FAST_MAX_PLY),
+		undoRedPawnsCount: memory.undoRedPawnsCount || new Int8Array(FAST_MAX_PLY),
+		undoBluePawnsCount: memory.undoBluePawnsCount || new Int8Array(FAST_MAX_PLY),
+		undoRedMasterPos: memory.undoRedMasterPos || new Int8Array(FAST_MAX_PLY),
+		undoBlueMasterPos: memory.undoBlueMasterPos || new Int8Array(FAST_MAX_PLY),
+		undoRedCenterControl: memory.undoRedCenterControl || new Int8Array(FAST_MAX_PLY),
+		undoBlueCenterControl: memory.undoBlueCenterControl || new Int8Array(FAST_MAX_PLY),
 		redPawnsCount: 0,
 		bluePawnsCount: 0,
 		redMasterPos: -1,
 		blueMasterPos: -1,
 		redCenterControl: 0,
 		blueCenterControl: 0,
+		mateOnly: memory.mateOnly === true,
 		thinkingStartTime: thinkingStartTime
 	}
-	for(let i=0;i<25;i++){
-		search.board[i] = fastPieceFromChar(gameState[i])
-		fastAddPieceStats(search, i, search.board[i])
-		fastXorPiece(search, i, search.board[i])
-	}
-	search.cards[0] = parseInt(gameState.substring(25,27))
-	search.cards[1] = parseInt(gameState.substring(28,30))
-	search.cards[2] = parseInt(gameState.substring(31,33))
-	search.cards[3] = parseInt(gameState.substring(34,36))
-	search.cards[4] = parseInt(gameState.substring(37,39))
+}
+
+function createFastStartingSearchFromCards(redCard0, redCard1, blueCard0, blueCard1, neutralCard, turn, transpositionTable=null, searchMemory=null, thinkingStartTime=null){
+	const search = createFastSearchState(turn == "R" ? FAST_RED : FAST_BLUE, thinkingStartTime === null ? getNow() : thinkingStartTime, transpositionTable, searchMemory)
+	fastAddPieceStats(search, 0, FAST_BLUE_PAWN)
+	fastXorPiece(search, 0, FAST_BLUE_PAWN)
+	fastAddPieceStats(search, 1, FAST_BLUE_PAWN)
+	fastXorPiece(search, 1, FAST_BLUE_PAWN)
+	fastAddPieceStats(search, 2, FAST_BLUE_MASTER)
+	fastXorPiece(search, 2, FAST_BLUE_MASTER)
+	fastAddPieceStats(search, 3, FAST_BLUE_PAWN)
+	fastXorPiece(search, 3, FAST_BLUE_PAWN)
+	fastAddPieceStats(search, 4, FAST_BLUE_PAWN)
+	fastXorPiece(search, 4, FAST_BLUE_PAWN)
+	fastAddPieceStats(search, 20, FAST_RED_PAWN)
+	fastXorPiece(search, 20, FAST_RED_PAWN)
+	fastAddPieceStats(search, 21, FAST_RED_PAWN)
+	fastXorPiece(search, 21, FAST_RED_PAWN)
+	fastAddPieceStats(search, 22, FAST_RED_MASTER)
+	fastXorPiece(search, 22, FAST_RED_MASTER)
+	fastAddPieceStats(search, 23, FAST_RED_PAWN)
+	fastXorPiece(search, 23, FAST_RED_PAWN)
+	fastAddPieceStats(search, 24, FAST_RED_PAWN)
+	fastXorPiece(search, 24, FAST_RED_PAWN)
+	search.cardBits = (redCard0 | (redCard1 << 5) | (blueCard0 << 10) | (blueCard1 << 15) | (neutralCard << 20)) >>> 0
 	for(let i=0;i<5;i++){
-		fastXorCard(search, i, search.cards[i])
+		fastXorCard(search, i, fastGetCard(search.cardBits, i))
+	}
+	fastXorTurn(search, search.turn)
+	return search
+}
+
+function createFastSearch(gameState, thinkingStartTime, transpositionTable=null, searchMemory=null){
+	const search = createFastSearchState(whosTurn(gameState) == "R" ? FAST_RED : FAST_BLUE, thinkingStartTime, transpositionTable, searchMemory)
+	for(let i=0;i<25;i++){
+		const piece = fastPieceFromChar(gameState[i])
+		fastAddPieceStats(search, i, piece)
+		fastXorPiece(search, i, piece)
+	}
+	const card0 = parseInt(gameState.substring(25,27))
+	const card1 = parseInt(gameState.substring(28,30))
+	const card2 = parseInt(gameState.substring(31,33))
+	const card3 = parseInt(gameState.substring(34,36))
+	const card4 = parseInt(gameState.substring(37,39))
+	search.cardBits = (card0 | (card1 << 5) | (card2 << 10) | (card3 << 15) | (card4 << 20)) >>> 0
+	for(let i=0;i<5;i++){
+		fastXorCard(search, i, fastGetCard(search.cardBits, i))
 	}
 	fastXorTurn(search, search.turn)
 	return search
@@ -1405,7 +1561,7 @@ function createFastTranspositionTable(){
 		hashA: new Uint32Array(FAST_TT_SIZE),
 		hashB: new Uint32Array(FAST_TT_SIZE),
 		depth: new Int16Array(FAST_TT_SIZE),
-		score: new Float64Array(FAST_TT_SIZE),
+		score: new Int32Array(FAST_TT_SIZE),
 		flag: new Int8Array(FAST_TT_SIZE),
 		move: new Uint16Array(FAST_TT_SIZE),
 		stats: createFastTTStats()
@@ -1448,7 +1604,7 @@ function fastCloneTTStats(tt){
 }
 
 function ensureFastSearchTables(){
-	if(FastMoveTable && FastMoveMask && FastZobrist && FastCenterTable) return
+	if(FastEncodedMoveList && FastMoveOffsetTable && FastMoveTargetBitTable && FastZobrist && FastCenterTable && FastCardSwapHashA && FastPieceIsRed) return
 	FastCenterTable = new Int8Array(25)
 	FastCenterTable[6] = 1
 	FastCenterTable[7] = 1
@@ -1459,17 +1615,21 @@ function ensureFastSearchTables(){
 	FastCenterTable[16] = 1
 	FastCenterTable[17] = 1
 	FastCenterTable[18] = 1
-	FastMoveTable = [[],[]]
-	FastMoveMask = [[],[]]
+	createFastPieceTables()
+	FastMoveOffsetTable = new Uint32Array(FAST_MOVE_TABLE_SIZE)
+	FastMoveCountTable = new Uint8Array(FAST_MOVE_TABLE_SIZE)
+	const encodedMoveList = []
+	FastMoveSlotTable = new Uint8Array(FAST_MOVE_META_SIZE)
+	FastMoveStartTable = new Uint8Array(FAST_MOVE_META_SIZE)
+	FastMoveTargetTable = new Uint8Array(FAST_MOVE_META_SIZE)
+	FastMoveStartBitTable = new Uint32Array(FAST_MOVE_META_SIZE)
+	FastMoveTargetBitTable = new Uint32Array(FAST_MOVE_META_SIZE)
 	for(let colorIndex=0;colorIndex<2;colorIndex++){
 		const color = colorIndex == 0 ? "R" : "B"
 		for(let cardID=0;cardID<32;cardID++){
-			FastMoveTable[colorIndex][cardID] = []
-			FastMoveMask[colorIndex][cardID] = new Uint32Array(25)
 			const rawMoves = move_dictionary[twoDigit(cardID)].moves
 			for(let spaceNum=0;spaceNum<25;spaceNum++){
 				const outputMoveList = []
-				var outputMoveMask = 0
 				for(let rawMove of rawMoves){
 					const forwardCount = rawMove.countLetters("f")
 					const backwardCount = rawMove.countLetters("b")
@@ -1479,22 +1639,44 @@ function ensureFastSearchTables(){
 						if(spaceNum + forwardCount*5<25 && spaceNum - backwardCount*5>=0 && spaceNum%5 - rightCount >=0 && spaceNum%5 + leftCount <5){
 							const target = spaceNum+forwardCount*5 - backwardCount*5 - rightCount + leftCount
 							outputMoveList.push(target)
-							outputMoveMask |= 1 << target
 						}
 					} else if (color == "R"){
 						if(spaceNum - forwardCount*5>=0 && spaceNum + backwardCount*5<25 && spaceNum%5 + rightCount <5 && spaceNum%5 - leftCount >=0){
 							const target = spaceNum-forwardCount*5 + backwardCount*5 + rightCount - leftCount
 							outputMoveList.push(target)
-							outputMoveMask |= 1 << target
 						}
 					}
 				}
-				FastMoveTable[colorIndex][cardID][spaceNum] = outputMoveList
-				FastMoveMask[colorIndex][cardID][spaceNum] = outputMoveMask
+				for(let slot=0;slot<5;slot++){
+					const tableKey = fastMoveTableKey(slot, colorIndex, cardID, spaceNum)
+					FastMoveOffsetTable[tableKey] = encodedMoveList.length
+					FastMoveCountTable[tableKey] = outputMoveList.length
+					for(let i=0;i<outputMoveList.length;i++){
+						const target = outputMoveList[i]
+						const move = fastEncodeMove(slot, spaceNum, target)
+						encodedMoveList.push(move)
+						FastMoveSlotTable[move] = slot
+						FastMoveStartTable[move] = spaceNum
+						FastMoveTargetTable[move] = target
+						FastMoveStartBitTable[move] = 1 << spaceNum
+						FastMoveTargetBitTable[move] = 1 << target
+					}
+				}
 			}
 		}
 	}
+	FastEncodedMoveList = new Uint16Array(encodedMoveList)
 	FastZobrist = createFastZobrist()
+	createFastCardSwapHashes()
+}
+
+function createFastPieceTables(){
+	FastPieceIsRed = new Int8Array([0, 1, 1, 0, 0])
+	FastPieceIsMaster = new Int8Array([0, 0, 1, 0, 1])
+	FastPieceRedPawnDelta = new Int8Array([0, 1, 0, 0, 0])
+	FastPieceBluePawnDelta = new Int8Array([0, 0, 0, 1, 0])
+	FastPieceRedCenterDelta = new Int8Array([0, 1, 1, 0, 0])
+	FastPieceBlueCenterDelta = new Int8Array([0, 0, 0, 1, 1])
 }
 
 function createFastZobrist(){
@@ -1536,14 +1718,33 @@ function createFastZobrist(){
 	}
 }
 
+function createFastCardSwapHashes(){
+	FastCardSwapHashA = new Uint32Array(4 * 32 * 32)
+	FastCardSwapHashB = new Uint32Array(4 * 32 * 32)
+	for(let slot=0;slot<4;slot++){
+		for(let slotCard=0;slotCard<32;slotCard++){
+			for(let neutralCard=0;neutralCard<32;neutralCard++){
+				const swapKey = fastCardSwapKey(slot, slotCard, neutralCard)
+				FastCardSwapHashA[swapKey] = (FastZobrist.cardA[slot][slotCard] ^ FastZobrist.cardA[4][neutralCard] ^ FastZobrist.cardA[slot][neutralCard] ^ FastZobrist.cardA[4][slotCard]) >>> 0
+				FastCardSwapHashB[swapKey] = (FastZobrist.cardB[slot][slotCard] ^ FastZobrist.cardB[4][neutralCard] ^ FastZobrist.cardB[slot][neutralCard] ^ FastZobrist.cardB[4][slotCard]) >>> 0
+			}
+		}
+	}
+}
+
 function fastAlphaBeta(search, depthRemaining, alpha, beta, ply){
-	if((AImovesEvaluated & 2047) == 0 && getNow() - search.thinkingStartTime > MaxThinkingTime){
+	const searchTimeLimit = search.maxThinkingTime === null ? Infinity : (Number.isFinite(search.maxThinkingTime) ? search.maxThinkingTime : MaxThinkingTime)
+	if((AImovesEvaluated & FAST_TIME_CHECK_MASK) == 0 && getNow() - search.thinkingStartTime > searchTimeLimit){
 		return {"timedOut": true}
 	}
 	GreatestDepthSearched = Math.max(GreatestDepthSearched,ply)
-	const staticEval = fastStaticEvaluation(search, ply)
-	if(depthRemaining == 0 || isFastMateScore(staticEval)){
-		return {"score": staticEval, "move": 0, "exact": true, "bound": "exact"}
+	const terminalScore = fastTerminalScore(search, ply)
+	if(terminalScore){
+		return {"score": terminalScore, "move": 0, "exact": true, "bound": "exact"}
+	}
+	if(depthRemaining == 0){
+		if(search.mateOnly) return {"score": 0, "move": 0, "exact": true, "bound": "exact"}
+		return {"score": fastStaticEvaluation(search, ply), "move": 0, "exact": true, "bound": "exact"}
 	}
 
 	const alphaOrig = alpha
@@ -1573,7 +1774,7 @@ function fastAlphaBeta(search, depthRemaining, alpha, beta, ply){
 	const moveCount = fastGenerateLegalMoves(search, ply)
 	const legalMoves = search.moveBuffers[ply]
 	if(moveCount == 0){
-		return {"score": staticEval, "move": 0, "exact": true, "bound": "exact"}
+		return {"score": fastStaticEvaluation(search, ply), "move": 0, "exact": true, "bound": "exact"}
 	}
 	fastOrderMoves(search, legalMoves, moveCount, ttMove, ply)
 
@@ -1583,23 +1784,28 @@ function fastAlphaBeta(search, depthRemaining, alpha, beta, ply){
 	var searchedMoves = 0
 	for(let moveIndex=0;moveIndex<moveCount;moveIndex++){
 		const move = legalMoves[moveIndex]
-		fastMakeMove(search, move, ply)
 		AImovesEvaluated += 1
 		var childEval = null
-		if(searchedMoves == 0 || depthRemaining <= 1 || beta - alpha <= FAST_PVS_WINDOW){
-			childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, beta, ply + 1)
-		} else if(maximizingPlayer){
-			childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, alpha + FAST_PVS_WINDOW, ply + 1)
-			if(!childEval.timedOut && childEval.score > alpha && childEval.score < beta){
-				childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, beta, ply + 1)
-			}
+		const terminalMoveScore = fastTerminalMoveScore(search, move, ply + 1)
+		if(terminalMoveScore){
+			childEval = {"score": terminalMoveScore, "move": 0, "exact": true, "bound": "exact"}
 		} else {
-			childEval = fastAlphaBeta(search, depthRemaining - 1, beta - FAST_PVS_WINDOW, beta, ply + 1)
-			if(!childEval.timedOut && childEval.score < beta && childEval.score > alpha){
+			fastMakeMove(search, move, ply)
+			if(searchedMoves == 0 || depthRemaining <= 1 || beta - alpha <= FAST_PVS_WINDOW){
 				childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, beta, ply + 1)
+			} else if(maximizingPlayer){
+				childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, alpha + FAST_PVS_WINDOW, ply + 1)
+				if(!childEval.timedOut && childEval.score > alpha && childEval.score < beta){
+					childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, beta, ply + 1)
+				}
+			} else {
+				childEval = fastAlphaBeta(search, depthRemaining - 1, beta - FAST_PVS_WINDOW, beta, ply + 1)
+				if(!childEval.timedOut && childEval.score < beta && childEval.score > alpha){
+					childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, beta, ply + 1)
+				}
 			}
+			fastUnmakeMove(search, ply)
 		}
-		fastUnmakeMove(search, ply)
 		if(childEval.timedOut) return childEval
 		searchedMoves += 1
 
@@ -1733,7 +1939,7 @@ function fastStorePrincipalVariation(search, depthRemaining){
 	const pv = []
 	var madeMoves = 0
 	for(let ply=0;ply<depthRemaining;ply++){
-		if(isFastMateScore(fastStaticEvaluation(search, ply))) break
+		if(fastTerminalScore(search, ply)) break
 		const ttIndex = fastTTProbe(search)
 		if(ttIndex < 0) break
 		const move = search.tt.move[ttIndex]
@@ -1748,7 +1954,11 @@ function fastStorePrincipalVariation(search, depthRemaining){
 	for(let ply=madeMoves-1;ply>=0;ply--){
 		fastUnmakeMove(search, ply)
 	}
-	search.previousPv = pv
+	search.previousPv.fill(0)
+	for(let i=0;i<pv.length;i++){
+		search.previousPv[i] = pv[i]
+	}
+	search.previousPvLength = pv.length
 }
 
 function fastFallbackSearch(search){
@@ -1759,14 +1969,20 @@ function fastFallbackSearch(search){
 	}
 	const maximizingPlayer = search.turn == FAST_RED
 	var bestMove = legalMoves[0]
-	fastMakeMove(search, bestMove, 0)
-	var bestScore = fastStaticEvaluation(search, 1)
-	fastUnmakeMove(search, 0)
+	var bestScore = fastTerminalMoveScore(search, bestMove, 1)
+	if(!bestScore){
+		fastMakeMove(search, bestMove, 0)
+		bestScore = fastStaticEvaluation(search, 1)
+		fastUnmakeMove(search, 0)
+	}
 	for(let moveIndex=0;moveIndex<moveCount;moveIndex++){
 		const move = legalMoves[moveIndex]
-		fastMakeMove(search, move, 0)
-		const score = fastStaticEvaluation(search, 1)
-		fastUnmakeMove(search, 0)
+		var score = fastTerminalMoveScore(search, move, 1)
+		if(!score){
+			fastMakeMove(search, move, 0)
+			score = fastStaticEvaluation(search, 1)
+			fastUnmakeMove(search, 0)
+		}
 		if((maximizingPlayer && score > bestScore) || (!maximizingPlayer && score < bestScore)){
 			bestMove = move
 			bestScore = score
@@ -1779,24 +1995,42 @@ function fastGenerateLegalMoves(search, ply){
 	const colorIndex = search.turn == FAST_RED ? 0 : 1
 	const firstCardSlot = search.turn == FAST_RED ? 0 : 2
 	const legalMoves = search.moveBuffers[ply] || (search.moveBuffers[ply] = new Uint16Array(FAST_MAX_MOVES))
+	const quietMoves = search.quietMoveBuffers[ply] || (search.quietMoveBuffers[ply] = new Uint16Array(FAST_MAX_MOVES))
 	var moveCount = 0
+	var quietCount = 0
 	const ownMask = search.turn == FAST_RED ? (search.occupiedMask & search.redMask) : (search.occupiedMask & ~search.redMask)
+	const occupiedMask = search.occupiedMask
+	const cardBits = search.cardBits
 	var pieces = ownMask
 	while(pieces){
 		const startBit = pieces & -pieces
 		const start = fastBitIndex(startBit)
 		for(let slot=firstCardSlot;slot<firstCardSlot+2;slot++){
-			const cardID = search.cards[slot]
-			var targetMask = FastMoveMask[colorIndex][cardID][start] & ~ownMask
-			while(targetMask){
-				const targetBit = targetMask & -targetMask
-				if(moveCount >= legalMoves.length) throw new Error("Fast move buffer overflow.")
-				legalMoves[moveCount] = fastEncodeMove(slot, start, fastBitIndex(targetBit))
-				moveCount += 1
-				targetMask ^= targetBit
+			const cardID = fastGetCard(cardBits, slot)
+			const tableKey = fastMoveTableKey(slot, colorIndex, cardID, start)
+			const moveOffset = FastMoveOffsetTable[tableKey]
+			const moveEnd = moveOffset + FastMoveCountTable[tableKey]
+			for(let i=moveOffset;i<moveEnd;i++){
+				const move = FastEncodedMoveList[i]
+				const targetBit = FastMoveTargetBitTable[move]
+				if(ownMask & targetBit) continue
+				if(occupiedMask & targetBit){
+					if(moveCount >= legalMoves.length) throw new Error("Fast move buffer overflow.")
+					legalMoves[moveCount] = move
+					moveCount += 1
+				} else {
+					if(quietCount >= quietMoves.length) throw new Error("Fast quiet move buffer overflow.")
+					quietMoves[quietCount] = move
+					quietCount += 1
+				}
 			}
 		}
 		pieces ^= startBit
+	}
+	for(let i=0;i<quietCount;i++){
+		if(moveCount >= legalMoves.length) throw new Error("Fast move buffer overflow.")
+		legalMoves[moveCount] = quietMoves[i]
+		moveCount += 1
 	}
 	search.moveCounts[ply] = moveCount
 	return moveCount
@@ -1829,16 +2063,18 @@ function fastMoveHeuristic(search, move, ttMove, ply){
 	if(ply == 0 && move == search.rootMove) return 2000000
 	if(move == ttMove) return 1000000
 	if(search.previousPv[ply] == move) return 950000
-	const start = fastMoveStart(move)
-	const target = fastMoveTarget(move)
-	const startBit = 1 << start
-	const targetBit = 1 << target
+	const startBit = FastMoveStartBitTable[move]
+	const targetBit = FastMoveTargetBitTable[move]
 	var score = 0
-	if(search.occupiedMask & targetBit) score += (search.masterMask & targetBit) ? 50000 : 10000
+	if(search.occupiedMask & targetBit){
+		score += (search.masterMask & targetBit) ? 50000 : 10000
+	}
 	if(search.masterMask & startBit){
+		const target = FastMoveTargetTable[move]
 		if((search.redMask & startBit) && target == 2) score += 90000
 		else if((search.redMask & startBit) == 0 && target == 22) score += 90000
 	}
+	if(score > 0) return score
 	if(search.killerOne[ply] == move) score += FAST_KILLER_SCORE
 	else if(search.killerTwo[ply] == move) score += FAST_KILLER_SCORE - 1000
 	const colorIndex = search.turn == FAST_RED ? 0 : 1
@@ -1848,7 +2084,7 @@ function fastMoveHeuristic(search, move, ttMove, ply){
 
 function fastRecordCutoff(search, move, ply, depthRemaining){
 	if(search.tt && search.tt.stats) search.tt.stats.searchCutoffs += 1
-	if(search.occupiedMask & (1 << fastMoveTarget(move))) return
+	if(search.occupiedMask & FastMoveTargetBitTable[move]) return
 	if(search.killerOne[ply] != move){
 		search.killerTwo[ply] = search.killerOne[ply] || 0
 		search.killerOne[ply] = move
@@ -1859,43 +2095,57 @@ function fastRecordCutoff(search, move, ply, depthRemaining){
 	search.history[historyIndex] = historyScore > FAST_HISTORY_MAX ? FAST_HISTORY_MAX : historyScore
 }
 
+function fastTerminalMoveScore(search, move, childPly){
+	const startBit = FastMoveStartBitTable[move]
+	const targetBit = FastMoveTargetBitTable[move]
+	if(search.masterMask & targetBit){
+		return (search.redMask & targetBit) ? -FAST_MATE_SCORE + childPly : FAST_MATE_SCORE - childPly
+	}
+	if(search.masterMask & startBit){
+		const target = FastMoveTargetTable[move]
+		if(search.redMask & startBit) return target == 2 ? FAST_MATE_SCORE - childPly : 0
+		return target == 22 ? -FAST_MATE_SCORE + childPly : 0
+	}
+	return 0
+}
+
 function fastMakeMove(search, move, ply){
-	const slot = fastMoveSlot(move)
-	const start = fastMoveStart(move)
-	const target = fastMoveTarget(move)
-	const startBit = 1 << start
-	const targetBit = 1 << target
-	const movingIsRed = (search.redMask & startBit) != 0
-	const movingIsMaster = (search.masterMask & startBit) != 0
-	const targetOccupied = (search.occupiedMask & targetBit) != 0
-	const targetIsRed = (search.redMask & targetBit) != 0
-	const targetIsMaster = (search.masterMask & targetBit) != 0
-	const movingPiece = movingIsRed ? (movingIsMaster ? FAST_RED_MASTER : FAST_RED_PAWN) : (movingIsMaster ? FAST_BLUE_MASTER : FAST_BLUE_PAWN)
-	const capturedPiece = targetOccupied ? (targetIsRed ? (targetIsMaster ? FAST_RED_MASTER : FAST_RED_PAWN) : (targetIsMaster ? FAST_BLUE_MASTER : FAST_BLUE_PAWN)) : FAST_EMPTY
-	const oldSlotCard = search.cards[slot]
-	const oldNeutralCard = search.cards[4]
-	search.undoMove[ply] = move
-	search.undoMovingPiece[ply] = movingPiece
-	search.undoCapturedPiece[ply] = capturedPiece
-	search.undoOldSlotCard[ply] = oldSlotCard
-	search.undoOldNeutralCard[ply] = oldNeutralCard
+	const slot = FastMoveSlotTable[move]
+	const start = FastMoveStartTable[move]
+	const target = FastMoveTargetTable[move]
+	const startBit = FastMoveStartBitTable[move]
+	const targetBit = FastMoveTargetBitTable[move]
+	const movingPieceIndex = ((search.redMask & startBit) ? 1 : 3) + ((search.masterMask & startBit) ? 1 : 0)
+	const capturedPieceIndex = (search.occupiedMask & targetBit) ? (((search.redMask & targetBit) ? 1 : 3) + ((search.masterMask & targetBit) ? 1 : 0)) : 0
+	const oldCardBits = search.cardBits
+	const oldSlotCard = fastGetCard(oldCardBits, slot)
+	const oldNeutralCard = fastGetCard(oldCardBits, 4)
+	search.undoCardBits[ply] = oldCardBits
 	search.undoOldTurn[ply] = search.turn
 	search.undoHashA[ply] = search.hashA
 	search.undoHashB[ply] = search.hashB
+	search.undoOccupiedMask[ply] = search.occupiedMask
+	search.undoRedMask[ply] = search.redMask
+	search.undoMasterMask[ply] = search.masterMask
+	search.undoRedPawnsCount[ply] = search.redPawnsCount
+	search.undoBluePawnsCount[ply] = search.bluePawnsCount
+	search.undoRedMasterPos[ply] = search.redMasterPos
+	search.undoBlueMasterPos[ply] = search.blueMasterPos
+	search.undoRedCenterControl[ply] = search.redCenterControl
+	search.undoBlueCenterControl[ply] = search.blueCenterControl
 
-	fastXorPiece(search, start, movingPiece)
-	if(capturedPiece != FAST_EMPTY) fastXorPiece(search, target, capturedPiece)
-	fastRemovePieceStats(search, start, movingPiece)
-	if(capturedPiece != FAST_EMPTY) fastRemovePieceStats(search, target, capturedPiece)
-	fastAddPieceStats(search, target, movingPiece)
-	fastXorPiece(search, target, movingPiece)
+	fastXorPieceIndex(search, start, movingPieceIndex)
+	if(capturedPieceIndex) fastXorPieceIndex(search, target, capturedPieceIndex)
+	fastRemovePieceStatsByIndex(search, start, movingPieceIndex)
+	if(capturedPieceIndex) fastRemovePieceStatsByIndex(search, target, capturedPieceIndex)
+	fastAddPieceStatsByIndex(search, target, movingPieceIndex)
+	fastXorPieceIndex(search, target, movingPieceIndex)
 
-	fastXorCard(search, slot, oldSlotCard)
-	fastXorCard(search, 4, oldNeutralCard)
-	search.cards[slot] = oldNeutralCard
-	search.cards[4] = oldSlotCard
-	fastXorCard(search, slot, search.cards[slot])
-	fastXorCard(search, 4, search.cards[4])
+	const swapKey = fastCardSwapKey(slot, oldSlotCard, oldNeutralCard)
+	const cardDelta = oldSlotCard ^ oldNeutralCard
+	search.hashA = (search.hashA ^ FastCardSwapHashA[swapKey]) >>> 0
+	search.hashB = (search.hashB ^ FastCardSwapHashB[swapKey]) >>> 0
+	search.cardBits = (oldCardBits ^ (cardDelta << (slot * 5)) ^ (cardDelta << 20)) >>> 0
 
 	fastXorTurn(search, search.turn)
 	search.turn = -search.turn
@@ -1903,19 +2153,19 @@ function fastMakeMove(search, move, ply){
 }
 
 function fastUnmakeMove(search, ply){
-	const move = search.undoMove[ply]
-	const start = fastMoveStart(move)
-	const target = fastMoveTarget(move)
-	const movingPiece = search.undoMovingPiece[ply]
-	const capturedPiece = search.undoCapturedPiece[ply]
-	fastRemovePieceStats(search, target, movingPiece)
-	if(capturedPiece != FAST_EMPTY) fastAddPieceStats(search, target, capturedPiece)
-	fastAddPieceStats(search, start, movingPiece)
-	search.cards[fastMoveSlot(move)] = search.undoOldSlotCard[ply]
-	search.cards[4] = search.undoOldNeutralCard[ply]
+	search.cardBits = search.undoCardBits[ply]
 	search.turn = search.undoOldTurn[ply]
 	search.hashA = search.undoHashA[ply]
 	search.hashB = search.undoHashB[ply]
+	search.occupiedMask = search.undoOccupiedMask[ply]
+	search.redMask = search.undoRedMask[ply]
+	search.masterMask = search.undoMasterMask[ply]
+	search.redPawnsCount = search.undoRedPawnsCount[ply]
+	search.bluePawnsCount = search.undoBluePawnsCount[ply]
+	search.redMasterPos = search.undoRedMasterPos[ply]
+	search.blueMasterPos = search.undoBlueMasterPos[ply]
+	search.redCenterControl = search.undoRedCenterControl[ply]
+	search.blueCenterControl = search.undoBlueCenterControl[ply]
 }
 
 function fastBitIndex(bit){
@@ -1931,62 +2181,59 @@ function fastPieceAt(search, square){
 	return (search.masterMask & bit) ? FAST_BLUE_MASTER : FAST_BLUE_PAWN
 }
 
-function fastAddPieceStats(search, square, piece){
-	if(piece == FAST_EMPTY) return
+function fastAddPieceStatsByIndex(search, square, pieceIndex){
+	if(pieceIndex == 0) return
 	const bit = 1 << square
-	search.occupiedMask |= bit
-	if(piece > 0) search.redMask |= bit
-	else search.redMask &= ~bit
-	if(piece == FAST_RED_MASTER || piece == FAST_BLUE_MASTER) search.masterMask |= bit
-	else search.masterMask &= ~bit
 	const centerValue = FastCenterTable[square]
-	if(piece == FAST_RED_PAWN){
-		search.redPawnsCount += 1
-		search.redCenterControl += centerValue
-	} else if(piece == FAST_BLUE_PAWN){
-		search.bluePawnsCount += 1
-		search.blueCenterControl += centerValue
-	} else if(piece == FAST_RED_MASTER){
-		search.redMasterPos = square
-		search.redCenterControl += centerValue
-	} else if(piece == FAST_BLUE_MASTER){
-		search.blueMasterPos = square
-		search.blueCenterControl += centerValue
-	}
+	search.occupiedMask |= bit
+	search.redMask = (search.redMask & ~bit) | (bit * FastPieceIsRed[pieceIndex])
+	search.masterMask = (search.masterMask & ~bit) | (bit * FastPieceIsMaster[pieceIndex])
+	search.redPawnsCount += FastPieceRedPawnDelta[pieceIndex]
+	search.bluePawnsCount += FastPieceBluePawnDelta[pieceIndex]
+	search.redCenterControl += FastPieceRedCenterDelta[pieceIndex] * centerValue
+	search.blueCenterControl += FastPieceBlueCenterDelta[pieceIndex] * centerValue
+	if(pieceIndex == 2) search.redMasterPos = square
+	else if(pieceIndex == 4) search.blueMasterPos = square
 }
 
-function fastRemovePieceStats(search, square, piece){
-	if(piece == FAST_EMPTY) return
+function fastRemovePieceStatsByIndex(search, square, pieceIndex){
+	if(pieceIndex == 0) return
 	const bit = 1 << square
+	const centerValue = FastCenterTable[square]
 	search.occupiedMask &= ~bit
 	search.redMask &= ~bit
 	search.masterMask &= ~bit
-	const centerValue = FastCenterTable[square]
-	if(piece == FAST_RED_PAWN){
-		search.redPawnsCount -= 1
-		search.redCenterControl -= centerValue
-	} else if(piece == FAST_BLUE_PAWN){
-		search.bluePawnsCount -= 1
-		search.blueCenterControl -= centerValue
-	} else if(piece == FAST_RED_MASTER){
-		search.redMasterPos = -1
-		search.redCenterControl -= centerValue
-	} else if(piece == FAST_BLUE_MASTER){
-		search.blueMasterPos = -1
-		search.blueCenterControl -= centerValue
-	}
+	search.redPawnsCount -= FastPieceRedPawnDelta[pieceIndex]
+	search.bluePawnsCount -= FastPieceBluePawnDelta[pieceIndex]
+	search.redCenterControl -= FastPieceRedCenterDelta[pieceIndex] * centerValue
+	search.blueCenterControl -= FastPieceBlueCenterDelta[pieceIndex] * centerValue
+	if(pieceIndex == 2) search.redMasterPos = -1
+	else if(pieceIndex == 4) search.blueMasterPos = -1
+}
+
+function fastAddPieceStats(search, square, piece){
+	fastAddPieceStatsByIndex(search, square, fastPieceIndex(piece))
+}
+
+function fastRemovePieceStats(search, square, piece){
+	fastRemovePieceStatsByIndex(search, square, fastPieceIndex(piece))
+}
+
+function fastTerminalScore(search, ply){
+	if(search.blueMasterPos == -1 || search.redMasterPos == 2) return FAST_MATE_SCORE - ply
+	if(search.redMasterPos == -1 || search.blueMasterPos == 22) return -FAST_MATE_SCORE + ply
+	return 0
 }
 
 function fastStaticEvaluation(search, ply){
-	if(search.blueMasterPos == -1 || search.redMasterPos == 2) return FAST_MATE_SCORE - ply
-	if(search.redMasterPos == -1 || search.blueMasterPos == 22) return -FAST_MATE_SCORE + ply
-
+	const terminalScore = fastTerminalScore(search, ply)
+	if(terminalScore) return terminalScore
 	const redMasterLocationEval = (4 - Math.floor(search.redMasterPos/5)) - (Math.abs(search.redMasterPos%5 - 2))
 	const blueMasterLocationEval = (Math.floor(search.blueMasterPos/5)) - (Math.abs(search.blueMasterPos%5 - 2))
-	const endGamePercent = 10*(8 - (search.bluePawnsCount + search.redPawnsCount))/8
-	var evaluation = 5*(search.redPawnsCount - search.bluePawnsCount)
-	evaluation += endGamePercent * (redMasterLocationEval - blueMasterLocationEval)
-	evaluation += search.redCenterControl - search.blueCenterControl
+	const remainingPawns = search.bluePawnsCount + search.redPawnsCount
+	var evaluation = 40*(search.redPawnsCount - search.bluePawnsCount)
+	evaluation += 10*(8 - remainingPawns) * (redMasterLocationEval - blueMasterLocationEval)
+	evaluation += 8*(search.redCenterControl - search.blueCenterControl)
 	return evaluation
 }
 
@@ -1997,6 +2244,8 @@ function fastResultToEval(search, result){
 	if(isFastMateScore(score)){
 		mateDistance = FAST_MATE_SCORE - Math.abs(score)
 		score = score > 0 ? Infinity : -Infinity
+	} else {
+		score = fastDisplayScore(score)
 	}
 	const evalMove = getEvalMove(score, fastDecodeMove(search, result.move), mateDistance, 0)
 	evalMove.exact = result.exact === true
@@ -2004,8 +2253,16 @@ function fastResultToEval(search, result){
 	return evalMove
 }
 
+function fastDisplayScore(score){
+	return score / FAST_EVAL_SCALE
+}
+
 function fastEncodeMove(slot,start,target){
 	return slot | (start << 3) | (target << 8)
+}
+
+function fastMoveTableKey(slot, colorIndex, cardID, square){
+	return (((slot * 2 + colorIndex) * 32 + cardID) * 25 + square)
 }
 
 function fastMoveSlot(move){
@@ -2022,24 +2279,31 @@ function fastMoveTarget(move){
 
 function fastDecodeMove(search, move){
 	if(!move) return {}
-	const slot = fastMoveSlot(move)
+	const slot = FastMoveSlotTable ? FastMoveSlotTable[move] : fastMoveSlot(move)
 	return {
-		"cardID": twoDigit(search.cards[slot]),
+		"cardID": twoDigit(fastGetCard(search.cardBits, slot)),
 		"color": search.turn == FAST_RED ? "R" : "B",
-		"startLocation": fastMoveStart(move),
-		"targetLocation": fastMoveTarget(move)
+		"startLocation": FastMoveStartTable ? FastMoveStartTable[move] : fastMoveStart(move),
+		"targetLocation": FastMoveTargetTable ? FastMoveTargetTable[move] : fastMoveTarget(move)
 	}
+}
+
+function fastGetCard(cardBits, slot){
+	return (cardBits >>> (slot * 5)) & FAST_CARD_MASK
 }
 
 function fastHashKey(search){
 	return search.hashA.toString(36)+":"+search.hashB.toString(36)
 }
 
-function fastXorPiece(search, square, piece){
-	const pieceIndex = fastPieceIndex(piece)
+function fastXorPieceIndex(search, square, pieceIndex){
 	if(pieceIndex == 0) return
 	search.hashA = (search.hashA ^ FastZobrist.pieceA[square][pieceIndex]) >>> 0
 	search.hashB = (search.hashB ^ FastZobrist.pieceB[square][pieceIndex]) >>> 0
+}
+
+function fastXorPiece(search, square, piece){
+	fastXorPieceIndex(search, square, fastPieceIndex(piece))
 }
 
 function fastXorCard(search, slot, card){
@@ -2051,6 +2315,10 @@ function fastXorTurn(search, turn){
 	const index = turn == FAST_RED ? 0 : 1
 	search.hashA = (search.hashA ^ FastZobrist.turnA[index]) >>> 0
 	search.hashB = (search.hashB ^ FastZobrist.turnB[index]) >>> 0
+}
+
+function fastCardSwapKey(slot, slotCard, neutralCard){
+	return (slot << 10) | (slotCard << 5) | neutralCard
 }
 
 function fastPieceIndex(piece){
@@ -2743,7 +3011,7 @@ function updateTakeBackButton(){
 function updateSwitchSidesButton(){
 	var switchSidesButton = document.getElementById("switchSidesButton")
 	if (!switchSidesButton) return
-	switchSidesButton.disabled = !GameHasStarted || GameIsOver || CustomSetupActive
+	switchSidesButton.disabled = GameIsOver || CustomSetupActive
 }
 
 function showBoardStartButton(){

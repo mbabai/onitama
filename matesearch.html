@@ -193,6 +193,39 @@
 			margin-top: 10px;
 		}
 
+		.summaryTable {
+			border-collapse: collapse;
+			font-size: 13px;
+			width: 100%;
+		}
+
+		.summaryTable th,
+		.summaryTable td {
+			border-bottom: 1px solid var(--line);
+			padding: 8px 6px;
+			text-align: right;
+		}
+
+		.summaryTable th:first-child,
+		.summaryTable td:first-child {
+			text-align: left;
+		}
+
+		.summaryTable th {
+			color: var(--muted);
+			font-size: 12px;
+			font-weight: 700;
+		}
+
+		.summaryTable tbody tr:last-child td {
+			border-bottom: 0;
+		}
+
+		.summaryTable .emptySummary {
+			color: var(--muted);
+			text-align: center;
+		}
+
 		.mateList {
 			display: grid;
 			gap: 8px;
@@ -242,6 +275,14 @@
 			font-weight: 800;
 		}
 
+		.mateTitle.red {
+			color: var(--red);
+		}
+
+		.mateTitle.blue {
+			color: var(--blue);
+		}
+
 		.mateMeta {
 			color: var(--muted);
 			font-size: 12px;
@@ -252,6 +293,40 @@
 			display: flex;
 			flex-wrap: wrap;
 			gap: 6px;
+		}
+
+		.cardDiagram {
+			display: grid;
+			gap: 6px;
+		}
+
+		.cardGroup {
+			align-items: center;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 6px;
+		}
+
+		.cardGroupLabel {
+			border-radius: 999px;
+			color: #fff;
+			font-size: 11px;
+			font-weight: 800;
+			min-width: 48px;
+			padding: 4px 7px;
+			text-align: center;
+		}
+
+		.cardGroupLabel.red {
+			background: var(--red);
+		}
+
+		.cardGroupLabel.blue {
+			background: var(--blue);
+		}
+
+		.cardGroupLabel.neutral {
+			background: var(--ink);
 		}
 
 		.cardPill {
@@ -265,6 +340,14 @@
 			gap: 5px;
 			max-width: 170px;
 			padding: 3px 8px 3px 4px;
+		}
+
+		.cardPill.red {
+			border-color: #dfbcbc;
+		}
+
+		.cardPill.blue {
+			border-color: #b7cbe2;
 		}
 
 		.cardThumb {
@@ -323,7 +406,7 @@
 			<div class="actions">
 				<button id="startButton" class="primary" type="button">Start/continue search</button>
 				<button id="pauseButton" type="button" disabled>Pause</button>
-				<button id="exportButton" type="button">Export progress</button>
+				<button id="exportButton" type="button">Export starting states</button>
 				<button id="resetButton" class="danger" type="button">Reset</button>
 			</div>
 		</header>
@@ -338,7 +421,7 @@
 							<div id="positionsSearched" class="metricValue">0</div>
 						</div>
 						<div class="metric">
-							<div class="metricLabel">Starting configs searched</div>
+							<div class="metricLabel">Search index</div>
 							<div id="configsSearched" class="metricValue">0</div>
 						</div>
 						<div class="metric">
@@ -358,12 +441,12 @@
 							<div id="matesFound" class="metricValue">0</div>
 						</div>
 						<div class="metric">
-							<div class="metricLabel">Current index</div>
-							<div id="currentIndex" class="metricValue">0</div>
+							<div class="metricLabel">Estimated remaining</div>
+							<div id="estimatedRemaining" class="metricValue">--:--</div>
 						</div>
 						<div class="metric">
 							<div class="metricLabel">Max depth</div>
-							<div id="maxDepth" class="metricValue">12</div>
+							<div id="maxDepth" class="metricValue">11</div>
 						</div>
 					</div>
 
@@ -385,6 +468,19 @@
 				</section>
 
 				<section class="panel" style="margin-top: 14px;">
+					<h2>Mate Counts</h2>
+					<table class="summaryTable" aria-label="Mate counts by length">
+						<thead>
+							<tr>
+								<th>Mate length</th>
+								<th>Found</th>
+							</tr>
+						</thead>
+						<tbody id="mateSummary"></tbody>
+					</table>
+				</section>
+
+				<section class="panel" style="margin-top: 14px;">
 					<h2>Activity</h2>
 					<div id="activityLog" class="logPanel"></div>
 				</section>
@@ -397,603 +493,23 @@
 		</div>
 	</div>
 
-	<script id="mateSearchWorker" type="javascript/worker">
-const RED = 1;
-const BLUE = -1;
-const EMPTY = 0;
-const RED_PAWN = 1;
-const RED_MASTER = 2;
-const BLUE_PAWN = -1;
-const BLUE_MASTER = -2;
-const TIGER = 1;
-const KIRIN = 21;
-const BLUE_TEMPLE = 2;
-const RED_TEMPLE = 22;
-const MATE_SCORE = 1000000;
-const TT_EXACT = 0;
-const TT_LOWER = 1;
-const TT_UPPER = 2;
-const TOTAL_CONFIGS = 706440;
-const STARTING_BOARD_STATE = "ppmpp" + "e".repeat(15) + "PPMPP";
-const START_BOARD = new Int8Array([
-	BLUE_PAWN, BLUE_PAWN, BLUE_MASTER, BLUE_PAWN, BLUE_PAWN,
-	EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-	EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-	EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-	RED_PAWN, RED_PAWN, RED_MASTER, RED_PAWN, RED_PAWN
-]);
-const CARD_NAMES = [
-	"monkey", "tiger", "dragon", "crab", "elephant", "mantis", "crane", "boar",
-	"horse", "ox", "cobra", "eel", "rooster", "goose", "frog", "rabbit",
-	"fox", "dog", "giraffe", "panda", "bear", "kirin", "sea snake", "viper",
-	"phoenix", "mouse", "rat", "turtle", "tanuki", "iguana", "sable", "otter"
-];
-const CARD_START_COLORS = [
-	BLUE, BLUE, RED, BLUE, RED, RED, BLUE, RED,
-	RED, BLUE, RED, BLUE, RED, BLUE, RED, BLUE,
-	RED, BLUE, BLUE, RED, BLUE, RED, BLUE, RED,
-	BLUE, BLUE, RED, RED, BLUE, RED, BLUE, RED
-];
-const RAW_CARD_MOVES = [
-	["fr","br","fl","bl"],
-	["ff","b"],
-	["frr","fll","br","bl"],
-	["f","rr","ll"],
-	["l","r","fl","fr"],
-	["fl","fr","b"],
-	["f","br","bl"],
-	["l","r","f"],
-	["l","f","b"],
-	["r","b","f"],
-	["l","br","fr"],
-	["r","bl","fl"],
-	["l","r","bl","fr"],
-	["l","r","fl","br"],
-	["ll","br","fl"],
-	["bl","rr","fr"],
-	["fr","r","br"],
-	["fl","l","bl"],
-	["frr","fll","b"],
-	["f","fr","bl"],
-	["fl","f","br"],
-	["ffl","ffr","bb"],
-	["f","rr","bl"],
-	["f","ll","br"],
-	["ll","rr","fr","fl"],
-	["r","f","bl"],
-	["l","f","br"],
-	["rr","ll","bl","br"],
-	["f","frr","bl"],
-	["f","fll","br"],
-	["ll","bl","fr"],
-	["rr","br","fl"]
-];
-
-let moveTable = null;
-let zobrist = null;
-let shouldStop = false;
-
-function twoDigit(value){
-	return value < 10 ? "0" + value : String(value);
-}
-
-function colorChar(color){
-	return color == RED ? "R" : "B";
-}
-
-function cardLabel(card){
-	return twoDigit(card) + ":" + CARD_NAMES[card];
-}
-
-function sortedPair(a, b){
-	return a <= b ? [a, b] : [b, a];
-}
-
-function moveVector(rawMove){
-	let forward = 0;
-	let backward = 0;
-	let right = 0;
-	let left = 0;
-	for(let i = 0; i < rawMove.length; i++){
-		const part = rawMove[i];
-		if(part == "f") forward++;
-		else if(part == "b") backward++;
-		else if(part == "r") right++;
-		else if(part == "l") left++;
-	}
-	return {forward, backward, right, left};
-}
-
-function buildMoveTable(){
-	const tables = [];
-	for(const color of [RED, BLUE]){
-		const colorTable = [];
-		for(let card = 0; card < RAW_CARD_MOVES.length; card++){
-			const cardTable = [];
-			for(let square = 0; square < 25; square++){
-				const row = Math.floor(square / 5);
-				const col = square % 5;
-				const targets = [];
-				for(const rawMove of RAW_CARD_MOVES[card]){
-					const vector = moveVector(rawMove);
-					let targetRow;
-					let targetCol;
-					if(color == BLUE){
-						targetRow = row + vector.forward - vector.backward;
-						targetCol = col - vector.right + vector.left;
-					} else {
-						targetRow = row - vector.forward + vector.backward;
-						targetCol = col + vector.right - vector.left;
-					}
-					if(targetRow >= 0 && targetRow < 5 && targetCol >= 0 && targetCol < 5){
-						targets.push(targetRow * 5 + targetCol);
-					}
-				}
-				cardTable[square] = targets;
-			}
-			colorTable[card] = cardTable;
-		}
-		tables.push(colorTable);
-	}
-	return tables;
-}
-
-function createZobrist(){
-	let seed = 0x9e3779b9;
-	const nextRand32 = () => {
-		seed = (seed + 0x6d2b79f5) | 0;
-		let t = seed;
-		t = Math.imul(t ^ (t >>> 15), t | 1);
-		t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-		return (t ^ (t >>> 14)) >>> 0;
-	};
-	const pieceA = [];
-	const pieceB = [];
-	for(let square = 0; square < 25; square++){
-		pieceA[square] = [];
-		pieceB[square] = [];
-		for(let piece = 0; piece < 5; piece++){
-			pieceA[square][piece] = nextRand32();
-			pieceB[square][piece] = nextRand32();
-		}
-	}
-	const cardA = [];
-	const cardB = [];
-	for(let slot = 0; slot < 5; slot++){
-		cardA[slot] = [];
-		cardB[slot] = [];
-		for(let card = 0; card < 32; card++){
-			cardA[slot][card] = nextRand32();
-			cardB[slot][card] = nextRand32();
-		}
-	}
-	return {
-		pieceA,
-		pieceB,
-		cardA,
-		cardB,
-		turnA: [nextRand32(), nextRand32()],
-		turnB: [nextRand32(), nextRand32()]
-	};
-}
-
-function ensureTables(){
-	if(!moveTable) moveTable = buildMoveTable();
-	if(!zobrist) zobrist = createZobrist();
-}
-
-function pieceIndex(piece){
-	if(piece == RED_PAWN) return 1;
-	if(piece == RED_MASTER) return 2;
-	if(piece == BLUE_PAWN) return 3;
-	if(piece == BLUE_MASTER) return 4;
-	return 0;
-}
-
-function xorPiece(search, square, piece){
-	const index = pieceIndex(piece);
-	if(index == 0) return;
-	search.hashA = (search.hashA ^ zobrist.pieceA[square][index]) >>> 0;
-	search.hashB = (search.hashB ^ zobrist.pieceB[square][index]) >>> 0;
-}
-
-function xorCard(search, slot, card){
-	search.hashA = (search.hashA ^ zobrist.cardA[slot][card]) >>> 0;
-	search.hashB = (search.hashB ^ zobrist.cardB[slot][card]) >>> 0;
-}
-
-function xorTurn(search, turn){
-	const index = turn == RED ? 0 : 1;
-	search.hashA = (search.hashA ^ zobrist.turnA[index]) >>> 0;
-	search.hashB = (search.hashB ^ zobrist.turnB[index]) >>> 0;
-}
-
-function hashKey(search, ply){
-	return search.hashA.toString(36) + ":" + search.hashB.toString(36) + ":" + ply;
-}
-
-function encodeMove(slot, start, target){
-	return slot | (start << 3) | (target << 8);
-}
-
-function moveSlot(move){
-	return move & 7;
-}
-
-function moveStart(move){
-	return (move >> 3) & 31;
-}
-
-function moveTarget(move){
-	return (move >> 8) & 31;
-}
-
-function createSearch(config){
-	ensureTables();
-	const search = {
-		board: new Int8Array(START_BOARD),
-		cards: new Int8Array([config.redCards[0], config.redCards[1], config.blueCards[0], config.blueCards[1], config.neutral]),
-		turn: config.startingPlayer,
-		root: config.startingPlayer,
-		redMaster: RED_TEMPLE,
-		blueMaster: BLUE_TEMPLE,
-		hashA: 0,
-		hashB: 0,
-		tt: new Map()
-	};
-	for(let i = 0; i < 25; i++) xorPiece(search, i, search.board[i]);
-	for(let i = 0; i < 5; i++) xorCard(search, i, search.cards[i]);
-	xorTurn(search, search.turn);
-	return search;
-}
-
-function terminalScore(search, ply){
-	if(search.blueMaster < 0 || search.redMaster == BLUE_TEMPLE){
-		return search.root == RED ? MATE_SCORE - ply : -MATE_SCORE + ply;
-	}
-	if(search.redMaster < 0 || search.blueMaster == RED_TEMPLE){
-		return search.root == BLUE ? MATE_SCORE - ply : -MATE_SCORE + ply;
-	}
-	return null;
-}
-
-function generateMoves(search){
-	const colorIndex = search.turn == RED ? 0 : 1;
-	const firstSlot = search.turn == RED ? 0 : 2;
-	const moves = [];
-	for(let start = 0; start < 25; start++){
-		const piece = search.board[start];
-		if(piece == EMPTY) continue;
-		if(search.turn == RED && piece < 0) continue;
-		if(search.turn == BLUE && piece > 0) continue;
-		for(let slot = firstSlot; slot < firstSlot + 2; slot++){
-			const card = search.cards[slot];
-			const targets = moveTable[colorIndex][card][start];
-			for(let i = 0; i < targets.length; i++){
-				const target = targets[i];
-				const targetPiece = search.board[target];
-				if(targetPiece == EMPTY || (targetPiece > 0) != (piece > 0)){
-					moves.push(encodeMove(slot, start, target));
-				}
-			}
-		}
-	}
-	return moves;
-}
-
-function moveHeuristic(search, move, ttMove){
-	if(move == ttMove) return 100000000;
-	const start = moveStart(move);
-	const target = moveTarget(move);
-	const movingPiece = search.board[start];
-	const targetPiece = search.board[target];
-	let score = 0;
-	if(targetPiece != EMPTY) score += Math.abs(targetPiece) == 2 ? 50000 : 10000;
-	if(search.turn == RED && movingPiece == RED_MASTER && target == BLUE_TEMPLE) score += 90000;
-	if(search.turn == BLUE && movingPiece == BLUE_MASTER && target == RED_TEMPLE) score += 90000;
-	if(target == 6 || target == 7 || target == 8 || target == 11 || target == 12 || target == 13 || target == 16 || target == 17 || target == 18) score += 25;
-	return score;
-}
-
-function orderMoves(search, moves, ttMove){
-	moves.sort((a, b) => moveHeuristic(search, b, ttMove) - moveHeuristic(search, a, ttMove));
-}
-
-function makeMove(search, move){
-	const slot = moveSlot(move);
-	const start = moveStart(move);
-	const target = moveTarget(move);
-	const movingPiece = search.board[start];
-	const capturedPiece = search.board[target];
-	const oldSlotCard = search.cards[slot];
-	const oldNeutralCard = search.cards[4];
-	const undo = {
-		move,
-		movingPiece,
-		capturedPiece,
-		oldSlotCard,
-		oldNeutralCard,
-		oldTurn: search.turn,
-		oldRedMaster: search.redMaster,
-		oldBlueMaster: search.blueMaster,
-		hashA: search.hashA,
-		hashB: search.hashB
-	};
-
-	xorPiece(search, start, movingPiece);
-	if(capturedPiece != EMPTY) xorPiece(search, target, capturedPiece);
-	search.board[start] = EMPTY;
-	search.board[target] = movingPiece;
-	xorPiece(search, target, movingPiece);
-
-	if(movingPiece == RED_MASTER) search.redMaster = target;
-	else if(movingPiece == BLUE_MASTER) search.blueMaster = target;
-	if(capturedPiece == RED_MASTER) search.redMaster = -1;
-	else if(capturedPiece == BLUE_MASTER) search.blueMaster = -1;
-
-	xorCard(search, slot, oldSlotCard);
-	xorCard(search, 4, oldNeutralCard);
-	search.cards[slot] = oldNeutralCard;
-	search.cards[4] = oldSlotCard;
-	xorCard(search, slot, search.cards[slot]);
-	xorCard(search, 4, search.cards[4]);
-
-	xorTurn(search, search.turn);
-	search.turn = -search.turn;
-	xorTurn(search, search.turn);
-	return undo;
-}
-
-function unmakeMove(search, undo){
-	const move = undo.move;
-	search.board[moveStart(move)] = undo.movingPiece;
-	search.board[moveTarget(move)] = undo.capturedPiece;
-	search.cards[moveSlot(move)] = undo.oldSlotCard;
-	search.cards[4] = undo.oldNeutralCard;
-	search.turn = undo.oldTurn;
-	search.redMaster = undo.oldRedMaster;
-	search.blueMaster = undo.oldBlueMaster;
-	search.hashA = undo.hashA;
-	search.hashB = undo.hashB;
-}
-
-function alphaBeta(search, depth, alpha, beta, ply, stats){
-	stats.nodes++;
-	if(stats.nodes >= stats.nextProgressNode){
-		postMessage({
-			type: "progress",
-			index: stats.configIndex,
-			activeNodes: stats.nodes,
-			activeElapsedMs: performance.now() - stats.startedAt
-		});
-		while(stats.nodes >= stats.nextProgressNode){
-			stats.nextProgressNode += stats.progressNodes;
-		}
-	}
-
-	const terminal = terminalScore(search, ply);
-	if(terminal !== null){
-		stats.leaves++;
-		return {score: terminal, move: 0};
-	}
-	if(depth == 0){
-		stats.leaves++;
-		return {score: 0, move: 0};
-	}
-
-	const alphaOrig = alpha;
-	const betaOrig = beta;
-	const key = hashKey(search, ply);
-	const entry = search.tt.get(key);
-	let ttMove = 0;
-	if(entry){
-		ttMove = entry.move;
-		if(entry.depth >= depth){
-			stats.ttHits++;
-			if(entry.flag == TT_EXACT) return {score: entry.score, move: entry.move};
-			if(entry.flag == TT_LOWER) alpha = Math.max(alpha, entry.score);
-			else if(entry.flag == TT_UPPER) beta = Math.min(beta, entry.score);
-			if(alpha >= beta) return {score: entry.score, move: entry.move};
-		}
-	}
-
-	const moves = generateMoves(search);
-	if(moves.length == 0){
-		stats.leaves++;
-		return {score: 0, move: 0};
-	}
-	orderMoves(search, moves, ttMove);
-
-	const maximizing = search.turn == search.root;
-	let bestMove = moves[0];
-	let bestScore = maximizing ? -MATE_SCORE - 1 : MATE_SCORE + 1;
-	for(let i = 0; i < moves.length; i++){
-		const move = moves[i];
-		const undo = makeMove(search, move);
-		const child = alphaBeta(search, depth - 1, alpha, beta, ply + 1, stats);
-		unmakeMove(search, undo);
-		if(maximizing){
-			if(child.score > bestScore){
-				bestScore = child.score;
-				bestMove = move;
-			}
-			alpha = Math.max(alpha, bestScore);
-		} else {
-			if(child.score < bestScore){
-				bestScore = child.score;
-				bestMove = move;
-			}
-			beta = Math.min(beta, bestScore);
-		}
-		if(alpha >= beta){
-			stats.cutoffs++;
-			break;
-		}
-	}
-
-	let flag = TT_EXACT;
-	if(bestScore <= alphaOrig) flag = TT_UPPER;
-	else if(bestScore >= betaOrig) flag = TT_LOWER;
-	search.tt.set(key, {depth, score: bestScore, flag, move: bestMove});
-	return {score: bestScore, move: bestMove};
-}
-
-function describeMove(search, move){
-	if(!move) return {};
-	const slot = moveSlot(move);
-	const start = moveStart(move);
-	const target = moveTarget(move);
-	return {
-		color: colorChar(search.turn),
-		card: cardLabel(search.cards[slot]),
-		from: start,
-		to: target,
-		from_coord: squareCoord(start),
-		to_coord: squareCoord(target)
-	};
-}
-
-function squareCoord(square){
-	return String.fromCharCode("A".charCodeAt(0) + (square % 5)) + (Math.floor(square / 5) + 1);
-}
-
-function configId(config){
-	return "R" + twoDigit(config.redCards[0]) + twoDigit(config.redCards[1]) +
-		"-B" + twoDigit(config.blueCards[0]) + twoDigit(config.blueCards[1]) +
-		"-N" + twoDigit(config.neutral) + "-" + colorChar(config.startingPlayer);
-}
-
-function gameState(config){
-	return STARTING_BOARD_STATE +
-		twoDigit(config.redCards[0]) + "-" + twoDigit(config.redCards[1]) + "-" +
-		twoDigit(config.blueCards[0]) + "-" + twoDigit(config.blueCards[1]) + "-" +
-		twoDigit(config.neutral) + "X" + colorChar(config.startingPlayer);
-}
-
-function solveConfig(config, maxDepth, progressNodes){
-	const search = createSearch(config);
-	const startedAt = performance.now();
-	const stats = {
-		nodes: 0,
-		leaves: 0,
-		cutoffs: 0,
-		ttHits: 0,
-		startedAt,
-		configIndex: config.index,
-		progressNodes: Math.max(1, progressNodes),
-		nextProgressNode: Math.max(1, progressNodes)
-	};
-	let best = {score: 0, move: 0};
-	let foundDepth = 0;
-	for(let depth = 1; depth <= maxDepth; depth++){
-		best = alphaBeta(search, depth, 0, 1, 0, stats);
-		if(best.score > 0){
-			foundDepth = depth;
-			break;
-		}
-	}
-	const elapsedMs = performance.now() - startedAt;
-	const result = {
-		config_index: config.index,
-		config_id: configId(config),
-		game_state: gameState(config),
-		starting_player: colorChar(config.startingPlayer),
-		red_cards: config.redCards.map(cardLabel),
-		blue_cards: config.blueCards.map(cardLabel),
-		neutral: cardLabel(config.neutral),
-		max_depth: maxDepth,
-		nodes: stats.nodes,
-		leaves: stats.leaves,
-		cutoffs: stats.cutoffs,
-		tt_hits: stats.ttHits,
-		elapsed_ms: elapsedMs,
-		mate_found: best.score > 0
-	};
-	if(best.score > 0){
-		result.mate_plies = MATE_SCORE - best.score;
-		result.search_depth = foundDepth;
-		result.first_move = describeMove(search, best.move);
-		result.principal_variation = extractPrincipalVariationFromSearch(config, foundDepth, search.tt);
-	}
-	return result;
-}
-
-function extractPrincipalVariationFromSearch(config, depth, tt){
-	const search = createSearch(config);
-	search.tt = tt;
-	const line = [];
-	for(let ply = 0; ply < depth; ply++){
-		if(terminalScore(search, ply) !== null) break;
-		const entry = search.tt.get(hashKey(search, ply));
-		if(!entry || !entry.move) break;
-		line.push(describeMove(search, entry.move));
-		makeMove(search, entry.move);
-	}
-	return line;
-}
-
-function* iterConfigs(startIndex){
-	let index = -1;
-	const specials = [TIGER, KIRIN];
-	const allCards = Array.from({length: 32}, (_, i) => i);
-	for(const neutral of allCards){
-		if(neutral == TIGER || neutral == KIRIN) continue;
-		const startingPlayer = CARD_START_COLORS[neutral];
-		const partners = allCards.filter(card => card != neutral && card != TIGER && card != KIRIN);
-		for(const special of specials){
-			for(const partner of partners){
-				const startingHand = sortedPair(special, partner);
-				const remaining = allCards.filter(card => card != neutral && card != startingHand[0] && card != startingHand[1]);
-				for(let i = 0; i < remaining.length - 1; i++){
-					for(let j = i + 1; j < remaining.length; j++){
-						index++;
-						if(index < startIndex) continue;
-						const otherHand = [remaining[i], remaining[j]];
-						yield {
-							index,
-							redCards: startingPlayer == RED ? startingHand : otherHand,
-							blueCards: startingPlayer == BLUE ? startingHand : otherHand,
-							neutral,
-							startingPlayer
-						};
-					}
-				}
-			}
-		}
-	}
-}
-
-self.onmessage = function(event){
-	const message = event.data;
-	if(message.type == "stop"){
-		shouldStop = true;
-		return;
-	}
-	if(message.type != "start") return;
-	shouldStop = false;
-	ensureTables();
-	const maxDepth = message.maxDepth || 12;
-	const progressNodes = message.progressNodes || 100000;
-	for(const config of iterConfigs(message.nextIndex || 0)){
-		if(shouldStop) break;
-		const result = solveConfig(config, maxDepth, progressNodes);
-		postMessage({type: "result", result});
-	}
-	postMessage({type: shouldStop ? "paused" : "done"});
-};
-	</script>
-
+	<script type="text/javascript" src="./mate_search/mate_starting_states.js?v=20260530-full-search"></script>
+	<script type="text/javascript" src="./main.js?v=20260530-mate-search-opts"></script>
 	<script>
-const TOTAL_CONFIGS = 706440;
-const TOTAL_CONFIG_MATH = "30 neutral cards x 2 Tiger/Kirin choices x 29 partner cards x C(29, 2) opponent hands = 706,440";
-const STORAGE_KEY = "onitamaMateSearch.progress.v1";
-const STORAGE_FILE = "onitama-matesearch-progress.json";
-const MAX_DEPTH = 12;
-const PROGRESS_NODES = 100000;
+const TOTAL_CONFIGS = 6041280;
+const TOTAL_CONFIG_MATH = "32 neutral cards x C(31, 2) starting-player hands x C(29, 2) opponent hands = 6.0M states";
+const STORAGE_KEY = "onitamaMateSearch.progress.v2";
+const STORAGE_FILE = "onitama-matesearch-progress-v2.json";
+const STARTING_STATES_FILE = "mate_starting_states.json";
+const STARTING_STATES_PATH = "mate_search/" + STARTING_STATES_FILE;
+const MAX_DEPTH = 11;
+const ROLLING_CONFIG_LIMIT = 100;
+const MATE_SEARCH_WORKER_URL = "mate_search/mate_search_worker.js?v=20260530-mate-search-opts";
 
 let progress = createEmptyProgress();
 let worker = null;
-let active = {nodes: 0, elapsedMs: 0, index: 0};
+let workerUrl = null;
+let active = {index: 0};
 let runStartedAt = 0;
 let storageMode = "localStorage";
 let saveQueue = Promise.resolve();
@@ -1009,7 +525,7 @@ const elements = {
 	avgConfigTime: document.getElementById("avgConfigTime"),
 	positionsPerSecond: document.getElementById("positionsPerSecond"),
 	matesFound: document.getElementById("matesFound"),
-	currentIndex: document.getElementById("currentIndex"),
+	estimatedRemaining: document.getElementById("estimatedRemaining"),
 	maxDepth: document.getElementById("maxDepth"),
 	progressBar: document.getElementById("progressBar"),
 	percentComplete: document.getElementById("percentComplete"),
@@ -1019,15 +535,635 @@ const elements = {
 	storageStatus: document.getElementById("storageStatus"),
 	lastSaved: document.getElementById("lastSaved"),
 	activityLog: document.getElementById("activityLog"),
+	mateSummary: document.getElementById("mateSummary"),
 	mateList: document.getElementById("mateList")
 };
+
+function createMateSearchWorker(){
+	if(canUseInlineMateSearchWorker()){
+		const source = buildMateSearchWorkerScript();
+		workerUrl = URL.createObjectURL(new Blob([source], {type: "text/javascript"}));
+		return new Worker(workerUrl);
+	}
+	return new Worker(MATE_SEARCH_WORKER_URL);
+}
+
+function canUseInlineMateSearchWorker(){
+	return window.location.protocol == "file:"
+		&& typeof Blob != "undefined"
+		&& typeof URL != "undefined"
+		&& typeof buildFastSearchWorkerPrelude == "function";
+}
+
+function buildMateSearchWorkerScript(){
+	return buildFastSearchWorkerPrelude() + "\n" + OPTIMIZED_MATE_SEARCH_WORKER_BODY;
+}
+
+// Keep this in sync with mate_search/mate_search_worker.js, without its importScripts() line.
+const OPTIMIZED_MATE_SEARCH_WORKER_BODY = `const MS_TOTAL_CONFIGS = 6041280;
+const MS_CONFIGS_PER_NEUTRAL = 188790;
+const MS_STARTER_PAIR_COUNT = 465;
+const MS_OPPONENT_PAIR_COUNT = 406;
+const MS_MAX_SCORE = 1000000;
+const MS_MATE_THRESHOLD = 900000;
+const MS_TT_BITS = 18;
+const MS_TT_SIZE = 1 << MS_TT_BITS;
+const MS_TT_BUCKET_SIZE = 2;
+const MS_TT_BUCKET_MASK = (MS_TT_SIZE / MS_TT_BUCKET_SIZE) - 1;
+const MS_BATCH_CONFIGS = 250;
+const MS_BATCH_MATES = 32;
+const MS_BATCH_MS = 250;
+const MS_NULL_TT = {stats: null};
+
+let msShouldStop = false;
+let msGeneration = 0;
+let msSharedMemory = null;
+let msSharedTT = null;
+let msPairFirst31 = null;
+let msPairSecond31 = null;
+let msPairFirst29 = null;
+let msPairSecond29 = null;
+let msMirrorCard = null;
+
+function msTwoDigit(value){
+	return value < 10 ? "0" + value : String(value);
+}
+
+function msCardName(card){
+	const entry = move_dictionary[msTwoDigit(card)];
+	return entry ? entry.name : msTwoDigit(card);
+}
+
+function msCardStartColor(card){
+	const entry = move_dictionary[msTwoDigit(card)];
+	return entry ? entry.startColor : "R";
+}
+
+function msGameState(config){
+	return "ppmpp" + "e".repeat(15) + "PPMPP"
+		+ msTwoDigit(config.red0) + "-"
+		+ msTwoDigit(config.red1) + "-"
+		+ msTwoDigit(config.blue0) + "-"
+		+ msTwoDigit(config.blue1) + "-"
+		+ msTwoDigit(config.neutral) + "X"
+		+ config.startingPlayer;
+}
+
+function msConfigId(config){
+	return "R" + msTwoDigit(config.red0) + msTwoDigit(config.red1)
+		+ "-B" + msTwoDigit(config.blue0) + msTwoDigit(config.blue1)
+		+ "-N" + msTwoDigit(config.neutral)
+		+ "-" + config.startingPlayer;
+}
+
+function msIsMateForStartingPlayer(score, startingPlayer){
+	if(Math.abs(score) < MS_MATE_THRESHOLD) return false;
+	return (startingPlayer == "R" && score > 0) || (startingPlayer == "B" && score < 0);
+}
+
+function msSquareCoord(square){
+	return String.fromCharCode("A".charCodeAt(0) + (square % 5)) + (Math.floor(square / 5) + 1);
+}
+
+function msMirrorSquare(square){
+	return Math.floor(square / 5) * 5 + (4 - (square % 5));
+}
+
+function msDescribeMove(search, move){
+	if(!move) return {};
+	const decoded = fastDecodeMove(search, move);
+	const card = Number(decoded.cardID);
+	return {
+		color: decoded.color,
+		card: msCardName(card),
+		card_id: msTwoDigit(card),
+		from: decoded.startLocation,
+		to: decoded.targetLocation,
+		from_coord: msSquareCoord(decoded.startLocation),
+		to_coord: msSquareCoord(decoded.targetLocation)
+	};
+}
+
+function msMirrorMoveDescription(move){
+	if(!move || !move.card_id) return {};
+	const mirroredCard = msMirrorCard[Number(move.card_id)];
+	const from = msMirrorSquare(move.from);
+	const to = msMirrorSquare(move.to);
+	return {
+		color: move.color,
+		card: msCardName(mirroredCard),
+		card_id: msTwoDigit(mirroredCard),
+		from,
+		to,
+		from_coord: msSquareCoord(from),
+		to_coord: msSquareCoord(to)
+	};
+}
+
+function msCreateSearch(config, startedAt){
+	const search = createFastStartingSearchFromCards(config.red0, config.red1, config.blue0, config.blue1, config.neutral, config.startingPlayer, MS_NULL_TT, msSharedMemory, startedAt);
+	search.maxThinkingTime = null;
+	search.mateOnly = true;
+	return search;
+}
+
+function msInitTables(){
+	if(msSharedTT) return;
+	ensureFastSearchTables();
+	msSharedMemory = createFastSearchMemory();
+	msSharedMemory.mateOnly = true;
+	msSharedTT = {
+		generation: new Uint32Array(MS_TT_SIZE),
+		hashA: new Uint32Array(MS_TT_SIZE),
+		hashB: new Uint32Array(MS_TT_SIZE),
+		depth: new Int8Array(MS_TT_SIZE),
+		score: new Int32Array(MS_TT_SIZE),
+		flag: new Int8Array(MS_TT_SIZE),
+		move: new Uint16Array(MS_TT_SIZE)
+	};
+	msPairFirst31 = msBuildPairPositions(31, 0);
+	msPairSecond31 = msBuildPairPositions(31, 1);
+	msPairFirst29 = msBuildPairPositions(29, 0);
+	msPairSecond29 = msBuildPairPositions(29, 1);
+	msMirrorCard = msBuildMirrorCardMap();
+}
+
+function msBuildPairPositions(size, part){
+	const count = size * (size - 1) / 2;
+	const output = new Uint8Array(count);
+	let index = 0;
+	for(let first=0;first<size-1;first++){
+		for(let second=first+1;second<size;second++){
+			output[index] = part == 0 ? first : second;
+			index += 1;
+		}
+	}
+	return output;
+}
+
+function msMoveSignature(rawMove){
+	let f = 0;
+	let b = 0;
+	let l = 0;
+	let r = 0;
+	for(let i=0;i<rawMove.length;i++){
+		const char = rawMove[i];
+		if(char == "f") f += 1;
+		else if(char == "b") b += 1;
+		else if(char == "l") l += 1;
+		else if(char == "r") r += 1;
+	}
+	return f + "," + b + "," + l + "," + r;
+}
+
+function msMirrorRawMove(rawMove){
+	let output = "";
+	for(let i=0;i<rawMove.length;i++){
+		const char = rawMove[i];
+		output += char == "l" ? "r" : (char == "r" ? "l" : char);
+	}
+	return output;
+}
+
+function msCardSignature(moves){
+	return moves.map(msMoveSignature).sort().join("|");
+}
+
+function msBuildMirrorCardMap(){
+	const signatures = new Map();
+	for(let card=0;card<32;card++){
+		const id = msTwoDigit(card);
+		const entry = move_dictionary[id];
+		signatures.set(entry.startColor + "|" + msCardSignature(entry.moves), card);
+	}
+	const output = new Uint8Array(32);
+	for(let card=0;card<32;card++){
+		const id = msTwoDigit(card);
+		const entry = move_dictionary[id];
+		const mirroredMoves = entry.moves.map(msMirrorRawMove);
+		const mirroredCard = signatures.get(entry.startColor + "|" + msCardSignature(mirroredMoves));
+		output[card] = mirroredCard === undefined ? card : mirroredCard;
+	}
+	return output;
+}
+
+function msStarterCard(neutral, position){
+	return position < neutral ? position : position + 1;
+}
+
+function msNthRemainingCard(neutral, firstStarter, secondStarter, position){
+	let seen = 0;
+	for(let card=0;card<32;card++){
+		if(card == neutral || card == firstStarter || card == secondStarter) continue;
+		if(seen == position) return card;
+		seen += 1;
+	}
+	return 0;
+}
+
+function msPositionWithoutCard(card, excluded){
+	return card < excluded ? card : card - 1;
+}
+
+function msPositionWithoutCards(card, excludedA, excludedB, excludedC){
+	let position = card;
+	if(excludedA < card) position -= 1;
+	if(excludedB < card) position -= 1;
+	if(excludedC < card) position -= 1;
+	return position;
+}
+
+function msPairIndexFromPositions(first, second, size){
+	return first * (2 * size - first - 1) / 2 + (second - first - 1);
+}
+
+function msFillConfigAtIndex(index, config){
+	const neutral = Math.floor(index / MS_CONFIGS_PER_NEUTRAL);
+	const neutralOffset = index - neutral * MS_CONFIGS_PER_NEUTRAL;
+	const starterPairIndex = Math.floor(neutralOffset / MS_OPPONENT_PAIR_COUNT);
+	const opponentPairIndex = neutralOffset - starterPairIndex * MS_OPPONENT_PAIR_COUNT;
+	const starterFirst = msStarterCard(neutral, msPairFirst31[starterPairIndex]);
+	const starterSecond = msStarterCard(neutral, msPairSecond31[starterPairIndex]);
+	const opponentFirst = msNthRemainingCard(neutral, starterFirst, starterSecond, msPairFirst29[opponentPairIndex]);
+	const opponentSecond = msNthRemainingCard(neutral, starterFirst, starterSecond, msPairSecond29[opponentPairIndex]);
+	const startingPlayer = msCardStartColor(neutral);
+	config.index = index;
+	config.neutral = neutral;
+	config.startingPlayer = startingPlayer;
+	if(startingPlayer == "R"){
+		config.red0 = starterFirst;
+		config.red1 = starterSecond;
+		config.blue0 = opponentFirst;
+		config.blue1 = opponentSecond;
+	} else {
+		config.red0 = opponentFirst;
+		config.red1 = opponentSecond;
+		config.blue0 = starterFirst;
+		config.blue1 = starterSecond;
+	}
+	return config;
+}
+
+function msConfigIndex(config){
+	const neutral = config.neutral;
+	const startingPlayer = msCardStartColor(neutral);
+	const starter0 = startingPlayer == "R" ? config.red0 : config.blue0;
+	const starter1 = startingPlayer == "R" ? config.red1 : config.blue1;
+	const opponent0 = startingPlayer == "R" ? config.blue0 : config.red0;
+	const opponent1 = startingPlayer == "R" ? config.blue1 : config.red1;
+	const starterFirst = Math.min(starter0, starter1);
+	const starterSecond = Math.max(starter0, starter1);
+	const opponentFirst = Math.min(opponent0, opponent1);
+	const opponentSecond = Math.max(opponent0, opponent1);
+	const starterPos0 = msPositionWithoutCard(starterFirst, neutral);
+	const starterPos1 = msPositionWithoutCard(starterSecond, neutral);
+	const starterPairIndex = msPairIndexFromPositions(starterPos0, starterPos1, 31);
+	const opponentPos0 = msPositionWithoutCards(opponentFirst, neutral, starterFirst, starterSecond);
+	const opponentPos1 = msPositionWithoutCards(opponentSecond, neutral, starterFirst, starterSecond);
+	const opponentPairIndex = msPairIndexFromPositions(opponentPos0, opponentPos1, 29);
+	return neutral * MS_CONFIGS_PER_NEUTRAL + starterPairIndex * MS_OPPONENT_PAIR_COUNT + opponentPairIndex;
+}
+
+function msFillMirrorConfig(config, mirrorConfig){
+	const redMirror0 = msMirrorCard[config.red0];
+	const redMirror1 = msMirrorCard[config.red1];
+	const blueMirror0 = msMirrorCard[config.blue0];
+	const blueMirror1 = msMirrorCard[config.blue1];
+	mirrorConfig.red0 = redMirror0 <= redMirror1 ? redMirror0 : redMirror1;
+	mirrorConfig.red1 = redMirror0 <= redMirror1 ? redMirror1 : redMirror0;
+	mirrorConfig.blue0 = blueMirror0 <= blueMirror1 ? blueMirror0 : blueMirror1;
+	mirrorConfig.blue1 = blueMirror0 <= blueMirror1 ? blueMirror1 : blueMirror0;
+	mirrorConfig.neutral = msMirrorCard[config.neutral];
+	mirrorConfig.startingPlayer = msCardStartColor(mirrorConfig.neutral);
+	mirrorConfig.index = msConfigIndex(mirrorConfig);
+	return mirrorConfig;
+}
+
+function msNextGeneration(){
+	msGeneration = (msGeneration + 1) >>> 0;
+	if(msGeneration == 0){
+		msSharedTT.generation.fill(0);
+		msGeneration = 1;
+	}
+	return msGeneration;
+}
+
+function msTTIndex(search){
+	return ((search.hashA ^ Math.imul(search.hashB, 0x9e3779b1)) & MS_TT_BUCKET_MASK) * MS_TT_BUCKET_SIZE;
+}
+
+function msTTProbeIndex(tt, search, generation){
+	const index = msTTIndex(search);
+	for(let offset=0;offset<MS_TT_BUCKET_SIZE;offset++){
+		const entryIndex = index + offset;
+		if(tt.generation[entryIndex] == generation && tt.hashA[entryIndex] == search.hashA && tt.hashB[entryIndex] == search.hashB){
+			return entryIndex;
+		}
+	}
+	return -1;
+}
+
+function msTTStore(tt, search, generation, depthRemaining, score, flag, move, ply){
+	const index = msTTIndex(search);
+	let replaceIndex = index;
+	let shallowestDepth = tt.depth[index];
+	for(let offset=0;offset<MS_TT_BUCKET_SIZE;offset++){
+		const entryIndex = index + offset;
+		if(tt.generation[entryIndex] != generation){
+			replaceIndex = entryIndex;
+			break;
+		}
+		if(tt.hashA[entryIndex] == search.hashA && tt.hashB[entryIndex] == search.hashB){
+			if(tt.depth[entryIndex] > depthRemaining) return;
+			replaceIndex = entryIndex;
+			break;
+		}
+		if(tt.depth[entryIndex] < shallowestDepth){
+			shallowestDepth = tt.depth[entryIndex];
+			replaceIndex = entryIndex;
+		}
+	}
+	tt.generation[replaceIndex] = generation;
+	tt.hashA[replaceIndex] = search.hashA;
+	tt.hashB[replaceIndex] = search.hashB;
+	tt.depth[replaceIndex] = depthRemaining;
+	tt.score[replaceIndex] = fastNormalizeTTScoreForStore(score, ply);
+	tt.flag[replaceIndex] = flag;
+	tt.move[replaceIndex] = move;
+}
+
+function msMateAlphaBeta(search, depthRemaining, alpha, beta, ply, tt, generation){
+	GreatestDepthSearched = Math.max(GreatestDepthSearched, ply);
+	const terminalScore = fastTerminalScore(search, ply);
+	if(terminalScore) return terminalScore;
+	if(depthRemaining == 0) return 0;
+
+	const alphaOrig = alpha;
+	const betaOrig = beta;
+	const ttIndex = msTTProbeIndex(tt, search, generation);
+	let ttMove = 0;
+	if(ttIndex >= 0){
+		ttMove = tt.move[ttIndex];
+		if(tt.depth[ttIndex] >= depthRemaining){
+			const ttScore = fastNormalizeTTScoreForProbe(tt.score[ttIndex], ply);
+			const ttFlag = tt.flag[ttIndex];
+			if(ttFlag == TT_EXACT) return ttScore;
+			if(ttFlag == TT_LOWER) alpha = Math.max(alpha, ttScore);
+			else if(ttFlag == TT_UPPER) beta = Math.min(beta, ttScore);
+			if(alpha >= beta) return ttScore;
+		}
+	}
+
+	const moveCount = fastGenerateLegalMoves(search, ply);
+	const legalMoves = search.moveBuffers[ply];
+	if(moveCount == 0) return 0;
+	msOrderMateMoves(search, legalMoves, moveCount, ttMove, ply);
+
+	const maximizingPlayer = search.turn == FAST_RED;
+	let bestMove = legalMoves[0];
+	let bestScore = maximizingPlayer ? -MS_MAX_SCORE - 1 : MS_MAX_SCORE + 1;
+	for(let moveIndex=0;moveIndex<moveCount;moveIndex++){
+		const move = legalMoves[moveIndex];
+		AImovesEvaluated += 1;
+		let score = fastTerminalMoveScore(search, move, ply + 1);
+		if(!score){
+			fastMakeMove(search, move, ply);
+			score = msMateAlphaBeta(search, depthRemaining - 1, alpha, beta, ply + 1, tt, generation);
+			fastUnmakeMove(search, ply);
+		}
+		if((maximizingPlayer && score > bestScore) || (!maximizingPlayer && score < bestScore)){
+			bestScore = score;
+			bestMove = move;
+		}
+		if(maximizingPlayer) alpha = Math.max(alpha, bestScore);
+		else beta = Math.min(beta, bestScore);
+		if(alpha >= beta){
+			fastRecordCutoff(search, move, ply, depthRemaining);
+			break;
+		}
+	}
+
+	let flag = TT_EXACT;
+	if(bestScore <= alphaOrig) flag = TT_UPPER;
+	else if(bestScore >= betaOrig) flag = TT_LOWER;
+	msTTStore(tt, search, generation, depthRemaining, bestScore, flag, bestMove, ply);
+	if(ply == 0) search.rootMove = bestMove;
+	return bestScore;
+}
+
+function msOrderMateMoves(search, moves, moveCount, ttMove, ply){
+	const scores = search.moveScoreBuffers[ply] || (search.moveScoreBuffers[ply] = new Int32Array(FAST_MAX_MOVES));
+	for(let i=0;i<moveCount;i++){
+		const move = moves[i];
+		const score = msMateMoveHeuristic(search, move, ttMove, ply);
+		let j = i - 1;
+		while(j >= 0 && scores[j] < score){
+			moves[j + 1] = moves[j];
+			scores[j + 1] = scores[j];
+			j -= 1;
+		}
+		moves[j + 1] = move;
+		scores[j + 1] = score;
+	}
+}
+
+function msMateMoveHeuristic(search, move, ttMove, ply){
+	if(move == ttMove) return 3000000;
+	const terminalScore = fastTerminalMoveScore(search, move, ply + 1);
+	if(terminalScore){
+		if((search.turn == FAST_RED && terminalScore > 0) || (search.turn == FAST_BLUE && terminalScore < 0)) return 2500000;
+		return -2500000;
+	}
+	const startBit = FastMoveStartBitTable[move];
+	const targetBit = FastMoveTargetBitTable[move];
+	let score = 0;
+	if(search.occupiedMask & targetBit) score += (search.masterMask & targetBit) ? 500000 : 50000;
+	if(search.masterMask & startBit){
+		const target = FastMoveTargetTable[move];
+		if((search.redMask & startBit) && target == 2) score += 1000000;
+		else if((search.redMask & startBit) == 0 && target == 22) score += 1000000;
+		const row = Math.floor(target / 5);
+		score += (search.redMask & startBit) ? (4 - row) * 2000 : row * 2000;
+	}
+	if(search.killerOne[ply] == move) score += 12000;
+	else if(search.killerTwo[ply] == move) score += 10000;
+	const colorIndex = search.turn == FAST_RED ? 0 : 1;
+	score += search.history[colorIndex * FAST_HISTORY_SIZE + move];
+	return score;
+}
+
+function msSearchRoot(config, maxDepth, tt, generation, startedAt){
+	const search = msCreateSearch(config, startedAt);
+	const score = msMateAlphaBeta(search, maxDepth, -MS_MAX_SCORE - 1, MS_MAX_SCORE + 1, 0, tt, generation);
+	return {
+		score,
+		move: search.rootMove || 0,
+		search
+	};
+}
+
+function msExtractPrincipalVariation(config, depth, tt, generation){
+	const search = msCreateSearch(config, getNow());
+	const line = [];
+	let madeMoves = 0;
+	for(let ply=0;ply<depth;ply++){
+		if(fastTerminalScore(search, ply)) break;
+		const ttIndex = msTTProbeIndex(tt, search, generation);
+		if(ttIndex < 0) break;
+		const move = tt.move[ttIndex];
+		if(!move) break;
+		const moveCount = fastGenerateLegalMoves(search, ply);
+		const legalMoves = search.moveBuffers[ply];
+		if(!fastMoveListContains(legalMoves, moveCount, move)) break;
+		line.push(msDescribeMove(search, move));
+		if(fastTerminalMoveScore(search, move, ply + 1)) break;
+		fastMakeMove(search, move, ply);
+		madeMoves += 1;
+	}
+	for(let ply=madeMoves-1;ply>=0;ply--){
+		fastUnmakeMove(search, ply);
+	}
+	return line;
+}
+
+function msBuildMateResult(config, maxDepth, nodes, elapsedMs, score, rootMove, search, tt, generation){
+	const matePlies = MS_MAX_SCORE - Math.abs(score);
+	const result = {
+		config_index: config.index,
+		config_id: msConfigId(config),
+		game_state: msGameState(config),
+		starting_player: config.startingPlayer,
+		red_cards: [msCardName(config.red0), msCardName(config.red1)],
+		blue_cards: [msCardName(config.blue0), msCardName(config.blue1)],
+		neutral: msCardName(config.neutral),
+		max_depth: maxDepth,
+		nodes,
+		elapsed_ms: elapsedMs,
+		mate_found: true,
+		mate_plies: matePlies,
+		mate_moves: Math.ceil(matePlies / 2),
+		search_depth: maxDepth,
+		first_move: msDescribeMove(search, rootMove),
+		principal_variation: msExtractPrincipalVariation(config, matePlies, tt, generation)
+	};
+	return result;
+}
+
+function msMirrorMateResult(result, mirrorConfig){
+	const mirrorResult = {
+		config_index: mirrorConfig.index,
+		config_id: msConfigId(mirrorConfig),
+		game_state: msGameState(mirrorConfig),
+		starting_player: mirrorConfig.startingPlayer,
+		red_cards: [msCardName(mirrorConfig.red0), msCardName(mirrorConfig.red1)],
+		blue_cards: [msCardName(mirrorConfig.blue0), msCardName(mirrorConfig.blue1)],
+		neutral: msCardName(mirrorConfig.neutral),
+		max_depth: result.max_depth,
+		nodes: 0,
+		elapsed_ms: 0,
+		mate_found: true,
+		mate_plies: result.mate_plies,
+		mate_moves: result.mate_moves,
+		search_depth: result.search_depth,
+		first_move: msMirrorMoveDescription(result.first_move),
+		principal_variation: result.principal_variation.map(msMirrorMoveDescription),
+		mirrored_from: result.config_id
+	};
+	return mirrorResult;
+}
+
+function msSolveConfig(config, mirrorConfig, maxDepth){
+	const startedAt = getNow();
+	const generation = msNextGeneration();
+	AImovesEvaluated = 0;
+	GreatestDepthSearched = 0;
+	const root = msSearchRoot(config, maxDepth, msSharedTT, generation, startedAt);
+	const elapsedMs = getNow() - startedAt;
+	const output = {
+		nodes: AImovesEvaluated,
+		elapsed_ms: elapsedMs,
+		mates: []
+	};
+	if(msIsMateForStartingPlayer(root.score, config.startingPlayer)){
+		const result = msBuildMateResult(config, maxDepth, output.nodes, elapsedMs, root.score, root.move, root.search, msSharedTT, generation);
+		output.mates.push(result);
+		if(mirrorConfig && mirrorConfig.index != config.index){
+			output.mates.push(msMirrorMateResult(result, mirrorConfig));
+		}
+	}
+	return output;
+}
+
+function msCreateBatch(startIndex){
+	return {
+		type: "batch",
+		nextIndex: startIndex,
+		configs: 0,
+		searched_configs: 0,
+		skipped_configs: 0,
+		nodes: 0,
+		elapsed_ms: 0,
+		mates: []
+	};
+}
+
+function msFlushBatch(batch, force){
+	if(!force && batch.configs < MS_BATCH_CONFIGS && batch.mates.length < MS_BATCH_MATES && batch.elapsed_ms < MS_BATCH_MS) return false;
+	if(batch.configs == 0 && batch.mates.length == 0) return false;
+	postMessage(batch);
+	return true;
+}
+
+self.onmessage = function(event){
+	const message = event.data;
+	if(message.type == "stop"){
+		msShouldStop = true;
+		return;
+	}
+	if(message.type != "start") return;
+
+	msInitTables();
+	msShouldStop = false;
+	const maxDepth = message.maxDepth || 12;
+	const startIndex = Math.max(0, Number(message.nextIndex) || 0);
+	const config = {};
+	const mirrorConfig = {};
+	let batch = msCreateBatch(startIndex);
+	let batchStartedAt = getNow();
+
+	for(let index=startIndex;index<MS_TOTAL_CONFIGS;index++){
+		if(msShouldStop) break;
+		msFillConfigAtIndex(index, config);
+		msFillMirrorConfig(config, mirrorConfig);
+		batch.configs += 1;
+		batch.nextIndex = index + 1;
+		if(mirrorConfig.index < index && mirrorConfig.index >= startIndex){
+			batch.skipped_configs += 1;
+		} else {
+			const result = msSolveConfig(config, mirrorConfig.index > index ? mirrorConfig : null, maxDepth);
+			batch.searched_configs += 1;
+			batch.nodes += result.nodes;
+			for(let i=0;i<result.mates.length;i++){
+				batch.mates.push(result.mates[i]);
+			}
+		}
+		batch.elapsed_ms = getNow() - batchStartedAt;
+		if(msFlushBatch(batch, false)){
+			batch = msCreateBatch(index + 1);
+			batchStartedAt = getNow();
+		}
+	}
+	msFlushBatch(batch, true);
+	postMessage({type: msShouldStop ? "paused" : "done", index: batch.nextIndex});
+};
+`;
 
 function createEmptyProgress(){
 	return {
 		nextIndex: 0,
-		configsSearched: 0,
 		positionsSearched: 0,
 		totalSearchTimeMs: 0,
+		recentConfigs: [],
 		mates: [],
 		lastSavedAt: ""
 	};
@@ -1039,12 +1175,21 @@ function sanitizeProgress(input){
 	const nextIndex = clampInteger(input.nextIndex ?? input.configsSearched, 0, TOTAL_CONFIGS);
 	return {
 		nextIndex,
-		configsSearched: clampInteger(input.configsSearched ?? nextIndex, 0, TOTAL_CONFIGS),
 		positionsSearched: Math.max(0, Number(input.positionsSearched) || 0),
 		totalSearchTimeMs: Math.max(0, Number(input.totalSearchTimeMs) || 0),
+		recentConfigs: sanitizeRecentConfigs(input.recentConfigs),
 		mates: Array.isArray(input.mates) ? input.mates : [],
 		lastSavedAt: typeof input.lastSavedAt == "string" ? input.lastSavedAt : ""
 	};
+}
+
+function sanitizeRecentConfigs(input){
+	if(!Array.isArray(input)) return [];
+	return input.map((entry) => ({
+		configs: Math.max(1, Number(entry && entry.configs) || 1),
+		nodes: Math.max(0, Number(entry && entry.nodes) || 0),
+		elapsed_ms: Math.max(0, Number(entry && entry.elapsed_ms) || 0)
+	})).filter(entry => entry.nodes > 0 || entry.elapsed_ms > 0).slice(-ROLLING_CONFIG_LIMIT);
 }
 
 function clampInteger(value, min, max){
@@ -1112,8 +1257,42 @@ function formatInteger(value){
 	return Math.floor(value).toLocaleString();
 }
 
+function formatCompact(value){
+	const number = Math.floor(Number(value) || 0);
+	const abs = Math.abs(number);
+	if(abs < 1000) return number.toLocaleString();
+	const units = [
+		{value: 1000000000, suffix: "B"},
+		{value: 1000000, suffix: "M"},
+		{value: 1000, suffix: "K"}
+	];
+	for(const unit of units){
+		if(abs >= unit.value){
+			const scaled = number / unit.value;
+			const rounded = abs >= unit.value * 100 ? scaled.toFixed(0) : scaled.toFixed(1);
+			return rounded.replace(/\.0$/, "") + unit.suffix;
+		}
+	}
+	return number.toLocaleString();
+}
+
+function formatPercent(value){
+	if(!isFinite(value) || value <= 0) return "0%";
+	if(value < 0.01) return value.toFixed(4) + "%";
+	if(value < 1) return value.toFixed(2) + "%";
+	return value.toFixed(1) + "%";
+}
+
 function formatMs(value){
 	if(!isFinite(value) || value <= 0) return "0 ms";
+	if(value < 0.001) return (value * 1000000).toFixed(2) + " ns";
+	if(value < 1) return (value * 1000).toFixed(2) + " us";
+	if(value < 1000) return value.toFixed(3) + " ms";
+	return (value / 1000).toFixed(2) + " s";
+}
+
+function formatDuration(value){
+	if(!isFinite(value) || value <= 0) return "0 s";
 	if(value < 1) return value.toFixed(3) + " ms";
 	if(value < 1000) return value.toFixed(2) + " ms";
 	return (value / 1000).toFixed(2) + " s";
@@ -1125,26 +1304,45 @@ function formatSeconds(value){
 	return (value / 1000).toFixed(2) + " s";
 }
 
-function render(){
-	const livePositions = progress.positionsSearched + active.nodes;
-	const liveTime = progress.totalSearchTimeMs + active.elapsedMs;
-	const configsDone = progress.configsSearched;
-	const percent = (configsDone / TOTAL_CONFIGS) * 100;
-	const avgPositionMs = livePositions > 0 ? liveTime / livePositions : 0;
-	const avgConfigMs = configsDone > 0 ? progress.totalSearchTimeMs / configsDone : 0;
-	const rate = liveTime > 0 ? livePositions / (liveTime / 1000) : 0;
+function formatHoursMinutes(value){
+	if(!isFinite(value) || value <= 0) return "0:00";
+	const totalMinutes = Math.ceil(value / 60000);
+	const hours = Math.floor(totalMinutes / 60);
+	const minutes = totalMinutes % 60;
+	return hours + ":" + String(minutes).padStart(2, "0");
+}
 
-	elements.positionsSearched.textContent = formatInteger(livePositions);
-	elements.configsSearched.textContent = formatInteger(configsDone);
+function matePliesToMoves(plies){
+	return Math.ceil((Number(plies) || 0) / 2);
+}
+
+function titleCase(value){
+	return String(value).split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+}
+
+function render(){
+	const livePositions = progress.positionsSearched;
+	const liveTime = progress.totalSearchTimeMs;
+	const configsDone = progress.nextIndex;
+	const rolling = getRollingTimingStats();
+	const percent = (configsDone / TOTAL_CONFIGS) * 100;
+	const avgPositionMs = rolling.nodes > 0 ? rolling.elapsedMs / rolling.nodes : 0;
+	const avgConfigMs = rolling.configs > 0 ? rolling.elapsedMs / rolling.configs : 0;
+	const rate = liveTime > 0 ? livePositions / (liveTime / 1000) : 0;
+	const estimatedRemainingMs = avgConfigMs > 0 ? avgConfigMs * (TOTAL_CONFIGS - configsDone) : NaN;
+	const matePercent = configsDone > 0 ? (progress.mates.length / configsDone) * 100 : 0;
+
+	elements.positionsSearched.textContent = formatCompact(livePositions);
+	elements.configsSearched.textContent = formatCompact(configsDone);
 	elements.avgPositionTime.textContent = formatMs(avgPositionMs);
-	elements.avgConfigTime.textContent = formatSeconds(avgConfigMs);
-	elements.positionsPerSecond.textContent = formatInteger(rate);
-	elements.matesFound.textContent = formatInteger(progress.mates.length);
-	elements.currentIndex.textContent = worker ? formatInteger(active.index) : formatInteger(progress.nextIndex);
+	elements.avgConfigTime.textContent = formatDuration(avgConfigMs);
+	elements.positionsPerSecond.textContent = formatCompact(rate);
+	elements.matesFound.textContent = formatCompact(progress.mates.length) + " (" + formatPercent(matePercent) + ")";
+	elements.estimatedRemaining.textContent = isFinite(estimatedRemainingMs) ? formatHoursMinutes(estimatedRemainingMs) : "--:--";
 	elements.maxDepth.textContent = String(MAX_DEPTH);
 	elements.progressBar.style.width = Math.min(100, percent).toFixed(6) + "%";
 	elements.percentComplete.textContent = percent.toFixed(4) + "% complete";
-	elements.totalConfigs.textContent = formatInteger(TOTAL_CONFIGS) + " total configs";
+	elements.totalConfigs.textContent = formatCompact(TOTAL_CONFIGS) + " total states";
 	elements.configFormula.textContent = TOTAL_CONFIG_MATH;
 	elements.storageStatus.textContent = "Storage: " + storageMode;
 	elements.lastSaved.textContent = progress.lastSavedAt ? "Saved: " + new Date(progress.lastSavedAt).toLocaleTimeString() : "Not saved";
@@ -1152,7 +1350,50 @@ function render(){
 	elements.runStatus.className = worker ? "badge running" : "badge";
 	elements.startButton.disabled = Boolean(worker) || progress.nextIndex >= TOTAL_CONFIGS;
 	elements.pauseButton.disabled = !worker;
+	renderMateSummary();
 	renderMateList();
+}
+
+function getRollingTimingStats(){
+	const recentConfigs = Array.isArray(progress.recentConfigs) ? progress.recentConfigs : [];
+	return recentConfigs.reduce((stats, entry) => {
+		stats.configs += Math.max(1, Number(entry.configs) || 1);
+		stats.nodes += Math.max(0, Number(entry.nodes) || 0);
+		stats.elapsedMs += Math.max(0, Number(entry.elapsed_ms) || 0);
+		return stats;
+	}, {configs: 0, nodes: 0, elapsedMs: 0});
+}
+
+function recordRecentBatch(batch){
+	if(!Array.isArray(progress.recentConfigs)) progress.recentConfigs = [];
+	progress.recentConfigs.push({
+		configs: Math.max(1, Number(batch.configs) || 1),
+		nodes: Math.max(0, Number(batch.nodes) || 0),
+		elapsed_ms: Math.max(0, Number(batch.elapsed_ms) || 0)
+	});
+	if(progress.recentConfigs.length > ROLLING_CONFIG_LIMIT){
+		progress.recentConfigs.splice(0, progress.recentConfigs.length - ROLLING_CONFIG_LIMIT);
+	}
+}
+
+function renderMateSummary(){
+	const counts = new Map();
+	for(const mate of progress.mates){
+		if(!mate || !Number.isFinite(Number(mate.mate_plies))) continue;
+		const mateMoves = mate.mate_moves || matePliesToMoves(mate.mate_plies);
+		counts.set(mateMoves, (counts.get(mateMoves) || 0) + 1);
+	}
+	const mateLengths = Array.from(counts.keys()).sort((a, b) => a - b);
+	if(mateLengths.length == 0){
+		elements.mateSummary.innerHTML = '<tr><td class="emptySummary" colspan="2">No mates found yet.</td></tr>';
+		return;
+	}
+	elements.mateSummary.innerHTML = mateLengths.map((mateMoves) => `
+		<tr>
+			<td>Mate in ${mateMoves}</td>
+			<td>${formatCompact(counts.get(mateMoves))}</td>
+		</tr>
+	`).join("");
 }
 
 function renderMateList(){
@@ -1162,30 +1403,53 @@ function renderMateList(){
 	}
 	const latestFirst = progress.mates.slice().reverse();
 	elements.mateList.innerHTML = latestFirst.map((mate, index) => {
-		const firstMove = mate.first_move ? formatMove(mate.first_move) : "No move";
-		const sideClass = mate.starting_player == "R" ? "red" : "running";
-		const redCards = mate.red_cards.map(cardPill).join("");
-		const blueCards = mate.blue_cards.map(cardPill).join("");
+		const cards = getCardsFromGameState(mate.game_state);
+		const sideClass = mate.starting_player == "R" ? "red" : "blue";
+		const redCards = cards.red.map(card => cardPill(card, "red")).join("");
+		const blueCards = cards.blue.map(card => cardPill(card, "blue")).join("");
+		const neutral = cardPill(cards.neutral, "neutral");
+		const mateMoves = mate.mate_moves || matePliesToMoves(mate.mate_plies);
 		return `
 			<button type="button" class="mateRow" data-mate="${progress.mates.length - 1 - index}">
 				<div class="mateHeader">
-					<span class="mateTitle">Mate in ${mate.mate_plies} - ${mate.config_id}</span>
-					<span class="badge ${sideClass}">${mate.starting_player}</span>
+					<span class="mateTitle ${sideClass}">Mate in ${mateMoves}</span>
 				</div>
-				<div class="mateMeta">First move: ${escapeHtml(firstMove)} | Nodes: ${formatInteger(mate.nodes)} | Time: ${formatSeconds(mate.elapsed_ms)}</div>
-				<div class="cardStrip">${redCards}${blueCards}${cardPill(mate.neutral)}</div>
+				<div class="cardDiagram">
+					<div class="cardGroup"><span class="cardGroupLabel red">Red</span>${redCards}</div>
+					<div class="cardGroup"><span class="cardGroupLabel neutral">Neutral</span>${neutral}</div>
+					<div class="cardGroup"><span class="cardGroupLabel blue">Blue</span>${blueCards}</div>
+				</div>
 			</button>
 		`;
 	}).join("");
 }
 
-function cardPill(label){
-	const name = label.split(":").slice(1).join(":");
-	return `<span class="cardPill"><span class="cardThumb" style="background-image: url('images/${escapeAttribute(name)}.jpeg')"></span>${escapeHtml(label)}</span>`;
+function getCardsFromGameState(gameState){
+	if(!gameState || gameState.length < 39){
+		return {red: [], blue: [], neutral: ""};
+	}
+	return {
+		red: [cardNameFromId(gameState.substring(25, 27)), cardNameFromId(gameState.substring(28, 30))],
+		blue: [cardNameFromId(gameState.substring(31, 33)), cardNameFromId(gameState.substring(34, 36))],
+		neutral: cardNameFromId(gameState.substring(37, 39))
+	};
 }
 
-function formatMove(move){
-	return move.color + " " + move.card + " " + move.from_coord + "->" + move.to_coord;
+function cardNameFromId(cardId){
+	const numeric = Number(cardId);
+	const fallback = typeof cardId == "string" ? cardId.replace(/^\d+:/, "") : "";
+	const names = [
+		"monkey", "tiger", "dragon", "crab", "elephant", "mantis", "crane", "boar",
+		"horse", "ox", "cobra", "eel", "rooster", "goose", "frog", "rabbit",
+		"fox", "dog", "giraffe", "panda", "bear", "kirin", "sea snake", "viper",
+		"phoenix", "mouse", "rat", "turtle", "tanuki", "iguana", "sable", "otter"
+	];
+	return names[numeric] || fallback;
+}
+
+function cardPill(name, color){
+	const className = color == "red" || color == "blue" ? "cardPill " + color : "cardPill";
+	return `<span class="${className}"><span class="cardThumb" style="background-image: url('images/${escapeAttribute(name)}.jpeg')"></span>${escapeHtml(titleCase(name))}</span>`;
 }
 
 function escapeHtml(value){
@@ -1204,17 +1468,16 @@ function escapeAttribute(value){
 
 function startSearch(){
 	if(worker || progress.nextIndex >= TOTAL_CONFIGS) return;
-	active = {nodes: 0, elapsedMs: 0, index: progress.nextIndex};
+	active = {index: progress.nextIndex};
 	runStartedAt = performance.now();
-	const workerSource = document.getElementById("mateSearchWorker").textContent;
-	worker = new Worker(URL.createObjectURL(new Blob([workerSource], {type: "text/javascript"})));
+	worker = createMateSearchWorker();
 	worker.onmessage = handleWorkerMessage;
 	worker.onerror = (event) => {
 		log("Worker error: " + event.message);
 		stopWorker();
 		render();
 	};
-	worker.postMessage({type: "start", nextIndex: progress.nextIndex, maxDepth: MAX_DEPTH, progressNodes: PROGRESS_NODES});
+	worker.postMessage({type: "start", nextIndex: progress.nextIndex, maxDepth: MAX_DEPTH});
 	log("Search started at config " + progress.nextIndex + ".");
 	render();
 }
@@ -1226,38 +1489,78 @@ function pauseSearch(){
 	render();
 }
 
-async function exportProgress(){
+async function exportStartingStates(){
 	await saveQueue;
-	const snapshot = JSON.stringify(progress, null, 2) + "\n";
-	const suggestedName = "onitama-matesearch-progress-" + new Date().toISOString().slice(0, 10) + ".json";
-	if(window.showSaveFilePicker){
-		try {
-			const handle = await window.showSaveFilePicker({
-				suggestedName,
-				types: [{
-					description: "JSON files",
-					accept: {"application/json": [".json"]}
-				}]
-			});
-			const writable = await handle.createWritable();
-			await writable.write(snapshot);
-			await writable.close();
-			log("Progress exported to " + handle.name + ".");
-			return;
-		} catch (error) {
-			if(error && error.name == "AbortError") return;
-			log("File export failed; downloading JSON instead.");
-		}
+	const records = buildStartingStateExport();
+	const snapshot = JSON.stringify(records, null, 4) + "\n";
+	if(await writeStartingStatesToLocalServer(snapshot)){
+		log("Exported " + formatCompact(records.length) + " starting states to " + STARTING_STATES_PATH + ".");
+		return;
 	}
+	const exportFileName = getStartingStatesExportFileName(records.length);
+	downloadStartingStates(snapshot, exportFileName);
+	log("Download started for " + exportFileName + " with " + formatCompact(records.length) + " starting states.");
+}
+
+function buildStartingStateExport(){
+	const records = [];
+	const byState = new Map();
+	const addRecord = (record) => {
+		if(!record || !record.game_state || !Number.isFinite(Number(record.mate_plies))) return;
+		const normalized = {
+			game_state: record.game_state,
+			mate_plies: Number(record.mate_plies)
+		};
+		const existingIndex = byState.get(normalized.game_state);
+		if(existingIndex === undefined){
+			byState.set(normalized.game_state, records.length);
+			records.push(normalized);
+			return;
+		}
+		if(normalized.mate_plies < records[existingIndex].mate_plies){
+			records[existingIndex] = normalized;
+		}
+	};
+	if(Array.isArray(window.MATE_STARTING_STATES)){
+		window.MATE_STARTING_STATES.forEach(addRecord);
+	}
+	progress.mates.forEach((mate) => {
+		if(mate && mate.mate_found) addRecord(mate);
+	});
+	return records;
+}
+
+async function writeStartingStatesToLocalServer(snapshot){
+	if(!canAttemptLocalServerWrite()) return false;
+	try {
+		const response = await fetch(STARTING_STATES_PATH, {
+			method: "PUT",
+			headers: {"Content-Type": "application/json"},
+			body: snapshot
+		});
+		return response.ok;
+	} catch (error) {
+		return false;
+	}
+}
+
+function canAttemptLocalServerWrite(){
+	return window.location.protocol == "http:" || window.location.protocol == "https:";
+}
+
+function getStartingStatesExportFileName(mateCount){
+	return "mate_starting_states_" + Math.max(0, Number(mateCount) || 0) + ".json";
+}
+
+function downloadStartingStates(snapshot, fileName){
 	const url = URL.createObjectURL(new Blob([snapshot], {type: "application/json"}));
 	const link = document.createElement("a");
 	link.href = url;
-	link.download = suggestedName;
+	link.download = fileName;
 	document.body.appendChild(link);
 	link.click();
 	link.remove();
 	URL.revokeObjectURL(url);
-	log("Progress download started.");
 }
 
 function stopWorker(){
@@ -1265,37 +1568,64 @@ function stopWorker(){
 		worker.terminate();
 		worker = null;
 	}
-	active = {nodes: 0, elapsedMs: 0, index: progress.nextIndex};
+	if(workerUrl){
+		URL.revokeObjectURL(workerUrl);
+		workerUrl = null;
+	}
+	active = {index: progress.nextIndex};
 }
 
 function handleWorkerMessage(event){
 	const message = event.data;
 	if(message.type == "progress"){
 		active = {
-			nodes: message.activeNodes,
-			elapsedMs: message.activeElapsedMs,
 			index: message.index
 		};
+		render();
+		return;
+	}
+	if(message.type == "batch"){
+		progress.nextIndex = Math.max(progress.nextIndex, clampInteger(message.nextIndex, 0, TOTAL_CONFIGS));
+		progress.positionsSearched += Math.max(0, Number(message.nodes) || 0);
+		progress.totalSearchTimeMs += Math.max(0, Number(message.elapsed_ms) || 0);
+		recordRecentBatch(message);
+		progress.lastSavedAt = new Date().toISOString();
+		active = {index: progress.nextIndex};
+		if(Array.isArray(message.mates) && message.mates.length){
+			for(const mate of message.mates){
+				progress.mates.push(mate);
+			}
+			if(message.mates.length == 1){
+				const mate = message.mates[0];
+				log("PING mate found: " + mate.config_id + " mate in " + (mate.mate_moves || matePliesToMoves(mate.mate_plies)) + ".");
+			} else {
+				log("PING " + message.mates.length + " mates found in latest batch.");
+			}
+		}
+		queueSave();
 		render();
 		return;
 	}
 	if(message.type == "result"){
 		const result = message.result;
 		progress.nextIndex = result.config_index + 1;
-		progress.configsSearched = Math.max(progress.configsSearched + 1, progress.nextIndex);
 		progress.positionsSearched += result.nodes;
 		progress.totalSearchTimeMs += result.elapsed_ms;
+		recordRecentBatch({configs: 1, nodes: result.nodes, elapsed_ms: result.elapsed_ms});
 		progress.lastSavedAt = new Date().toISOString();
-		active = {nodes: 0, elapsedMs: 0, index: progress.nextIndex};
+		active = {index: progress.nextIndex};
 		if(result.mate_found){
 			progress.mates.push(result);
-			log("PING mate found: " + result.config_id + " mate in " + result.mate_plies + ".");
+			log("PING mate found: " + result.config_id + " mate in " + (result.mate_moves || matePliesToMoves(result.mate_plies)) + ".");
 		}
 		queueSave();
 		render();
 		return;
 	}
 	if(message.type == "done"){
+		if(Number.isFinite(Number(message.index))){
+			progress.nextIndex = Math.max(progress.nextIndex, clampInteger(message.index, 0, TOTAL_CONFIGS));
+		}
 		log("Search complete.");
 		stopWorker();
 		render();
@@ -1311,7 +1641,7 @@ function resetProgress(){
 	if(worker) stopWorker();
 	if(!confirm("Reset mate search progress?")) return;
 	progress = createEmptyProgress();
-	active = {nodes: 0, elapsedMs: 0, index: 0};
+	active = {index: 0};
 	progress.lastSavedAt = new Date().toISOString();
 	queueSave();
 	log("Progress reset.");
@@ -1334,7 +1664,7 @@ function log(message){
 
 elements.startButton.addEventListener("click", startSearch);
 elements.pauseButton.addEventListener("click", pauseSearch);
-elements.exportButton.addEventListener("click", exportProgress);
+elements.exportButton.addEventListener("click", exportStartingStates);
 elements.resetButton.addEventListener("click", resetProgress);
 elements.mateList.addEventListener("click", (event) => {
 	const row = event.target.closest(".mateRow");
@@ -1344,7 +1674,7 @@ elements.mateList.addEventListener("click", (event) => {
 
 (async function init(){
 	progress = await loadProgress();
-	elements.totalConfigs.textContent = formatInteger(TOTAL_CONFIGS) + " total configs";
+	elements.totalConfigs.textContent = formatCompact(TOTAL_CONFIGS) + " total states";
 	render();
 })();
 	</script>
