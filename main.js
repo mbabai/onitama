@@ -57,6 +57,14 @@ var AIWorkerRequests = {}
 var AIWorkerMessageId = 0
 var ActiveAIRequestId = 0
 var LatestAIEvalMove = null
+var KnownMateEvaluation = null
+var BackgroundSearchRequestId = 0
+var BackgroundSearchActive = false
+var BackgroundSearchTimer = null
+var BackgroundSearchState = ""
+var EvaluationBarCurrentTopPercent = 50
+var EvaluationBarTargetTopPercent = 50
+var EvaluationBarAnimationFrame = null
 
 const STARTING_BOARD_STATE = "ppmpp" + "e".repeat(15) + "PPMPP";
 const BOARD_LEFT = 500
@@ -75,6 +83,10 @@ const NEUTRAL_TOP = 380
 const MIN_SELECTED_CARDS = 5
 const SELECTED_CARDS_COOKIE = "onitamaSelectedCards"
 const PLAYER_COLOR_COOKIE = "onitamaPlayerColor"
+const BACKGROUND_THINKING_TIME = 150
+const BACKGROUND_THINKING_DELAY = 35
+const EVAL_BAR_LERP_FACTOR = 0.16
+const EVAL_BAR_LERP_EPSILON = 0.08
 const CUSTOM_BOARD_LEFT = 260
 const CUSTOM_CARD_LEFT_1 = 270
 const CUSTOM_CARD_LEFT_2 = 520
@@ -150,6 +162,7 @@ function goHome(){
 	const homeMarker = "_______________________\n________HOME________\n_______________________"
 	setTimeout(() => console.log(homeMarker), 0)
 	ActiveAIRequestId += 1
+	stopBackgroundSearch()
 	resetAIWorker("AI search cancelled.")
 	AIIsThinking = false
 	PlayerCanMove = false
@@ -207,6 +220,7 @@ function startCustomSetup(){
 	PlayerColor = selectedColor == "random" ? (Math.random() > 0.5 ? "R" : "B") : selectedColor
 	AIcolor = [PlayerColor == "R" ? "B" : "R"]
 	ActiveAIRequestId += 1
+	stopBackgroundSearch()
 	resetAIWorker("AI search cancelled.")
 	AIIsThinking = false
 	PlayerCanMove = false
@@ -235,6 +249,7 @@ function startCustomSetup(){
 	renderCustomCardSlots()
 	showCustomBeginButton()
 	updateTakeBackButton()
+	updateSwitchSidesButton()
 }
 
 function setCustomSetupMode(isActive){
@@ -252,6 +267,7 @@ function setCustomSetupMode(isActive){
 		CustomSelectedPieceSquare = null
 		hideCustomBeginButton()
 	}
+	updateSwitchSidesButton()
 }
 
 function positionCustomSetupLayout(){
@@ -679,25 +695,100 @@ function getAIMove(gameState,color){
 	return evalMove
 }
 
+function maybeStartBackgroundSearch(){
+	if(!shouldRunBackgroundSearch()){
+		stopBackgroundSearch()
+		return
+	}
+	if(BackgroundSearchActive && BackgroundSearchState == GameState) return
+	BackgroundSearchRequestId += 1
+	BackgroundSearchActive = true
+	BackgroundSearchState = GameState
+	scheduleBackgroundSearch(BACKGROUND_THINKING_DELAY)
+}
+
+function shouldRunBackgroundSearch(){
+	return GameHasStarted
+		&& !GameIsOver
+		&& !AIIsThinking
+		&& !CustomSetupActive
+		&& typeof Worker !== "undefined"
+		&& !AIcolor.includes(whosTurn(GameState))
+}
+
+function scheduleBackgroundSearch(delayMs){
+	clearBackgroundSearchTimer()
+	BackgroundSearchTimer = setTimeout(runBackgroundSearchChunk, delayMs)
+}
+
+function clearBackgroundSearchTimer(){
+	if(BackgroundSearchTimer){
+		clearTimeout(BackgroundSearchTimer)
+		BackgroundSearchTimer = null
+	}
+}
+
+function stopBackgroundSearch(){
+	BackgroundSearchRequestId += 1
+	BackgroundSearchActive = false
+	BackgroundSearchState = ""
+	clearBackgroundSearchTimer()
+}
+
+function runBackgroundSearchChunk(){
+	clearBackgroundSearchTimer()
+	if(!shouldRunBackgroundSearch()){
+		stopBackgroundSearch()
+		return
+	}
+	const requestId = BackgroundSearchRequestId
+	const state = GameState
+	const color = whosTurn(state)
+	BackgroundSearchState = state
+	getAIMoveInWorker(state, color, {
+		mode: "background",
+		maxThinkingTime: BACKGROUND_THINKING_TIME,
+		emitProgress: true,
+		onProgress: function(progress){
+			if(requestId != BackgroundSearchRequestId || state != GameState || !shouldRunBackgroundSearch()) return
+			setLatestAIEvaluation(progress.evalMove)
+		}
+	}).then((result) => {
+		if(requestId != BackgroundSearchRequestId || state != GameState || !shouldRunBackgroundSearch()) return
+		setLatestAIEvaluation(result.evalMove)
+		scheduleBackgroundSearch(BACKGROUND_THINKING_DELAY)
+	}).catch((error) => {
+		if(requestId != BackgroundSearchRequestId) return
+		console.warn("Background AI search paused.", error)
+		stopBackgroundSearch()
+	})
+}
 
 function doAIMove(gameState,color){
 	const requestId = ++ActiveAIRequestId
-	resetAIWorker("AI search cancelled.")
+	stopBackgroundSearch()
 	PlayerCanMove = false
 	AIIsThinking = true
 	updateAIThinkingIndicator(color)
 	console.log("Thinking about move...")
 	setTimeout(() => {
-		getAIMoveInWorker(gameState,color).then((result) => {
+		getAIMoveInWorker(gameState,color, {
+			mode: "move",
+			maxThinkingTime: MaxThinkingTime,
+			emitProgress: true,
+			onProgress: function(progress){
+				if(requestId != ActiveAIRequestId || gameState != GameState || whosTurn(GameState) != color) return
+				setLatestAIEvaluation(progress.evalMove)
+			}
+		}).then((result) => {
 			if(requestId != ActiveAIRequestId || gameState != GameState || whosTurn(GameState) != color) return
 			AIIsThinking = false
 			updateAIThinkingIndicator(color)
 			PlayerCanMove = true
 			AImovesEvaluated = result.nodes
 			GreatestDepthSearched = result.depth
-			logAIMoveResult(result.evalMove, color, result.nodes, result.depth, result.thinkingTime)
+			logAIMoveResult(result.evalMove, color, result.nodes, result.depth, result.thinkingTime, result.ttStats)
 			doRealMove(GameState, result.evalMove.m)
-			setLatestAIEvaluation(result.evalMove)
 		}).catch((error) => {
 			if(requestId != ActiveAIRequestId || gameState != GameState || whosTurn(GameState) != color) return
 			console.warn("AI worker failed; using quick fallback move.", error)
@@ -706,13 +797,12 @@ function doAIMove(gameState,color){
 			PlayerCanMove = true
 			const fallbackMove = getFallbackMove(GameState)
 			doRealMove(GameState, fallbackMove.m)
-			setLatestAIEvaluation(fallbackMove)
 		})
 	},100)
 
 }
 
-function logAIMoveResult(evalMove, color, nodes, depth, thinkingTime){
+function logAIMoveResult(evalMove, color, nodes, depth, thinkingTime, ttStats=null){
 	if (evalMove.exact && isLosingScoreForColor(evalMove.e, color)){
 		if(!ResignShown){
 			console.log("AI resigns")
@@ -730,9 +820,13 @@ function logAIMoveResult(evalMove, color, nodes, depth, thinkingTime){
 	console.log("Thinking time: "+thinkingTime)
 	console.log("Edge: "+winningPlayer)
 	console.log("Greatest Depth Searched: "+depth)
+	if(ttStats && ttStats.probes){
+		const hitRate = Math.round((ttStats.hits / ttStats.probes) * 1000) / 10
+		console.log("TT hits: "+ttStats.hits+"/"+ttStats.probes+" ("+hitRate+"%), TT cutoffs: "+ttStats.ttCutoffs+", search cutoffs: "+ttStats.searchCutoffs+", stores: "+ttStats.stores)
+	}
 }
 
-function getAIMoveInWorker(gameState,color){
+function getAIMoveInWorker(gameState,color,options={}){
 	return new Promise((resolve,reject) => {
 		if(typeof Worker === "undefined" || typeof Blob === "undefined" || typeof URL === "undefined"){
 			reject("Web Workers are not available in this browser.")
@@ -740,14 +834,22 @@ function getAIMoveInWorker(gameState,color){
 		}
 		const worker = getAIWorker()
 		const messageId = ++AIWorkerMessageId
-		AIWorkerRequests[messageId] = {resolve: resolve, reject: reject}
+		AIWorkerRequests[messageId] = {resolve: resolve, reject: reject, onProgress: options.onProgress}
 		worker.postMessage({
 			id: messageId,
+			type: "search",
+			mode: options.mode || "move",
 			gameState: gameState,
 			color: color,
-			maxThinkingTime: MaxThinkingTime
+			maxThinkingTime: options.maxThinkingTime || MaxThinkingTime,
+			emitProgress: options.emitProgress === true,
+			ttKey: getCurrentSearchKey()
 		})
 	})
+}
+
+function getCurrentSearchKey(){
+	return GameHistory && GameHistory.gameStart ? GameHistory.gameStart : GameState
 }
 
 function getAIWorker(){
@@ -757,6 +859,10 @@ function getAIWorker(){
 	AIWorker.onmessage = (event) => {
 		const request = AIWorkerRequests[event.data.id]
 		if(!request) return
+		if(event.data.type == "progress"){
+			if(request.onProgress) request.onProgress(event.data)
+			return
+		}
 		delete AIWorkerRequests[event.data.id]
 		if(event.data.error){
 			request.reject(event.data.error)
@@ -776,6 +882,7 @@ function getAIWorker(){
 }
 
 function resetAIWorker(reason=null){
+	stopBackgroundSearch()
 	if(reason){
 		const pendingRequests = AIWorkerRequests
 		AIWorkerRequests = {}
@@ -802,17 +909,30 @@ function buildAIWorkerScript(){
 		isWinningScoreForColor,
 		isLosingScoreForColor,
 		timeBasedMinMax,
+		continueTimeBasedMinMax,
+		fastSearchRoot,
+		getSharedFastTT,
+		getSharedFastSearchSession,
+		createFastSearchSession,
+		createFastSearchMemory,
 		createFastSearch,
 		createFastTranspositionTable,
+		createFastTTStats,
+		fastCloneTTStats,
 		ensureFastSearchTables,
 		createFastZobrist,
 		fastAlphaBeta,
 		fastTTIndex,
 		fastTTProbe,
 		fastTTStore,
+		fastNormalizeTTScoreForStore,
+		fastNormalizeTTScoreForProbe,
+		fastProbeRootResult,
+		fastStorePrincipalVariation,
 		fastFallbackSearch,
 		fastGenerateLegalMoves,
 		fastOrderMoves,
+		fastMoveListContains,
 		fastMoveHeuristic,
 		fastRecordCutoff,
 		fastMakeMove,
@@ -855,16 +975,24 @@ function buildAIWorkerScript(){
 		const TT_LOWER = ${TT_LOWER};
 		const TT_UPPER = ${TT_UPPER};
 		const FAST_BOARD_MASK = ${FAST_BOARD_MASK};
+		const FAST_ASPIRATION_WINDOW = ${FAST_ASPIRATION_WINDOW};
+		const FAST_PVS_WINDOW = ${FAST_PVS_WINDOW};
 		const FAST_TT_BITS = ${FAST_TT_BITS};
 		const FAST_TT_SIZE = ${FAST_TT_SIZE};
-		const FAST_TT_MASK = ${FAST_TT_MASK};
+		const FAST_TT_BUCKET_SIZE = ${FAST_TT_BUCKET_SIZE};
+		const FAST_TT_BUCKET_MASK = ${FAST_TT_BUCKET_MASK};
 		const FAST_HISTORY_SIZE = ${FAST_HISTORY_SIZE};
 		const FAST_HISTORY_MAX = ${FAST_HISTORY_MAX};
 		const FAST_KILLER_SCORE = ${FAST_KILLER_SCORE};
+		const FAST_MAX_MOVES = ${FAST_MAX_MOVES};
 		var FastMoveTable = null;
 		var FastMoveMask = null;
 		var FastZobrist = null;
 		var FastCenterTable = null;
+		var FastSharedTT = null;
+		var FastSharedTTKey = null;
+		var FastSharedSearchMemory = null;
+		var FastSharedSearchSession = null;
 		var move_dictionary = ${JSON.stringify(move_dictionary)};
 		String.prototype.countLetters = function(inputLetter) {
 			return this.split(inputLetter).length -1;
@@ -876,13 +1004,30 @@ function buildAIWorkerScript(){
 				AImovesEvaluated = 0;
 				GreatestDepthSearched = 0;
 				const thinkingStartTime = getNow();
-				const evalMove = timeBasedMinMax(event.data.gameState, thinkingStartTime, event.data.color);
+				const sharedSession = getSharedFastSearchSession(event.data.ttKey || "default", event.data.gameState);
+				const progressCallback = event.data.emitProgress ? function(progress){
+					self.postMessage({
+						id: event.data.id,
+						type: "progress",
+						evalMove: progress.evalMove,
+						nodes: progress.nodes,
+						depth: progress.depth,
+						completedDepth: progress.completedDepth,
+						thinkingTime: progress.thinkingTime,
+						ttStats: progress.ttStats
+					});
+				} : null;
+				const evalMove = continueTimeBasedMinMax(event.data.gameState, thinkingStartTime, event.data.color, sharedSession, progressCallback);
 				self.postMessage({
 					id: event.data.id,
+					type: "done",
 					evalMove: evalMove,
 					nodes: AImovesEvaluated,
-					depth: GreatestDepthSearched,
-					thinkingTime: (getNow() - thinkingStartTime) / 1000
+					depth: evalMove.searchDepth || GreatestDepthSearched,
+					maxPly: GreatestDepthSearched,
+					completedDepth: evalMove.searchDepth || sharedSession.completedDepth || 0,
+					thinkingTime: (getNow() - thinkingStartTime) / 1000,
+					ttStats: fastCloneTTStats(sharedSession.tt)
 				});
 			} catch (error) {
 				self.postMessage({
@@ -921,6 +1066,7 @@ function startGameFromState(initialGameState){
 	GameHistory.gameStart = GameState
 	GameHistory.stateHistory = [GameState]
 	updateTakeBackButton()
+	updateSwitchSidesButton()
 	var thisGameMoveSets = getThisGameCardsMoveSet(move_dictionary, GameState) // Filter down all possible moves to just the cards in this game
 	precomputeOnBoardMoves(thisGameMoveSets)
 }
@@ -931,9 +1077,12 @@ function startBoardGame(){
 	PlayerCanMove = true
 	hideBoardStartButton()
 	updateTakeBackButton()
+	updateSwitchSidesButton()
 	if(AIcolor.includes(whosTurn(GameState))){ // If its the AI's turn (and there is an AI) the AI makes a move.
 		console.log("Starting game with AI...")
 		doAIMove(GameState,whosTurn(GameState))
+	} else {
+		maybeStartBackgroundSearch()
 	}
 }
 
@@ -956,7 +1105,30 @@ function takeBack(){
 	GameHistory.stateHistory = getStateHistoryThroughIndex(targetHistoryIndex)
 
 	updateUI(GameState)
+	maybeStartBackgroundSearch()
 	console.log("Took back to "+GameHistory.moveHistory.length+" plies.")
+}
+
+function switchSides(){
+	if(CustomSetupActive) return
+	const oldPlayerColor = PlayerColor
+	ActiveAIRequestId += 1
+	resetAIWorker("AI search cancelled.")
+	AIIsThinking = false
+	currentMoveUI = {}
+	PlayerColor = oppositeColor(PlayerColor)
+	AIcolor = [oldPlayerColor]
+	PlayerCanMove = GameHasStarted && !GameIsOver && !AIcolor.includes(whosTurn(GameState))
+	setCookie(PLAYER_COLOR_COOKIE, PlayerColor)
+	applyPlayerPerspective()
+	updateUI(GameState)
+	updateSwitchSidesButton()
+	if(!GameHasStarted || GameIsOver) return
+	if(AIcolor.includes(whosTurn(GameState))){
+		doAIMove(GameState, whosTurn(GameState))
+	} else {
+		maybeStartBackgroundSearch()
+	}
 }
 
 function getTakeBackHistoryIndex(){
@@ -1005,34 +1177,88 @@ const TT_EXACT = 0
 const TT_LOWER = 1
 const TT_UPPER = 2
 const FAST_BOARD_MASK = (1 << 25) - 1
+const FAST_ASPIRATION_WINDOW = 8
+const FAST_PVS_WINDOW = 0.01
 const FAST_TT_BITS = 20
 const FAST_TT_SIZE = 1 << FAST_TT_BITS
-const FAST_TT_MASK = FAST_TT_SIZE - 1
+const FAST_TT_BUCKET_SIZE = 2
+const FAST_TT_BUCKET_MASK = (FAST_TT_SIZE / FAST_TT_BUCKET_SIZE) - 1
 const FAST_HISTORY_SIZE = 1 << 13
 const FAST_HISTORY_MAX = 7000
 const FAST_KILLER_SCORE = 8000
+const FAST_MAX_MOVES = 128
 var FastMoveTable = null
 var FastMoveMask = null
 var FastZobrist = null
 var FastCenterTable = null
+var FastSharedTT = null
+var FastSharedTTKey = null
+var FastSharedSearchMemory = null
+var FastSharedSearchSession = null
 
-function timeBasedMinMax(gameState, thinkingStartTime, color){
+function timeBasedMinMax(gameState, thinkingStartTime, color, transpositionTable=null, progressCallback=null){
+	const searchMemory = createFastSearchMemory()
+	const session = createFastSearchSession("standalone|" + gameState, gameState, transpositionTable || createFastTranspositionTable(), searchMemory)
+	return continueTimeBasedMinMax(gameState, thinkingStartTime, color, session, progressCallback)
+}
+
+function continueTimeBasedMinMax(gameState, thinkingStartTime, color, session, progressCallback=null){
 	// Iterative deepening over a compact, mutable search state.
 	EvaluatedStates = {}
 	StatesMovesLists = {}
 	AImovesEvaluated = 0
 	GreatestDepthSearched = 0
-	const search = createFastSearch(gameState, thinkingStartTime)
-	var evalMove = fastResultToEval(search, fastFallbackSearch(search))
-	var depthsBestMove = {}
-	var depthRemaining = 0
+	if(!session.search || session.gameState != gameState){
+		session.gameState = gameState
+		session.search = createFastSearch(gameState, thinkingStartTime, session.tt, session)
+		const rootResult = fastProbeRootResult(session.search)
+		if(rootResult && rootResult.exact && rootResult.depth > 0){
+			session.completedDepth = rootResult.depth
+			session.previousScore = rootResult.score
+			session.rootMove = rootResult.move
+			session.bestResult = rootResult
+			session.search.rootMove = rootResult.move
+			fastStorePrincipalVariation(session.search, rootResult.depth)
+			session.previousPv = session.search.previousPv
+			session.bestEvalMove = fastResultToEval(session.search, rootResult)
+			session.bestEvalMove.searchDepth = rootResult.depth
+			session.depthsBestMove[rootResult.depth] = session.bestEvalMove
+		}
+	} else {
+		session.search.thinkingStartTime = thinkingStartTime
+	}
+	const search = session.search
+	search.thinkingStartTime = thinkingStartTime
+	var evalMove = session.bestEvalMove || fastResultToEval(search, fastFallbackSearch(search))
+	if(session.completedDepth > 0 && !evalMove.searchDepth) evalMove.searchDepth = session.completedDepth
+	var depthRemaining = session.completedDepth || 0
+	var previousScore = session.previousScore
 	while(getNow() - thinkingStartTime < MaxThinkingTime){
 		depthRemaining++
-		const thisEvalMove = fastAlphaBeta(search, depthRemaining, -FAST_MATE_SCORE - 1, FAST_MATE_SCORE + 1, 0)
-		if(thisEvalMove.timedOut || getNow() - thinkingStartTime >= MaxThinkingTime) break
-		evalMove = fastResultToEval(search, thisEvalMove)
+		const thisResult = fastSearchRoot(search, depthRemaining, previousScore)
+		if(thisResult.timedOut || getNow() - thinkingStartTime >= MaxThinkingTime) break
+		previousScore = thisResult.score
+		search.rootMove = thisResult.move
+		session.rootMove = thisResult.move
+		fastStorePrincipalVariation(search, depthRemaining)
+		session.previousPv = search.previousPv
+		evalMove = fastResultToEval(search, thisResult)
 		evalMove.searchDepth = depthRemaining
-		depthsBestMove[depthRemaining] = evalMove
+		session.completedDepth = depthRemaining
+		session.previousScore = previousScore
+		session.bestResult = thisResult
+		session.bestEvalMove = evalMove
+		session.depthsBestMove[depthRemaining] = evalMove
+		if(progressCallback){
+			progressCallback({
+				evalMove: evalMove,
+				nodes: AImovesEvaluated,
+				depth: depthRemaining,
+				completedDepth: depthRemaining,
+				thinkingTime: (getNow() - thinkingStartTime) / 1000,
+				ttStats: fastCloneTTStats(search.tt)
+			})
+		}
 		if(evalMove.exact && isWinningScoreForColor(evalMove.e, color)){
 			console.log(("Forced mate in "+(evalMove.d)+" plies."))
 			break
@@ -1040,8 +1266,9 @@ function timeBasedMinMax(gameState, thinkingStartTime, color){
 			if(depthRemaining > 1){
 				console.log("Forced loss in "+(evalMove.d)+" plies.")
 				const forcedLossEvalMove = evalMove
-				evalMove = depthsBestMove[depthRemaining-1]
-				evalMove.latestEvaluation = forcedLossEvalMove
+				evalMove = session.depthsBestMove[depthRemaining-1] || evalMove
+				if(evalMove) evalMove.latestEvaluation = forcedLossEvalMove
+				session.bestEvalMove = evalMove
 				break
 			}
 		}
@@ -1050,14 +1277,78 @@ function timeBasedMinMax(gameState, thinkingStartTime, color){
 	return evalMove
 }
 
+function getSharedFastTT(ttKey){
+	if(!FastSharedTT || FastSharedTTKey != ttKey){
+		FastSharedTT = createFastTranspositionTable()
+		FastSharedTTKey = ttKey
+		FastSharedSearchMemory = createFastSearchMemory()
+		FastSharedSearchSession = null
+	}
+	return FastSharedTT
+}
+
+function getSharedFastSearchSession(ttKey, gameState){
+	const tt = getSharedFastTT(ttKey)
+	if(!FastSharedSearchMemory) FastSharedSearchMemory = createFastSearchMemory()
+	const sessionKey = ttKey + "|" + gameState
+	if(!FastSharedSearchSession || FastSharedSearchSession.key != sessionKey){
+		FastSharedSearchSession = createFastSearchSession(sessionKey, gameState, tt, FastSharedSearchMemory)
+	}
+	return FastSharedSearchSession
+}
+
+function createFastSearchSession(key, gameState, transpositionTable, searchMemory){
+	const memory = searchMemory || createFastSearchMemory()
+	return {
+		key: key,
+		gameState: gameState,
+		tt: transpositionTable,
+		search: null,
+		completedDepth: 0,
+		previousScore: null,
+		bestResult: null,
+		bestEvalMove: null,
+		rootMove: 0,
+		previousPv: [],
+		depthsBestMove: {},
+		killerOne: memory.killerOne,
+		killerTwo: memory.killerTwo,
+		history: memory.history
+	}
+}
+
+function createFastSearchMemory(){
+	return {
+		killerOne: [],
+		killerTwo: [],
+		history: new Int32Array(FAST_HISTORY_SIZE * 2)
+	}
+}
+
 function minmaxMoveFind(gameState,depthRemaining,depth,rBest,bBest,thinkingStartTime){
 	const search = createFastSearch(gameState, thinkingStartTime)
 	const result = fastAlphaBeta(search, depthRemaining, rBest, bBest, depth)
 	return fastResultToEval(search, result)
 }
 
-function createFastSearch(gameState, thinkingStartTime){
+function fastSearchRoot(search, depthRemaining, previousScore){
+	const fullAlpha = -FAST_MATE_SCORE - 1
+	const fullBeta = FAST_MATE_SCORE + 1
+	if(previousScore !== null && !isFastMateScore(previousScore)){
+		const alpha = Math.max(fullAlpha, previousScore - FAST_ASPIRATION_WINDOW)
+		const beta = Math.min(fullBeta, previousScore + FAST_ASPIRATION_WINDOW)
+		const aspirationResult = fastAlphaBeta(search, depthRemaining, alpha, beta, 0)
+		if(aspirationResult.timedOut) return aspirationResult
+		if(aspirationResult.score > alpha && aspirationResult.score < beta){
+			return aspirationResult
+		}
+	}
+	return fastAlphaBeta(search, depthRemaining, fullAlpha, fullBeta, 0)
+}
+
+function createFastSearch(gameState, thinkingStartTime, transpositionTable=null, searchMemory=null){
 	ensureFastSearchTables()
+	const memory = searchMemory || {}
 	const search = {
 		board: new Int8Array(25),
 		cards: new Int8Array(5),
@@ -1067,12 +1358,15 @@ function createFastSearch(gameState, thinkingStartTime){
 		occupiedMask: 0,
 		redMask: 0,
 		masterMask: 0,
-		tt: createFastTranspositionTable(),
+		tt: transpositionTable || createFastTranspositionTable(),
 		moveBuffers: [],
 		moveScoreBuffers: [],
-		killerOne: [],
-		killerTwo: [],
-		history: new Int32Array(FAST_HISTORY_SIZE * 2),
+		moveCounts: [],
+		rootMove: memory.rootMove || 0,
+		previousPv: memory.previousPv || [],
+		killerOne: memory.killerOne || [],
+		killerTwo: memory.killerTwo || [],
+		history: memory.history || new Int32Array(FAST_HISTORY_SIZE * 2),
 		undoMove: [],
 		undoMovingPiece: [],
 		undoCapturedPiece: [],
@@ -1113,7 +1407,43 @@ function createFastTranspositionTable(){
 		depth: new Int16Array(FAST_TT_SIZE),
 		score: new Float64Array(FAST_TT_SIZE),
 		flag: new Int8Array(FAST_TT_SIZE),
-		move: new Uint16Array(FAST_TT_SIZE)
+		move: new Uint16Array(FAST_TT_SIZE),
+		stats: createFastTTStats()
+	}
+}
+
+function createFastTTStats(){
+	return {
+		probes: 0,
+		hits: 0,
+		exactHits: 0,
+		boundHits: 0,
+		ttCutoffs: 0,
+		searchCutoffs: 0,
+		storeRequests: 0,
+		stores: 0,
+		emptyStores: 0,
+		overwrites: 0,
+		collisions: 0,
+		rejectedStores: 0
+	}
+}
+
+function fastCloneTTStats(tt){
+	if(!tt || !tt.stats) return null
+	return {
+		probes: tt.stats.probes,
+		hits: tt.stats.hits,
+		exactHits: tt.stats.exactHits,
+		boundHits: tt.stats.boundHits,
+		ttCutoffs: tt.stats.ttCutoffs,
+		searchCutoffs: tt.stats.searchCutoffs,
+		storeRequests: tt.stats.storeRequests,
+		stores: tt.stats.stores,
+		emptyStores: tt.stats.emptyStores,
+		overwrites: tt.stats.overwrites,
+		collisions: tt.stats.collisions,
+		rejectedStores: tt.stats.rejectedStores
 	}
 }
 
@@ -1225,34 +1555,53 @@ function fastAlphaBeta(search, depthRemaining, alpha, beta, ply){
 		ttMove = tt.move[ttIndex]
 		if(tt.depth[ttIndex] >= depthRemaining){
 			const ttFlag = tt.flag[ttIndex]
-			const ttScore = tt.score[ttIndex]
+			const ttScore = fastNormalizeTTScoreForProbe(tt.score[ttIndex], ply)
 			if(ttFlag == TT_EXACT){
+				if(tt.stats) tt.stats.exactHits += 1
 				return {"score": ttScore, "move": ttMove, "exact": true, "bound": "exact"}
 			}
+			if(tt.stats) tt.stats.boundHits += 1
 			if(ttFlag == TT_LOWER) alpha = Math.max(alpha, ttScore)
 			if(ttFlag == TT_UPPER) beta = Math.min(beta, ttScore)
 			if(alpha >= beta){
+				if(tt.stats) tt.stats.ttCutoffs += 1
 				return {"score": ttScore, "move": ttMove, "exact": false, "bound": ttFlag == TT_LOWER ? "lower" : "upper"}
 			}
 		}
 	}
 
-	const legalMoves = fastGenerateLegalMoves(search, ply)
-	if(legalMoves.length == 0){
+	const moveCount = fastGenerateLegalMoves(search, ply)
+	const legalMoves = search.moveBuffers[ply]
+	if(moveCount == 0){
 		return {"score": staticEval, "move": 0, "exact": true, "bound": "exact"}
 	}
-	fastOrderMoves(search, legalMoves, ttMove, ply)
+	fastOrderMoves(search, legalMoves, moveCount, ttMove, ply)
 
 	const maximizingPlayer = search.turn == FAST_RED
 	var bestMove = legalMoves[0]
 	var bestScore = maximizingPlayer ? -FAST_MATE_SCORE - 1 : FAST_MATE_SCORE + 1
-	for(let moveIndex=0;moveIndex<legalMoves.length;moveIndex++){
+	var searchedMoves = 0
+	for(let moveIndex=0;moveIndex<moveCount;moveIndex++){
 		const move = legalMoves[moveIndex]
 		fastMakeMove(search, move, ply)
 		AImovesEvaluated += 1
-		const childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, beta, ply + 1)
+		var childEval = null
+		if(searchedMoves == 0 || depthRemaining <= 1 || beta - alpha <= FAST_PVS_WINDOW){
+			childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, beta, ply + 1)
+		} else if(maximizingPlayer){
+			childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, alpha + FAST_PVS_WINDOW, ply + 1)
+			if(!childEval.timedOut && childEval.score > alpha && childEval.score < beta){
+				childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, beta, ply + 1)
+			}
+		} else {
+			childEval = fastAlphaBeta(search, depthRemaining - 1, beta - FAST_PVS_WINDOW, beta, ply + 1)
+			if(!childEval.timedOut && childEval.score < beta && childEval.score > alpha){
+				childEval = fastAlphaBeta(search, depthRemaining - 1, alpha, beta, ply + 1)
+			}
+		}
 		fastUnmakeMove(search, ply)
 		if(childEval.timedOut) return childEval
+		searchedMoves += 1
 
 		if((maximizingPlayer && childEval.score > bestScore) || (!maximizingPlayer && childEval.score < bestScore)){
 			bestScore = childEval.score
@@ -1272,7 +1621,7 @@ function fastAlphaBeta(search, depthRemaining, alpha, beta, ply){
 	var flag = TT_EXACT
 	if(bestScore <= alphaOrig) flag = TT_UPPER
 	else if(bestScore >= betaOrig) flag = TT_LOWER
-	fastTTStore(search, depthRemaining, bestScore, flag, bestMove)
+	fastTTStore(search, depthRemaining, bestScore, flag, bestMove, ply)
 	return {
 		"score": bestScore,
 		"move": bestMove,
@@ -1282,31 +1631,130 @@ function fastAlphaBeta(search, depthRemaining, alpha, beta, ply){
 }
 
 function fastTTIndex(search){
-	return (search.hashA ^ Math.imul(search.hashB, 0x9e3779b1)) & FAST_TT_MASK
+	return ((search.hashA ^ Math.imul(search.hashB, 0x9e3779b1)) & FAST_TT_BUCKET_MASK) * FAST_TT_BUCKET_SIZE
 }
 
 function fastTTProbe(search){
 	const tt = search.tt
 	const index = fastTTIndex(search)
-	if(tt.depth[index] > 0 && tt.hashA[index] == search.hashA && tt.hashB[index] == search.hashB) return index
+	if(tt.stats) tt.stats.probes += 1
+	for(let offset=0;offset<FAST_TT_BUCKET_SIZE;offset++){
+		const entryIndex = index + offset
+		if(tt.depth[entryIndex] > 0 && tt.hashA[entryIndex] == search.hashA && tt.hashB[entryIndex] == search.hashB){
+			if(tt.stats) tt.stats.hits += 1
+			return entryIndex
+		}
+	}
 	return -1
 }
 
-function fastTTStore(search, depthRemaining, score, flag, move){
+function fastTTStore(search, depthRemaining, score, flag, move, ply){
 	const tt = search.tt
 	const index = fastTTIndex(search)
-	if(tt.depth[index] > depthRemaining && (tt.hashA[index] != search.hashA || tt.hashB[index] != search.hashB)) return
-	tt.hashA[index] = search.hashA
-	tt.hashB[index] = search.hashB
-	tt.depth[index] = depthRemaining
-	tt.score[index] = score
-	tt.flag[index] = flag
-	tt.move[index] = move
+	var replaceIndex = -1
+	var shallowestIndex = index
+	var shallowestDepth = tt.depth[index]
+	var replacingEmpty = false
+	var replacingCollision = false
+	if(tt.stats) tt.stats.storeRequests += 1
+	for(let offset=0;offset<FAST_TT_BUCKET_SIZE;offset++){
+		const entryIndex = index + offset
+		if(tt.hashA[entryIndex] == search.hashA && tt.hashB[entryIndex] == search.hashB && tt.depth[entryIndex] > 0){
+			if(tt.depth[entryIndex] > depthRemaining){
+				if(tt.stats) tt.stats.rejectedStores += 1
+				return
+			}
+			replaceIndex = entryIndex
+			break
+		}
+		if(tt.depth[entryIndex] == 0){
+			replaceIndex = entryIndex
+			replacingEmpty = true
+			break
+		}
+		if(tt.depth[entryIndex] < shallowestDepth){
+			shallowestIndex = entryIndex
+			shallowestDepth = tt.depth[entryIndex]
+		}
+	}
+	if(replaceIndex < 0){
+		if(shallowestDepth > depthRemaining){
+			if(tt.stats) tt.stats.rejectedStores += 1
+			return
+		}
+		replaceIndex = shallowestIndex
+		replacingCollision = true
+	} else if(!replacingEmpty && (tt.hashA[replaceIndex] != search.hashA || tt.hashB[replaceIndex] != search.hashB)){
+		replacingCollision = true
+	}
+	tt.hashA[replaceIndex] = search.hashA
+	tt.hashB[replaceIndex] = search.hashB
+	tt.depth[replaceIndex] = depthRemaining
+	tt.score[replaceIndex] = fastNormalizeTTScoreForStore(score, ply)
+	tt.flag[replaceIndex] = flag
+	tt.move[replaceIndex] = move
+	if(tt.stats){
+		tt.stats.stores += 1
+		if(replacingEmpty) tt.stats.emptyStores += 1
+		if(replacingCollision){
+			tt.stats.collisions += 1
+			tt.stats.overwrites += 1
+		}
+	}
+}
+
+function fastNormalizeTTScoreForStore(score, ply){
+	if(score >= FAST_MATE_THRESHOLD) return score + ply
+	if(score <= -FAST_MATE_THRESHOLD) return score - ply
+	return score
+}
+
+function fastNormalizeTTScoreForProbe(score, ply){
+	if(score >= FAST_MATE_THRESHOLD) return score - ply
+	if(score <= -FAST_MATE_THRESHOLD) return score + ply
+	return score
+}
+
+function fastProbeRootResult(search){
+	const ttIndex = fastTTProbe(search)
+	if(ttIndex < 0) return null
+	const tt = search.tt
+	if(tt.flag[ttIndex] != TT_EXACT) return null
+	return {
+		score: fastNormalizeTTScoreForProbe(tt.score[ttIndex], 0),
+		move: tt.move[ttIndex],
+		exact: true,
+		bound: "exact",
+		depth: tt.depth[ttIndex]
+	}
+}
+
+function fastStorePrincipalVariation(search, depthRemaining){
+	const pv = []
+	var madeMoves = 0
+	for(let ply=0;ply<depthRemaining;ply++){
+		if(isFastMateScore(fastStaticEvaluation(search, ply))) break
+		const ttIndex = fastTTProbe(search)
+		if(ttIndex < 0) break
+		const move = search.tt.move[ttIndex]
+		if(!move) break
+		const moveCount = fastGenerateLegalMoves(search, ply)
+		const legalMoves = search.moveBuffers[ply]
+		if(!fastMoveListContains(legalMoves, moveCount, move)) break
+		pv.push(move)
+		fastMakeMove(search, move, ply)
+		madeMoves += 1
+	}
+	for(let ply=madeMoves-1;ply>=0;ply--){
+		fastUnmakeMove(search, ply)
+	}
+	search.previousPv = pv
 }
 
 function fastFallbackSearch(search){
-	const legalMoves = fastGenerateLegalMoves(search, 0)
-	if(legalMoves.length == 0){
+	const moveCount = fastGenerateLegalMoves(search, 0)
+	const legalMoves = search.moveBuffers[0]
+	if(moveCount == 0){
 		return {"score": fastStaticEvaluation(search, 0), "move": 0, "exact": true, "bound": "exact"}
 	}
 	const maximizingPlayer = search.turn == FAST_RED
@@ -1314,7 +1762,7 @@ function fastFallbackSearch(search){
 	fastMakeMove(search, bestMove, 0)
 	var bestScore = fastStaticEvaluation(search, 1)
 	fastUnmakeMove(search, 0)
-	for(let moveIndex=0;moveIndex<legalMoves.length;moveIndex++){
+	for(let moveIndex=0;moveIndex<moveCount;moveIndex++){
 		const move = legalMoves[moveIndex]
 		fastMakeMove(search, move, 0)
 		const score = fastStaticEvaluation(search, 1)
@@ -1330,8 +1778,8 @@ function fastFallbackSearch(search){
 function fastGenerateLegalMoves(search, ply){
 	const colorIndex = search.turn == FAST_RED ? 0 : 1
 	const firstCardSlot = search.turn == FAST_RED ? 0 : 2
-	const legalMoves = search.moveBuffers[ply] || (search.moveBuffers[ply] = [])
-	legalMoves.length = 0
+	const legalMoves = search.moveBuffers[ply] || (search.moveBuffers[ply] = new Uint16Array(FAST_MAX_MOVES))
+	var moveCount = 0
 	const ownMask = search.turn == FAST_RED ? (search.occupiedMask & search.redMask) : (search.occupiedMask & ~search.redMask)
 	var pieces = ownMask
 	while(pieces){
@@ -1342,18 +1790,21 @@ function fastGenerateLegalMoves(search, ply){
 			var targetMask = FastMoveMask[colorIndex][cardID][start] & ~ownMask
 			while(targetMask){
 				const targetBit = targetMask & -targetMask
-				legalMoves.push(fastEncodeMove(slot, start, fastBitIndex(targetBit)))
+				if(moveCount >= legalMoves.length) throw new Error("Fast move buffer overflow.")
+				legalMoves[moveCount] = fastEncodeMove(slot, start, fastBitIndex(targetBit))
+				moveCount += 1
 				targetMask ^= targetBit
 			}
 		}
 		pieces ^= startBit
 	}
-	return legalMoves
+	search.moveCounts[ply] = moveCount
+	return moveCount
 }
 
-function fastOrderMoves(search, moves, ttMove, ply){
-	const scores = search.moveScoreBuffers[ply] || (search.moveScoreBuffers[ply] = [])
-	for(let i=0;i<moves.length;i++){
+function fastOrderMoves(search, moves, moveCount, ttMove, ply){
+	const scores = search.moveScoreBuffers[ply] || (search.moveScoreBuffers[ply] = new Int32Array(FAST_MAX_MOVES))
+	for(let i=0;i<moveCount;i++){
 		const move = moves[i]
 		const score = fastMoveHeuristic(search, move, ttMove, ply)
 		let j = i - 1
@@ -1367,8 +1818,17 @@ function fastOrderMoves(search, moves, ttMove, ply){
 	}
 }
 
+function fastMoveListContains(moves, moveCount, move){
+	for(let i=0;i<moveCount;i++){
+		if(moves[i] == move) return true
+	}
+	return false
+}
+
 function fastMoveHeuristic(search, move, ttMove, ply){
+	if(ply == 0 && move == search.rootMove) return 2000000
 	if(move == ttMove) return 1000000
+	if(search.previousPv[ply] == move) return 950000
 	const start = fastMoveStart(move)
 	const target = fastMoveTarget(move)
 	const startBit = 1 << start
@@ -1387,6 +1847,7 @@ function fastMoveHeuristic(search, move, ttMove, ply){
 }
 
 function fastRecordCutoff(search, move, ply, depthRemaining){
+	if(search.tt && search.tt.stats) search.tt.stats.searchCutoffs += 1
 	if(search.occupiedMask & (1 << fastMoveTarget(move))) return
 	if(search.killerOne[ply] != move){
 		search.killerTwo[ply] = search.killerOne[ply] || 0
@@ -1773,15 +2234,15 @@ function doRealMove(gameState,move){
 	//Actually Play out a real move in the game, and record the history
 	if (!GameHasStarted) return
 	if (!move || !("cardID" in move) || !("startLocation" in move) || !("targetLocation" in move)) return
-	const movedByAI = AIcolor.includes(move.color)
+	stopBackgroundSearch()
 	GameState = doMove(gameState,move)
 	recordHistory(move, GameState)
 	updateUI(GameState,move)
-	if (!movedByAI){
-		setLatestAIEvaluation(getStaticEvaluationMove(GameState))
-	}
+	const carriedMateEval = getCarriedKnownMateEvaluationAfterMove(move)
+	setLatestAIEvaluation(carriedMateEval || getStaticEvaluationMove(GameState))
 	GameIsOver = Math.abs(staticEvaluation(GameState)) == Infinity
 	if (GameIsOver){
+		updateSwitchSidesButton()
 		var endstring = ""
 		if(staticEvaluation(GameState) == Infinity){
 			endstring = "Red wins!!! "+GameHistory.moveHistory.length+" plies"
@@ -1795,6 +2256,8 @@ function doRealMove(gameState,move){
 	}
 	if(GameHasStarted && AIcolor.includes(whosTurn(GameState))){ // If its the AI's turn (and there is an AI), and the game is not over, the AI makes a move.
 		doAIMove(GameState,whosTurn(GameState))
+	} else {
+		maybeStartBackgroundSearch()
 	}
 }
 
@@ -1912,28 +2375,98 @@ function getEvaluationBar(){
 }
 
 function setLatestAIEvaluation(evalMove){
-	LatestAIEvalMove = getDisplayAIEvaluation(evalMove)
+	const displayEvalMove = getDisplayAIEvaluation(evalMove)
+	if(KnownMateEvaluation){
+		const knownMateEval = getCurrentKnownMateEvaluation()
+		if(knownMateEval && !shouldReplaceKnownMateEvaluation(displayEvalMove, knownMateEval)){
+			LatestAIEvalMove = knownMateEval
+			updateEvaluationBar()
+			return
+		}
+	}
+	LatestAIEvalMove = displayEvalMove
+	rememberKnownMateEvaluation(displayEvalMove)
 	updateEvaluationBar()
 }
 
 function clearLatestAIEvaluation(){
 	LatestAIEvalMove = null
+	KnownMateEvaluation = null
 	updateEvaluationBar()
 }
 
 function updateEvaluationBar(){
 	const bar = getEvaluationBar()
 	if (!bar) return
-	const sections = getEvaluationBarSections(LatestAIEvalMove)
-	bar.innerHTML = ""
-	for (let color of sections){
-		var segment = document.createElement("div")
-		segment.className = "evalBarSegment " + (color == "R" ? "evalBarRed" : "evalBarBlue")
-		bar.appendChild(segment)
-	}
+	const targetTopPercent = getEvaluationBarTopPercent(LatestAIEvalMove)
+	EvaluationBarTargetTopPercent = targetTopPercent
+	ensureEvaluationBarFills(bar)
+	updateEvaluationBarFillColors(bar)
+	startEvaluationBarAnimation()
 	const label = getEvaluationBarLabel(LatestAIEvalMove)
 	bar.title = label
 	bar.setAttribute("aria-label", label)
+}
+
+function getEvaluationBarTopPercent(evalMove){
+	const counts = getEvaluationBarColorCounts(evalMove)
+	const topColor = PlayerColor == "B" ? "R" : "B"
+	return (counts[topColor] / EVAL_BAR_SECTIONS) * 100
+}
+
+function ensureEvaluationBarFills(bar){
+	var topSegment = bar.querySelector(".evalBarTopFill")
+	var bottomSegment = bar.querySelector(".evalBarBottomFill")
+	if(topSegment && bottomSegment) return
+	bar.innerHTML = ""
+	topSegment = document.createElement("div")
+	topSegment.className = "evalBarFill evalBarTopFill"
+	bottomSegment = document.createElement("div")
+	bottomSegment.className = "evalBarFill evalBarBottomFill"
+	bar.appendChild(topSegment)
+	bar.appendChild(bottomSegment)
+	applyEvaluationBarPercent(EvaluationBarCurrentTopPercent)
+}
+
+function updateEvaluationBarFillColors(bar){
+	const topColor = PlayerColor == "B" ? "R" : "B"
+	const bottomColor = oppositeColor(topColor)
+	const topSegment = bar.querySelector(".evalBarTopFill")
+	const bottomSegment = bar.querySelector(".evalBarBottomFill")
+	if(topSegment) topSegment.className = "evalBarFill evalBarTopFill " + (topColor == "R" ? "evalBarRed" : "evalBarBlue")
+	if(bottomSegment) bottomSegment.className = "evalBarFill evalBarBottomFill " + (bottomColor == "R" ? "evalBarRed" : "evalBarBlue")
+}
+
+function startEvaluationBarAnimation(){
+	if(EvaluationBarAnimationFrame !== null) return
+	if(typeof requestAnimationFrame === "undefined"){
+		EvaluationBarCurrentTopPercent = EvaluationBarTargetTopPercent
+		applyEvaluationBarPercent(EvaluationBarCurrentTopPercent)
+		return
+	}
+	EvaluationBarAnimationFrame = requestAnimationFrame(animateEvaluationBar)
+}
+
+function animateEvaluationBar(){
+	const delta = EvaluationBarTargetTopPercent - EvaluationBarCurrentTopPercent
+	if(Math.abs(delta) <= EVAL_BAR_LERP_EPSILON){
+		EvaluationBarCurrentTopPercent = EvaluationBarTargetTopPercent
+		applyEvaluationBarPercent(EvaluationBarCurrentTopPercent)
+		EvaluationBarAnimationFrame = null
+		return
+	}
+	EvaluationBarCurrentTopPercent += delta * EVAL_BAR_LERP_FACTOR
+	applyEvaluationBarPercent(EvaluationBarCurrentTopPercent)
+	EvaluationBarAnimationFrame = requestAnimationFrame(animateEvaluationBar)
+}
+
+function applyEvaluationBarPercent(topPercent){
+	const bar = getEvaluationBar()
+	if (!bar) return
+	const topSegment = bar.querySelector(".evalBarTopFill")
+	const bottomSegment = bar.querySelector(".evalBarBottomFill")
+	if(topSegment) topSegment.style.flexBasis = topPercent + "%"
+	if(bottomSegment) bottomSegment.style.flexBasis = (100 - topPercent) + "%"
 }
 
 function getDisplayAIEvaluation(evalMove){
@@ -1941,18 +2474,85 @@ function getDisplayAIEvaluation(evalMove){
 	return evalMove
 }
 
-function getEvaluationBarSections(evalMove){
-	const counts = getEvaluationBarColorCounts(evalMove)
-	const topColor = PlayerColor == "B" ? "R" : "B"
-	const bottomColor = oppositeColor(topColor)
-	var sections = []
-	for (let i=0;i<counts[topColor];i++){
-		sections.push(topColor)
+function rememberKnownMateEvaluation(evalMove){
+	if(!isMateEvaluation(evalMove)){
+		if(!KnownMateEvaluation) KnownMateEvaluation = null
+		return
 	}
-	for (let i=0;i<counts[bottomColor];i++){
-		sections.push(bottomColor)
+	KnownMateEvaluation = {
+		evalMove: cloneEvalMove(evalMove),
+		sourcePly: getCurrentGamePly(),
+		winningColor: evalMove.e == Infinity ? "R" : "B",
+		expectedMove: cloneMove(evalMove.m)
 	}
-	return sections
+}
+
+function shouldReplaceKnownMateEvaluation(evalMove, knownMateEval){
+	if(!isMateEvaluation(evalMove)) return false
+	if(!knownMateEval) return true
+	const evalWinner = evalMove.e == Infinity ? "R" : "B"
+	const knownWinner = knownMateEval.e == Infinity ? "R" : "B"
+	if(evalWinner != knownWinner) return true
+	return evalMove.d <= knownMateEval.d
+}
+
+function getCarriedKnownMateEvaluationAfterMove(move){
+	if(!KnownMateEvaluation) return null
+	const sourcePly = KnownMateEvaluation.sourcePly
+	const expectedMove = KnownMateEvaluation.expectedMove
+	const isFirstCarriedPly = getCurrentGamePly() == sourcePly + 1
+	if(isFirstCarriedPly && expectedMove && expectedMove.cardID && move.color == KnownMateEvaluation.winningColor && !movesMatch(move, expectedMove)){
+		KnownMateEvaluation = null
+		return null
+	}
+	return getCurrentKnownMateEvaluation()
+}
+
+function getCurrentKnownMateEvaluation(){
+	if(!KnownMateEvaluation) return null
+	const elapsedPlies = getCurrentGamePly() - KnownMateEvaluation.sourcePly
+	const remainingPlies = KnownMateEvaluation.evalMove.d - elapsedPlies
+	if(remainingPlies < 0){
+		KnownMateEvaluation = null
+		return null
+	}
+	const evalMove = cloneEvalMove(KnownMateEvaluation.evalMove)
+	evalMove.d = remainingPlies
+	evalMove.m = {}
+	evalMove.t = getCurrentGamePly()
+	return evalMove
+}
+
+function isMateEvaluation(evalMove){
+	return evalMove
+		&& evalMove.exact
+		&& (evalMove.e == Infinity || evalMove.e == -Infinity)
+		&& Number.isFinite(evalMove.d)
+}
+
+function cloneEvalMove(evalMove){
+	if(!evalMove) return evalMove
+	const copy = Object.assign({}, evalMove)
+	copy.m = cloneMove(evalMove.m)
+	if(evalMove.latestEvaluation) copy.latestEvaluation = cloneEvalMove(evalMove.latestEvaluation)
+	return copy
+}
+
+function cloneMove(move){
+	return move ? Object.assign({}, move) : move
+}
+
+function movesMatch(firstMove, secondMove){
+	return firstMove
+		&& secondMove
+		&& firstMove.cardID == secondMove.cardID
+		&& firstMove.color == secondMove.color
+		&& firstMove.startLocation == secondMove.startLocation
+		&& firstMove.targetLocation == secondMove.targetLocation
+}
+
+function getCurrentGamePly(){
+	return GameHistory && GameHistory.moveHistory ? GameHistory.moveHistory.length : 0
 }
 
 function getEvaluationBarColorCounts(evalMove){
@@ -2127,6 +2727,7 @@ function clearTransientGameUI(){
 	removeClassFromElements("piece","customSelectedPiece")
 	hideBoardStartButton()
 	updateTakeBackButton()
+	updateSwitchSidesButton()
 	setClassStyleValue("cardSlot","background-image","none")
 	setClassStyleValue("cardSlot","border-color","white")
 	setClassStyleValue("cardSlot","opacity","")
@@ -2137,6 +2738,12 @@ function updateTakeBackButton(){
 	var takeBackButton = document.getElementById("takeBackButton")
 	if (!takeBackButton) return
 	takeBackButton.disabled = getTakeBackHistoryIndex() === null
+}
+
+function updateSwitchSidesButton(){
+	var switchSidesButton = document.getElementById("switchSidesButton")
+	if (!switchSidesButton) return
+	switchSidesButton.disabled = !GameHasStarted || GameIsOver || CustomSetupActive
 }
 
 function showBoardStartButton(){
@@ -2389,6 +2996,7 @@ function updateUI(gameState,move){
 	colorlastSquare(GameHistory)
 	currentMoveUI = {}
 	updateTakeBackButton()
+	updateSwitchSidesButton()
 }
 
 

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Onitama</title>
-	<link href="./main.css" rel="stylesheet" type="text/css">
+	<link href="./main.css?v=20260530-switch-mate" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="startMenu" class="menuPanel">
@@ -36,6 +36,7 @@
 	<div id="gameArea">
 		<button id="homeButton" type="button" onclick="goHome()" title="Abandon game and return home">Home</button>
 		<button id="takeBackButton" type="button" onclick="takeBack()" title="Return to your previous turn">Take Back</button>
+		<button id="switchSidesButton" type="button" onclick="switchSides()" title="Allow the AI to play from your position against you. If clicked, it switches the board red and blue and moves all cards/UI accordingly, reversing the position so the player is playing the AI's position and the AI is playing the player's position. This can be done indefinitely.">Switch Sides</button>
 		<div id="customCardPanel" class="customCardPanel" aria-label="Custom setup cards">
 			<div class="customCardPanelHeader">Cards</div>
 			<div id="customCardPicker" class="customCardPicker"></div>
@@ -80,7 +81,7 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="./mate_search/mate_starting_states.js?v=20260529"></script>
-	<script type="text/javascript" src="./main.js?v=20260529-bitboard"></script>
+	<script type="text/javascript" src="./main.js?v=20260530-mate-gate"></script>
 	<script type="text/javascript">main()</script>
 </body>
 </html>
