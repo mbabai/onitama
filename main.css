@@ -7,9 +7,9 @@ body {
 	border: 2px solid white;
 	box-sizing: border-box;
 	display: flex;
-	gap: 24px;
+	gap: 18px;
 	left: 50%;
-	max-width: 1040px;
+	max-width: 920px;
 	padding: 20px;
 	position: absolute;
 	top: 24px;
@@ -25,7 +25,7 @@ body {
 .menuControls h1 {
 	color: #2f2b22;
 	font: bold 32px Arial, sans-serif;
-	margin: 0 0 24px;
+	margin: 0 0 22px;
 }
 
 .menuField {
@@ -45,18 +45,70 @@ body {
 	cursor: pointer;
 }
 
+.menuPanel button:disabled,
+.menuPanel select:disabled {
+	cursor: default;
+	opacity: 0.45;
+}
+
 .menuActions {
 	display: flex;
-	gap: 10px;
-	margin-top: 18px;
+	gap: 12px;
+	margin-top: 8px;
+}
+
+.menuActions button {
+	font-size: 22px;
+	font-weight: bold;
+	padding: 8px 18px;
+}
+
+.menuSectionTitle {
+	color: #2f2b22;
+	font: bold 20px Arial, sans-serif;
+}
+
+.playSectionTitle {
+	margin-top: 22px;
+}
+
+.puzzlesSectionTitle {
+	border-top: 2px solid #b8ad88;
+	margin-top: 22px;
+	padding-top: 14px;
 }
 
 .menuMateActions {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	align-items: stretch;
 	gap: 10px;
-	margin-top: 12px;
+	margin-top: 10px;
+	max-width: 620px;
+}
+
+.matePuzzleRow {
+	align-items: center;
+	display: grid;
+	gap: 8px;
+	grid-template-columns: minmax(0, 1fr) auto auto;
+	width: 100%;
+}
+
+.matePuzzleLabel {
+	color: #2f2b22;
+	font: bold 16px Arial, sans-serif;
+	grid-column: 1 / -1;
+	white-space: nowrap;
+}
+
+.matePuzzleSelect {
+	box-sizing: border-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	min-width: 0;
+	width: 100%;
 }
 
 .menuCardPanel {
@@ -68,6 +120,7 @@ body {
 
 .cardPickerHeader {
 	color: #4b4638;
+	cursor: pointer;
 	font: bold 18px Arial, sans-serif;
 }
 
@@ -477,5 +530,17 @@ body {
 
 	.cardPicker {
 		max-height: 420px;
+	}
+
+	.matePuzzleRow {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.matePuzzleSelect {
+		grid-column: 1 / -1;
+	}
+
+	.matePuzzleRow button {
+		width: 100%;
 	}
 }

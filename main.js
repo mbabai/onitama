@@ -187,15 +187,25 @@ function playFromMenu(){
 
 function playRandomMateIn(mateMoves){
 	var matePlies = mateMovesToPlies(mateMoves)
-	var mateStates = getMateStartingStatesForPlies(matePlies)
-	if(!mateStates.length){
+	var mateRecords = getFilteredMateStartingStateRecordsForPlies(matePlies)
+	if(!mateRecords.length){
 		alert("No mate-in-" + mateMoves + " starting positions are loaded.")
 		return
 	}
-	var selectedMate = mateStates[Math.floor(Math.random() * mateStates.length)]
+	var selectedMate = mateRecords[Math.floor(Math.random() * mateRecords.length)].mateState
+	startMatePuzzle(selectedMate, false)
+}
+
+function playSelectedMateIn(mateMoves){
+	var selectedMate = getSelectedMateStartingState(mateMoves)
+	if(!selectedMate) return
+	startMatePuzzle(selectedMate, true)
+}
+
+function startMatePuzzle(selectedMate, playerHasMate){
 	var startingPlayer = whosTurn(selectedMate.game_state)
-	PlayerColor = oppositeColor(startingPlayer)
-	AIcolor = [startingPlayer]
+	PlayerColor = playerHasMate ? startingPlayer : oppositeColor(startingPlayer)
+	AIcolor = [oppositeColor(PlayerColor)]
 	document.getElementById("startMenu").style.display = "none"
 	document.getElementById("gameArea").style.display = "block"
 	startGameFromState(selectedMate.game_state)
@@ -212,6 +222,29 @@ function getMateStartingStatesForPlies(matePlies){
 			&& mateState.mate_plies == matePlies
 			&& isValidLaunchGameState(mateState.game_state)
 	})
+}
+
+function getFilteredMateStartingStateRecordsForPlies(matePlies){
+	if(!Array.isArray(window.MATE_STARTING_STATES)) return []
+	var selectedCards = new Set(getSelectedCardIDsForMateFilter())
+	var mateRecords = []
+	for(let i = 0; i < window.MATE_STARTING_STATES.length; i++){
+		var mateState = window.MATE_STARTING_STATES[i]
+		if(!mateState || mateState.mate_plies != matePlies || !isValidLaunchGameState(mateState.game_state)) continue
+		if(!getGameStateCardIDs(mateState.game_state).every(function(cardID){ return selectedCards.has(cardID) })) continue
+		mateRecords.push({ index: i, mateState: mateState })
+	}
+	return mateRecords
+}
+
+function getGameStateCardIDs(gameState){
+	return [
+		gameState.substring(25,27),
+		gameState.substring(28,30),
+		gameState.substring(31,33),
+		gameState.substring(34,36),
+		gameState.substring(37,39)
+	]
 }
 
 function startCustomSetup(){
@@ -539,24 +572,107 @@ function setupStartMenu(){
 		playerColorSelect.value = savedColor
 	}
 	playerColorSelect.addEventListener("change", saveMenuPreferences)
-	renderMatePuzzleButtons()
 	renderCardPicker(loadSelectedCardIDs())
+	renderMatePuzzleControls()
 }
 
-function renderMatePuzzleButtons(){
+function renderMatePuzzleControls(){
 	var mateActions = document.getElementById("menuMateActions")
 	if(!mateActions) return
 	mateActions.innerHTML = ""
 	var mateMoves = getAvailableMateMoveCounts()
 	for(let mateMoveCount of mateMoves){
-		var button = document.createElement("button")
-		button.type = "button"
-		button.innerText = "Random Mate in " + mateMoveCount
-		button.addEventListener("click", function(){
+		var row = document.createElement("div")
+		row.className = "matePuzzleRow"
+
+		var label = document.createElement("label")
+		label.className = "matePuzzleLabel"
+		label.setAttribute("for", getMateSelectID(mateMoveCount))
+		var mateRecords = getFilteredMateStartingStateRecordsForPlies(mateMovesToPlies(mateMoveCount))
+		label.innerText = "Mate in " + mateMoveCount + " (" + mateRecords.length + ")"
+
+		var select = document.createElement("select")
+		select.id = getMateSelectID(mateMoveCount)
+		select.className = "matePuzzleSelect"
+		select.setAttribute("aria-label", "Mate in " + mateMoveCount + " puzzles")
+
+		if(mateRecords.length){
+			for(let i = 0; i < mateRecords.length; i++){
+				var option = document.createElement("option")
+				option.value = mateRecords[i].index
+				option.innerText = formatMatePuzzleOption(mateRecords[i].mateState)
+				option.style.color = getMatePuzzleOptionColor(mateRecords[i].mateState)
+				select.appendChild(option)
+			}
+			updateMatePuzzleSelectColor(select)
+			select.addEventListener("change", function(){
+				updateMatePuzzleSelectColor(select)
+			})
+		} else {
+			var emptyOption = document.createElement("option")
+			emptyOption.value = ""
+			emptyOption.innerText = ""
+			select.appendChild(emptyOption)
+			select.disabled = true
+		}
+
+		var goButton = document.createElement("button")
+		goButton.type = "button"
+		goButton.innerText = "Go"
+		goButton.disabled = !mateRecords.length
+		goButton.addEventListener("click", function(){
+			playSelectedMateIn(mateMoveCount)
+		})
+
+		var randomButton = document.createElement("button")
+		randomButton.type = "button"
+		randomButton.innerText = "Random"
+		randomButton.disabled = !mateRecords.length
+		randomButton.addEventListener("click", function(){
 			playRandomMateIn(mateMoveCount)
 		})
-		mateActions.appendChild(button)
+
+		row.appendChild(label)
+		row.appendChild(select)
+		row.appendChild(goButton)
+		row.appendChild(randomButton)
+		mateActions.appendChild(row)
 	}
+}
+
+function getMateSelectID(mateMoveCount){
+	return "mateSelect" + mateMoveCount
+}
+
+function getSelectedMateStartingState(mateMoves){
+	var select = document.getElementById(getMateSelectID(mateMoves))
+	if(!select || select.value === "") return null
+	var selectedIndex = Number(select.value)
+	if(!Number.isInteger(selectedIndex)) return null
+	var mateRecords = getFilteredMateStartingStateRecordsForPlies(mateMovesToPlies(mateMoves))
+	for(let mateRecord of mateRecords){
+		if(mateRecord.index == selectedIndex){
+			return mateRecord.mateState
+		}
+	}
+	return null
+}
+
+function formatMatePuzzleOption(mateState){
+	var gameState = mateState.game_state
+	var cardNames = getGameStateCardIDs(gameState).map(function(cardID){
+		return titleCase(move_dictionary[cardID].name)
+	})
+	return cardNames.join(", ")
+}
+
+function getMatePuzzleOptionColor(mateState){
+	return whosTurn(mateState.game_state) == "R" ? "red" : "blue"
+}
+
+function updateMatePuzzleSelectColor(select){
+	var selectedOption = select.options[select.selectedIndex]
+	select.style.color = selectedOption ? selectedOption.style.color : ""
 }
 
 function getAvailableMateMoveCounts(){
@@ -575,7 +691,7 @@ function renderCardPicker(selectedCardIDs){
 	var cardPicker = document.getElementById("cardPicker")
 	cardPicker.innerHTML = ""
 	var selectedCards = new Set(selectedCardIDs)
-	for (let cardID of getAllCardIDs()){
+	for (let cardID of getAllCardIDsByName()){
 		var cardLabel = document.createElement("label")
 		cardLabel.className = "cardToggle"
 		cardLabel.setAttribute("data-card-id", cardID)
@@ -627,6 +743,7 @@ function handleCardToggleChange(event, cardLabel){
 	}
 	saveMenuPreferences()
 	updateCardToggleLockedState()
+	renderMatePuzzleControls()
 }
 
 function shakeCardToggle(cardLabel){
@@ -667,6 +784,11 @@ function getSelectedCardIDsForDeal(){
 	return checkedCardIDs.length >= MIN_SELECTED_CARDS ? checkedCardIDs : loadSelectedCardIDs()
 }
 
+function getSelectedCardIDsForMateFilter(){
+	var checkedCardIDs = getCheckedCardIDs()
+	return checkedCardIDs.length ? checkedCardIDs : loadSelectedCardIDs()
+}
+
 function loadSelectedCardIDs(){
 	var allCardIDs = getAllCardIDs()
 	var validCardIDs = new Set(allCardIDs)
@@ -683,6 +805,12 @@ function loadSelectedCardIDs(){
 
 function getAllCardIDs(){
 	return Object.keys(move_dictionary).sort((a,b) => parseInt(a) - parseInt(b))
+}
+
+function getAllCardIDsByName(){
+	return getAllCardIDs().sort(function(a,b){
+		return move_dictionary[a].name.localeCompare(move_dictionary[b].name)
+	})
 }
 
 function setCookie(name, value){
