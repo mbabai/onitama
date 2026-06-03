@@ -221,6 +221,10 @@
 			border-bottom: 0;
 		}
 
+		.summaryTable .summaryTotal td {
+			font-weight: 700;
+		}
+
 		.summaryTable .emptySummary {
 			color: var(--muted);
 			text-align: center;
@@ -473,7 +477,9 @@
 						<thead>
 							<tr>
 								<th>Mate length</th>
-								<th>Found</th>
+								<th>Saved</th>
+								<th>New found</th>
+								<th>Total</th>
 							</tr>
 						</thead>
 						<tbody id="mateSummary"></tbody>
@@ -513,6 +519,9 @@ let active = {index: 0};
 let runStartedAt = 0;
 let storageMode = "localStorage";
 let saveQueue = Promise.resolve();
+let lastStorageWarning = "";
+let fullStoragePromptActive = false;
+let opfsSaveAvailable = true;
 
 const elements = {
 	startButton: document.getElementById("startButton"),
@@ -1230,14 +1239,8 @@ function queueSave(){
 	});
 }
 
-async function writeProgressSnapshot(snapshot){
-	try {
-		localStorage.setItem(STORAGE_KEY, snapshot);
-		storageMode = storageMode == "browser local file" ? storageMode : "localStorage";
-	} catch (error) {
-		log("Unable to write localStorage progress: " + error.message);
-	}
-	if(navigator.storage && navigator.storage.getDirectory){
+async function writeProgressSnapshot(snapshot, options = {}){
+	if(opfsSaveAvailable && navigator.storage && navigator.storage.getDirectory){
 		try {
 			const root = await navigator.storage.getDirectory();
 			const handle = await root.getFileHandle(STORAGE_FILE, {create: true});
@@ -1245,12 +1248,84 @@ async function writeProgressSnapshot(snapshot){
 			await writable.write(snapshot);
 			await writable.close();
 			storageMode = "browser local file";
+			render();
+			return;
 		} catch (error) {
-			if(storageMode != "localStorage") log("Browser local file save failed; using localStorage.");
-			storageMode = "localStorage";
+			opfsSaveAvailable = false;
+			logStorageWarning("Browser local file save is unavailable in this browser session; using localStorage instead.");
+		}
+	}
+	try {
+		localStorage.setItem(STORAGE_KEY, snapshot);
+		storageMode = opfsSaveAvailable ? "localStorage" : "localStorage (browser file unavailable)";
+		lastStorageWarning = "";
+	} catch (error) {
+		storageMode = "not saving";
+		logStorageWarning("Progress is too large for localStorage and could not be saved automatically.");
+		if(!options.suppressFullStoragePrompt){
+			await promptFullStorageExport();
+			return;
 		}
 	}
 	render();
+}
+
+function logStorageWarning(message){
+	if(lastStorageWarning == message) return;
+	lastStorageWarning = message;
+	log(message);
+}
+
+async function promptFullStorageExport(){
+	if(fullStoragePromptActive) return;
+	fullStoragePromptActive = true;
+	try {
+		if(worker){
+			stopWorker();
+			log("Search paused because browser storage is full.");
+		}
+		const mateCount = Array.isArray(progress.mates) ? progress.mates.length : 0;
+		if(mateCount == 0){
+			logStorageWarning("Browser storage is full, but there are no unsaved mates to export.");
+			render();
+			return;
+		}
+		const shouldExport = confirm(
+			"Browser storage is full. Export/download " + formatCompact(mateCount) +
+			" found mates now and clear them from in-browser progress so saving can continue?"
+		);
+		if(!shouldExport){
+			logStorageWarning("Storage is full; export was skipped. Progress is not being saved.");
+			render();
+			return;
+		}
+		const exportedRecords = buildStartingStateExport();
+		await exportStartingStateRecords(exportedRecords);
+		window.MATE_STARTING_STATES = exportedRecords;
+		progress.mates = [];
+		progress.lastSavedAt = new Date().toISOString();
+		await clearStoredProgress();
+		await writeProgressSnapshot(JSON.stringify(progress), {suppressFullStoragePrompt: true});
+		log("Cleared " + formatCompact(mateCount) + " exported mates from in-browser progress.");
+	} finally {
+		fullStoragePromptActive = false;
+	}
+}
+
+async function clearStoredProgress(){
+	try {
+		localStorage.removeItem(STORAGE_KEY);
+	} catch (error) {
+		// Best effort cleanup; a later save will report persistent failures.
+	}
+	if(navigator.storage && navigator.storage.getDirectory){
+		try {
+			const root = await navigator.storage.getDirectory();
+			await root.removeEntry(STORAGE_FILE);
+		} catch (error) {
+			// Missing files and cleanup failures are non-fatal.
+		}
+	}
 }
 
 function formatInteger(value){
@@ -1330,14 +1405,16 @@ function render(){
 	const avgConfigMs = rolling.configs > 0 ? rolling.elapsedMs / rolling.configs : 0;
 	const rate = liveTime > 0 ? livePositions / (liveTime / 1000) : 0;
 	const estimatedRemainingMs = avgConfigMs > 0 ? avgConfigMs * (TOTAL_CONFIGS - configsDone) : NaN;
-	const matePercent = configsDone > 0 ? (progress.mates.length / configsDone) * 100 : 0;
+	const mateCounts = buildMateCountSummary();
+	const matePercentDenominator = Math.max(configsDone, mateCounts.total);
+	const matePercent = matePercentDenominator > 0 ? (mateCounts.total / matePercentDenominator) * 100 : 0;
 
 	elements.positionsSearched.textContent = formatCompact(livePositions);
 	elements.configsSearched.textContent = formatCompact(configsDone);
 	elements.avgPositionTime.textContent = formatMs(avgPositionMs);
 	elements.avgConfigTime.textContent = formatDuration(avgConfigMs);
 	elements.positionsPerSecond.textContent = formatCompact(rate);
-	elements.matesFound.textContent = formatCompact(progress.mates.length) + " (" + formatPercent(matePercent) + ")";
+	elements.matesFound.textContent = formatCompact(mateCounts.total) + " (" + formatPercent(matePercent) + ")";
 	elements.estimatedRemaining.textContent = isFinite(estimatedRemainingMs) ? formatHoursMinutes(estimatedRemainingMs) : "--:--";
 	elements.maxDepth.textContent = String(MAX_DEPTH);
 	elements.progressBar.style.width = Math.min(100, percent).toFixed(6) + "%";
@@ -1376,24 +1453,71 @@ function recordRecentBatch(batch){
 	}
 }
 
-function renderMateSummary(){
-	const counts = new Map();
-	for(const mate of progress.mates){
-		if(!mate || !Number.isFinite(Number(mate.mate_plies))) continue;
-		const mateMoves = mate.mate_moves || matePliesToMoves(mate.mate_plies);
-		counts.set(mateMoves, (counts.get(mateMoves) || 0) + 1);
+function getMateMoveLength(mate){
+	if(!mate) return 0;
+	if(Number.isFinite(Number(mate.mate_moves))) return Number(mate.mate_moves);
+	if(Number.isFinite(Number(mate.mate_plies))) return matePliesToMoves(mate.mate_plies);
+	return 0;
+}
+
+function addMateCount(counts, mateMoves, field){
+	if(!mateMoves) return;
+	if(!counts.has(mateMoves)){
+		counts.set(mateMoves, {mateMoves, saved: 0, newFound: 0});
 	}
-	const mateLengths = Array.from(counts.keys()).sort((a, b) => a - b);
-	if(mateLengths.length == 0){
-		elements.mateSummary.innerHTML = '<tr><td class="emptySummary" colspan="2">No mates found yet.</td></tr>';
+	counts.get(mateMoves)[field] += 1;
+}
+
+function buildMateCountSummary(){
+	const counts = new Map();
+	const savedStates = new Set();
+	const newStates = new Set();
+	const savedMates = Array.isArray(window.MATE_STARTING_STATES) ? window.MATE_STARTING_STATES : [];
+	for(const mate of savedMates){
+		if(!mate || typeof mate.game_state != "string") continue;
+		savedStates.add(mate.game_state);
+		addMateCount(counts, getMateMoveLength(mate), "saved");
+	}
+	for(const mate of progress.mates){
+		if(!mate || typeof mate.game_state != "string" || savedStates.has(mate.game_state) || newStates.has(mate.game_state)) continue;
+		newStates.add(mate.game_state);
+		addMateCount(counts, getMateMoveLength(mate), "newFound");
+	}
+	const rows = Array.from(counts.values()).sort((a, b) => a.mateMoves - b.mateMoves).map((row) => ({
+		mateMoves: row.mateMoves,
+		saved: row.saved,
+		newFound: row.newFound,
+		total: row.saved + row.newFound
+	}));
+	return rows.reduce((summary, row) => {
+		summary.saved += row.saved;
+		summary.newFound += row.newFound;
+		summary.total += row.total;
+		return summary;
+	}, {rows, saved: 0, newFound: 0, total: 0});
+}
+
+function renderMateSummary(){
+	const summary = buildMateCountSummary();
+	if(summary.rows.length == 0){
+		elements.mateSummary.innerHTML = '<tr><td class="emptySummary" colspan="4">No mates found yet.</td></tr>';
 		return;
 	}
-	elements.mateSummary.innerHTML = mateLengths.map((mateMoves) => `
+	elements.mateSummary.innerHTML = summary.rows.map((row) => `
 		<tr>
-			<td>Mate in ${mateMoves}</td>
-			<td>${formatCompact(counts.get(mateMoves))}</td>
+			<td>Mate in ${row.mateMoves}</td>
+			<td>${formatCompact(row.saved)}</td>
+			<td>${formatCompact(row.newFound)}</td>
+			<td>${formatCompact(row.total)}</td>
 		</tr>
-	`).join("");
+	`).join("") + `
+		<tr class="summaryTotal">
+			<td>Total</td>
+			<td>${formatCompact(summary.saved)}</td>
+			<td>${formatCompact(summary.newFound)}</td>
+			<td>${formatCompact(summary.total)}</td>
+		</tr>
+	`;
 }
 
 function renderMateList(){
@@ -1491,7 +1615,10 @@ function pauseSearch(){
 
 async function exportStartingStates(){
 	await saveQueue;
-	const records = buildStartingStateExport();
+	await exportStartingStateRecords(buildStartingStateExport());
+}
+
+async function exportStartingStateRecords(records){
 	const snapshot = JSON.stringify(records, null, 4) + "\n";
 	if(await writeStartingStatesToLocalServer(snapshot)){
 		log("Exported " + formatCompact(records.length) + " starting states to " + STARTING_STATES_PATH + ".");
