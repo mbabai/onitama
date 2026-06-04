@@ -499,13 +499,15 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="./mate_search/mate_starting_states.js?v=20260530-full-search"></script>
+	<script type="text/javascript" src="./mate_search/mate_starting_states.js?v=20260604-resume-meta"></script>
 	<script type="text/javascript" src="./main.js?v=20260530-mate-search-opts"></script>
 	<script>
 const TOTAL_CONFIGS = 6041280;
 const TOTAL_CONFIG_MATH = "32 neutral cards x C(31, 2) starting-player hands x C(29, 2) opponent hands = 6.0M states";
 const STORAGE_KEY = "onitamaMateSearch.progress.v2";
 const STORAGE_FILE = "onitama-matesearch-progress-v2.json";
+const PURGE_BEFORE_NEXT_SEARCH_ID = "20260604-merged-mate-starting-states-preserve-resume";
+const PURGE_BEFORE_NEXT_SEARCH_KEY = STORAGE_KEY + ".purged." + PURGE_BEFORE_NEXT_SEARCH_ID;
 const STARTING_STATES_FILE = "mate_starting_states.json";
 const STARTING_STATES_PATH = "mate_search/" + STARTING_STATES_FILE;
 const MAX_DEPTH = 11;
@@ -1208,14 +1210,30 @@ function clampInteger(value, min, max){
 
 async function loadProgress(){
 	const opfs = await readOpfsProgress();
-	if(opfs) return sanitizeProgress(opfs);
+	if(opfs) return mergeProgressWithStartingStateMetadata(sanitizeProgress(opfs));
 	try {
 		const local = localStorage.getItem(STORAGE_KEY);
-		if(local) return sanitizeProgress(JSON.parse(local));
+		if(local) return mergeProgressWithStartingStateMetadata(sanitizeProgress(JSON.parse(local)));
 	} catch (error) {
 		log("Unable to read localStorage progress: " + error.message);
 	}
-	return createEmptyProgress();
+	return mergeProgressWithStartingStateMetadata(createEmptyProgress());
+}
+
+function mergeProgressWithStartingStateMetadata(input){
+	const metadata = window.MATE_STARTING_STATES_META;
+	const search = metadata && metadata.search;
+	if(!search || typeof search != "object") return input;
+	const metadataNextIndex = clampInteger(search.next_index ?? search.nextIndex, 0, TOTAL_CONFIGS);
+	if(metadataNextIndex <= input.nextIndex) return input;
+	return sanitizeProgress({
+		...input,
+		nextIndex: metadataNextIndex,
+		positionsSearched: Math.max(input.positionsSearched, Number(search.positions_searched ?? search.positionsSearched) || 0),
+		totalSearchTimeMs: Math.max(input.totalSearchTimeMs, Number(search.total_search_time_ms ?? search.totalSearchTimeMs) || 0),
+		recentConfigs: input.recentConfigs.length ? input.recentConfigs : search.recent_configs,
+		lastSavedAt: input.lastSavedAt || metadata.exported_at || ""
+	});
 }
 
 async function readOpfsProgress(){
@@ -1326,6 +1344,39 @@ async function clearStoredProgress(){
 			// Missing files and cleanup failures are non-fatal.
 		}
 	}
+}
+
+function hasConsumedSearchStartPurge(){
+	try {
+		return localStorage.getItem(PURGE_BEFORE_NEXT_SEARCH_KEY) == "1";
+	} catch (error) {
+		return false;
+	}
+}
+
+function markSearchStartPurgeConsumed(){
+	try {
+		localStorage.setItem(PURGE_BEFORE_NEXT_SEARCH_KEY, "1");
+	} catch (error) {
+		// If localStorage is unavailable, the in-memory progress has still been cleared for this start.
+	}
+}
+
+async function purgeProgressBeforeSearchIfNeeded(){
+	if(hasConsumedSearchStartPurge()) return false;
+	const purgedMateCount = Array.isArray(progress.mates) ? progress.mates.length : 0;
+	progress = sanitizeProgress({
+		...progress,
+		mates: [],
+		lastSavedAt: new Date().toISOString()
+	});
+	active = {index: progress.nextIndex};
+	progress.lastSavedAt = new Date().toISOString();
+	markSearchStartPurgeConsumed();
+	await writeProgressSnapshot(JSON.stringify(progress), {suppressFullStoragePrompt: true});
+	log("Purged " + formatCompact(purgedMateCount) + " old in-browser mate results after merging starting states; search will resume at config " + progress.nextIndex + ".");
+	render();
+	return true;
 }
 
 function formatInteger(value){
@@ -1590,7 +1641,10 @@ function escapeAttribute(value){
 	return escapeHtml(value).replace(/`/g, "&#96;");
 }
 
-function startSearch(){
+async function startSearch(){
+	if(worker || progress.nextIndex >= TOTAL_CONFIGS) return;
+	await saveQueue;
+	await purgeProgressBeforeSearchIfNeeded();
 	if(worker || progress.nextIndex >= TOTAL_CONFIGS) return;
 	active = {index: progress.nextIndex};
 	runStartedAt = performance.now();
@@ -1619,7 +1673,7 @@ async function exportStartingStates(){
 }
 
 async function exportStartingStateRecords(records){
-	const snapshot = JSON.stringify(records, null, 4) + "\n";
+	const snapshot = JSON.stringify(buildStartingStateExportPayload(records), null, 4) + "\n";
 	if(await writeStartingStatesToLocalServer(snapshot)){
 		log("Exported " + formatCompact(records.length) + " starting states to " + STARTING_STATES_PATH + ".");
 		return;
@@ -1629,32 +1683,51 @@ async function exportStartingStateRecords(records){
 	log("Download started for " + exportFileName + " with " + formatCompact(records.length) + " starting states.");
 }
 
+function buildStartingStateExportPayload(records){
+	const metadataSearch = window.MATE_STARTING_STATES_META && window.MATE_STARTING_STATES_META.search;
+	const metadataNextIndex = metadataSearch && Number.isFinite(Number(metadataSearch.next_index)) ? Number(metadataSearch.next_index) : 0;
+	return {
+		schema_version: 2,
+		exported_at: new Date().toISOString(),
+		search: {
+			next_index: Math.max(progress.nextIndex, metadataNextIndex),
+			positions_searched: progress.positionsSearched,
+			total_search_time_ms: progress.totalSearchTimeMs,
+			recent_configs: Array.isArray(progress.recentConfigs) ? progress.recentConfigs.slice(-ROLLING_CONFIG_LIMIT) : [],
+			max_depth: MAX_DEPTH,
+			total_configs: TOTAL_CONFIGS
+		},
+		starting_states: records
+	};
+}
+
 function buildStartingStateExport(){
 	const records = [];
 	const byState = new Map();
-	const addRecord = (record) => {
-		if(!record || !record.game_state || !Number.isFinite(Number(record.mate_plies))) return;
-		const normalized = {
-			game_state: record.game_state,
-			mate_plies: Number(record.mate_plies)
-		};
-		const existingIndex = byState.get(normalized.game_state);
-		if(existingIndex === undefined){
-			byState.set(normalized.game_state, records.length);
-			records.push(normalized);
-			return;
-		}
-		if(normalized.mate_plies < records[existingIndex].mate_plies){
-			records[existingIndex] = normalized;
-		}
-	};
 	if(Array.isArray(window.MATE_STARTING_STATES)){
-		window.MATE_STARTING_STATES.forEach(addRecord);
+		window.MATE_STARTING_STATES.forEach((record) => mergeStartingStateRecord(records, byState, record));
 	}
 	progress.mates.forEach((mate) => {
-		if(mate && mate.mate_found) addRecord(mate);
+		if(mate && mate.mate_found) mergeStartingStateRecord(records, byState, mate);
 	});
 	return records;
+}
+
+function mergeStartingStateRecord(records, byState, record){
+	if(!record || !record.game_state || !Number.isFinite(Number(record.mate_plies))) return;
+	const normalized = {
+		game_state: record.game_state,
+		mate_plies: Number(record.mate_plies)
+	};
+	const existingIndex = byState.get(normalized.game_state);
+	if(existingIndex === undefined){
+		byState.set(normalized.game_state, records.length);
+		records.push(normalized);
+		return;
+	}
+	if(normalized.mate_plies < records[existingIndex].mate_plies){
+		records[existingIndex] = normalized;
+	}
 }
 
 async function writeStartingStatesToLocalServer(snapshot){

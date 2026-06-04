@@ -2,6 +2,11 @@ const fs = require("fs");
 const http = require("http");
 const path = require("path");
 const {URL} = require("url");
+const {
+	parsePayloadText,
+	mergePayloads,
+	writeMergedFiles
+} = require("./merge_starting_states");
 
 const ROOT = path.resolve(__dirname, "..");
 const PORT = Number(process.env.PORT) || 4173;
@@ -29,24 +34,6 @@ function isInsideRoot(filePath){
 	return relative && !relative.startsWith("..") && !path.isAbsolute(relative);
 }
 
-function normalizeStartingStates(rawBody){
-	const parsed = JSON.parse(rawBody);
-	if(!Array.isArray(parsed)) throw new Error("Expected a JSON array.");
-	return parsed.map((entry, index) => {
-		if(!entry || typeof entry.game_state !== "string"){
-			throw new Error("Entry " + index + " is missing game_state.");
-		}
-		const matePlies = Number(entry.mate_plies);
-		if(!Number.isFinite(matePlies)){
-			throw new Error("Entry " + index + " is missing numeric mate_plies.");
-		}
-		return {
-			game_state: entry.game_state,
-			mate_plies: matePlies
-		};
-	});
-}
-
 function writeStartingStates(rawBody, response){
 	let body = "";
 	rawBody.on("data", (chunk) => {
@@ -57,11 +44,11 @@ function writeStartingStates(rawBody, response){
 	});
 	rawBody.on("end", () => {
 		try {
-			const records = normalizeStartingStates(body);
-			const json = JSON.stringify(records, null, 4) + "\n";
-			fs.writeFileSync(STARTING_STATES_JSON, json);
-			fs.writeFileSync(STARTING_STATES_JS, "window.MATE_STARTING_STATES = " + json.trimEnd() + ";\n");
-			send(response, 200, JSON.stringify({ok: true, count: records.length}) + "\n", "application/json; charset=utf-8");
+			const currentPayload = fs.existsSync(STARTING_STATES_JSON) ? parsePayloadText(fs.readFileSync(STARTING_STATES_JSON, "utf8"), STARTING_STATES_JSON) : null;
+			const incomingPayload = parsePayloadText(body, "request body");
+			const merged = mergePayloads(currentPayload ? [currentPayload, incomingPayload] : [incomingPayload]);
+			writeMergedFiles(merged.records, merged.metadata, STARTING_STATES_JSON, STARTING_STATES_JS);
+			send(response, 200, JSON.stringify({ok: true, count: merged.records.length, next_index: merged.metadata.search.next_index}) + "\n", "application/json; charset=utf-8");
 		} catch (error) {
 			send(response, 400, JSON.stringify({ok: false, error: error.message}) + "\n", "application/json; charset=utf-8");
 		}
