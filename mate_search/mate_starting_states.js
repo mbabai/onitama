@@ -30274,515 +30274,519 @@ window.MATE_STARTING_STATES = [
     {
         "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-23-01XB",
         "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-21-05-24-01XB",
+        "mate_plies": 11
     }
 ];
 window.MATE_STARTING_STATES_META = {
     "schema_version": 2,
-    "exported_at": "2026-06-05T03:59:21.217Z",
+    "exported_at": "2026-06-05T05:52:44.413Z",
     "search": {
-        "next_index": 242343,
-        "positions_searched": 146105376753,
-        "total_search_time_ms": 35472956,
+        "next_index": 242627,
+        "positions_searched": 146781879966,
+        "total_search_time_ms": 35693801,
         "recent_configs": [
             {
                 "configs": 1,
-                "nodes": 3031248,
-                "elapsed_ms": 727
-            },
-            {
-                "configs": 1,
-                "nodes": 2291098,
-                "elapsed_ms": 514
-            },
-            {
-                "configs": 1,
-                "nodes": 1722767,
-                "elapsed_ms": 425
-            },
-            {
-                "configs": 1,
-                "nodes": 3231105,
-                "elapsed_ms": 716
-            },
-            {
-                "configs": 1,
-                "nodes": 1512363,
-                "elapsed_ms": 363
-            },
-            {
-                "configs": 1,
-                "nodes": 1686217,
-                "elapsed_ms": 405
-            },
-            {
-                "configs": 1,
-                "nodes": 1609314,
-                "elapsed_ms": 370
-            },
-            {
-                "configs": 1,
-                "nodes": 1761636,
-                "elapsed_ms": 418
-            },
-            {
-                "configs": 1,
-                "nodes": 1828959,
-                "elapsed_ms": 454
-            },
-            {
-                "configs": 1,
-                "nodes": 1873449,
-                "elapsed_ms": 458
-            },
-            {
-                "configs": 1,
-                "nodes": 1276179,
-                "elapsed_ms": 328
-            },
-            {
-                "configs": 1,
-                "nodes": 1894673,
-                "elapsed_ms": 460
-            },
-            {
-                "configs": 1,
-                "nodes": 1978130,
-                "elapsed_ms": 506
-            },
-            {
-                "configs": 1,
-                "nodes": 2137709,
-                "elapsed_ms": 500
-            },
-            {
-                "configs": 1,
-                "nodes": 2218995,
-                "elapsed_ms": 518
-            },
-            {
-                "configs": 1,
-                "nodes": 1608219,
-                "elapsed_ms": 353
-            },
-            {
-                "configs": 1,
-                "nodes": 2514310,
-                "elapsed_ms": 614
-            },
-            {
-                "configs": 1,
-                "nodes": 1897752,
-                "elapsed_ms": 419
-            },
-            {
-                "configs": 1,
-                "nodes": 1664312,
-                "elapsed_ms": 393
-            },
-            {
-                "configs": 1,
-                "nodes": 2008042,
-                "elapsed_ms": 452
-            },
-            {
-                "configs": 1,
-                "nodes": 1563579,
-                "elapsed_ms": 354
-            },
-            {
-                "configs": 1,
-                "nodes": 1789030,
-                "elapsed_ms": 421
-            },
-            {
-                "configs": 1,
-                "nodes": 2185641,
-                "elapsed_ms": 522
-            },
-            {
-                "configs": 1,
-                "nodes": 2121870,
-                "elapsed_ms": 495
-            },
-            {
-                "configs": 1,
-                "nodes": 2191071,
-                "elapsed_ms": 534
-            },
-            {
-                "configs": 1,
-                "nodes": 1192808,
-                "elapsed_ms": 332
-            },
-            {
-                "configs": 1,
-                "nodes": 2107431,
-                "elapsed_ms": 516
-            },
-            {
-                "configs": 1,
-                "nodes": 2302399,
-                "elapsed_ms": 603
-            },
-            {
-                "configs": 1,
-                "nodes": 1970664,
-                "elapsed_ms": 490
-            },
-            {
-                "configs": 1,
-                "nodes": 2459740,
-                "elapsed_ms": 593
-            },
-            {
-                "configs": 1,
-                "nodes": 1445904,
-                "elapsed_ms": 332
-            },
-            {
-                "configs": 1,
-                "nodes": 2075943,
-                "elapsed_ms": 520
-            },
-            {
-                "configs": 1,
-                "nodes": 2154139,
-                "elapsed_ms": 528
-            },
-            {
-                "configs": 1,
-                "nodes": 1869530,
-                "elapsed_ms": 429
-            },
-            {
-                "configs": 1,
-                "nodes": 1579717,
-                "elapsed_ms": 381
-            },
-            {
-                "configs": 1,
-                "nodes": 1798610,
-                "elapsed_ms": 444
-            },
-            {
-                "configs": 1,
-                "nodes": 2304457,
-                "elapsed_ms": 561
-            },
-            {
-                "configs": 1,
-                "nodes": 1900352,
-                "elapsed_ms": 464
-            },
-            {
-                "configs": 1,
-                "nodes": 1868198,
-                "elapsed_ms": 481
-            },
-            {
-                "configs": 1,
-                "nodes": 1253879,
-                "elapsed_ms": 351
-            },
-            {
-                "configs": 1,
-                "nodes": 1800768,
-                "elapsed_ms": 424
-            },
-            {
-                "configs": 1,
-                "nodes": 2779897,
-                "elapsed_ms": 657
-            },
-            {
-                "configs": 1,
-                "nodes": 1522441,
-                "elapsed_ms": 374
-            },
-            {
-                "configs": 1,
-                "nodes": 2040991,
-                "elapsed_ms": 486
-            },
-            {
-                "configs": 1,
-                "nodes": 1576449,
-                "elapsed_ms": 346
-            },
-            {
-                "configs": 1,
-                "nodes": 2251295,
-                "elapsed_ms": 547
-            },
-            {
-                "configs": 1,
-                "nodes": 2385207,
-                "elapsed_ms": 590
-            },
-            {
-                "configs": 1,
-                "nodes": 1727891,
-                "elapsed_ms": 411
-            },
-            {
-                "configs": 1,
-                "nodes": 1839968,
-                "elapsed_ms": 438
-            },
-            {
-                "configs": 1,
-                "nodes": 2011103,
-                "elapsed_ms": 491
-            },
-            {
-                "configs": 1,
-                "nodes": 4505543,
-                "elapsed_ms": 1028
-            },
-            {
-                "configs": 1,
-                "nodes": 2463317,
-                "elapsed_ms": 574
-            },
-            {
-                "configs": 1,
-                "nodes": 2080301,
-                "elapsed_ms": 508
-            },
-            {
-                "configs": 1,
-                "nodes": 2449786,
-                "elapsed_ms": 565
-            },
-            {
-                "configs": 1,
-                "nodes": 3102776,
-                "elapsed_ms": 689
-            },
-            {
-                "configs": 1,
-                "nodes": 2774195,
-                "elapsed_ms": 617
-            },
-            {
-                "configs": 1,
-                "nodes": 2518595,
-                "elapsed_ms": 580
-            },
-            {
-                "configs": 1,
-                "nodes": 1903393,
-                "elapsed_ms": 409
-            },
-            {
-                "configs": 1,
-                "nodes": 2299326,
-                "elapsed_ms": 560
-            },
-            {
-                "configs": 1,
-                "nodes": 1933100,
-                "elapsed_ms": 447
-            },
-            {
-                "configs": 1,
-                "nodes": 2059507,
-                "elapsed_ms": 472
-            },
-            {
-                "configs": 1,
-                "nodes": 1937427,
-                "elapsed_ms": 462
-            },
-            {
-                "configs": 1,
-                "nodes": 2558342,
-                "elapsed_ms": 626
-            },
-            {
-                "configs": 1,
-                "nodes": 2661421,
-                "elapsed_ms": 658
-            },
-            {
-                "configs": 1,
-                "nodes": 956606,
-                "elapsed_ms": 268
-            },
-            {
-                "configs": 1,
-                "nodes": 2083293,
-                "elapsed_ms": 542
-            },
-            {
-                "configs": 1,
-                "nodes": 2927092,
-                "elapsed_ms": 736
-            },
-            {
-                "configs": 1,
-                "nodes": 1956887,
-                "elapsed_ms": 494
-            },
-            {
-                "configs": 1,
-                "nodes": 2059452,
-                "elapsed_ms": 535
-            },
-            {
-                "configs": 1,
-                "nodes": 1859761,
-                "elapsed_ms": 410
-            },
-            {
-                "configs": 1,
-                "nodes": 2436660,
-                "elapsed_ms": 634
-            },
-            {
-                "configs": 1,
-                "nodes": 2030181,
-                "elapsed_ms": 545
-            },
-            {
-                "configs": 1,
-                "nodes": 1974222,
-                "elapsed_ms": 488
-            },
-            {
-                "configs": 1,
-                "nodes": 2480486,
-                "elapsed_ms": 587
-            },
-            {
-                "configs": 1,
-                "nodes": 5149328,
-                "elapsed_ms": 1254
-            },
-            {
-                "configs": 1,
-                "nodes": 2226428,
-                "elapsed_ms": 618
-            },
-            {
-                "configs": 1,
-                "nodes": 3585288,
-                "elapsed_ms": 854
-            },
-            {
-                "configs": 1,
-                "nodes": 3228165,
-                "elapsed_ms": 844
-            },
-            {
-                "configs": 1,
-                "nodes": 2522986,
-                "elapsed_ms": 624
-            },
-            {
-                "configs": 1,
-                "nodes": 3044230,
-                "elapsed_ms": 759
-            },
-            {
-                "configs": 1,
-                "nodes": 1827474,
-                "elapsed_ms": 427
-            },
-            {
-                "configs": 1,
-                "nodes": 2513686,
-                "elapsed_ms": 686
-            },
-            {
-                "configs": 1,
-                "nodes": 3296237,
-                "elapsed_ms": 836
-            },
-            {
-                "configs": 1,
-                "nodes": 1842687,
-                "elapsed_ms": 492
-            },
-            {
-                "configs": 1,
-                "nodes": 2339977,
-                "elapsed_ms": 593
-            },
-            {
-                "configs": 1,
-                "nodes": 2321817,
-                "elapsed_ms": 589
-            },
-            {
-                "configs": 1,
-                "nodes": 2971684,
-                "elapsed_ms": 725
-            },
-            {
-                "configs": 1,
-                "nodes": 4756140,
+                "nodes": 2986702,
                 "elapsed_ms": 1193
             },
             {
                 "configs": 1,
-                "nodes": 2698602,
-                "elapsed_ms": 647
+                "nodes": 2714990,
+                "elapsed_ms": 888
             },
             {
                 "configs": 1,
-                "nodes": 4244650,
-                "elapsed_ms": 925
+                "nodes": 2812000,
+                "elapsed_ms": 806
             },
             {
                 "configs": 1,
-                "nodes": 2562970,
-                "elapsed_ms": 554
+                "nodes": 1637975,
+                "elapsed_ms": 441
             },
             {
                 "configs": 1,
-                "nodes": 2624281,
-                "elapsed_ms": 682
+                "nodes": 3076697,
+                "elapsed_ms": 983
             },
             {
                 "configs": 1,
-                "nodes": 3485580,
-                "elapsed_ms": 822
+                "nodes": 3236868,
+                "elapsed_ms": 986
             },
             {
                 "configs": 1,
-                "nodes": 2249362,
-                "elapsed_ms": 603
+                "nodes": 2768928,
+                "elapsed_ms": 854
             },
             {
                 "configs": 1,
-                "nodes": 3289012,
-                "elapsed_ms": 768
+                "nodes": 2424475,
+                "elapsed_ms": 711
             },
             {
                 "configs": 1,
-                "nodes": 1627636,
-                "elapsed_ms": 424
+                "nodes": 3041314,
+                "elapsed_ms": 959
             },
             {
                 "configs": 1,
-                "nodes": 2110677,
-                "elapsed_ms": 533
+                "nodes": 2022252,
+                "elapsed_ms": 616
             },
             {
                 "configs": 1,
-                "nodes": 1635958,
-                "elapsed_ms": 443
+                "nodes": 3230219,
+                "elapsed_ms": 933
             },
             {
                 "configs": 1,
-                "nodes": 1555685,
+                "nodes": 2153086,
+                "elapsed_ms": 655
+            },
+            {
+                "configs": 1,
+                "nodes": 2404348,
+                "elapsed_ms": 695
+            },
+            {
+                "configs": 1,
+                "nodes": 2057645,
+                "elapsed_ms": 620
+            },
+            {
+                "configs": 1,
+                "nodes": 1806773,
+                "elapsed_ms": 649
+            },
+            {
+                "configs": 1,
+                "nodes": 2604490,
+                "elapsed_ms": 852
+            },
+            {
+                "configs": 1,
+                "nodes": 2506311,
+                "elapsed_ms": 731
+            },
+            {
+                "configs": 1,
+                "nodes": 3606621,
+                "elapsed_ms": 1101
+            },
+            {
+                "configs": 1,
+                "nodes": 2991541,
+                "elapsed_ms": 1054
+            },
+            {
+                "configs": 1,
+                "nodes": 2463324,
+                "elapsed_ms": 905
+            },
+            {
+                "configs": 1,
+                "nodes": 2131526,
+                "elapsed_ms": 767
+            },
+            {
+                "configs": 1,
+                "nodes": 3399290,
+                "elapsed_ms": 974
+            },
+            {
+                "configs": 1,
+                "nodes": 2464018,
+                "elapsed_ms": 699
+            },
+            {
+                "configs": 1,
+                "nodes": 2926517,
+                "elapsed_ms": 999
+            },
+            {
+                "configs": 1,
+                "nodes": 2460667,
+                "elapsed_ms": 780
+            },
+            {
+                "configs": 1,
+                "nodes": 1339111,
+                "elapsed_ms": 393
+            },
+            {
+                "configs": 1,
+                "nodes": 2870621,
+                "elapsed_ms": 904
+            },
+            {
+                "configs": 1,
+                "nodes": 2753402,
+                "elapsed_ms": 829
+            },
+            {
+                "configs": 1,
+                "nodes": 2004583,
+                "elapsed_ms": 601
+            },
+            {
+                "configs": 1,
+                "nodes": 1539090,
+                "elapsed_ms": 505
+            },
+            {
+                "configs": 1,
+                "nodes": 1676494,
+                "elapsed_ms": 521
+            },
+            {
+                "configs": 1,
+                "nodes": 2907438,
+                "elapsed_ms": 824
+            },
+            {
+                "configs": 1,
+                "nodes": 2288511,
+                "elapsed_ms": 721
+            },
+            {
+                "configs": 1,
+                "nodes": 2122365,
+                "elapsed_ms": 836
+            },
+            {
+                "configs": 1,
+                "nodes": 2639940,
+                "elapsed_ms": 1032
+            },
+            {
+                "configs": 1,
+                "nodes": 1776857,
+                "elapsed_ms": 766
+            },
+            {
+                "configs": 1,
+                "nodes": 2378805,
+                "elapsed_ms": 851
+            },
+            {
+                "configs": 1,
+                "nodes": 2604340,
+                "elapsed_ms": 828
+            },
+            {
+                "configs": 1,
+                "nodes": 2766628,
+                "elapsed_ms": 979
+            },
+            {
+                "configs": 1,
+                "nodes": 3658017,
+                "elapsed_ms": 1301
+            },
+            {
+                "configs": 1,
+                "nodes": 3386970,
+                "elapsed_ms": 1157
+            },
+            {
+                "configs": 1,
+                "nodes": 2218958,
+                "elapsed_ms": 773
+            },
+            {
+                "configs": 1,
+                "nodes": 2770814,
+                "elapsed_ms": 986
+            },
+            {
+                "configs": 1,
+                "nodes": 2878108,
+                "elapsed_ms": 935
+            },
+            {
+                "configs": 1,
+                "nodes": 3229119,
+                "elapsed_ms": 1026
+            },
+            {
+                "configs": 1,
+                "nodes": 2895497,
+                "elapsed_ms": 947
+            },
+            {
+                "configs": 1,
+                "nodes": 1539937,
+                "elapsed_ms": 442
+            },
+            {
+                "configs": 1,
+                "nodes": 2678735,
+                "elapsed_ms": 886
+            },
+            {
+                "configs": 1,
+                "nodes": 2760468,
+                "elapsed_ms": 962
+            },
+            {
+                "configs": 1,
+                "nodes": 2829798,
+                "elapsed_ms": 855
+            },
+            {
+                "configs": 1,
+                "nodes": 2160688,
+                "elapsed_ms": 670
+            },
+            {
+                "configs": 1,
+                "nodes": 2201020,
+                "elapsed_ms": 676
+            },
+            {
+                "configs": 1,
+                "nodes": 2237527,
+                "elapsed_ms": 772
+            },
+            {
+                "configs": 1,
+                "nodes": 1683998,
+                "elapsed_ms": 546
+            },
+            {
+                "configs": 1,
+                "nodes": 1482158,
+                "elapsed_ms": 481
+            },
+            {
+                "configs": 1,
+                "nodes": 1737804,
+                "elapsed_ms": 525
+            },
+            {
+                "configs": 1,
+                "nodes": 1561615,
+                "elapsed_ms": 468
+            },
+            {
+                "configs": 1,
+                "nodes": 1961308,
+                "elapsed_ms": 606
+            },
+            {
+                "configs": 1,
+                "nodes": 2909481,
+                "elapsed_ms": 875
+            },
+            {
+                "configs": 1,
+                "nodes": 3099453,
+                "elapsed_ms": 957
+            },
+            {
+                "configs": 1,
+                "nodes": 2773393,
+                "elapsed_ms": 911
+            },
+            {
+                "configs": 1,
+                "nodes": 1540214,
+                "elapsed_ms": 616
+            },
+            {
+                "configs": 1,
+                "nodes": 2192604,
+                "elapsed_ms": 642
+            },
+            {
+                "configs": 1,
+                "nodes": 2633468,
+                "elapsed_ms": 781
+            },
+            {
+                "configs": 1,
+                "nodes": 2082486,
+                "elapsed_ms": 726
+            },
+            {
+                "configs": 1,
+                "nodes": 2473531,
+                "elapsed_ms": 866
+            },
+            {
+                "configs": 1,
+                "nodes": 1439662,
+                "elapsed_ms": 417
+            },
+            {
+                "configs": 1,
+                "nodes": 3211262,
+                "elapsed_ms": 992
+            },
+            {
+                "configs": 1,
+                "nodes": 3074539,
+                "elapsed_ms": 884
+            },
+            {
+                "configs": 1,
+                "nodes": 1876132,
+                "elapsed_ms": 525
+            },
+            {
+                "configs": 1,
+                "nodes": 1575947,
+                "elapsed_ms": 473
+            },
+            {
+                "configs": 1,
+                "nodes": 3083148,
+                "elapsed_ms": 846
+            },
+            {
+                "configs": 1,
+                "nodes": 1974998,
+                "elapsed_ms": 594
+            },
+            {
+                "configs": 1,
+                "nodes": 1030939,
+                "elapsed_ms": 319
+            },
+            {
+                "configs": 1,
+                "nodes": 1342866,
+                "elapsed_ms": 427
+            },
+            {
+                "configs": 1,
+                "nodes": 1639338,
+                "elapsed_ms": 502
+            },
+            {
+                "configs": 1,
+                "nodes": 1297707,
+                "elapsed_ms": 420
+            },
+            {
+                "configs": 1,
+                "nodes": 2750067,
+                "elapsed_ms": 849
+            },
+            {
+                "configs": 1,
+                "nodes": 2917123,
+                "elapsed_ms": 943
+            },
+            {
+                "configs": 1,
+                "nodes": 3166513,
+                "elapsed_ms": 903
+            },
+            {
+                "configs": 1,
+                "nodes": 1640950,
+                "elapsed_ms": 637
+            },
+            {
+                "configs": 1,
+                "nodes": 2039786,
+                "elapsed_ms": 626
+            },
+            {
+                "configs": 1,
+                "nodes": 1887050,
+                "elapsed_ms": 543
+            },
+            {
+                "configs": 1,
+                "nodes": 2053554,
+                "elapsed_ms": 629
+            },
+            {
+                "configs": 1,
+                "nodes": 2369091,
+                "elapsed_ms": 761
+            },
+            {
+                "configs": 1,
+                "nodes": 1328159,
+                "elapsed_ms": 365
+            },
+            {
+                "configs": 1,
+                "nodes": 1888344,
+                "elapsed_ms": 678
+            },
+            {
+                "configs": 1,
+                "nodes": 1944032,
+                "elapsed_ms": 607
+            },
+            {
+                "configs": 1,
+                "nodes": 1234189,
+                "elapsed_ms": 387
+            },
+            {
+                "configs": 1,
+                "nodes": 1270129,
                 "elapsed_ms": 418
             },
             {
-                "configs": 2,
-                "nodes": 2296353,
-                "elapsed_ms": 615
+                "configs": 1,
+                "nodes": 3982708,
+                "elapsed_ms": 1288
+            },
+            {
+                "configs": 1,
+                "nodes": 2377522,
+                "elapsed_ms": 777
+            },
+            {
+                "configs": 1,
+                "nodes": 2334276,
+                "elapsed_ms": 708
+            },
+            {
+                "configs": 1,
+                "nodes": 2067546,
+                "elapsed_ms": 651
+            },
+            {
+                "configs": 1,
+                "nodes": 2403451,
+                "elapsed_ms": 771
+            },
+            {
+                "configs": 1,
+                "nodes": 3737183,
+                "elapsed_ms": 1236
+            },
+            {
+                "configs": 1,
+                "nodes": 3798377,
+                "elapsed_ms": 1142
+            },
+            {
+                "configs": 1,
+                "nodes": 3397263,
+                "elapsed_ms": 1159
+            },
+            {
+                "configs": 1,
+                "nodes": 2395987,
+                "elapsed_ms": 936
+            },
+            {
+                "configs": 1,
+                "nodes": 3341057,
+                "elapsed_ms": 959
             }
         ],
         "max_depth": 11,
