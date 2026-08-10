@@ -363582,515 +363582,12087 @@ window.MATE_STARTING_STATES = [
     {
         "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-10-21XR",
         "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-07-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-08-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-09-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-10-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-11-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-12-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-13-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-14-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-14-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-14-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-14-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-14-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-14-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-14-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-14-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-14-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-14-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-14-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-14-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-15-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-15-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-15-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-15-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-15-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-15-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-15-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-15-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-15-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-15-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-15-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-16-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-16-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-16-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-16-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-16-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-16-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-16-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-16-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-16-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-16-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-17-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-17-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-17-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-17-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-17-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-17-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-17-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-17-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-17-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-18-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-19-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-19-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-19-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-19-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-19-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-19-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-19-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-19-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-20-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-20-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-20-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-20-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-20-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-20-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-20-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-22-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-22-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-22-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-22-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-22-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-22-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-22-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-23-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-23-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-23-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-23-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-23-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-23-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-25-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-25-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-25-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-25-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-25-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-27-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-27-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-27-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-27-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-28-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-29-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-30-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-01-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-03-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-03-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-03-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-03-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-03-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-03-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-03-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-03-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-03-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-06-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-06-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-06-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-06-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-06-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-06-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-06-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-06-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-07-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-07-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-07-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-07-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-07-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-07-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-07-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-08-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-08-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-08-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-08-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-08-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-08-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-09-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-09-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-09-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-09-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-09-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-11-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-11-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-11-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-11-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-11-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-13-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-13-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-13-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-13-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-14-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-14-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-14-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-17-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-17-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-20-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-22-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-22-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-22-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-22-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-23-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-23-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-23-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-25-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-25-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-26-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-27-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-01-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-03-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-03-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-03-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-03-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-03-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-03-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-03-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-03-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-03-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-06-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-06-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-06-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-06-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-06-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-06-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-06-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-06-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-07-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-07-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-07-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-07-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-07-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-07-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-07-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-08-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-08-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-08-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-08-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-08-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-08-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-09-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-09-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-09-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-09-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-09-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-10-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-10-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-10-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-10-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-10-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-12-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-12-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-12-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-12-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-15-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-15-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-15-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-16-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-16-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-19-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-22-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-22-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-22-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-22-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-23-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-23-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-23-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-25-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-25-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-26-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-27-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-00-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-01-27-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-03-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-04-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-06-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-07-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-08-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-09-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-10-12-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-10-16-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-11-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-12-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-13-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-17-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-19-27-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-20-27-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-22-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-23-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-25-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-26-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-27-28-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-27-29-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-00-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-01-27-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-03-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-04-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-06-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-07-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-08-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-09-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-10-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-11-13-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-11-17-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-12-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-13-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-16-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-19-27-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-20-27-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-22-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-23-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-25-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-26-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-27-28-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-27-29-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-00-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-01-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-05-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-10-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-11-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-14-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-15-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-24-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-27-30-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-27-31-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-28-11-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-28-13-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-28-14-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-28-17-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-28-27-31-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-29-10-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-29-12-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-29-15-16-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-29-15-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-29-16-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-29-27-30-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-00-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-02-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-03-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-04-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-05-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-10-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-10-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-10-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-10-18-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-10-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-11-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-12-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-12-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-12-18-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-12-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-13-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-14-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-15-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-15-18-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-15-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-16-18-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-16-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-17-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-18-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-20-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-23-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-24-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-27-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-27-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-00-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-01-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-02-11-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-02-13-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-02-14-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-02-17-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-02-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-03-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-04-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-05-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-10-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-11-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-11-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-11-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-11-18-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-11-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-12-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-13-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-13-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-13-18-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-13-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-14-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-14-18-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-14-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-15-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-16-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-17-18-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-17-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-18-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-19-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-22-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-24-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-27-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-27-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-28-11-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-28-13-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-28-14-17-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-28-14-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-28-17-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-28-27-31-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-29-10-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-29-12-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-29-15-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-29-16-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-29-27-30-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-00-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-01-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-02-10-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-02-12-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-02-15-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-02-16-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-02-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-03-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-04-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-05-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-10-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-10-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-10-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-10-18-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-10-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-11-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-12-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-12-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-12-18-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-12-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-13-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-14-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-15-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-15-18-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-15-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-16-18-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-16-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-17-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-18-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-20-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-23-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-24-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-27-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-27-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-00-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-02-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-03-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-04-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-05-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-10-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-11-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-11-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-11-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-11-18-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-11-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-12-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-13-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-13-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-13-18-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-13-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-14-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-14-18-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-14-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-15-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-16-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-17-18-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-17-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-18-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-19-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-22-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-24-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-27-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-27-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-29-01-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-29-12-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-29-13-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-29-14-17-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-29-14-20-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-29-15-16-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-29-15-19-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-00-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-02-10-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-02-12-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-02-15-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-02-16-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-02-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-03-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-04-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-05-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-06-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-08-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-10-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-10-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-10-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-10-18-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-10-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-11-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-12-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-12-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-12-18-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-12-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-13-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-14-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-15-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-15-18-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-15-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-16-18-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-16-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-17-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-18-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-20-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-23-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-24-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-26-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-27-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-27-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-00-03-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-00-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-00-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-00-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-00-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-00-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-00-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-00-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-00-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-00-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-03-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-03-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-02-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-04-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-05-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-03-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-04-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-04-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-04-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-04-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-04-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-04-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-04-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-04-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-04-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-05-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-05-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-05-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-05-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-05-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-05-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-05-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-05-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-05-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-06-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-07-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-08-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-09-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-10-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-10-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-10-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-10-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-10-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-11-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-11-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-11-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-11-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-11-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-11-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-11-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-11-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-11-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-11-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-11-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-12-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-12-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-12-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-12-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-12-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-13-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-13-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-13-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-13-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-13-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-13-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-13-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-13-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-13-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-13-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-14-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-14-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-14-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-14-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-14-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-14-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-14-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-14-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-14-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-15-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-15-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-15-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-15-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-15-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-16-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-16-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-16-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-16-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-16-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-17-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-17-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-17-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-17-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-17-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-17-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-17-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-17-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-18-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-18-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-18-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-18-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-18-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-18-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-19-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-19-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-19-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-19-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-19-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-20-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-20-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-20-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-20-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-20-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-22-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-22-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-22-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-22-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-22-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-22-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-23-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-23-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-23-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-23-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-23-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-24-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-24-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-24-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-25-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-25-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-25-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-26-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-26-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-27-29-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-27-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-00-03-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-00-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-00-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-00-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-00-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-00-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-00-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-00-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-00-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-00-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-03-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-03-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-02-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-04-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-05-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-03-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-04-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-04-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-04-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-04-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-04-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-04-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-04-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-04-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-04-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-05-06-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-05-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-05-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-05-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-05-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-05-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-05-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-05-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-05-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-07-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-06-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-08-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-07-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-09-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-08-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-10-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-11-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-20-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-09-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-10-12-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-10-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-10-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-10-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-10-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-10-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-10-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-10-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-10-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-10-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-10-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-11-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-11-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-11-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-11-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-11-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-12-15-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-12-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-12-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-12-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-12-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-12-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-12-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-12-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-12-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-12-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-13-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-13-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-13-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-13-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-13-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-14-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-14-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-14-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-14-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-14-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-15-16-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-15-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-15-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-15-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-15-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-15-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-15-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-15-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-15-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-16-18-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-16-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-16-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-16-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-16-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-16-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-16-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-16-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-17-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-17-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-17-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-17-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-17-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-18-19-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-18-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-18-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-18-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-18-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-18-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-19-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-19-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-19-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-19-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-19-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-20-22-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-20-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-20-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-20-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-20-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-22-23-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-22-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-22-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-22-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-22-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-22-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-23-24-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-23-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-23-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-23-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-23-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-24-25-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-24-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-24-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-25-26-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-25-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-25-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-26-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-26-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-27-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-27-31-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-00-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-02-11-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-02-13-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-02-14-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-02-17-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-02-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-03-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-04-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-05-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-06-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-09-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-10-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-11-13-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-11-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-11-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-11-18-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-11-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-12-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-13-14-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-13-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-13-18-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-13-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-14-17-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-14-18-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-14-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-15-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-16-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-17-18-21XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-17-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-18-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-19-27-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-22-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-24-27-21XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-25-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-27-28-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-27-30-21XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP30-31-03-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP30-31-10-12-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP30-31-11-13-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP30-31-22-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP30-31-23-27-21XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-00-01-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-00-01-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-00-01-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-00-01-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-00-01-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-00-01-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-01-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-00-01-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-02-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-04-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-05-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-10-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-11-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-14-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-15-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-16-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-17-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-18-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-20-00-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-27-00-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-00-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-24-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-30-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-00-31-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-01-02-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-01-02-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-01-02-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-01-02-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-01-02-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-01-02-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-07-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-08-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-09-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-23-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-25-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-26-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-08-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-09-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-23-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-25-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-26-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-09-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-23-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-25-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-26-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-23-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-25-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-26-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-03-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-25-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-26-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-01-03-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-01-04-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-04-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-01-04-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-01-04-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-01-04-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-04-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-01-04-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-01-04-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-04-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-01-04-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-01-04-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-01-05-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-01-05-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-01-05-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-01-05-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-01-05-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-01-05-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-01-05-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-01-05-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-05-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-01-05-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-01-05-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-01-05-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-07-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-08-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-09-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-23-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-25-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-26-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-08-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-09-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-23-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-25-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-26-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-09-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-23-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-25-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-26-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-23-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-25-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-26-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-06-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-25-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-26-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-01-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-06-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-08-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-09-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-23-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-25-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-26-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-08-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-09-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-23-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-25-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-26-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-09-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-23-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-25-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-26-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-23-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-25-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-26-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-25-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-26-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-01-07-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-06-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-07-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-09-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-23-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-25-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-26-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-07-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-09-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-23-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-25-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-26-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-09-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-23-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-25-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-26-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-23-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-25-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-26-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-25-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-26-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-01-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-06-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-07-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-08-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-23-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-25-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-26-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-07-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-08-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-23-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-25-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-26-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-08-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-23-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-25-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-26-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-23-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-25-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-26-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-25-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-26-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-01-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-01-10-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-01-10-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-10-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-01-11-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-01-11-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-12-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-01-12-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-12-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-01-12-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-12-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-13-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-01-13-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-13-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-01-13-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-13-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-01-14-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-01-14-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-14-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-01-15-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-01-15-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-15-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-16-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-01-16-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-16-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-01-16-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-17-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-01-17-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-17-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-01-17-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-01-18-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-01-18-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-01-18-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-01-18-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-01-18-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-01-18-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-01-19-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-01-19-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-01-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-01-20-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-01-20-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-01-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-02-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-03-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-04-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-05-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-06-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-07-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-08-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-09-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-10-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-11-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-12-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-13-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-14-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-15-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-16-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-17-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-18-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-19-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-20-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-23-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-24-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-25-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-26-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-28-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-29-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-03-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-04-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-05-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-06-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-07-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-08-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-09-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-10-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-11-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-12-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-13-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-14-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-15-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-16-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-17-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-18-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-19-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-20-01-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-23-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-25-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-26-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-28-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-29-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-04-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-05-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-06-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-07-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-08-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-09-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-10-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-11-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-12-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-13-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-14-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-15-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-16-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-17-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-18-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-19-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-20-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-23-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-24-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-25-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-26-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-28-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-29-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-05-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-06-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-07-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-08-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-09-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-10-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-11-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-12-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-13-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-14-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-15-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-16-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-17-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-18-01-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-19-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-20-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-23-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-24-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-25-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-26-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-28-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-29-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-06-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-07-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-08-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-09-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-10-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-11-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-12-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-13-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-14-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-15-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-16-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-17-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-19-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-20-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-23-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-24-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-25-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-26-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-28-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-29-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-07-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-08-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-09-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-10-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-11-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-12-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-13-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-14-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-15-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-16-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-17-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-18-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-19-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-20-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-23-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-24-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-25-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-26-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-28-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-29-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-08-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-09-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-10-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-11-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-12-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-13-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-14-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-15-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-16-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-17-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-18-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-19-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-20-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-23-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-24-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-25-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-26-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-28-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-29-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-09-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-10-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-11-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-12-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-13-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-14-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-15-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-16-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-17-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-18-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-19-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-20-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-23-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-24-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-25-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-26-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-28-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-29-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-10-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-11-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-12-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-13-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-14-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-15-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-16-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-17-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-18-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-19-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-20-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-23-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-24-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-25-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-26-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-28-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-29-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-11-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-12-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-13-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-14-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-15-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-16-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-17-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-18-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-19-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-20-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-23-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-24-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-25-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-26-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-28-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-29-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-30-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-12-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-13-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-14-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-15-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-16-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-17-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-18-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-19-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-20-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-23-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-24-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-25-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-26-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-28-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-29-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-31-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-13-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-14-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-15-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-16-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-17-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-18-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-19-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-20-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-23-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-24-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-25-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-26-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-28-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-29-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-30-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-14-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-15-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-16-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-17-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-18-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-19-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-20-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-23-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-24-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-25-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-26-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-28-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-29-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-31-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-15-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-16-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-17-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-18-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-19-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-20-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-23-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-24-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-25-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-26-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-28-01-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-29-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-31-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-16-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-17-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-18-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-19-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-20-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-23-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-24-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-25-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-26-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-28-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-29-01-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-30-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-17-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-18-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-19-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-20-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-23-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-24-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-25-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-26-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-28-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-29-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-30-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-18-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-19-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-20-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-23-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-24-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-25-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-26-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-28-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-29-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-31-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-19-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-20-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-23-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-25-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-26-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-28-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-29-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-20-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-23-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-24-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-25-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-26-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-28-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-29-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-23-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-24-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-25-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-26-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-28-01-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-29-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-24-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-25-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-26-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-28-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-29-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-25-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-26-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-28-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-29-01-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-28-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-29-01-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-28-01-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-29-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-01-21-22XB",
+        "mate_plies": 3
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-29-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-30-01-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP28-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-30-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP29-31-01-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP30-31-01-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-06-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-07-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-08-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-09-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-25-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-26-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-07-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-08-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-09-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-25-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-26-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-08-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-09-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-25-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-26-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-09-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-25-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-26-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-25-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-26-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-23-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-26-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-01-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-01-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-01-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-01-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-01-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-01-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-01-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-01-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-24-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-06-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-07-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-08-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-09-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-23-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-26-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-07-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-08-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-09-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-23-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-26-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-08-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-09-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-23-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-26-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-09-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-23-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-26-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-23-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-26-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-26-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-01-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-06-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-07-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-08-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-09-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-23-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-25-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-07-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-08-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-09-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-23-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-25-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-08-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-09-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-23-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-25-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-09-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-23-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-25-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-23-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-25-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-25-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-01-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-01-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-01-28-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-01-28-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-01-28-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-28-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-01-28-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-01-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-01-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-01-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-01-29-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-01-29-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-01-29-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-01-29-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-01-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-29-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-01-29-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-01-29-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-01-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-01-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-01-30-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-01-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-01-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-01-31-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-01-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-01-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-02-05-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-02-10-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-02-11-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-02-14-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-02-15-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-02-16-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-02-17-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-02-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-02-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-02-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-27-02-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-02-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-02-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-02-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-02-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-02-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-02-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-02-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-02-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-02-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-02-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-02-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-02-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-02-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-02-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-02-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-02-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-02-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-03-04-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-03-05-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-03-12-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-03-13-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-03-14-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-03-15-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-03-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-03-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-03-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-03-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-03-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-03-30-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-03-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-05-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-07-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-10-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-11-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-14-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-15-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-16-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-17-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-28-04-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-04-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-24-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-30-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-04-31-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-06-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-08-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-09-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-10-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-11-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-14-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-15-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-16-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-17-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-18-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-06-05-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-19-05-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-27-05-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-16-05-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-05-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-23-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-24-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-30-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-05-31-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-06-10-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-06-11-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-06-12-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-06-13-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-06-14-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-06-17-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-06-20-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-06-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-06-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-06-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-06-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-06-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-06-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-06-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-06-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-06-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-06-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-06-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-06-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-06-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-06-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-06-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-06-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-06-31-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-07-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-28-07-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-07-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-07-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-07-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-07-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-07-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-08-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-08-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-08-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-08-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-08-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-08-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-08-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-08-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-08-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-08-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-08-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-08-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-08-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-09-14-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-09-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-09-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-09-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-09-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-09-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-09-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-09-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-09-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-09-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-09-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-09-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-09-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-09-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-10-18-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-30-10-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-15-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-16-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-18-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-30-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-16-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-18-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-30-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-18-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-30-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-30-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-10-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP30-31-10-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-10-24-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-10-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-11-18-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-31-11-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-14-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-17-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-18-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-31-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-17-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-18-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-31-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-18-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-31-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-31-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-11-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP30-31-11-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-11-24-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-11-25-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-11-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-06-12-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-10-12-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-15-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-16-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-18-12-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-30-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-16-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-18-12-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-30-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-18-12-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-30-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-30-12-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-12-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-12-23-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-12-28-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-12-29-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-11-13-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-14-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-17-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-18-13-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-31-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-17-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-18-13-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-31-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-18-13-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-31-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-31-13-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-13-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-13-23-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-13-25-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-13-28-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-13-29-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-14-18-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-02-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-18-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-27-14-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-28-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-11-14-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-13-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-17-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-18-14-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-31-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-17-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-18-14-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-31-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-18-14-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-31-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-31-14-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-14-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-14-24-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-14-25-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-14-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-15-18-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-02-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-18-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-20-15-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-29-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-10-15-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-30-15-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-12-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-16-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-18-15-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-30-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-16-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-18-15-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-30-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-18-15-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-30-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-30-15-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-15-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP30-31-15-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-15-24-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-15-28-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-15-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-16-18-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-01-16-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-20-16-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-10-16-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-30-16-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-12-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-15-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-18-16-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-30-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-15-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-18-16-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-30-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-18-16-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-30-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-30-16-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-16-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP30-31-16-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-16-24-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-16-28-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-16-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-17-18-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-11-17-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-31-17-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-13-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-14-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-18-17-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-31-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-14-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-18-17-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-31-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-18-17-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-31-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-31-17-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-17-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP30-31-17-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-17-24-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-17-25-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-17-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-18-19-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-18-20-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-18-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-18-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-18-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-18-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-18-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-18-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-18-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-18-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-18-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-18-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-18-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-18-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-18-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-18-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-18-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-18-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-18-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-18-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-19-20-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-20-19-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-27-19-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-29-19-21-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-19-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-19-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-19-28-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-19-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-01-20-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-05-20-21-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-27-20-21-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-20-21-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-20-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-20-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-20-29-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-20-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-21-23-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-21-23-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-21-23-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-21-23-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-21-23-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-21-23-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-21-23-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-21-23-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-21-23-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-21-23-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-21-23-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-27-21-24-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-29-21-24-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-21-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-21-25-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-23-21-25-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-29-21-25-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-21-25-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-21-25-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-21-25-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-21-25-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-21-25-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-21-25-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-21-25-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-21-25-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-21-25-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-21-25-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-21-26-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-02-21-26-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-21-26-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-21-26-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-21-26-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-21-26-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-21-26-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-21-26-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-21-26-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-21-26-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-21-26-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-21-26-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-21-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-21-28-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-21-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-21-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-21-28-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-21-28-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-21-28-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-21-28-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-21-28-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-21-28-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-21-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-21-28-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-21-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-21-29-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-21-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-21-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-15-21-29-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-21-29-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-21-29-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-21-29-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-21-29-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-21-29-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-21-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-21-29-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-10-21-30-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-12-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-15-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-16-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-18-21-30-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-15-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-16-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-18-21-30-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-16-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-18-21-30-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-18-21-30-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-31-21-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-27-21-31-22XB",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-11-21-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-13-21-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-14-21-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-17-21-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP02-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP03-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP04-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP05-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP07-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP08-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP09-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-15-21-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP10-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-13-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-14-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-17-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-18-21-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP11-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP12-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-14-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-17-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-18-21-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP13-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-17-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-18-21-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP14-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP15-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP16-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-18-21-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP17-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP18-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP19-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP20-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP23-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP24-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP25-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP26-27-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-28-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-29-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP27-30-21-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-23-24-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-24-25-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-24-26-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-24-28-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-24-29-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-24-30-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-24-31-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-25-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-26-31-22XB",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-28-30-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-28-31-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-29-30-22XB",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP21-27-29-31-22XB",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-01-04-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-01-05-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-01-12-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-01-13-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-01-19-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-01-20-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-01-21-27-23XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-01-24-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-02-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-03-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-04-21-27-23XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-05-21-27-23XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-06-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-08-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-09-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-10-21-27-23XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-11-21-27-23XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-14-21-27-23XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-15-21-27-23XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-16-21-27-23XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-17-21-27-23XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-18-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-19-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-20-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-01-19-23XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-01-27-23XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-02-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-03-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-04-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-05-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-06-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-07-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-08-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-09-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-10-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-11-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-12-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-13-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-14-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-15-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-16-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-17-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-18-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-19-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-20-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-22-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-24-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-25-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-26-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-27-28-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-27-29-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-27-30-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-21-27-31-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-22-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-24-21-27-23XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-25-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-26-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-28-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-29-21-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-30-21-27-23XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP00-31-21-27-23XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-02-00-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-02-04-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-02-05-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-02-24-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-02-27-28-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-02-27-29-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-02-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-06-07-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-06-08-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-06-09-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-06-22-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-06-25-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-06-26-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-06-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-07-08-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-07-09-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-07-22-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-07-25-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-07-26-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-07-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-08-09-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-08-22-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-08-25-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-08-26-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-08-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-09-22-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-09-25-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-09-26-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-09-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-18-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-21-27-23XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-22-25-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-22-26-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-22-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-25-26-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-25-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-03-26-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-04-00-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-04-02-27-23XR",
+        "mate_plies": 9
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-04-05-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-04-12-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-04-13-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-04-18-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-04-19-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-04-20-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-04-21-27-23XR",
+        "mate_plies": 7
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-04-24-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-04-27-29-23XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-05-00-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-05-04-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-05-12-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-05-13-27-23XR",
+        "mate_plies": 5
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-05-14-27-23XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-05-15-27-23XR",
+        "mate_plies": 11
+    },
+    {
+        "game_state": "ppmppeeeeeeeeeeeeeeePPMPP01-05-19-27-23XR",
+        "mate_plies": 5
     }
 ];
 window.MATE_STARTING_STATES_META = {
     "schema_version": 2,
-    "exported_at": "2026-08-07T20:23:46.892Z",
+    "exported_at": "2026-08-10T00:11:47.144Z",
     "search": {
-        "next_index": 4142596,
-        "positions_searched": 11881996862505,
-        "total_search_time_ms": 2765113200,
+        "next_index": 4355917,
+        "positions_searched": 12446904819439,
+        "total_search_time_ms": 2908518085,
         "recent_configs": [
             {
                 "configs": 1,
-                "nodes": 2874943,
-                "elapsed_ms": 842
+                "nodes": 2291062,
+                "elapsed_ms": 520
             },
             {
                 "configs": 1,
-                "nodes": 3551539,
-                "elapsed_ms": 967
+                "nodes": 2550737,
+                "elapsed_ms": 689
             },
             {
                 "configs": 1,
-                "nodes": 2573970,
-                "elapsed_ms": 717
+                "nodes": 2302973,
+                "elapsed_ms": 625
             },
             {
                 "configs": 1,
-                "nodes": 3419571,
-                "elapsed_ms": 948
+                "nodes": 2200970,
+                "elapsed_ms": 537
             },
             {
                 "configs": 1,
-                "nodes": 2113462,
-                "elapsed_ms": 659
+                "nodes": 2516355,
+                "elapsed_ms": 687
             },
             {
                 "configs": 1,
-                "nodes": 1862797,
-                "elapsed_ms": 509
+                "nodes": 2046562,
+                "elapsed_ms": 492
             },
             {
                 "configs": 1,
-                "nodes": 1657049,
-                "elapsed_ms": 449
+                "nodes": 1684941,
+                "elapsed_ms": 473
             },
             {
                 "configs": 1,
-                "nodes": 2172778,
-                "elapsed_ms": 599
+                "nodes": 1695469,
+                "elapsed_ms": 481
             },
             {
                 "configs": 1,
-                "nodes": 1890938,
-                "elapsed_ms": 516
+                "nodes": 1941521,
+                "elapsed_ms": 453
             },
             {
                 "configs": 1,
-                "nodes": 1844685,
-                "elapsed_ms": 502
+                "nodes": 2468358,
+                "elapsed_ms": 685
             },
             {
                 "configs": 1,
-                "nodes": 1587091,
-                "elapsed_ms": 470
+                "nodes": 2162430,
+                "elapsed_ms": 653
             },
             {
                 "configs": 1,
-                "nodes": 1109292,
-                "elapsed_ms": 311
+                "nodes": 3886750,
+                "elapsed_ms": 1002
             },
             {
                 "configs": 1,
-                "nodes": 1555094,
-                "elapsed_ms": 461
-            },
-            {
-                "configs": 1,
-                "nodes": 1573961,
-                "elapsed_ms": 450
-            },
-            {
-                "configs": 1,
-                "nodes": 1429766,
-                "elapsed_ms": 374
-            },
-            {
-                "configs": 1,
-                "nodes": 1326257,
-                "elapsed_ms": 363
-            },
-            {
-                "configs": 1,
-                "nodes": 1436488,
-                "elapsed_ms": 399
-            },
-            {
-                "configs": 1,
-                "nodes": 1579605,
-                "elapsed_ms": 423
-            },
-            {
-                "configs": 1,
-                "nodes": 3359964,
-                "elapsed_ms": 865
-            },
-            {
-                "configs": 1,
-                "nodes": 2085888,
-                "elapsed_ms": 597
-            },
-            {
-                "configs": 1,
-                "nodes": 1826423,
-                "elapsed_ms": 533
-            },
-            {
-                "configs": 1,
-                "nodes": 1538659,
-                "elapsed_ms": 420
-            },
-            {
-                "configs": 1,
-                "nodes": 1659050,
-                "elapsed_ms": 450
-            },
-            {
-                "configs": 1,
-                "nodes": 1847888,
-                "elapsed_ms": 528
-            },
-            {
-                "configs": 1,
-                "nodes": 1747353,
-                "elapsed_ms": 421
-            },
-            {
-                "configs": 1,
-                "nodes": 1710169,
-                "elapsed_ms": 469
-            },
-            {
-                "configs": 1,
-                "nodes": 1906543,
-                "elapsed_ms": 585
-            },
-            {
-                "configs": 1,
-                "nodes": 1404099,
-                "elapsed_ms": 401
-            },
-            {
-                "configs": 1,
-                "nodes": 1225019,
-                "elapsed_ms": 364
-            },
-            {
-                "configs": 1,
-                "nodes": 4144401,
-                "elapsed_ms": 1072
-            },
-            {
-                "configs": 1,
-                "nodes": 2043673,
-                "elapsed_ms": 601
-            },
-            {
-                "configs": 1,
-                "nodes": 2582345,
-                "elapsed_ms": 743
-            },
-            {
-                "configs": 1,
-                "nodes": 2433950,
-                "elapsed_ms": 693
-            },
-            {
-                "configs": 1,
-                "nodes": 2623362,
-                "elapsed_ms": 748
-            },
-            {
-                "configs": 1,
-                "nodes": 2760527,
-                "elapsed_ms": 771
-            },
-            {
-                "configs": 1,
-                "nodes": 2863811,
-                "elapsed_ms": 804
-            },
-            {
-                "configs": 1,
-                "nodes": 3577602,
-                "elapsed_ms": 998
-            },
-            {
-                "configs": 1,
-                "nodes": 3077592,
-                "elapsed_ms": 800
-            },
-            {
-                "configs": 1,
-                "nodes": 2720688,
-                "elapsed_ms": 692
-            },
-            {
-                "configs": 1,
-                "nodes": 2428258,
-                "elapsed_ms": 646
-            },
-            {
-                "configs": 1,
-                "nodes": 2641352,
-                "elapsed_ms": 706
-            },
-            {
-                "configs": 1,
-                "nodes": 3240090,
-                "elapsed_ms": 837
-            },
-            {
-                "configs": 1,
-                "nodes": 5211234,
-                "elapsed_ms": 1358
-            },
-            {
-                "configs": 1,
-                "nodes": 3902373,
-                "elapsed_ms": 1080
-            },
-            {
-                "configs": 1,
-                "nodes": 4433598,
-                "elapsed_ms": 1192
-            },
-            {
-                "configs": 1,
-                "nodes": 2206143,
-                "elapsed_ms": 636
-            },
-            {
-                "configs": 1,
-                "nodes": 2193341,
-                "elapsed_ms": 679
-            },
-            {
-                "configs": 1,
-                "nodes": 2345817,
-                "elapsed_ms": 693
-            },
-            {
-                "configs": 1,
-                "nodes": 1583125,
-                "elapsed_ms": 395
-            },
-            {
-                "configs": 1,
-                "nodes": 3994643,
-                "elapsed_ms": 1058
-            },
-            {
-                "configs": 1,
-                "nodes": 3973072,
-                "elapsed_ms": 1067
-            },
-            {
-                "configs": 1,
-                "nodes": 2890812,
-                "elapsed_ms": 767
-            },
-            {
-                "configs": 1,
-                "nodes": 2772667,
-                "elapsed_ms": 749
-            },
-            {
-                "configs": 1,
-                "nodes": 1481022,
-                "elapsed_ms": 406
-            },
-            {
-                "configs": 1,
-                "nodes": 2242766,
-                "elapsed_ms": 622
-            },
-            {
-                "configs": 1,
-                "nodes": 1916916,
-                "elapsed_ms": 524
-            },
-            {
-                "configs": 1,
-                "nodes": 2074162,
-                "elapsed_ms": 577
-            },
-            {
-                "configs": 1,
-                "nodes": 1912740,
-                "elapsed_ms": 516
-            },
-            {
-                "configs": 1,
-                "nodes": 2206216,
-                "elapsed_ms": 571
-            },
-            {
-                "configs": 1,
-                "nodes": 2421896,
-                "elapsed_ms": 644
-            },
-            {
-                "configs": 1,
-                "nodes": 2574431,
-                "elapsed_ms": 678
-            },
-            {
-                "configs": 1,
-                "nodes": 1796549,
-                "elapsed_ms": 470
-            },
-            {
-                "configs": 1,
-                "nodes": 1547806,
-                "elapsed_ms": 399
-            },
-            {
-                "configs": 1,
-                "nodes": 1743234,
-                "elapsed_ms": 458
-            },
-            {
-                "configs": 1,
-                "nodes": 2065131,
+                "nodes": 1712325,
                 "elapsed_ms": 534
             },
             {
                 "configs": 1,
-                "nodes": 3194230,
-                "elapsed_ms": 843
+                "nodes": 2475873,
+                "elapsed_ms": 638
             },
             {
                 "configs": 1,
-                "nodes": 2736594,
-                "elapsed_ms": 737
+                "nodes": 2381619,
+                "elapsed_ms": 688
             },
             {
                 "configs": 1,
-                "nodes": 3201144,
-                "elapsed_ms": 817
+                "nodes": 2853579,
+                "elapsed_ms": 749
             },
             {
                 "configs": 1,
-                "nodes": 1811320,
-                "elapsed_ms": 495
+                "nodes": 2425291,
+                "elapsed_ms": 639
             },
             {
                 "configs": 1,
-                "nodes": 2078257,
-                "elapsed_ms": 558
+                "nodes": 1354936,
+                "elapsed_ms": 316
             },
             {
                 "configs": 1,
-                "nodes": 2030843,
-                "elapsed_ms": 565
-            },
-            {
-                "configs": 2,
-                "nodes": 3355870,
-                "elapsed_ms": 920
+                "nodes": 2336176,
+                "elapsed_ms": 661
             },
             {
                 "configs": 1,
-                "nodes": 2829785,
-                "elapsed_ms": 768
+                "nodes": 2975737,
+                "elapsed_ms": 778
             },
             {
                 "configs": 1,
-                "nodes": 2271158,
-                "elapsed_ms": 585
+                "nodes": 1752786,
+                "elapsed_ms": 491
             },
             {
                 "configs": 1,
-                "nodes": 1681518,
-                "elapsed_ms": 434
+                "nodes": 2111958,
+                "elapsed_ms": 560
             },
             {
                 "configs": 1,
-                "nodes": 1764842,
-                "elapsed_ms": 474
+                "nodes": 1343272,
+                "elapsed_ms": 366
             },
             {
                 "configs": 1,
-                "nodes": 1687639,
-                "elapsed_ms": 461
+                "nodes": 1379973,
+                "elapsed_ms": 393
             },
             {
                 "configs": 1,
-                "nodes": 1652175,
-                "elapsed_ms": 450
-            },
-            {
-                "configs": 1,
-                "nodes": 1177712,
-                "elapsed_ms": 332
-            },
-            {
-                "configs": 1,
-                "nodes": 1218849,
-                "elapsed_ms": 335
-            },
-            {
-                "configs": 1,
-                "nodes": 1502842,
-                "elapsed_ms": 425
-            },
-            {
-                "configs": 1,
-                "nodes": 1269007,
-                "elapsed_ms": 381
-            },
-            {
-                "configs": 1,
-                "nodes": 1125083,
-                "elapsed_ms": 310
-            },
-            {
-                "configs": 1,
-                "nodes": 1392043,
-                "elapsed_ms": 359
-            },
-            {
-                "configs": 1,
-                "nodes": 1190409,
-                "elapsed_ms": 323
-            },
-            {
-                "configs": 1,
-                "nodes": 1185411,
+                "nodes": 1335849,
                 "elapsed_ms": 325
             },
             {
                 "configs": 1,
-                "nodes": 2130799,
-                "elapsed_ms": 578
+                "nodes": 1845542,
+                "elapsed_ms": 480
             },
             {
                 "configs": 1,
-                "nodes": 1417200,
-                "elapsed_ms": 430
-            },
-            {
-                "configs": 1,
-                "nodes": 1421091,
-                "elapsed_ms": 426
-            },
-            {
-                "configs": 1,
-                "nodes": 1161244,
-                "elapsed_ms": 328
-            },
-            {
-                "configs": 1,
-                "nodes": 1160186,
-                "elapsed_ms": 326
-            },
-            {
-                "configs": 1,
-                "nodes": 1203882,
-                "elapsed_ms": 343
-            },
-            {
-                "configs": 1,
-                "nodes": 1326369,
-                "elapsed_ms": 324
-            },
-            {
-                "configs": 1,
-                "nodes": 1395815,
-                "elapsed_ms": 376
-            },
-            {
-                "configs": 1,
-                "nodes": 1428993,
-                "elapsed_ms": 410
-            },
-            {
-                "configs": 1,
-                "nodes": 1089726,
-                "elapsed_ms": 296
-            },
-            {
-                "configs": 1,
-                "nodes": 1009564,
-                "elapsed_ms": 273
-            },
-            {
-                "configs": 1,
-                "nodes": 1654473,
+                "nodes": 1460641,
                 "elapsed_ms": 438
             },
             {
                 "configs": 1,
-                "nodes": 1644479,
-                "elapsed_ms": 462
+                "nodes": 2251779,
+                "elapsed_ms": 625
             },
             {
                 "configs": 1,
-                "nodes": 1788523,
-                "elapsed_ms": 575
+                "nodes": 1226049,
+                "elapsed_ms": 344
+            },
+            {
+                "configs": 1,
+                "nodes": 1778545,
+                "elapsed_ms": 475
+            },
+            {
+                "configs": 1,
+                "nodes": 1820877,
+                "elapsed_ms": 534
+            },
+            {
+                "configs": 1,
+                "nodes": 1749797,
+                "elapsed_ms": 466
+            },
+            {
+                "configs": 1,
+                "nodes": 1843253,
+                "elapsed_ms": 459
+            },
+            {
+                "configs": 1,
+                "nodes": 1742212,
+                "elapsed_ms": 404
+            },
+            {
+                "configs": 1,
+                "nodes": 2314144,
+                "elapsed_ms": 594
+            },
+            {
+                "configs": 1,
+                "nodes": 2399652,
+                "elapsed_ms": 608
+            },
+            {
+                "configs": 1,
+                "nodes": 1219459,
+                "elapsed_ms": 331
+            },
+            {
+                "configs": 1,
+                "nodes": 1238096,
+                "elapsed_ms": 306
+            },
+            {
+                "configs": 1,
+                "nodes": 2080671,
+                "elapsed_ms": 482
+            },
+            {
+                "configs": 1,
+                "nodes": 2733109,
+                "elapsed_ms": 700
+            },
+            {
+                "configs": 1,
+                "nodes": 2079955,
+                "elapsed_ms": 545
+            },
+            {
+                "configs": 1,
+                "nodes": 2958262,
+                "elapsed_ms": 743
+            },
+            {
+                "configs": 1,
+                "nodes": 2525985,
+                "elapsed_ms": 662
+            },
+            {
+                "configs": 1,
+                "nodes": 1622156,
+                "elapsed_ms": 439
+            },
+            {
+                "configs": 1,
+                "nodes": 2451174,
+                "elapsed_ms": 588
+            },
+            {
+                "configs": 1,
+                "nodes": 2910130,
+                "elapsed_ms": 744
+            },
+            {
+                "configs": 1,
+                "nodes": 2732641,
+                "elapsed_ms": 661
+            },
+            {
+                "configs": 1,
+                "nodes": 2585292,
+                "elapsed_ms": 640
+            },
+            {
+                "configs": 1,
+                "nodes": 2175400,
+                "elapsed_ms": 484
+            },
+            {
+                "configs": 1,
+                "nodes": 2962581,
+                "elapsed_ms": 719
+            },
+            {
+                "configs": 1,
+                "nodes": 2840198,
+                "elapsed_ms": 732
+            },
+            {
+                "configs": 1,
+                "nodes": 2221103,
+                "elapsed_ms": 516
+            },
+            {
+                "configs": 1,
+                "nodes": 2003435,
+                "elapsed_ms": 534
+            },
+            {
+                "configs": 1,
+                "nodes": 2475107,
+                "elapsed_ms": 610
+            },
+            {
+                "configs": 1,
+                "nodes": 2554572,
+                "elapsed_ms": 631
+            },
+            {
+                "configs": 1,
+                "nodes": 3000531,
+                "elapsed_ms": 742
+            },
+            {
+                "configs": 1,
+                "nodes": 3034155,
+                "elapsed_ms": 799
+            },
+            {
+                "configs": 1,
+                "nodes": 1329302,
+                "elapsed_ms": 361
+            },
+            {
+                "configs": 1,
+                "nodes": 2623469,
+                "elapsed_ms": 643
+            },
+            {
+                "configs": 1,
+                "nodes": 3453741,
+                "elapsed_ms": 858
+            },
+            {
+                "configs": 1,
+                "nodes": 3407700,
+                "elapsed_ms": 812
+            },
+            {
+                "configs": 1,
+                "nodes": 3048657,
+                "elapsed_ms": 732
+            },
+            {
+                "configs": 1,
+                "nodes": 2345813,
+                "elapsed_ms": 520
+            },
+            {
+                "configs": 1,
+                "nodes": 2901640,
+                "elapsed_ms": 715
+            },
+            {
+                "configs": 1,
+                "nodes": 2675784,
+                "elapsed_ms": 720
+            },
+            {
+                "configs": 1,
+                "nodes": 2501512,
+                "elapsed_ms": 606
+            },
+            {
+                "configs": 1,
+                "nodes": 2270260,
+                "elapsed_ms": 621
+            },
+            {
+                "configs": 1,
+                "nodes": 2547095,
+                "elapsed_ms": 654
+            },
+            {
+                "configs": 1,
+                "nodes": 1919871,
+                "elapsed_ms": 603
+            },
+            {
+                "configs": 1,
+                "nodes": 2031145,
+                "elapsed_ms": 579
+            },
+            {
+                "configs": 1,
+                "nodes": 1135848,
+                "elapsed_ms": 333
+            },
+            {
+                "configs": 1,
+                "nodes": 1741509,
+                "elapsed_ms": 467
+            },
+            {
+                "configs": 1,
+                "nodes": 2183306,
+                "elapsed_ms": 695
+            },
+            {
+                "configs": 1,
+                "nodes": 2010229,
+                "elapsed_ms": 608
+            },
+            {
+                "configs": 1,
+                "nodes": 1687325,
+                "elapsed_ms": 482
+            },
+            {
+                "configs": 1,
+                "nodes": 1736293,
+                "elapsed_ms": 396
+            },
+            {
+                "configs": 1,
+                "nodes": 2583219,
+                "elapsed_ms": 738
+            },
+            {
+                "configs": 1,
+                "nodes": 2154836,
+                "elapsed_ms": 607
+            },
+            {
+                "configs": 1,
+                "nodes": 1403621,
+                "elapsed_ms": 451
+            },
+            {
+                "configs": 1,
+                "nodes": 1222885,
+                "elapsed_ms": 304
+            },
+            {
+                "configs": 1,
+                "nodes": 3070041,
+                "elapsed_ms": 901
+            },
+            {
+                "configs": 1,
+                "nodes": 2518693,
+                "elapsed_ms": 737
+            },
+            {
+                "configs": 1,
+                "nodes": 978275,
+                "elapsed_ms": 306
+            },
+            {
+                "configs": 1,
+                "nodes": 1954449,
+                "elapsed_ms": 539
+            },
+            {
+                "configs": 1,
+                "nodes": 2261436,
+                "elapsed_ms": 615
+            },
+            {
+                "configs": 1,
+                "nodes": 3564581,
+                "elapsed_ms": 923
+            },
+            {
+                "configs": 1,
+                "nodes": 3180850,
+                "elapsed_ms": 855
+            },
+            {
+                "configs": 1,
+                "nodes": 2948828,
+                "elapsed_ms": 720
+            },
+            {
+                "configs": 1,
+                "nodes": 1606097,
+                "elapsed_ms": 455
+            },
+            {
+                "configs": 1,
+                "nodes": 2195161,
+                "elapsed_ms": 640
+            },
+            {
+                "configs": 1,
+                "nodes": 1936973,
+                "elapsed_ms": 543
+            },
+            {
+                "configs": 1,
+                "nodes": 1913972,
+                "elapsed_ms": 500
+            },
+            {
+                "configs": 1,
+                "nodes": 4083469,
+                "elapsed_ms": 1070
+            },
+            {
+                "configs": 1,
+                "nodes": 1834388,
+                "elapsed_ms": 559
+            },
+            {
+                "configs": 1,
+                "nodes": 2897137,
+                "elapsed_ms": 822
+            },
+            {
+                "configs": 1,
+                "nodes": 4435586,
+                "elapsed_ms": 1224
+            },
+            {
+                "configs": 1,
+                "nodes": 3013347,
+                "elapsed_ms": 846
+            },
+            {
+                "configs": 1,
+                "nodes": 3036828,
+                "elapsed_ms": 843
+            },
+            {
+                "configs": 2,
+                "nodes": 5181936,
+                "elapsed_ms": 1365
+            },
+            {
+                "configs": 1,
+                "nodes": 3124817,
+                "elapsed_ms": 1150
             }
         ],
         "max_depth": 11,
