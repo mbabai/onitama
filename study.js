@@ -55,8 +55,15 @@ function fitGame(){
 	const area=document.getElementById('gameArea');if(!area)return;
 	// innerWidth can include overflowing content on mobile; use the layout viewport.
 	const width=document.documentElement.clientWidth;
-	const base=window.matchMedia('(orientation:portrait)').matches?600:1280;
-	const scale=Math.min(1,Math.max(1,width-24)/base);
+	const portrait=window.matchMedia('(orientation:portrait)').matches;
+	const base=portrait?600:1280;
+	const widthScale=Math.min(1,Math.max(1,width-24)/base);
+	// Keep the full board and both hands visible on desktop. Small screens
+	// retain scrolling instead of shrinking the pieces beyond readability.
+	const navHeight=document.querySelector('.siteNav')?.getBoundingClientRect().height||0;
+	const availableHeight=document.documentElement.clientHeight-navHeight-12;
+	const heightScale=Math.max(0.55,availableHeight/(990+18));
+	const scale=portrait?widthScale:Math.min(widthScale,heightScale);
 	area.style.setProperty('--game-scale',scale);
 	area.style.zoom=scale;area.style.marginLeft=Math.max(12,(width-base*scale)/2)/scale+'px';
 }
