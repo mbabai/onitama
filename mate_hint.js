@@ -60,15 +60,36 @@ function updateMateHintControl(){
  bar.setAttribute('aria-disabled',String(!available));
  bar.setAttribute('aria-pressed',String(mateHintVisible));
  bar.onclick=toggleMateHint;
- bar.onkeydown=event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleMateHint();}};
+ bar.onkeydown=event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleMateHint(event);}};
  if(available){bar.title+=' — click to show the next forced-line move';bar.setAttribute('aria-label',bar.title);}
  if(mateHintVisible){if(!available||mateHintState!==GameState)hideMateHint();else drawMateHint();}
 }
-function toggleMateHint(){
+function toggleMateHint(event){
+ // The document's outside-click handler must not clear the hint selection.
+ event?.stopPropagation();
  if(mateHintVisible){hideMateHint();return;}
- if(!currentMateHint()||GameIsOver||CustomSetupActive)return;
+ const move=currentMateHint();
+ if(!move||GameIsOver||CustomSetupActive)return;
+ selectMateHintMove(move);
  mateHintVisible=true;mateHintState=GameState;drawMateHint();
  getEvaluationBar().setAttribute('aria-pressed','true');
+}
+function selectMateHintMove(move){
+ if(!GameHasStarted||!PlayerCanMove||AIIsThinking)return;
+ const slot=['p'+move.color+'c1','p'+move.color+'c2'].find(id=>document.getElementById(id)?.innerText===move.cardID);
+ const piece=move.pass?null:document.querySelector('#s'+move.startLocation+' .piece');
+ if(!slot||(!move.pass&&!piece))return;
+ // Select directly: selectCard toggles existing selections and executes passes.
+ currentMoveUI={color:move.color,cardID:move.cardID};
+ clearMoveSelection();
+ setClassAttributeToValue('piece','draggable','false');
+ if(piece){
+  currentMoveUI.startLocation=move.startLocation;
+  setClassAttributeToValue('piece '+(move.color==='R'?'red':'blue'),'draggable','true');
+  piece.style.outline='3px solid gold';
+ }
+ updatePlayableCardStyles(slot);
+ highlightLegalTargets();
 }
 function drawMateHint(){
  document.getElementById('mateHintArrow')?.remove();
