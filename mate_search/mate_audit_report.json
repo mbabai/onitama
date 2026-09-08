@@ -1,0 +1,32 @@
+{
+  "version": "forced-v1",
+  "input_sha256": "8fbf2a0fba66eed41233149f2753806b91f439f8dbf8a8f49b43f031a4f1575e",
+  "completed_at": "2026-09-07T19:08:57.206Z",
+  "input_count": 115078,
+  "verified_count": 115078,
+  "unproven_count": 0,
+  "distribution": {
+    "3": 5240,
+    "5": 79414,
+    "7": 14922,
+    "9": 8211,
+    "11": 7286,
+    "13": 5
+  },
+  "changed_count": 2,
+  "changes": [
+    {
+      "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-25-01-27-21XR",
+      "previous_mate_plies": 15,
+      "mate_plies": 13
+    },
+    {
+      "game_state": "ppmppeeeeeeeeeeeeeeePPMPP06-26-01-27-21XR",
+      "previous_mate_plies": 15,
+      "mate_plies": 13
+    }
+  ],
+  "scan_max_depth": 11,
+  "max_verification_depth": 15,
+  "beyond_scan_count": 5
+}

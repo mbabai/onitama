@@ -1,5 +1,9 @@
 # Onitama Mate Pattern Report
 
+> Historical exploratory notes. The complete September 2026 audit supersedes
+> the dataset-status statements below: see [AUDIT.md](AUDIT.md) for 115,078
+> verified shortest forced mates, saved main lines, and corrected distances.
+
 ## Scope
 
 The checked-in search data currently contains two completed non-mates and a resume state, not a saved mate-found dataset. To analyze actual mates, I reused the solver embedded in `matesearch.html` and generated three focused samples of found mate-in-5 positions:

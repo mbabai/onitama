@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const MateRecords = require('./record_schema');
 
 const DEFAULT_TOTAL_CONFIGS = 6041280;
 const DEFAULT_MAX_DEPTH = 11;
@@ -13,7 +14,8 @@ function parsePayloadText(text, sourceName){
 	const metadata = Array.isArray(parsed) ? {} : {
 		schema_version: Number(parsed.schema_version) || 2,
 		exported_at: typeof parsed.exported_at === "string" ? parsed.exported_at : "",
-		search: parsed.search && typeof parsed.search === "object" ? parsed.search : {}
+		search: parsed.search && typeof parsed.search === "object" ? parsed.search : {},
+		audit: parsed.audit || null
 	};
 	return {
 		metadata,
@@ -29,10 +31,7 @@ function normalizeRecord(entry, index, sourceName){
 	if(!Number.isFinite(matePlies)){
 		throw new Error((sourceName || "Payload") + " entry " + index + " is missing numeric mate_plies.");
 	}
-	return {
-		game_state: entry.game_state,
-		mate_plies: matePlies
-	};
+	return MateRecords.normalize(entry);
 }
 
 function mergePayloads(payloads, options = {}){
@@ -40,9 +39,11 @@ function mergePayloads(payloads, options = {}){
 	const byState = new Map();
 	let bestSearch = {};
 	let bestNextIndex = -1;
+	let audit = null;
 
 	for(const payload of payloads){
 		const normalizedPayload = normalizePayloadInput(payload);
+		audit = audit || normalizedPayload.metadata.audit || null;
 		for(const record of normalizedPayload.records){
 			addRecord(records, byState, record);
 		}
@@ -57,7 +58,8 @@ function mergePayloads(payloads, options = {}){
 	const exportedAt = options.exportedAt || new Date().toISOString();
 	return {
 		metadata: {
-			schema_version: 2,
+			schema_version: 3,
+			audit,
 			exported_at: exportedAt,
 			search: {
 				...bestSearch,
@@ -85,7 +87,8 @@ function normalizePayloadInput(payload){
 			metadata: {
 				schema_version: Number(payload.schema_version) || 2,
 				exported_at: typeof payload.exported_at === "string" ? payload.exported_at : "",
-				search: payload.search && typeof payload.search === "object" ? payload.search : {}
+				search: payload.search && typeof payload.search === "object" ? payload.search : {},
+				audit: payload.audit || null
 			},
 			records: payload.starting_states.map((entry, index) => normalizeRecord(entry, index))
 		};
@@ -95,19 +98,14 @@ function normalizePayloadInput(payload){
 
 function addRecord(records, byState, record){
 	if(!record || typeof record.game_state !== "string" || !Number.isFinite(Number(record.mate_plies))) return;
-	const normalized = {
-		game_state: record.game_state,
-		mate_plies: Number(record.mate_plies)
-	};
+	const normalized = MateRecords.normalize(record);
 	const existingIndex = byState.get(normalized.game_state);
 	if(existingIndex === undefined){
 		byState.set(normalized.game_state, records.length);
 		records.push(normalized);
 		return;
 	}
-	if(normalized.mate_plies < records[existingIndex].mate_plies){
-		records[existingIndex] = normalized;
-	}
+	records[existingIndex] = MateRecords.prefer(records[existingIndex], normalized);
 }
 
 function getNextIndex(search){
@@ -121,20 +119,24 @@ function buildJsonPayload(records, metadata){
 		schema_version: metadata.schema_version || 2,
 		exported_at: metadata.exported_at || new Date().toISOString(),
 		search: metadata.search || {},
+		audit: metadata.audit || null,
 		starting_states: records
 	};
 }
 
 function buildJsonText(records, metadata){
-	return JSON.stringify(buildJsonPayload(records, metadata), null, 4) + "\n";
+	const {starting_states, ...header} = buildJsonPayload(records, metadata);
+	return JSON.stringify(header).slice(0,-1) + ',"starting_states":[\n'
+		+ records.map(record=>JSON.stringify(record)).join(',\n') + '\n]}\n';
 }
 
 function buildJsText(records, metadata){
-	return "window.MATE_STARTING_STATES = " + JSON.stringify(records, null, 4) + ";\n"
+	return "window.MATE_STARTING_STATES = [\n" + records.map(record=>JSON.stringify(record)).join(',\n') + "\n];\n"
 		+ "window.MATE_STARTING_STATES_META = " + JSON.stringify({
 			schema_version: metadata.schema_version || 2,
 			exported_at: metadata.exported_at || new Date().toISOString(),
-			search: metadata.search || {}
+			search: metadata.search || {},
+			audit: metadata.audit || null
 		}, null, 4) + ";\n";
 }
 

@@ -311,6 +311,9 @@ body {
 }
 
 .coordinateLabel {
+	border: none;
+	background: transparent;
+	box-shadow: none;
 	color: #4b4638;
 	font: bold 14px Arial, sans-serif;
 	pointer-events: none;

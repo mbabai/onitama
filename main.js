@@ -144,6 +144,11 @@ var CustomSetupBoardState = ""
 var CustomSetupCards = {}
 var CustomSelectedCardID = null
 var CustomSelectedPieceSquare = null
+var MatePuzzlePages = {}
+var CardModes = {}
+const CARD_MODES_COOKIE = "onitamaCardModes"
+var RequiredCardOrder = []
+const REQUIRED_CARD_ORDER_COOKIE = "onitamaRequiredCardOrder"
 
 // Logic flow ********************************************
 function main(){
@@ -224,17 +229,35 @@ function getMateStartingStatesForPlies(matePlies){
 	})
 }
 
+// Validate and group each library once; reuse filtered groups until preferences change.
+var MateLibraryIndex = null
+var MateFilterCache = null
+function getMateLibraryIndex(){
+ const source = window.MATE_STARTING_STATES
+ if(MateLibraryIndex && MateLibraryIndex.source === source) return MateLibraryIndex
+ const groups = new Map()
+ if(Array.isArray(source)) source.forEach((mateState,index)=>{
+  if(!mateState || !isValidLaunchGameState(mateState.game_state)) return
+  const plies = Number(mateState.mate_plies)
+  if(!Number.isFinite(plies) || plies <= 0) return
+  if(!groups.has(plies)) groups.set(plies,[])
+  groups.get(plies).push({index,mateState,cards:getGameStateCardIDs(mateState.game_state)})
+ })
+ MateLibraryIndex = {source,groups}
+ MateFilterCache = null
+ return MateLibraryIndex
+}
 function getFilteredMateStartingStateRecordsForPlies(matePlies){
-	if(!Array.isArray(window.MATE_STARTING_STATES)) return []
-	var selectedCards = new Set(getSelectedCardIDsForMateFilter())
-	var mateRecords = []
-	for(let i = 0; i < window.MATE_STARTING_STATES.length; i++){
-		var mateState = window.MATE_STARTING_STATES[i]
-		if(!mateState || mateState.mate_plies != matePlies || !isValidLaunchGameState(mateState.game_state)) continue
-		if(!getGameStateCardIDs(mateState.game_state).every(function(cardID){ return selectedCards.has(cardID) })) continue
-		mateRecords.push({ index: i, mateState: mateState })
-	}
-	return mateRecords
+ const library = getMateLibraryIndex()
+ const key = JSON.stringify(CardModes)
+ if(!MateFilterCache || MateFilterCache.key !== key) MateFilterCache = {key,groups:new Map()}
+ const plies = Number(matePlies)
+ if(!MateFilterCache.groups.has(plies)){
+  const required = Object.keys(CardModes).filter(id=>CardModes[id]==='require')
+  MateFilterCache.groups.set(plies,(library.groups.get(plies)||[]).filter(record=>
+   record.cards.every(id=>CardModes[id]!=='exclude') && required.every(id=>record.cards.includes(id))))
+ }
+ return MateFilterCache.groups.get(plies)
 }
 
 function getGameStateCardIDs(gameState){
@@ -581,6 +604,7 @@ function renderMatePuzzleControls(){
 	if(!mateActions) return
 	mateActions.innerHTML = ""
 	var mateMoves = getAvailableMateMoveCounts()
+	var totalMates = 0
 	for(let mateMoveCount of mateMoves){
 		var row = document.createElement("div")
 		row.className = "matePuzzleRow"
@@ -589,6 +613,7 @@ function renderMatePuzzleControls(){
 		label.className = "matePuzzleLabel"
 		label.setAttribute("for", getMateSelectID(mateMoveCount))
 		var mateRecords = getFilteredMateStartingStateRecordsForPlies(mateMovesToPlies(mateMoveCount))
+		totalMates += mateRecords.length
 		label.innerText = "Mate in " + mateMoveCount + " (" + mateRecords.length + ")"
 
 		var select = document.createElement("select")
@@ -597,7 +622,9 @@ function renderMatePuzzleControls(){
 		select.setAttribute("aria-label", "Mate in " + mateMoveCount + " puzzles")
 
 		if(mateRecords.length){
-			for(let i = 0; i < mateRecords.length; i++){
+			const page=Math.min(MatePuzzlePages[mateMoveCount]||0,Math.floor((mateRecords.length-1)/100))
+			MatePuzzlePages[mateMoveCount]=page
+			for(let i = page*100; i < Math.min(mateRecords.length,(page+1)*100); i++){
 				var option = document.createElement("option")
 				option.value = mateRecords[i].index
 				option.innerText = formatMatePuzzleOption(mateRecords[i].mateState)
@@ -611,7 +638,7 @@ function renderMatePuzzleControls(){
 		} else {
 			var emptyOption = document.createElement("option")
 			emptyOption.value = ""
-			emptyOption.innerText = ""
+			emptyOption.innerText = "No matching setups"
 			select.appendChild(emptyOption)
 			select.disabled = true
 		}
@@ -636,8 +663,27 @@ function renderMatePuzzleControls(){
 		row.appendChild(select)
 		row.appendChild(goButton)
 		row.appendChild(randomButton)
+		const studyButton=document.createElement('button')
+		studyButton.type='button';studyButton.textContent='Study'
+		studyButton.disabled=!mateRecords.length||!MateRecords.verified(mateRecords[0]?.mateState)
+		studyButton.onclick=()=>studySelected(mateMoveCount)
+		row.appendChild(studyButton)
+		if(mateRecords.length>100){
+			const pager=document.createElement('div');pager.className='puzzlePager'
+			const page=MatePuzzlePages[mateMoveCount]||0
+			const prev=document.createElement('button');prev.type='button';prev.textContent='←';prev.setAttribute('aria-label','Previous mate-in-'+mateMoveCount+' puzzles');prev.disabled=page===0
+			prev.onclick=()=>{MatePuzzlePages[mateMoveCount]=page-1;renderMatePuzzleControls()}
+			const next=document.createElement('button');next.type='button';next.textContent='→';next.setAttribute('aria-label','Next mate-in-'+mateMoveCount+' puzzles');next.disabled=(page+1)*100>=mateRecords.length
+			next.onclick=()=>{MatePuzzlePages[mateMoveCount]=page+1;renderMatePuzzleControls()}
+			const label=document.createElement('span');label.textContent=(page*100+1)+'–'+Math.min(mateRecords.length,(page+1)*100)+' of '+mateRecords.length.toLocaleString()
+			pager.append(prev,label,next);row.append(pager)
+		}
 		mateActions.appendChild(row)
 	}
+	var totalSetups = CardPreferences.startingConfigurations(CardModes)
+	document.getElementById('libraryCount').textContent = totalMates.toLocaleString()
+	document.getElementById('librarySetupCount').textContent = totalSetups.toLocaleString()
+	document.getElementById('libraryPercent').textContent = (totalSetups ? totalMates / totalSetups * 100 : 0).toLocaleString(undefined, {maximumFractionDigits: 4}) + '%'
 }
 
 function getMateSelectID(mateMoveCount){
@@ -676,118 +722,58 @@ function updateMatePuzzleSelectColor(select){
 }
 
 function getAvailableMateMoveCounts(){
-	if(!Array.isArray(window.MATE_STARTING_STATES)) return []
-	var available = new Set()
-	for(let mateState of window.MATE_STARTING_STATES){
-		if(!mateState || !isValidLaunchGameState(mateState.game_state)) continue
-		var matePlies = Number(mateState.mate_plies)
-		if(!Number.isFinite(matePlies) || matePlies <= 0) continue
-		available.add(matePliesToMoves(matePlies))
-	}
-	return Array.from(available).sort((a,b) => a - b)
+ return [...new Set([...getMateLibraryIndex().groups.keys()].map(matePliesToMoves))].sort((a,b)=>a-b)
 }
 
 function renderCardPicker(selectedCardIDs){
-	var cardPicker = document.getElementById("cardPicker")
-	cardPicker.innerHTML = ""
-	var selectedCards = new Set(selectedCardIDs)
-	for (let cardID of getAllCardIDsByName()){
-		var cardLabel = document.createElement("label")
-		cardLabel.className = "cardToggle"
-		cardLabel.setAttribute("data-card-id", cardID)
-		cardLabel.style.backgroundImage = "url('images/" + move_dictionary[cardID].name + ".jpeg')"
-
-		var checkbox = document.createElement("input")
-		checkbox.type = "checkbox"
-		checkbox.checked = selectedCards.has(cardID)
-		checkbox.setAttribute("aria-label", titleCase(move_dictionary[cardID].name))
-		checkbox.addEventListener("click", function(event){
-			if (checkbox.checked && getCheckedCardIDs().length <= MIN_SELECTED_CARDS){
-				event.preventDefault()
-				shakeCardToggle(cardLabel)
-			}
-		})
-		checkbox.addEventListener("change", function(event){
-			handleCardToggleChange(event, cardLabel)
-		})
-
-		var checkmark = document.createElement("span")
-		checkmark.className = "cardToggleCheckmark"
-		checkmark.setAttribute("aria-hidden", "true")
-
-		var name = document.createElement("span")
-		name.className = "cardToggleName"
-		name.innerText = titleCase(move_dictionary[cardID].name)
-
-		cardLabel.addEventListener("mousedown", function(event){
-			if (checkbox.checked && getCheckedCardIDs().length <= MIN_SELECTED_CARDS){
-				event.preventDefault()
-				shakeCardToggle(cardLabel)
-			}
-		})
-		cardLabel.appendChild(checkbox)
-		cardLabel.appendChild(checkmark)
-		cardLabel.appendChild(name)
-		cardPicker.appendChild(cardLabel)
-	}
-	updateCardToggleLockedState()
+ let saved={};try{saved=JSON.parse(getCookie(CARD_MODES_COOKIE)||'{}')||{}}catch(error){}
+ CardModes=CardPreferences.normalize(getAllCardIDs(),saved,selectedCardIDs)
+ let savedOrder=[];try{savedOrder=JSON.parse(getCookie(REQUIRED_CARD_ORDER_COOKIE)||'[]')}catch(error){}
+ RequiredCardOrder=[...new Set([...(Array.isArray(savedOrder)?savedOrder.map(String):[]),...getAllCardIDs()])].filter(id=>CardModes[id]==='require')
+ const picker=document.getElementById('cardPicker');picker.replaceChildren()
+ for(const cardID of getAllCardIDsByName()){
+  const row=document.createElement('div');row.className='cardChoice';row.dataset.cardId=cardID
+  const image=document.createElement('img');image.src='images/'+move_dictionary[cardID].name+'.jpeg';image.alt='';image.loading='lazy';image.decoding='async';image.width=62;image.height=40
+  const label=document.createElement('label');label.htmlFor='cardMode'+cardID;label.textContent=titleCase(move_dictionary[cardID].name)
+  const select=document.createElement('select');select.id=label.htmlFor;select.setAttribute('aria-label',label.textContent+' card choice')
+  for(const mode of ['include','exclude','require']){const option=document.createElement('option');option.value=mode;option.textContent=titleCase(mode);select.append(option)}
+  select.value=CardModes[cardID]
+  select.onchange=()=>{
+   const result=CardPreferences.change(CardModes,cardID,select.value)
+   if(result.error){select.value=CardModes[cardID];document.getElementById('cardChoiceStatus').textContent=result.error;return}
+   CardModes=result.modes
+   RequiredCardOrder=RequiredCardOrder.filter(id=>CardModes[id]==='require')
+   if(select.value==='require'&&!RequiredCardOrder.includes(cardID))RequiredCardOrder.push(cardID)
+   saveMenuPreferences();updateCardChoiceControls();MatePuzzlePages={};renderMatePuzzleControls()
+  }
+  row.append(image,label,select);picker.append(row)
+ }
+ updateCardChoiceControls()
 }
-
-function handleCardToggleChange(event, cardLabel){
-	var checkbox = event.target
-	if (!checkbox.checked && getCheckedCardIDs().length < MIN_SELECTED_CARDS){
-		checkbox.checked = true
-		shakeCardToggle(cardLabel)
-		updateCardToggleLockedState()
-		return
-	}
-	saveMenuPreferences()
-	updateCardToggleLockedState()
-	renderMatePuzzleControls()
+function updateCardChoiceControls(){
+ const picker=document.getElementById('cardPicker')
+ const orderedIDs=[...RequiredCardOrder,...getAllCardIDsByName().filter(id=>CardModes[id]!=='require')]
+ const rows=new Map(Array.from(picker.children,row=>[row.dataset.cardId,row]))
+ const focused=document.activeElement
+ orderedIDs.forEach((id,index)=>{if(picker.children[index]!==rows.get(id))picker.insertBefore(rows.get(id),picker.children[index]||null)})
+ if(focused&&picker.contains(focused)&&document.activeElement!==focused)focused.focus({preventScroll:true})
+ const required=Object.values(CardModes).filter(mode=>mode==='require').length
+ const allowed=Object.values(CardModes).filter(mode=>mode!=='exclude').length
+ for(const row of document.querySelectorAll('#cardPicker .cardChoice')){
+  const mode=CardModes[row.dataset.cardId],select=row.querySelector('select');row.dataset.mode=mode
+  select.querySelector('option[value=require]').disabled=required>=5&&mode!=='require'
+  select.querySelector('option[value=exclude]').disabled=allowed<=5&&mode!=='exclude'
+ }
+ document.getElementById('cardChoiceStatus').textContent=required+' / 5 required · '+allowed+' available'
 }
-
-function shakeCardToggle(cardLabel){
-	cardLabel.classList.remove("shake")
-	void cardLabel.offsetWidth
-	cardLabel.classList.add("shake")
-}
-
-function updateCardToggleLockedState(){
-	var checkedCards = getCheckedCardIDs()
-	var isLocked = checkedCards.length <= MIN_SELECTED_CARDS
-	var cardToggles = document.querySelectorAll("#cardPicker .cardToggle")
-	for (let cardToggle of cardToggles){
-		var checkbox = cardToggle.querySelector("input[type='checkbox']")
-		cardToggle.classList.toggle("locked", isLocked && checkbox.checked)
-	}
-}
-
 function saveMenuPreferences(){
-	var colorSelect = document.getElementById("playerColor")
-	if (colorSelect){
-		setCookie(PLAYER_COLOR_COOKIE, colorSelect.value)
-	}
-	setCookie(SELECTED_CARDS_COOKIE, getCheckedCardIDs().join(","))
+ const color=document.getElementById('playerColor');if(color)setCookie(PLAYER_COLOR_COOKIE,color.value)
+ setCookie(CARD_MODES_COOKIE,JSON.stringify(CardModes))
+ setCookie(REQUIRED_CARD_ORDER_COOKIE,JSON.stringify(RequiredCardOrder))
+ setCookie(SELECTED_CARDS_COOKIE,getSelectedCardIDsForDeal().join(','))
 }
-
-function getCheckedCardIDs(){
-	var checkedCards = []
-	var checkboxes = document.querySelectorAll("#cardPicker .cardToggle input[type='checkbox']:checked")
-	for (let checkbox of checkboxes){
-		checkedCards.push(checkbox.parentElement.getAttribute("data-card-id"))
-	}
-	return checkedCards
-}
-
-function getSelectedCardIDsForDeal(){
-	var checkedCardIDs = getCheckedCardIDs()
-	return checkedCardIDs.length >= MIN_SELECTED_CARDS ? checkedCardIDs : loadSelectedCardIDs()
-}
-
-function getSelectedCardIDsForMateFilter(){
-	var checkedCardIDs = getCheckedCardIDs()
-	return checkedCardIDs.length ? checkedCardIDs : loadSelectedCardIDs()
-}
+function getSelectedCardIDsForDeal(){return Object.keys(CardModes).filter(id=>CardModes[id]!=='exclude')}
+function getSelectedCardIDsForMateFilter(){return getSelectedCardIDsForDeal()}
 
 function loadSelectedCardIDs(){
 	var allCardIDs = getAllCardIDs()
@@ -871,6 +857,7 @@ function shouldRunBackgroundSearch(){
 		&& !CustomSetupActive
 		&& typeof Worker !== "undefined"
 		&& !AIcolor.includes(whosTurn(GameState))
+		&& !getReusableMateEvaluation(GameState)
 }
 
 function scheduleBackgroundSearch(delayMs){
@@ -984,6 +971,8 @@ function logAIMoveResult(evalMove, color, nodes, depth, thinkingTime, ttStats=nu
 }
 
 function getAIMoveInWorker(gameState,color,options={}){
+ const known=getReusableMateEvaluation(gameState)
+ if(known)return Promise.resolve({evalMove:known,nodes:0,depth:known.searchDepth||known.d,thinkingTime:0,reused:true})
 	return new Promise((resolve,reject) => {
 		if(typeof Worker === "undefined" || typeof Blob === "undefined" || typeof URL === "undefined"){
 			reject("Web Workers are not available in this browser.")
@@ -1024,6 +1013,7 @@ function getAIWorker(){
 		if(event.data.error){
 			request.reject(event.data.error)
 		} else {
+			rememberLiveMateLine(event.data.evalMove)
 			request.resolve(event.data)
 		}
 	}
@@ -1090,6 +1080,7 @@ function getFastSearchWorkerFunctions(){
 		fastNormalizeTTScoreForProbe,
 		fastProbeRootResult,
 		fastStorePrincipalVariation,
+		fastExportMateLine,
 		fastFallbackSearch,
 		fastGenerateLegalMoves,
 		fastOrderMoves,
@@ -1107,6 +1098,12 @@ function getFastSearchWorkerFunctions(){
 		fastRemovePieceStats,
 		fastTerminalScore,
 		fastStaticEvaluation,
+		fastAttackMask,
+		fastCanWin,
+		fastSideFeatures,
+		fastThreatPressure,
+		fastTempleDistance,
+		fastQuiescence,
 		fastResultToEval,
 		fastDisplayScore,
 		fastEncodeMove,
@@ -1270,6 +1267,7 @@ function startGameFromState(initialGameState){
 	updateSwitchSidesButton()
 	var thisGameMoveSets = getThisGameCardsMoveSet(move_dictionary, GameState) // Filter down all possible moves to just the cards in this game
 	precomputeOnBoardMoves(thisGameMoveSets)
+	setLatestAIEvaluation(getReusableMateEvaluation(GameState)||getStaticEvaluationMove(GameState))
 }
 
 function startBoardGame(){
@@ -1306,6 +1304,7 @@ function takeBack(){
 	GameHistory.stateHistory = getStateHistoryThroughIndex(targetHistoryIndex)
 
 	updateUI(GameState)
+	setLatestAIEvaluation(getReusableMateEvaluation(GameState)||getStaticEvaluationMove(GameState))
 	maybeStartBackgroundSearch()
 	console.log("Took back to "+GameHistory.moveHistory.length+" plies.")
 }
@@ -1320,6 +1319,7 @@ function switchSides(){
 	PlayerColor = oppositeColor(PlayerColor)
 	AIcolor = [oldPlayerColor]
 	PlayerCanMove = GameHasStarted && !GameIsOver && !AIcolor.includes(whosTurn(GameState))
+		&& !getReusableMateEvaluation(GameState)
 	setCookie(PLAYER_COLOR_COOKIE, PlayerColor)
 	applyPlayerPerspective()
 	updateUI(GameState)
@@ -1453,7 +1453,8 @@ function continueTimeBasedMinMax(gameState, thinkingStartTime, color, session, p
 	search.thinkingStartTime = thinkingStartTime
 	var evalMove = session.bestEvalMove || fastResultToEval(search, fastFallbackSearch(search))
 	if(session.completedDepth > 0 && !evalMove.searchDepth) evalMove.searchDepth = session.completedDepth
-	var depthRemaining = session.completedDepth || 0
+	if(evalMove.exact && (evalMove.e===Infinity || evalMove.e===-Infinity)) return evalMove
+ var depthRemaining = session.completedDepth || 0
 	var previousScore = session.previousScore
 	while(getNow() - thinkingStartTime < MaxThinkingTime){
 		depthRemaining++
@@ -1486,15 +1487,9 @@ function continueTimeBasedMinMax(gameState, thinkingStartTime, color, session, p
 			console.log(("Forced mate in "+(evalMove.d)+" plies."))
 			break
 		} else if (evalMove.exact && isLosingScoreForColor(evalMove.e, color)){
-			if(depthRemaining > 1){
-				console.log("Forced loss in "+(evalMove.d)+" plies.")
-				const forcedLossEvalMove = evalMove
-				evalMove = session.depthsBestMove[depthRemaining-1] || evalMove
-				if(evalMove) evalMove.latestEvaluation = forcedLossEvalMove
-				session.bestEvalMove = evalMove
-				break
-			}
-		}
+   // Keep the exact move that delays defeat longest.
+   break
+  }
 	}
 	console.log("Greatest Depth Searched: "+(GreatestDepthSearched))
 	return evalMove
@@ -1681,6 +1676,7 @@ function createFastSearch(gameState, thinkingStartTime, transpositionTable=null,
 		fastXorCard(search, i, fastGetCard(search.cardBits, i))
 	}
 	fastXorTurn(search, search.turn)
+	search.sourceState = gameState
 	return search
 }
 
@@ -1794,6 +1790,12 @@ function ensureFastSearchTables(){
 		}
 	}
 	FastEncodedMoveList = new Uint16Array(encodedMoveList)
+	for(let slot=0;slot<4;slot++){
+		const pass = fastEncodeMove(slot,31,31)
+		FastMoveSlotTable[pass] = slot
+		FastMoveStartTable[pass] = 31
+		FastMoveTargetTable[pass] = 31
+	}
 	FastZobrist = createFastZobrist()
 	createFastCardSwapHashes()
 }
@@ -1872,7 +1874,7 @@ function fastAlphaBeta(search, depthRemaining, alpha, beta, ply){
 	}
 	if(depthRemaining == 0){
 		if(search.mateOnly) return {"score": 0, "move": 0, "exact": true, "bound": "exact"}
-		return {"score": fastStaticEvaluation(search, ply), "move": 0, "exact": true, "bound": "exact"}
+		return fastQuiescence(search, alpha, beta, ply, 2)
 	}
 
 	const alphaOrig = alpha
@@ -1882,7 +1884,7 @@ function fastAlphaBeta(search, depthRemaining, alpha, beta, ply){
 	if(ttIndex >= 0){
 		const tt = search.tt
 		ttMove = tt.move[ttIndex]
-		if(tt.depth[ttIndex] >= depthRemaining){
+		if(tt.depth[ttIndex] == depthRemaining){
 			const ttFlag = tt.flag[ttIndex]
 			const ttScore = fastNormalizeTTScoreForProbe(tt.score[ttIndex], ply)
 			if(ttFlag == TT_EXACT){
@@ -2063,6 +2065,22 @@ function fastProbeRootResult(search){
 	}
 }
 
+function fastExportMateLine(search){
+ const line=[];let made=0
+ try{
+  for(let ply=0;ply<FAST_MAX_PLY-1;ply++){
+   if(fastTerminalScore(search,ply))break
+   const index=fastTTProbe(search);if(index<0)break
+   const move=search.tt.move[index],count=fastGenerateLegalMoves(search,ply)
+   if(!move||!fastMoveListContains(search.moveBuffers[ply],count,move))break
+   const score=fastNormalizeTTScoreForProbe(search.tt.score[index],0)
+   line.push({m:fastDecodeMove(search,move),exact:search.tt.flag[index]===TT_EXACT&&isFastMateScore(score),e:score>0?Infinity:-Infinity,d:FAST_MATE_SCORE-Math.abs(score)})
+   fastMakeMove(search,move,ply);made++
+  }
+ }finally{for(let ply=made-1;ply>=0;ply--)fastUnmakeMove(search,ply)}
+ return line
+}
+
 function fastStorePrincipalVariation(search, depthRemaining){
 	const pv = []
 	var madeMoves = 0
@@ -2161,6 +2179,11 @@ function fastGenerateLegalMoves(search, ply){
 		moveCount += 1
 	}
 	search.moveCounts[ply] = moveCount
+	if(moveCount == 0){
+		legalMoves[0] = fastEncodeMove(firstCardSlot,31,31)
+		legalMoves[1] = fastEncodeMove(firstCardSlot+1,31,31)
+		search.moveCounts[ply] = moveCount = 2
+	}
 	return moveCount
 }
 
@@ -2224,6 +2247,7 @@ function fastRecordCutoff(search, move, ply, depthRemaining){
 }
 
 function fastTerminalMoveScore(search, move, childPly){
+	if(FastMoveStartTable[move] == 31) return 0
 	const startBit = FastMoveStartBitTable[move]
 	const targetBit = FastMoveTargetBitTable[move]
 	if(search.masterMask & targetBit){
@@ -2262,12 +2286,14 @@ function fastMakeMove(search, move, ply){
 	search.undoRedCenterControl[ply] = search.redCenterControl
 	search.undoBlueCenterControl[ply] = search.blueCenterControl
 
-	fastXorPieceIndex(search, start, movingPieceIndex)
-	if(capturedPieceIndex) fastXorPieceIndex(search, target, capturedPieceIndex)
-	fastRemovePieceStatsByIndex(search, start, movingPieceIndex)
-	if(capturedPieceIndex) fastRemovePieceStatsByIndex(search, target, capturedPieceIndex)
-	fastAddPieceStatsByIndex(search, target, movingPieceIndex)
-	fastXorPieceIndex(search, target, movingPieceIndex)
+	if(start < 25){
+		fastXorPieceIndex(search, start, movingPieceIndex)
+		if(capturedPieceIndex) fastXorPieceIndex(search, target, capturedPieceIndex)
+		fastRemovePieceStatsByIndex(search, start, movingPieceIndex)
+		if(capturedPieceIndex) fastRemovePieceStatsByIndex(search, target, capturedPieceIndex)
+		fastAddPieceStatsByIndex(search, target, movingPieceIndex)
+		fastXorPieceIndex(search, target, movingPieceIndex)
+	}
 
 	const swapKey = fastCardSwapKey(slot, oldSlotCard, oldNeutralCard)
 	const cardDelta = oldSlotCard ^ oldNeutralCard
@@ -2356,13 +2382,161 @@ function fastTerminalScore(search, ply){
 function fastStaticEvaluation(search, ply){
 	const terminalScore = fastTerminalScore(search, ply)
 	if(terminalScore) return terminalScore
-	const redMasterLocationEval = (4 - Math.floor(search.redMasterPos/5)) - (Math.abs(search.redMasterPos%5 - 2))
-	const blueMasterLocationEval = (Math.floor(search.blueMasterPos/5)) - (Math.abs(search.blueMasterPos%5 - 2))
-	const remainingPawns = search.bluePawnsCount + search.redPawnsCount
-	var evaluation = 40*(search.redPawnsCount - search.bluePawnsCount)
-	evaluation += 10*(8 - remainingPawns) * (redMasterLocationEval - blueMasterLocationEval)
-	evaluation += 8*(search.redCenterControl - search.blueCenterControl)
-	return evaluation
+	const red = fastSideFeatures(search, FAST_RED)
+	const blue = fastSideFeatures(search, FAST_BLUE)
+	return 40*(search.redPawnsCount-search.bluePawnsCount) + red-blue + fastThreatPressure(search,ply)
+}
+
+function fastThreatPressure(search,ply){
+	if(ply>=FAST_MAX_PLY-1 || !fastCanWin(search,-search.turn)) return 0
+	const color=search.turn,count=fastGenerateLegalMoves(search,ply),moves=search.moveBuffers[ply]
+	let survivors=0
+	for(let i=0;i<count;i++){
+		if(fastTerminalMoveScore(search,moves[i],ply+1)) return 0
+		fastMakeMove(search,moves[i],ply)
+		const survives=!fastCanWin(search,search.turn)
+		fastUnmakeMove(search,ply)
+		if(survives && ++survivors>=4) return 0
+	}
+	return -color*(survivors==0 ? 160 : 32-8*survivors)
+}
+
+// Attack maps use the actual hand and board. Onitama permits moving into attack;
+// safety is an evaluation feature, never a move-generation legality restriction.
+function fastAttackMask(search, color){
+	const own = search.occupiedMask & (color == FAST_RED ? search.redMask : ~search.redMask)
+	let pieces=own, attacks=0
+	const first=color == FAST_RED ? 0 : 2, orientation=color == FAST_RED ? 0 : 1
+	while(pieces){
+		const bit=pieces & -pieces, square=fastBitIndex(bit)
+		for(let slot=first;slot<first+2;slot++){
+			const key=fastMoveTableKey(slot,orientation,fastGetCard(search.cardBits,slot),square)
+			const end=FastMoveOffsetTable[key]+FastMoveCountTable[key]
+			for(let i=FastMoveOffsetTable[key];i<end;i++) attacks |= FastMoveTargetBitTable[FastEncodedMoveList[i]]
+		}
+		pieces ^= bit
+	}
+	return attacks & ~own
+}
+
+function fastCanWin(search,color){
+	const enemyMaster=color == FAST_RED ? search.blueMasterPos : search.redMasterPos
+	if(fastAttackMask(search,color) & (1 << enemyMaster)) return true
+	const master=color == FAST_RED ? search.redMasterPos : search.blueMasterPos
+	const temple=color == FAST_RED ? 2 : 22, first=color == FAST_RED ? 0 : 2
+	const own=search.occupiedMask & (color == FAST_RED ? search.redMask : ~search.redMask)
+	if(own & (1 << temple)) return false
+	for(let slot=first;slot<first+2;slot++){
+		const key=fastMoveTableKey(slot,first/2,fastGetCard(search.cardBits,slot),master)
+		for(let i=FastMoveOffsetTable[key],end=i+FastMoveCountTable[key];i<end;i++)
+			if(FastMoveTargetTable[FastEncodedMoveList[i]] == temple) return true
+	}
+	return false
+}
+
+function fastTempleDistance(search,color){
+	// Optimistic empty-board route with a frozen hand, not a forced-mate distance.
+	// Cache at most 2 * 32 * 32 small tables on this search session.
+	const first=color == FAST_RED ? 0 : 2, orientation=first/2
+	const a=fastGetCard(search.cardBits,first), b=fastGetCard(search.cardBits,first+1)
+	const key=orientation*1024+Math.min(a,b)*32+Math.max(a,b)
+	const cache=search.templeDistances || (search.templeDistances=new Map())
+	let distances=cache.get(key)
+	if(!distances){
+		distances=new Uint8Array(25);distances.fill(8);distances[color == FAST_RED ? 2 : 22]=0
+		for(let distance=1;distance<8;distance++){
+			let changed=false
+			for(let square=0;square<25;square++){
+				if(distances[square]!=8) continue
+				for(const card of [a,b]){
+					const table=fastMoveTableKey(first,orientation,card,square)
+					for(let i=FastMoveOffsetTable[table],end=i+FastMoveCountTable[table];i<end;i++){
+						if(distances[FastMoveTargetTable[FastEncodedMoveList[i]]]==distance-1){distances[square]=distance;changed=true;break}
+					}
+				}
+			}
+			if(!changed) break
+		}
+		cache.set(key,distances)
+	}
+	return distances[color == FAST_RED ? search.redMasterPos : search.blueMasterPos]
+}
+
+function fastSideFeatures(search,color){
+	const first=color == FAST_RED ? 0 : 2, master=color == FAST_RED ? search.redMasterPos : search.blueMasterPos
+	const own=search.occupiedMask & (color == FAST_RED ? search.redMask : ~search.redMask)
+	const enemyAttacks=fastAttackMask(search,-color)
+	let pieces=own, mobility=0, safeMaster=0
+	while(pieces){
+		const bit=pieces & -pieces, square=fastBitIndex(bit)
+		let destinations=0
+		for(let slot=first;slot<first+2;slot++){
+			const key=fastMoveTableKey(slot,first/2,fastGetCard(search.cardBits,slot),square)
+			for(let i=FastMoveOffsetTable[key],end=i+FastMoveCountTable[key];i<end;i++) destinations |= FastMoveTargetBitTable[FastEncodedMoveList[i]]
+		}
+		destinations &= ~own
+		while(destinations){
+			const target=destinations & -destinations
+			if(square==master){
+				// Remove a captured attacker before testing the destination. Hand exchange
+				// does not change the opponent's immediate reply cards.
+				const occupied=search.occupiedMask,red=search.redMask
+				search.occupiedMask=(occupied & ~bit) | target
+				search.redMask=color==FAST_RED ? (red & ~bit) | target : red & ~target
+				const safe=!(fastAttackMask(search,-color) & target)
+				search.occupiedMask=occupied;search.redMask=red
+				if(safe) safeMaster++
+			}else mobility += (enemyAttacks & target) ? 1 : 2
+			destinations ^= target
+		}
+		pieces ^= bit
+	}
+	const danger=[-60,-28,-8,0,6,10,12,14,16][Math.min(safeMaster,8)]
+	const threatened=fastCanWin(search,-color)
+	return Math.min(mobility,40)+danger-4*fastTempleDistance(search,color)
+		-(threatened ? (search.turn==color ? 65 : 110) : 0)
+}
+
+function fastQuiescence(search,alpha,beta,ply,remaining){
+	const limit=search.maxThinkingTime===null ? Infinity : (Number.isFinite(search.maxThinkingTime)?search.maxThinkingTime:MaxThinkingTime)
+	if(getNow()-search.thinkingStartTime>limit) return {timedOut:true}
+	GreatestDepthSearched=Math.max(GreatestDepthSearched,ply)
+	// Selective extensions are guidance only. They cannot create a mate proof or
+	// a shortest-mate distance in the normal search's transposition table.
+	const terminal=fastTerminalScore(search,ply)
+	if(terminal) return {score:Math.sign(terminal)*8000,move:0,exact:true,bound:'exact'}
+	const stand=fastStaticEvaluation(search,ply)
+	if(remaining==0 || ply>=FAST_MAX_PLY-2) return {score:stand,move:0,exact:true,bound:'exact'}
+	const maximizing=search.turn==FAST_RED, color=search.turn
+	const threatened=fastCanWin(search,-color)
+	const alphaOrig=alpha,betaOrig=beta
+	let best=threatened ? (maximizing?-9000:9000) : stand, bestMove=0
+	const count=fastGenerateLegalMoves(search,ply),moves=search.moveBuffers[ply]
+	for(let i=0;i<count;i++){
+		const move=moves[i],win=fastTerminalMoveScore(search,move,ply+1)
+		if(win) return {score:Math.sign(win)*8000,move,exact:true,bound:'exact'}
+	}
+	if(!threatened){
+		if(maximizing) alpha=Math.max(alpha,best);else beta=Math.min(beta,best)
+		if(alpha>=beta) return {score:best,move:0,exact:false,bound:maximizing?'lower':'upper'}
+	}
+	for(let i=0;i<count;i++){
+		const move=moves[i],capture=!!(search.occupiedMask & FastMoveTargetBitTable[move])
+		AImovesEvaluated++
+		fastMakeMove(search,move,ply)
+		const loses=fastCanWin(search,-color)
+		// Include quiet threats and ALL replies to threats, including card passes.
+		const forcing=threatened || capture || fastCanWin(search,color)
+		let child=null
+		if(forcing) child=loses ? {score:color==FAST_RED?-7900:7900} : fastQuiescence(search,alpha,beta,ply+1,remaining-1)
+		fastUnmakeMove(search,ply)
+		if(child?.timedOut) return child
+		if(!child) continue
+		if(maximizing ? child.score>best : child.score<best){best=child.score;bestMove=move}
+		if(maximizing) alpha=Math.max(alpha,best);else beta=Math.min(beta,best)
+		if(alpha>=beta) return {score:best,move:bestMove,exact:false,bound:maximizing?'lower':'upper'}
+	}
+	return {score:best,move:bestMove,exact:best>alphaOrig&&best<betaOrig,bound:best<=alphaOrig?'upper':best>=betaOrig?'lower':'exact'}
 }
 
 function fastResultToEval(search, result){
@@ -2378,6 +2552,8 @@ function fastResultToEval(search, result){
 	const evalMove = getEvalMove(score, fastDecodeMove(search, result.move), mateDistance, 0)
 	evalMove.exact = result.exact === true
 	evalMove.bound = result.bound
+	evalMove.sourceState = search.sourceState
+	if(evalMove.exact && isFastMateScore(result.score))evalMove.principalLine=fastExportMateLine(search)
 	return evalMove
 }
 
@@ -2408,6 +2584,7 @@ function fastMoveTarget(move){
 function fastDecodeMove(search, move){
 	if(!move) return {}
 	const slot = FastMoveSlotTable ? FastMoveSlotTable[move] : fastMoveSlot(move)
+	if(fastMoveStart(move) == 31) return {cardID:twoDigit(fastGetCard(search.cardBits,slot)),color:search.turn == FAST_RED ? "R" : "B",startLocation:-1,targetLocation:-1,pass:true}
 	return {
 		"cardID": twoDigit(fastGetCard(search.cardBits, slot)),
 		"color": search.turn == FAST_RED ? "R" : "B",
@@ -2484,6 +2661,9 @@ function getLegalMoves(gameState){
 			}
 		}
 	}
+	if(!legalMoves.length){
+		for(const cardID of cardIDs) legalMoves.push({cardID,color:turn,startLocation:-1,targetLocation:-1,pass:true})
+	}
 	return legalMoves
 }
 
@@ -2500,30 +2680,10 @@ function getFallbackMove(gameState){
 	return fastResultToEval(search, fastFallbackSearch(search))
 }
 
-function staticEvaluation(gameState){// Evaluate a board. Red is "positive" blue is "negative"
-	if(!gameState.includes("m") || gameState[2] == "M"){ // Either there is no blue master, or the red master is in the blue temple
-		return Infinity //Red wins
-	} else if (!gameState.includes("M") || gameState[22] == "m"){ // Either there is no red master, or the blue master is in the red temple
-		return -Infinity //Blue wins
-	} else {
-		//Eval Variables
-		const bluePawnsCount = gameState.countLetters("p")
-		const redPawnsCount =  gameState.countLetters("P")
-		const redMasterPos = gameState.indexOf("M") 
-		const blueMasterPos = gameState.indexOf("m") 
-		const redMasterLocationEval = (4 - Math.floor(redMasterPos/5)) - (Math.abs(redMasterPos%5 - 2)) // How close is Red master to blue temple (manhattan Distance)
-		const blueMasterLocationEval = (Math.floor(blueMasterPos/5)) - (Math.abs(blueMasterPos%5 - 2))  // How close is Blue master to red temple (manhattan Distance)
-		const endGamePercent = 10*(8 - (bluePawnsCount + redPawnsCount))/8 // How deep are we into the end game (as measure by total pawns)
-		const centerSpaces = gameState[6]+gameState[7]+gameState[8]+gameState[11]+gameState[12]+gameState[13]+gameState[16]+gameState[17]+gameState[18]
-		const redCenterControl = centerSpaces.countLetters("P")
-		const blueCenterControl = centerSpaces.countLetters("p")
-
-		// Put in the evals
-		var evaluation = 5*(redPawnsCount - bluePawnsCount) // The difference between number of pawns 
-		evaluation += endGamePercent * (redMasterLocationEval - blueMasterLocationEval) // As endgame approaches, master distance to enemy temple matters more.
-		evaluation += redCenterControl - blueCenterControl // See who has more center control. 
-		return evaluation
-	}
+function staticEvaluation(gameState){
+ const search=createFastSearch(gameState,getNow(),{})
+ const terminal=fastTerminalScore(search,0)
+ return terminal ? Math.sign(terminal)*Infinity : fastDisplayScore(fastStaticEvaluation(search,0))
 }
 
 function getEvalMove(thisEval,thisMove,depthRemaining,depth,r=null,b=null,p=null){
@@ -2554,21 +2714,9 @@ function disposeUnneededStates(evaluatedStates){
 //SETUP ***************************************************
 function createRandomGameState(isStart = true){
 	var thisGameState = STARTING_BOARD_STATE;
-	var deck = getSelectedCardIDsForDeal()
-	if (!isStart) {
-		thisGameState = thisGameState.shuffle()
-	}
-	var dealtCards = []
-	for(var i=0;i<5;i++){
-		const randomCardID = deck[Math.floor(Math.random() * deck.length)];
-		for( var j = 0; j < deck.length; j++){ 
-			if ( deck[j] === randomCardID) { 
-				deck.splice(j, 1); 
-			}
-		}
-		dealtCards.push(randomCardID)
-		thisGameState += randomCardID + (i<4 ? "-" : "X")
-	}
+	if(!isStart) thisGameState=thisGameState.shuffle()
+	const dealtCards=CardPreferences.deal(CardModes)
+	thisGameState+=dealtCards.join('-')+'X'
 	thisGameState += move_dictionary[dealtCards[4]].startColor
 	return thisGameState
 }
@@ -2635,7 +2783,7 @@ function doRealMove(gameState,move){
 	recordHistory(move, GameState)
 	updateUI(GameState,move)
 	const carriedMateEval = getCarriedKnownMateEvaluationAfterMove(move)
-	setLatestAIEvaluation(carriedMateEval || getStaticEvaluationMove(GameState))
+	setLatestAIEvaluation(getReusableMateEvaluation(GameState) || carriedMateEval || getStaticEvaluationMove(GameState))
 	GameIsOver = Math.abs(staticEvaluation(GameState)) == Infinity
 	if (GameIsOver){
 		updateSwitchSidesButton()
@@ -2674,6 +2822,7 @@ function recordHistory(move, gameState){
 }
 
 function movePiece(gameState,move){
+	if(move.pass) return gameState
 	//Enact the move, and update the game state.
 	var newGameState = gameState.replaceAt(move.targetLocation, gameState[move.startLocation]) //The piece will now be in the right place
 	var newestGameState = newGameState.replaceAt(move.startLocation,"e") //empty the space it left
@@ -2771,6 +2920,7 @@ function getEvaluationBar(){
 }
 
 function setLatestAIEvaluation(evalMove){
+	rememberLiveMateLine(evalMove)
 	const displayEvalMove = getDisplayAIEvaluation(evalMove)
 	if(KnownMateEvaluation){
 		const knownMateEval = getCurrentKnownMateEvaluation()
@@ -2786,6 +2936,7 @@ function setLatestAIEvaluation(evalMove){
 }
 
 function clearLatestAIEvaluation(){
+	if(typeof hideMateHint==='function') hideMateHint()
 	LatestAIEvalMove = null
 	KnownMateEvaluation = null
 	updateEvaluationBar()
@@ -2802,6 +2953,7 @@ function updateEvaluationBar(){
 	const label = getEvaluationBarLabel(LatestAIEvalMove)
 	bar.title = label
 	bar.setAttribute("aria-label", label)
+	if(typeof updateMateHintControl==='function')updateMateHintControl()
 }
 
 function getEvaluationBarTopPercent(evalMove){
@@ -2893,15 +3045,9 @@ function shouldReplaceKnownMateEvaluation(evalMove, knownMateEval){
 }
 
 function getCarriedKnownMateEvaluationAfterMove(move){
-	if(!KnownMateEvaluation) return null
-	const sourcePly = KnownMateEvaluation.sourcePly
-	const expectedMove = KnownMateEvaluation.expectedMove
-	const isFirstCarriedPly = getCurrentGamePly() == sourcePly + 1
-	if(isFirstCarriedPly && expectedMove && expectedMove.cardID && move.color == KnownMateEvaluation.winningColor && !movesMatch(move, expectedMove)){
-		KnownMateEvaluation = null
-		return null
-	}
-	return getCurrentKnownMateEvaluation()
+	// A proof belongs to a position. A later attacker deviation can throw it away.
+	KnownMateEvaluation = null
+	return null
 }
 
 function getCurrentKnownMateEvaluation(){
@@ -2914,7 +3060,7 @@ function getCurrentKnownMateEvaluation(){
 	}
 	const evalMove = cloneEvalMove(KnownMateEvaluation.evalMove)
 	evalMove.d = remainingPlies
-	evalMove.m = {}
+	if(elapsedPlies) evalMove.m = {}
 	evalMove.t = getCurrentGamePly()
 	return evalMove
 }
@@ -2994,16 +3140,8 @@ function matePliesToMoves(plies){
 }
 
 function updateTempleBorders(){
-	const redTemple = document.getElementById("s22")
-	const blueTemple = document.getElementById("s2")
-	redTemple.style.borderTopColor = PlayerColor == "B" ? "red" : "white"
-	redTemple.style.borderBottomColor = PlayerColor == "B" ? "white" : "red"
-	redTemple.style.borderLeftColor = "red"
-	redTemple.style.borderRightColor = "red"
-	blueTemple.style.borderTopColor = PlayerColor == "B" ? "white" : "blue"
-	blueTemple.style.borderBottomColor = PlayerColor == "B" ? "blue" : "white"
-	blueTemple.style.borderLeftColor = "blue"
-	blueTemple.style.borderRightColor = "blue"
+	// Temple colors are attached to their squares and follow board rotation.
+	for(const id of ['s2','s22'])document.getElementById(id).style.borderColor = ''
 }
 
 function labelBoardCoordinates(){
@@ -3095,13 +3233,16 @@ function updatePlayableCardStyles(selectedSlot = null){
 	var currentTurnPlayer = whosTurn(GameState)
 	setClassStyleValue("cardSlot","border-color","white")
 	setClassStyleValue("cardSlot","opacity","0.55")
+	for(const slot of document.querySelectorAll(".cardSlot"))slot.classList.remove("turnCard","selectedTurnCard")
 	var playableSlots = currentTurnPlayer == "R" ? ["pRc1","pRc2"] : ["pBc1","pBc2"]
 	for (let slot of playableSlots){
 		document.getElementById(slot).style.opacity = "1"
-		document.getElementById(slot).style.borderColor = currentTurnPlayer == "R" ? "red" : "blue"
+		if(!GameIsOver)document.getElementById(slot).classList.add("turnCard")
+		document.getElementById(slot).style.borderColor = currentTurnPlayer == "R" ? "#e27e6f" : "#8bb7d5"
 	}
 	if (selectedSlot){
 		document.getElementById(selectedSlot).style.borderColor = "gold"
+		document.getElementById(selectedSlot).classList.add("selectedTurnCard")
 	}
 }
 
@@ -3110,12 +3251,16 @@ function colorlastSquare(gameHistory){
 	var moves = gameHistory.moveHistory
 	if (moves.length === 0) return
 	var latestMove = moves[moves.length -1]
+	if(latestMove.pass) return
 	console.log(stringifyMove(latestMove))
 	document.getElementById("s"+latestMove.startLocation).classList.add("lastMoveFromSquare")
 	document.getElementById("s"+latestMove.targetLocation).classList.add("lastMoveToSquare")
 }
 
 function clearTransientGameUI(){
+	removeClassFromElements("cardSlot","turnCard")
+	removeClassFromElements("cardSlot","selectedTurnCard")
+	if(typeof hideMateHint==='function')hideMateHint()
 	clearBoardHighlights()
 	removeElementsByClass("piece")
 	removeClassFromElements("cardSlot","customEmptySlot")
@@ -3168,7 +3313,7 @@ function clearBoardHighlights(){
 	removeClassFromElements("boardSquare","lastMoveFromSquare")
 	removeClassFromElements("boardSquare","lastMoveToSquare")
 	setClassStyleValue("boardSquare","background-color","")
-	setClassStyleValue("boardSquare","outline","")
+	removeClassFromElements("boardSquare","legalMoveTarget")
 }
 
 function selectCard(slot){
@@ -3179,30 +3324,31 @@ function selectCard(slot){
 	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking) return;
 	var currentTurnPlayer = whosTurn(GameState)
 	var cardSlotPlayer = slot[1]
-	setClassAttributeToValue("piece","draggable","false") //set nothing to be draggable. If needed, we'll set somethings to be draggable
-	clearMoveSelection()
-	if(currentTurnPlayer == cardSlotPlayer) { // check that it's the right player's turn.
-		if ("cardID" in currentMoveUI && currentMoveUI["cardID"] == document.getElementById(slot).innerText ){ 
-			// If we're clicking on the same card, unselect
-			delete currentMoveUI["cardID"]
-			delete currentMoveUI["color"]
-			updatePlayableCardStyles()
-		} else {
-			//clicking on a new card, unselect everything else, and select this one. 
-			updatePlayableCardStyles(slot)
-			currentMoveUI["cardID"] = document.getElementById(slot).innerText
-			if (currentTurnPlayer == "R"){ // Red's turn
-				setClassAttributeToValue("piece red","draggable","true")
-				currentMoveUI["color"] = "R"
-			}else{ // Blue's turn
-				setClassAttributeToValue("piece blue","draggable","true")
-				currentMoveUI["color"] = "B"
-
-			}
-			highlightDraggablePieces(currentTurnPlayer)
-		}
+	if(currentTurnPlayer == cardSlotPlayer){
+		const pass = getLegalMoves(GameState).find(m=>m.pass && m.cardID===document.getElementById(slot).innerText)
+		if(pass){doRealMove(GameState,pass);return;}
 	}
+ if(currentTurnPlayer !== cardSlotPlayer) return
+ const cardID=document.getElementById(slot).innerText
+ if(currentMoveUI.cardID===cardID) delete currentMoveUI.cardID
+ else currentMoveUI.cardID=cardID
+ currentMoveUI.color=currentTurnPlayer
+ delete currentMoveUI.targetLocation
+ setClassAttributeToValue("piece","draggable","false")
+ if(currentMoveUI.cardID)setClassAttributeToValue("piece "+(currentTurnPlayer==='R'?'red':'blue'),"draggable","true")
+ updatePlayableCardStyles(currentMoveUI.cardID?slot:null)
+ setClassStyleValue("piece","outline","")
+ if("startLocation" in currentMoveUI){
+  document.querySelector('#s'+currentMoveUI.startLocation+' .piece').style.outline='3px solid gold'
+ }else if(currentMoveUI.cardID)highlightDraggablePieces(currentTurnPlayer)
+ highlightLegalTargets()
 }
+
+if(typeof document!=='undefined')document.addEventListener('click',event=>{
+ if(CustomSetupActive || event.target.closest('.boardSquare,.cardSlot,button,select,a,dialog'))return
+ currentMoveUI={};clearMoveSelection();updatePlayableCardStyles()
+ setClassAttributeToValue('piece','draggable','false')
+})
 
 function bindBoardSquareClicks(){
 	var squares = document.getElementsByClassName("boardSquare")
@@ -3215,7 +3361,7 @@ function clearMoveSelection(){
 	delete currentMoveUI["startLocation"]
 	delete currentMoveUI["targetLocation"]
 	setClassStyleValue("piece","outline","")
-	setClassStyleValue("boardSquare","outline","")
+	removeClassFromElements("boardSquare","legalMoveTarget")
 }
 
 function highlightDraggablePieces(color){
@@ -3229,7 +3375,7 @@ function highlightDraggablePieces(color){
 }
 
 function highlightLegalTargets(){
-	setClassStyleValue("boardSquare","outline","")
+	removeClassFromElements("boardSquare","legalMoveTarget")
 	if (!("cardID" in currentMoveUI) || !("startLocation" in currentMoveUI)) return
 	var lookUpString = currentMoveUI.color + "-" + currentMoveUI.cardID + "-" + currentMoveUI.startLocation
 	var targetLocations = PrecomputedBoardMoves[lookUpString] || []
@@ -3241,7 +3387,7 @@ function highlightLegalTargets(){
 			targetLocation: targetLocation
 		}
 		if (isLegal(GameState, move)){
-			document.getElementById("s"+targetLocation).style.outline = "3px solid gold"
+			document.getElementById("s"+targetLocation).classList.add("legalMoveTarget")
 		}
 	}
 }
@@ -3299,7 +3445,7 @@ function selectPiece(ev){
 		selectCustomSetupPiece(ev)
 		return
 	}
-	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking || !("cardID" in currentMoveUI)) return
+	if (GameIsOver || !GameHasStarted || !PlayerCanMove || AIIsThinking) return
 	var squareNum = getSquareNumFromElement(ev.target.parentElement)
 	if (squareNum === null) return
 	var piece = GameState[squareNum]
@@ -3312,6 +3458,7 @@ function selectPiece(ev){
 		}
 		return
 	}
+	currentMoveUI["color"] = currentTurnPlayer
 	currentMoveUI["startLocation"] = squareNum
 	setClassStyleValue("piece","outline","")
 	ev.target.style.outline = "3px solid gold"
@@ -3387,6 +3534,7 @@ function doMoveUI(gameState,currentMoveUI){
 }
 
 function updateUI(gameState,move){
+	if(typeof hideMateHint==='function')hideMateHint()
 	placePieces(gameState)
 	placeCards(gameState)
 	colorlastSquare(GameHistory)
@@ -3400,6 +3548,9 @@ function updateUI(gameState,move){
 function isLegal(gameState,move){ //Check if a move made in the UI is legal
 	if (!move || !("color" in move) || !("cardID" in move) || !("startLocation" in move) || !("targetLocation" in move)) return false
 	if (move.color != whosTurn(gameState)) return false // can't move on the wrong turn
+	if(!getCurrentTurnPlayersCardIDs(gameState).includes(move.cardID)) return false
+	if(move.pass) return getLegalMoves(gameState).some(m=>m.pass && m.cardID===move.cardID)
+	if(!getColorPieceLocations(gameState,move.color).includes(move.startLocation)) return false
 	var lookUpString = move.color + "-" + move.cardID + "-" + move.startLocation
 	var boardLegal = PrecomputedBoardMoves[lookUpString] && PrecomputedBoardMoves[lookUpString].includes(move.targetLocation) //is it in the precomputed board moves
 	if (!boardLegal) return false
@@ -3412,6 +3563,7 @@ function isLegal(gameState,move){ //Check if a move made in the UI is legal
 // UTILITY ************************************************************
 function stringifyMove(move){
 	if (Object.keys(move).length === 0) return "Empty Move"
+	if(move.pass) return move.color + " passes / " + move_dictionary[move.cardID].name
 	return move.color +"-"+move_dictionary[move.cardID].name +":"+  coordinatifySquareNumber(move.startLocation) +"-"+ coordinatifySquareNumber(move.targetLocation)
 }
 

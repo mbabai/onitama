@@ -4,31 +4,36 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Onitama</title>
-	<link href="./main.css?v=20260601-menu-sections" rel="stylesheet" type="text/css">
+	<link href="./main.css?v=20260908j" rel="stylesheet" type="text/css">
+<link href="./theme.css?v=20260908i" rel="stylesheet">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
 </head>
 <body>
+<nav class="siteNav" aria-label="Main navigation"><a class="brand" href="index.html"><span class="brandMark">王</span>ONITAMA</a></nav>
 	<div id="startMenu" class="menuPanel">
 		<div class="menuControls">
-			<h1>Play Onitama against AI</h1>
+			<h1>Play against Bot</h1>
 			<div class="menuField">
-				<label for="playerColor">Player Color</label>
+				<label for="playerColor">Your side</label>
 				<select id="playerColor">
 					<option value="random" selected>Random</option>
 					<option value="R">Red</option>
 					<option value="B">Blue</option>
 				</select>
 			</div>
-			<div class="menuSectionTitle playSectionTitle">Play</div>
 			<div class="menuActions">
-				<button type="button" onclick="playFromMenu()">Play</button>
-				<button type="button" onclick="startCustomSetup()">Custom</button>
+				<button type="button" id="startGameButton" disabled onclick="playFromMenu()">Start game</button>
+				<button type="button" id="customSetupButton" disabled onclick="startCustomSetup()">Custom setup</button>
 			</div>
-			<div class="menuSectionTitle puzzlesSectionTitle">Puzzles</div>
+			<h2 class="menuSectionTitle puzzlesSectionTitle">Mate Puzzles</h2>
+<p class="libraryStats" aria-live="polite"><strong id="libraryCount">—</strong> puzzles out of <strong id="librarySetupCount">—</strong> total starting configurations · <strong id="libraryPercent">—</strong></p>
 			<div id="menuMateActions" class="menuMateActions" aria-label="Mate puzzles"></div>
 		</div>
-		<details class="menuCardPanel">
-			<summary class="cardPickerHeader">Card Restrictions</summary>
-			<div id="cardPicker" class="cardPicker" aria-label="Cards included in random deals"></div>
+		<details class="menuCardPanel" open>
+			<summary class="cardPickerHeader">Card choices</summary>
+			<p class="cardPanelNote">Include cards in the random pool, exclude them, or require them in every deal and matching puzzle. At most five can be required.</p>
+<p id="cardChoiceStatus" role="status" class="smallNote"></p>
+<div id="cardPicker" class="cardPicker" aria-label="Cards included in random deals"></div>
 		</details>
 	</div>
 	<div id="gameArea">
@@ -78,8 +83,17 @@
 			<div id="aiEvalBar" class="evalBar" aria-label="Latest bot evaluation"></div>
 		</div>
 	</div>
-	<script type="text/javascript" src="./mate_search/mate_starting_states.js?v=20260604-resume-meta"></script>
-	<script type="text/javascript" src="./main.js?v=20260601-alpha-card-restrictions"></script>
-	<script type="text/javascript">main()</script>
+	<dialog id="studyDialog" aria-labelledby="studyTitle">
+<div class="dialogHeader"><div><div class="eyebrow">The principal variation</div><h2 id="studyTitle">Forced mate</h2></div><button type="button" onclick="document.getElementById('studyDialog').close()" aria-label="Close main line">✕</button></div>
+<p class="studyExplanation">The attacker wins as quickly as possible; the defender resists as long as possible. This is one main line from a search that checks every legal defense. Other replies can require different attacking moves.</p>
+<div class="studyLayout"><div><div id="studyBoard" class="studyBoard" role="group" aria-label="Main line board"></div><div class="studyTransport"><button id="studyPrevious" onclick="stepStudy(-1)" type="button">← Previous</button><button id="studyPlay" onclick="playStudy()" class="primary" type="button">Play line</button><button id="studyNext" onclick="stepStudy(1)" type="button">Next →</button></div><div id="studyCards" class="studyCards"></div></div><div><p id="studyStatus" class="studyStatus" aria-live="polite"></p><div id="studyLine" class="studyLine"></div></div></div>
+</dialog>
+<script src="./card_preferences.js?v=20260908f"></script>
+<script src="./mate_search/record_schema.js?v=20260907b"></script>
+
+	<script type="text/javascript" src="./main.js?v=20260908h"></script>
+	<script src="./mate_hint.js?v=20260908e"></script>
+<script src="./study.js?v=20260908i"></script>
+<script src="./startup.js?v=20260908h"></script>
 </body>
 </html>

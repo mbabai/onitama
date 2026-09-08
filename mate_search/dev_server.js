@@ -21,7 +21,8 @@ const CONTENT_TYPES = {
 	".jpeg": "image/jpeg",
 	".jpg": "image/jpeg",
 	".png": "image/png",
-	".gif": "image/gif"
+	".gif": "image/gif",
+	".svg": "image/svg+xml"
 };
 
 function send(response, status, body, contentType){
